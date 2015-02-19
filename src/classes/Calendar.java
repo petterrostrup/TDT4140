@@ -3,15 +3,15 @@ package classes;
 import java.util.ArrayList;
 
 public class Calendar {
-	private String owner;
+	private User owner;
 	private ArrayList<Appointment> appointments;
 
-	public String getOwner() {
-		return owner;
+	public User getOwner() {
+		return this.owner;
 	}
 
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setOwner(User user) {
+		this.owner = user;
 	}
 
 	public ArrayList<Appointment> getAppointments() {
