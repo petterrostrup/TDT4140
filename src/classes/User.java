@@ -83,7 +83,8 @@ public class User {
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public void logInn(){
+	public void logIn(){
+		
 		//Insert sql logic for login with this.userName and this.password
 	}
 	
