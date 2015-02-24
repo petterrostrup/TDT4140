@@ -27,7 +27,7 @@
       <Button fx:id="registrer" layoutX="123.0" layoutY="451.0" mnemonicParsing="false" text="Registrer" />
       <PasswordField fx:id="passord" layoutX="123.0" layoutY="338.0" />
       <PasswordField fx:id="gpassord" layoutX="123.0" layoutY="382.0" />
-      <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="419.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="openfile" layoutX="493.0" layoutY="370.0" mnemonicParsing="false" text="Åpne fil" />
+      <ImageView fx:id="imageview" fitHeight="187.0" fitWidth="249.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="openfile" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" text="Åpne fil" />
    </children>
 </Pane>
