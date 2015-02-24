@@ -7,8 +7,11 @@ public class Room {
 	private boolean available;
 	
 
-	public Room() {
-		// TODO Auto-generated constructor stub
+	public Room(String room, String place, int cap) {
+		setRoomNr(room);
+		setPlace(place);
+		setCapacity(cap);
+		setAvailable(false);
 	}
 
 

@@ -6,8 +6,10 @@ public class Alarm {
 	private Appointment appointment;
 	private String description;
 	
-	public Alarm() {
-		// TODO Auto-generated constructor stub
+	public Alarm(String id, String name, Appointment appointment) {
+		setNoticeID(id);
+		setName(name);
+		setAppointment(appointment);
 	}
 
 
