@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import application.Login;
 
 
 public class Main extends Application {
@@ -20,7 +21,15 @@ public class Main extends Application {
 		}
 	}
 	
+	public static void loginStart(){
+		javafx.application.Application.launch(Login.class);}
+	
+	
+	
+	
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		loginStart();
+		
 	}
 }
