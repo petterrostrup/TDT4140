@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -21,9 +23,11 @@
       <Label layoutX="35.0" layoutY="303.0" text="Adresse:" />
       <TextField fx:id="adresse" layoutX="123.0" layoutY="303.0" />
       <Label layoutX="35.0" layoutY="342.0" text="Passord:" />
-      <TextField fx:id="passord" layoutX="123.0" layoutY="342.0" />
-      <TextField fx:id="gpassord" layoutX="123.0" layoutY="386.0" />
       <Label layoutX="35.0" layoutY="386.0" text="Gjenta passord:" />
-      <Button layoutX="123.0" layoutY="451.0" mnemonicParsing="false" text="Registrer" />
+      <Button fx:id="registrer" layoutX="123.0" layoutY="451.0" mnemonicParsing="false" text="Registrer" />
+      <PasswordField fx:id="passord" layoutX="123.0" layoutY="338.0" />
+      <PasswordField fx:id="gpassord" layoutX="123.0" layoutY="382.0" />
+      <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="419.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="openfile" layoutX="493.0" layoutY="370.0" mnemonicParsing="false" text="Åpne fil" />
    </children>
 </Pane>
