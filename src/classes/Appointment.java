@@ -101,26 +101,6 @@ public class Appointment {
 	public void setEnd(LocalTime end) {
 		this.end = end;
 	}
-	public void connect(){
-		Connection conn = null;
-		
-		try {conn =DriverManager.getConnection("jdbc:mysql.stud.ntnu.no/petternr_felles" +
-		                                   "user=petternr_felles&password=gruppe61");
-
-		    // Do something with the Connection
-		
-			
-			
-		} catch (SQLException ex) {
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		}
-
-		
-	}
-	
 	
 	
 	public void change(){
