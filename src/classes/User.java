@@ -83,8 +83,8 @@ public class User {
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public void logIn(){
-		
+	public void logIn(String username, String password){
+		 User varUser = Login.login(username, password);
 		//Insert sql logic for login with this.userName and this.password
 	}
 	
