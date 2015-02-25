@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 
 
 
+
 public class LoginController extends Application {
 	
 	private int logFail = 0;
@@ -59,6 +60,16 @@ public class LoginController extends Application {
 	        System.out.println("asdf");
 	        //feilLabel.setVisible(false);
 	}
+	
+	
+	
+	//Bytter vindu til registreringsskjerm
+	public void regButt (ActionEvent event) {
+		System.out.println("hade");
+		//RegistrerBrukerKlasse().start(new Stage());
+		//Platform.exit();
+	
+	}
 
 
 	        
@@ -87,9 +98,11 @@ public class LoginController extends Application {
 			if(logFail == 0){
 				
 				logFail = 1;
-				brukernavn.setText("poop");
+				brukernavn.setText("noob");
 				brukernavn.setStyle("-fx-background:#FE2E2E");
-				feilLabel.setVisible(true);
+				passord.setStyle("-fx-background:#FE2E2E");
+				feilLabel.setText("Feil brukernavn eller passord"); 
+				//feilLabel.setVisible(true);
 				
 			}
 		}
