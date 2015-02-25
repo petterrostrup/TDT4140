@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <children>
+      <Button fx:id="logginn" layoutX="290.0" layoutY="385.0" mnemonicParsing="false" onAction="#logButt" text="Logg inn" />
+      <TextField fx:id="brukernavn" layoutX="290.0" layoutY="281.0" />
+      <PasswordField fx:id="passord" layoutX="290.0" layoutY="330.0" />
+      <Label layoutX="214.0" layoutY="285.0" text="Brukernavn:" />
+      <Label layoutX="214.0" layoutY="334.0" text="Passord:" />
+      <Label layoutX="285.0" layoutY="203.0" text="Logg inn">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="registrer" layoutX="375.0" layoutY="385.0" mnemonicParsing="false" text="Registrer" />
+      <Label fx:id="feilLabel" layoutX="288.0" layoutY="254.0" prefHeight="17.0" prefWidth="168.0" text="Feil brukernavn eller passord" textFill="#ee0202" />
+   </children>
+</Pane>
