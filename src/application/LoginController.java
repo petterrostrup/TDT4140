@@ -57,7 +57,7 @@ public class LoginController extends Application {
 	        stage.show();
 	        
 	        System.out.println("asdf");
-	        feilLabel.setVisible(false);
+	        //feilLabel.setVisible(false);
 	}
 
 
