@@ -1,0 +1,5 @@
+DB
+
+Username: petternr_felles
+Password: gruppe61
+Location: mysql.stud.ntnu.no/petternr_felles

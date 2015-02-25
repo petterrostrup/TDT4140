@@ -1,9 +1,14 @@
 package classes;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Appointment {
+	// Make logic to generate appointmentID
 	private String appointmentID;
 	private String name;
 	private String description;
@@ -11,8 +16,28 @@ public class Appointment {
 	private Room room;
 	private ArrayList<User> participants;
 	private Date date;
-	private Date start;
-	private Date end;
+	private LocalTime start;
+	private LocalTime end;
+	
+	public Appointment(String name, String location, Room room, Date date, LocalTime start, LocalTime end){
+		setName(name);
+		setLocation(location);
+		setRoom(room);
+		setDate(date);
+		setStart(start);
+		setEnd(end);
+	}
+	
+	public Appointment(String name, String desc, String location, Room room, ArrayList<User> participants, Date date, LocalTime start, LocalTime end){
+		setName(name);
+		setDescription(desc);
+		setLocation(location);
+		setRoom(room);
+		setParticipants(participants);
+		setDate(date);
+		setStart(start);
+		setEnd(end);
+	}
 	
 	public String getAppointmentID() {
 		return appointmentID;
@@ -63,19 +88,20 @@ public class Appointment {
 		this.date = date;
 	}
 	
-	public Date getStart() {
+	public LocalTime getStart() {
 		return start;
 	}
-	public void setStart(Date start) {
+	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 	
-	public Date getEnd() {
+	public LocalTime getEnd() {
 		return end;
 	}
-	public void setEnd(Date end) {
+	public void setEnd(LocalTime end) {
 		this.end = end;
 	}
+	
 	
 	public void change(){
 		// Change the appointment and save to database

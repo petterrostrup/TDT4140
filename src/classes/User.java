@@ -26,7 +26,12 @@ public class User {
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		//lowercase and numbers allowed between 3 to 15 chars long
+		if (userName.matches("^[a-z0-9_-]{3,15}$")){
+			this.userName = userName;
+		}
+		
+		else throw new IllegalArgumentException("Invalid username");
 	}
 
 	public String getPassword() {
@@ -34,7 +39,13 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		//Lower and Upper case, must contain number and at least length of 8
+		if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")){
+			this.password = password;			
+		}
+		
+		else throw new IllegalArgumentException("Illegal password. Must contain lower and higher case, numbers and at least 8 chars long");
+		
 	}
 
 	public String getName() {
@@ -42,7 +53,10 @@ public class User {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		//All unicode chars from any language
+		if (name.matches("^[\\p{L} .'-]+$")){
+			this.name = name;
+		}
 	}
 
 	public String geteMail() {
@@ -50,7 +64,12 @@ public class User {
 	}
 
 	public void seteMail(String eMail) {
-		this.eMail = eMail;
+		if (eMail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
+			this.eMail = eMail;			
+		}
+		
+		else throw new IllegalArgumentException("Invalig email");
 	}
 
 	public String getAddress() {
@@ -58,10 +77,14 @@ public class User {
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		if (name.matches("((([A-Z]?[a-z]* ?)*)[0-9]+)")){
+			this.address = address;		
+		}
+		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public void logInn(){
+	public void logIn(String username, String password){
+		 User varUser = Login.login(username, password);
 		//Insert sql logic for login with this.userName and this.password
 	}
 	
