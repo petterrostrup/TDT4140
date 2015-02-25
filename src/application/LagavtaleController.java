@@ -11,7 +11,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LagavtaleController extends Application {
+public class LagAvtaleController extends Application {
 	
 	@FXML
 	private TextField tittel;  

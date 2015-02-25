@@ -24,12 +24,17 @@ public class Main extends Application {
 	public static void loginStart(){
 		javafx.application.Application.launch(LoginController.class);}
 	
+	public static void lageAvtaleStart(){
+		javafx.application.Application.launch(LagAvtaleController.class);}
 	
 	
 	
+	//(Kan bare launche ett vindu om gangen, resten må kalles fra andre klasser)
 	public static void main(String[] args) {
 		//launch(args);
 		loginStart();
+		//lageAvtaleStart();
+		
 		
 	}
 }
