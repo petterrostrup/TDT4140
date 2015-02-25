@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 
 
 
-public class Login extends Application {
+public class LoginController extends Application {
 	
 	private int logFail = 0;
 		
@@ -43,52 +43,62 @@ public class Login extends Application {
 	@FXML
 	private PasswordField passord;
 	
+	@FXML
+	private Label feilLabel; 
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	       
-	        Scene scene = new Scene(root, 500, 450);
-	    
+	        Scene scene = new Scene(root);
+	        
 	        stage.setTitle("Login");
 	        stage.setScene(scene);
 	        stage.show();
 	        
+	        System.out.println("asdf");
+	        feilLabel.setVisible(false);
+	}
+
+
 	        
-	        //Button action handler 1
-	        logginn.setOnAction((event) -> {
-	        	System.out.println("test");
-	        	});
-	        
-	        //Button action handler 2
-	        logginn.setOnAction(new EventHandler<ActionEvent>(){
-	    		public void handle(ActionEvent event){
-	    			String correctUsername = "admin";
-	    			String correctPassword = "admin";
-	    			System.out.println("testytest");
-	    		
-	    			
-	    			//failedLabel.setText("Feil brukernavn eller passord!");
-	    				if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
-	    				(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
-	    					//Sjekker om brukernavn og passord stemmer og bytter skjerm.
-	    					
-	    					stage.resizableProperty().set(true);
-	    					logFail = 0;
-	    					
-	    					
-	    					//stage.close();
-	    					
-	    					
-	    				}
-	    			else{	// Gir melding om at brukernavn og passord er feil
-	    				if(logFail == 0){
-	    					
-	    					logFail = 1;
-	    				}
-	    			}
-	    		}
-	    	});
-	    }
+	       
+    public void logButt (ActionEvent event) {
+    	System.out.println("hei");
+    	String correctUsername = "admin";
+		String correctPassword = "admin";
+		//System.out.println("testytest");
+	
+		
+		//failedLabel.setText("Feil brukernavn eller passord!");
+			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
+			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
+				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
+				
+				//stage.resizableProperty().set(true);
+				logFail = 0;
+				
+				
+				//stage.close();
+				Platform.exit();
+				
+			}
+		else{	// Gir melding om at brukernavn og passord er feil
+			if(logFail == 0){
+				
+				logFail = 1;
+				brukernavn.setText("poop");
+				brukernavn.setStyle("-fx-background:#FE2E2E");
+				feilLabel.setVisible(true);
+				
+			}
+		}
+	}
+
+
+    	
+    	
+    
 	
 
 	public static void main(String[] args) {
