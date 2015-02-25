@@ -31,14 +31,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="124.0" prefWidth="98.0" text="Button" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="4" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="5" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="6" />
-            <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="1" />
