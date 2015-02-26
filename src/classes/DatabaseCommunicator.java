@@ -161,7 +161,7 @@ public class DatabaseCommunicator {
 		}
 	}
 	
-	public ResultSet execute(String statement){
+	public static ResultSet execute(String statement){
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;

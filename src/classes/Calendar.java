@@ -1,5 +1,7 @@
 package classes;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +37,12 @@ public class Calendar {
 		this.appointments.remove(appointment);
 	}
 	
+	public void addAppointment(int appid){
+		String sqlStatement = 	"SELECT * FROM attending WHERE id = " + appid;
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+	}
+	
 	public void fillTest(){
 		Room testRoom = new Room("245", "somewhere", 10);
 		Appointment appointment1 = new Appointment("Gruppemøte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"));
@@ -46,6 +54,25 @@ public class Calendar {
 		appointments.add(appointment2);
 		appointments.add(appointment3);
 		appointments.add(appointment4);
+	}
+	
+	public void fillCalendar(){
+		appointments.clear();
+		String id = null; //userid here
+		String sqlStatement = "SELECT * FROM attending WHERE person = " + id;
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		try {
+			while (results.next()) {
+				addAppointment(results.getInt("APPOINTMENT"));
+				System.out.println("Adding appointment");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 }
