@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,7 +34,7 @@ public class LagAvtaleController extends Application {
 	private TextField slutt;
 	
 	@FXML
-	private TextField beskrivelse;
+	private TextArea beskrivelse;
 	
 	@FXML
 	private Button lagreavtale;
@@ -49,6 +51,20 @@ public class LagAvtaleController extends Application {
 	        stage.show();
 	        
 	}
+	
+	
+	public void lagreButt (ActionEvent event) {
+		//System.out.println("hade");
+		//Lagre data fra skjema i database
+	
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 		launch(args);

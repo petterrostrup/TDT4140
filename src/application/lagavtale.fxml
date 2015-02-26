@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LagAvtaleController">
    <children>
       <Label layoutX="272.0" layoutY="56.0" text="Lag avtale">
          <font>
@@ -54,7 +54,7 @@
       <TextField fx:id="slutt" layoutX="145.0" layoutY="398.0" />
       <Label layoutX="37.0" layoutY="455.0" text="Beskrivelse" />
       <TextArea fx:id="beskrivelse" layoutX="141.0" layoutY="455.0" prefHeight="130.0" prefWidth="300.0" />
-      <Button fx:id="lagreavtale" layoutX="141.0" layoutY="620.0" mnemonicParsing="false" text="Lagre" />
+      <Button fx:id="lagreavtale" layoutX="141.0" layoutY="620.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
       <SplitMenuButton fx:id="rom" layoutX="145.0" layoutY="212.0" mnemonicParsing="false" text="Rom">
          <items>
             <MenuItem mnemonicParsing="false">
