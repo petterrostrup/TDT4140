@@ -1,3 +1,0 @@
-Legion is a geth platform in Mass Effect 2 and 3. The platform calls itself Legion because it is made up of x 
-amounts of geth-processes, and may therefore not call itself for one geth, 
-hence "Legion, for we are many", from the Bible, the holy book of the Earth religion Christianity.

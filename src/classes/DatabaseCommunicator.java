@@ -57,7 +57,7 @@ public class DatabaseCommunicator {
 		Statement st = null;
 		ResultSet rs = null;
 		
-		String appointmentTable = "CREATE TABLE APPOINTMENT " +
+		String appointmentTable = "CREATE TABLE IF NOT EXISTS APPOINTMENT " +
                 "(id INTEGER not NULL, " +
                 " name VARCHAR(255), " + 
                 " description VARCHAR(255), " + 
@@ -66,9 +66,9 @@ public class DatabaseCommunicator {
                 " date DATE, " +
                 " start DATETIME, " +
                 " end DATETIME, " +
-                " FOREIGN KEY (room) REFERENCES room(id), " +
+                " FOREIGN KEY (room) REFERENCES ROOM(id), " +
                 " PRIMARY KEY ( id ))"; 
-		String userTable = "CREATE TABLE USER " +
+		String userTable = "CREATE TABLE IF NOT EXISTS USER " +
                 "(id INTEGER not NULL, " +
                 " username VARCHAR(255), " +
                 " password VARCHAR(255), " +
@@ -76,36 +76,37 @@ public class DatabaseCommunicator {
                 " email VARCHAR(255), " +
                 " address VARCHAR(255), " +
                 " PRIMARY KEY ( id ))"; 
-		String roomTable = "CREATE TABLE ROOM " +
+		String roomTable = "CREATE TABLE IF NOT EXISTS ROOM " +
                 "(id INTEGER not NULL, " +
                 " name VARCHAR(255), " + 
                 " place VARCHAR(255), " + 
                 " capacity INTEGER(25), " + 
                 " PRIMARY KEY ( id ))"; 
-		String groupTable = "CREATE TABLE GROUP " +
+		 String membergroupTable = "CREATE TABLE IF NOT EXISTS MEMBERGROUP " +
                 "(id INTEGER not NULL, " +
-                " name VARCHAR(255), " + 
+                " name VARCHAR(255), " +  
                 " PRIMARY KEY ( id ))"; 
-		String attendingTable = "CREATE TABLE ATTENDING " +
+                
+		String attendingTable = "CREATE TABLE IF NOT EXISTS ATTENDING " +
                 "(id INTEGER not NULL, " +
                 " person INTEGER not NULL, " +
                 " appointment INTEGER not NULL, " +
-                " FOREIGN KEY (person) REFERENCES user(id), " +
-                " FOREIGN KEY (appointment) REFERENCES appointment(id), " +
+                " FOREIGN KEY (person) REFERENCES USER(id), " +
+                " FOREIGN KEY (appointment) REFERENCES APPOINTMENT(id), " +
                 " PRIMARY KEY ( id ))"; 
-		String memberTable = "CREATE TABLE MEMBER " +
+		String memberTable = "CREATE TABLE IF NOT EXISTS MEMBER " +
                 "(id INTEGER not NULL, " +
                 " person INTEGER not NULL, " +
-                " group INTEGER not NULL, " +
-                " FOREIGN KEY (person) REFERENCES user(id), " +
-                " FOREIGN KEY (group) REFERENCES group(id), " +
+                " membergroup INTEGER not NULL, " +
+                " FOREIGN KEY (person) REFERENCES USER(id), " +
+                " FOREIGN KEY (membergroup) REFERENCES MEMBERGROUP(id), " +
                 " PRIMARY KEY ( id ))"; 
-		String bookingTable = "CREATE TABLE BOOKING " +
+		String bookingTable = "CREATE TABLE IF NOT EXISTS BOOKING " +
                 "(id INTEGER not NULL, " +
                 " room INTEGER not NULL, " +
                 " appointment INTEGER not NULL, " +
-                " FOREIGN KEY (room) REFERENCES room(id), " +
-                " FOREIGN KEY (appointment) REFERENCES appointment(id), " +
+                " FOREIGN KEY (room) REFERENCES ROOM(id), " +
+                " FOREIGN KEY (appointment) REFERENCES APPOINTMENT(id), " +
                 " PRIMARY KEY ( id ))";  
 		
 		try {
@@ -113,19 +114,29 @@ public class DatabaseCommunicator {
 			con = DriverManager.getConnection(url, user, password);
 			System.out.println("Connected");
 			st = con.createStatement();
-			st.executeUpdate(appointmentTable);
+			//st.executeUpdate("DROP TABLE IF EXISTS  USER ");
 			st.executeUpdate(userTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
+			//st.executeUpdate("DROP TABLE IF EXISTS  ROOM ");
 			st.executeUpdate(roomTable);
-			st.executeUpdate(groupTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
+			//st.executeUpdate("DROP TABLE IF EXISTS  APPOINTMENT ");
+			st.executeUpdate(appointmentTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
+			//st.executeUpdate("DROP TABLE IF EXISTS  MEMBERGROUP ");
+			st.executeUpdate(membergroupTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
+			//st.executeUpdate("DROP TABLE IF EXISTS  ATTENDING ");
 			st.executeUpdate(attendingTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
+			//st.executeUpdate("DROP TABLE IF EXISTS  MEMBER ");
 			st.executeUpdate(memberTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
+			//st.executeUpdate("DROP TABLE IF EXISTS  BOOKING ");
 			st.executeUpdate(bookingTable);
+			System.out.println("(╯°□°）╯︵ ┻━┻");
 			
-			con.commit();
-			
-			if (rs.next()) {
-				System.out.println(rs.getString(1));
-			}
+			System.out.println("Created all tables. Databases is initialized");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
