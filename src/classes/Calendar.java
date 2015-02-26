@@ -37,12 +37,42 @@ public class Calendar {
 		this.appointments.remove(appointment);
 	}
 	
-	public void addAppointment(int appid){
+	public void getAppointment(int appid){
 		String sqlStatement = 	"SELECT * FROM attending WHERE id = " + appid;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
+		try {
+			while (results.next()) {
+				String id = Integer.toString(results.getInt("id"));
+				String name = results.getString("name");
+				String desc = results.getString("description");
+				String loc = results.getString("location");
+				Room room = getroom();
+				
+				System.out.println("Adding appointment");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
+	public Room getroom(String roomid) {
+		String sqlStatement = 	"SELECT * FROM room WHERE id = " + roomid;
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		Room room = null;
+		try {
+			while (results.next()) {
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 	public void fillTest(){
 		Room testRoom = new Room("245", "somewhere", 10);
 		Appointment appointment1 = new Appointment("Gruppemøte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"));
@@ -64,7 +94,7 @@ public class Calendar {
 		
 		try {
 			while (results.next()) {
-				addAppointment(results.getInt("APPOINTMENT"));
+				getAppointment(results.getInt("APPOINTMENT"));
 				System.out.println("Adding appointment");
 			}
 		} catch (SQLException e) {
