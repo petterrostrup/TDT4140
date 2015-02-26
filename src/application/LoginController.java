@@ -75,7 +75,7 @@ public class LoginController extends Application {
 	        
 	       
     public void logButt (ActionEvent event) {
-    	System.out.println("hei");
+    	//System.out.println("hei");
     	String correctUsername = "admin";
 		String correctPassword = "admin";
 		//System.out.println("testytest");
@@ -102,7 +102,7 @@ public class LoginController extends Application {
 				brukernavn.setStyle("-fx-background:#FE2E2E");
 				passord.setStyle("-fx-background:#FE2E2E");
 				feilLabel.setText("Feil brukernavn eller passord"); 
-				//feilLabel.setVisible(true);
+				
 				
 			}
 		}
