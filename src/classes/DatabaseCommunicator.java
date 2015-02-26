@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 
 public class DatabaseCommunicator {
 	
-	private static String url = "jdbc:mysql://mysql.stud.ntnu.no/";
-    private static String user = "petternr_felles";
+	private static String url = "jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar";
+    private static String user = "petternr_user";
     private static String password = "gruppe61";
 	
 	public static void test(){
@@ -61,7 +61,6 @@ public class DatabaseCommunicator {
                 "(id INTEGER not NULL, " +
                 " name VARCHAR(255), " + 
                 " description VARCHAR(255), " + 
-                " location VARCHAR(255), " + 
                 " location VARCHAR(255), " + 
                 " room INTEGER not NULL, " + 
                 " date DATE, " +
