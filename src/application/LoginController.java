@@ -83,7 +83,6 @@ public class LoginController extends Application {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 		
-		
 	}
 	
 	
@@ -94,7 +93,6 @@ public class LoginController extends Application {
 		String correctPassword = "admin";
 		
 		
-		//failedLabel.setText("Feil brukernavn eller passord!");
 			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
 			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
 				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
@@ -103,7 +101,7 @@ public class LoginController extends Application {
 				
 				
 				try {
-					new LagAvtaleController().start(new Stage());
+					new HjemController().start(new Stage());
 				} catch (Exception e) {
 					
 					e.printStackTrace();
@@ -114,7 +112,7 @@ public class LoginController extends Application {
 			    stage.close();
 				
 			}
-		else{	// Gir melding om at brukernavn og passord er feil
+		else{	// Gir melding om at brukernavn eller passord er feil
 			if(logFail == 0){
 				
 				logFail = 1;
