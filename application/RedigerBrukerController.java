@@ -71,9 +71,11 @@ public class RedigerBrukerController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
+	        
+	        
 	}
 	
-	//setTextFill(Color.RED);
+	
 
 	//Lagre data fra skjema i database
 	public void lagreButt (ActionEvent event) {
@@ -91,6 +93,9 @@ public class RedigerBrukerController extends Application {
 		//System.out.println(nyttBrukernavnRed);
 		
 		
+		
+		
+		//setTextFill(Color.RED);
 		ugyldigNavn.setText("Ugyldig navn");
 		ugyldigNyttBrukernavn.setText("Ugyldig brukernavn");
 		
