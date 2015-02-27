@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="825.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="825.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HjemController">
    <children>
       <Pane layoutY="-1.0" prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
          <children>
@@ -20,9 +20,9 @@
       <Pane layoutY="127.0" prefHeight="51.0" prefWidth="928.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="HJEM" />
-            <Button layoutX="232.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
+            <Button layoutX="232.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
             <Button layoutX="464.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
-            <Button layoutX="696.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
+            <Button layoutX="696.0" mnemonicParsing="false" onAction="#logoutButt" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
          </children>
       </Pane>
       <Pane layoutY="178.0" prefHeight="71.0" prefWidth="928.0">
