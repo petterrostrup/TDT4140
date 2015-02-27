@@ -91,20 +91,22 @@ public class RedigerBrukerController extends Application {
 		//System.out.println(nyttBrukernavnRed);
 		
 		
-		ugyldigNavn.setText("");
-		ugyldigNyttBrukernavn.setText("");
+		ugyldigNavn.setText("Ugyldig navn");
+		ugyldigNyttBrukernavn.setText("Ugyldig brukernavn");
 		
 		
 		
 		
 		
 		try {User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
-		//System.out.println(varUser);
+		System.out.println(varUser);
+		
 			
 		} catch (Exception e) {
 			System.out.println(e);
+			
 		}
-		
+		System.out.println("LOL");
 		
 		
 		
