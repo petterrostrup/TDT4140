@@ -116,25 +116,18 @@ public class DatabaseCommunicator {
 			st = con.createStatement();
 			//st.executeUpdate("DROP TABLE IF EXISTS  USER ");
 			st.executeUpdate(userTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  ROOM ");
 			st.executeUpdate(roomTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  APPOINTMENT ");
 			st.executeUpdate(appointmentTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  MEMBERGROUP ");
 			st.executeUpdate(membergroupTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  ATTENDING ");
 			st.executeUpdate(attendingTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  MEMBER ");
 			st.executeUpdate(memberTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  BOOKING ");
 			st.executeUpdate(bookingTable);
-			System.out.println("(╯°□°）╯︵ ┻�?┻");
 			
 			System.out.println("Created all tables. Databases is initialized");
 			
