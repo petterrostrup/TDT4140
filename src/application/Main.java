@@ -24,6 +24,7 @@ public class Main extends Application {
 	public static void loginStart(){
 		javafx.application.Application.launch(LoginController.class);}
 	
+<<<<<<< HEAD
 	public static void lageAvtaleStart(){
 		javafx.application.Application.launch(LagAvtaleController.class);}
 	
@@ -36,6 +37,14 @@ public class Main extends Application {
 		loginStart();
 		//lageAvtaleStart();
 		
+=======
+	
+	
+	
+	public static void main(String[] args) {
+		//launch(args);
+		loginStart();
+>>>>>>> e2e6808fca04ebc961f143325a6ef88b1e7b9b45
 		
 	}
 }

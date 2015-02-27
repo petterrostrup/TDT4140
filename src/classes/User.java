@@ -57,6 +57,7 @@ public class User {
 		if (name.matches("^[\\p{L} .'-]+$")){
 			this.name = name;
 		}
+		else throw new IllegalArgumentException("Invalid name");
 	}
 
 	public String geteMail() {
@@ -77,13 +78,14 @@ public class User {
 	}
 
 	public void setAddress(String address) {
-		if (name.matches("((([A-Z]?[a-z]* ?)*)[0-9]+)")){
+		if (address.matches("((([A-Z]?[a-z]* ?)*)[0-9]+)")){
 			this.address = address;		
 		}
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public void logInn(){
+	public void logIn(String username, String password){
+		 User varUser = Login.login(username, password);
 		//Insert sql logic for login with this.userName and this.password
 	}
 	
