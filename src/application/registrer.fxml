@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegistrerController">
    <children>
       <Label layoutX="281.0" layoutY="54.0" text="Registrer">
          <font>
@@ -24,10 +24,12 @@
       <TextField fx:id="adresse" layoutX="123.0" layoutY="303.0" />
       <Label layoutX="35.0" layoutY="342.0" text="Passord:" />
       <Label layoutX="35.0" layoutY="386.0" text="Gjenta passord:" />
-      <Button fx:id="registrer" layoutX="123.0" layoutY="451.0" mnemonicParsing="false" text="Registrer" />
+      <Button fx:id="registrer" layoutX="123.0" layoutY="451.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
       <PasswordField fx:id="passord" layoutX="123.0" layoutY="338.0" />
       <PasswordField fx:id="gpassord" layoutX="123.0" layoutY="382.0" />
       <ImageView fx:id="imageview" fitHeight="187.0" fitWidth="249.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="openfile" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" text="Åpne fil" />
+      <Button fx:id="openfile" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" onAction="#openButt" text="Åpne fil" />
+      <Label fx:id="ugyldigBrukernavn" layoutX="281.0" layoutY="228.0" />
+      <Label fx:id="ugyldigEpost" layoutX="281.0" layoutY="264.0" prefHeight="17.0" prefWidth="0.0" />
    </children>
 </Pane>
