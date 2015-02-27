@@ -47,6 +47,7 @@ public class RegistrerController {
 		stage.setTitle("Registrer");
 		stage.setScene(scene);
 		stage.show();
+		System.out.println("HELLO WØØØRLD");
 	}
 	
 }
