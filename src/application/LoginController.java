@@ -119,7 +119,7 @@ public class LoginController extends Application {
 				//brukernavn.setText("noob");
 				brukernavn.setStyle("-fx-background:#FE2E2E");
 				passord.setStyle("-fx-background:#FE2E2E");
-				feilLabel.setText("Feil brukernavn eller passord"); 
+				feilLabel.setText("Feil brukernavn eller passord");
 				
 				
 			}
