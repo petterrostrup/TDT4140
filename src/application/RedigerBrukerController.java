@@ -62,7 +62,7 @@ public class RedigerBrukerController extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
+		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       Parent root = FXMLLoader.load(getClass().getResource("redigerbruker.fxml"));
 	       
 	        Scene scene = new Scene(root);
