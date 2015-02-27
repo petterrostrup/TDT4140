@@ -1,7 +1,15 @@
 package application;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+
+import com.sun.javafx.logging.Logger;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -39,7 +47,7 @@ public class RegistrerController extends Application{
 	private Button registrer;
 	
 	@FXML
-	private Button openfile;
+	private Button openFile;
 	
 	@FXML
 	private ImageView imageview;
@@ -50,6 +58,8 @@ public class RegistrerController extends Application{
 	@FXML
 	private Label ugyldigEpost;
 	
+	private Desktop desktop = Desktop.getDesktop();
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("registrer.fxml"));
@@ -57,8 +67,42 @@ public class RegistrerController extends Application{
 		stage.setTitle("Registrer");
 		stage.setScene(scene);
 		stage.show();
-		System.out.println("HELLO WØØØRLD");
+		
+		
+		
+		final FileChooser fileChooser = new FileChooser();
+		final Button openButton = new Button("Velg bilde");
+		
+		openButton.setOnAction(
+				new EventHandler<ActionEvent>(){
+					@Override
+					public void handle(final ActionEvent e){
+						File file = fileChooser.showOpenDialog(stage);
+						if(file != null){
+							openFile(file);
+						}
+					}
+				
+				});
+			
+		}
+		
+	public void openFile(File file){
+		
+		
+		
+		try{
+			desktop.open(file);
+		}
+		catch (IOException ex){
+//			Logger.getLogger(
+//					RegistrerController.class.getName()).log(
+//							Level.SEVERE, null, ex
+//							);
+		}
+		
 	}
+		
 	
 	public void regButt (ActionEvent event){
 		System.out.println("registrert");
@@ -73,21 +117,7 @@ public class RegistrerController extends Application{
 //		stage.close();
 	}
 	
-	public void openButt(ActionEvent event){
-		System.out.println("butt iz opened");
-		
-		
-		 FileChooser openfile = new FileChooser();
-		 openfile.setTitle("Open Resource File");
-		 openfile.getExtensionFilters().addAll(
-		         
-		         new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
-		     
-		 File selectedFile = fileChooser.showOpenDialog(mainStage);
-		 if (selectedFile != null) {
-		    mainStage.display(imageview);
-		 }
-	}
+
 	
 	
 	public static void main(String[] args){
