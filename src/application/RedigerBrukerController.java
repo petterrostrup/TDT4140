@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class RedigerBrukerController extends Application {
@@ -42,7 +43,7 @@ public class RedigerBrukerController extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no:3306/nilsad_koier", "nilsad" , "passord1212");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       Parent root = FXMLLoader.load(getClass().getResource("redigerbruker.fxml"));
 	       
 	        Scene scene = new Scene(root);
@@ -52,11 +53,15 @@ public class RedigerBrukerController extends Application {
 	        stage.show();
 	        
 	}
-
 	
+	//setTextFill(Color.RED);
+
+	//Lagre data fra skjema i database
 	public void lagreButt (ActionEvent event) {
 		System.out.println("test");
-		//Lagre data fra skjema i database
+		boolean dataOk = true;
+		
+		
 	
 	}
 	
