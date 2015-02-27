@@ -49,6 +49,7 @@ public class RegistrerController {
 	@FXML
 	private Label ugyldigEpost;
 	
+	@Override
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("registrer.fxml"));
 		Scene scene = new Scene(root);
@@ -60,15 +61,15 @@ public class RegistrerController {
 	
 	public void regButt (ActionEvent event){
 		System.out.println("registrert");
-		try{
-			new RegistrerController().start(new Stage());
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
-		Node source = (Node) event.getSource();
-		Stage stage = (Stage) source.getScene().getWindow();
-		stage.close();
+//		try{
+//			new RegistrerController().start(new Stage());
+//		}
+//		catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		Node source = (Node) event.getSource();
+//		Stage stage = (Stage) source.getScene().getWindow();
+//		stage.close();
 	}
 	
 	public void openButt(ActionEvent event){

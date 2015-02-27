@@ -31,13 +31,13 @@ public class RedigerBrukerController extends Application {
 	private TextField adresse;
 	
 	@FXML
-	private TextField passord;
+	private PasswordField passord;
 	
 	@FXML
-	private TextField nyttpassord;
+	private PasswordField nyttpassord;
 	
 	@FXML
-	private TextField gnyttpassord;
+	private PasswordField gnyttpassord;
 	
 	
 	@Override
