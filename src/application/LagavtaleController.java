@@ -54,7 +54,7 @@ public class LagAvtaleController extends Application {
 	
 	
 	public void lagreButt (ActionEvent event) {
-		//System.out.println("hade");
+		System.out.println("test");
 		//Lagre data fra skjema i database
 	
 	}
