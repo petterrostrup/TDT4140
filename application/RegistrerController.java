@@ -88,7 +88,7 @@ public class RegistrerController extends Application{
 		}
 		
 	public void openFile(File file){
-		
+		System.out.println("supp bro, open a file bro");
 		
 		
 		try{
