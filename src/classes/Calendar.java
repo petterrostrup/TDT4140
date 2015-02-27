@@ -47,7 +47,7 @@ public class Calendar {
 				String name = results.getString("name");
 				String desc = results.getString("description");
 				String loc = results.getString("location");
-				Room room = getroom();
+				Room room = getroom(Integer.toString(results.getInt("room")));
 				
 				System.out.println("Adding appointment");
 			}
@@ -64,6 +64,7 @@ public class Calendar {
 		Room room = null;
 		try {
 			while (results.next()) {
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
