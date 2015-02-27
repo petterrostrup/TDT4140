@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -41,6 +42,14 @@ public class RedigerBrukerController extends Application {
 	private PasswordField gnyttpassord;
 	
 	
+	String navnRed;
+	String nyttBrukernavnRed;
+	String epostRed;
+	String adresseRed;
+	String gammeltPassordRed;
+	String nyttPassordRed;
+	
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
@@ -58,8 +67,13 @@ public class RedigerBrukerController extends Application {
 
 	//Lagre data fra skjema i database
 	public void lagreButt (ActionEvent event) {
-		System.out.println("test");
+		//System.out.println("test");
 		boolean dataOk = true;
+		
+		gammeltPassordRed = passord.getText();
+		System.out.println(gammeltPassordRed);
+		
+		
 		
 		
 	
