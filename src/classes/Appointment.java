@@ -1,6 +1,5 @@
 package classes;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
@@ -8,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Appointment {
-	// Make logic to generate appointmentID
 	private String appointmentID;
 	private String name;
 	private String description;
@@ -16,27 +14,11 @@ public class Appointment {
 	private Room room;
 	private ArrayList<User> participants;
 	private Date date;
-	private LocalTime start;
-	private LocalTime end;
+	private Date start;
+	private Date end;
 	
-	public Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end){
-		setName(name);
-		setLocation(location);
-		setRoom(room);
-		setDate(date);
-		setStart(start);
-		setEnd(end);
-	}
-	
-	public Appointment(String name, String desc, String location, Room room, ArrayList<User> participants, Date date, LocalTime start, LocalTime end){
-		setName(name);
-		setDescription(desc);
-		setLocation(location);
-		setRoom(room);
-		setParticipants(participants);
-		setDate(date);
-		setStart(start);
-		setEnd(end);
+	public Appointment(){
+		
 	}
 	
 	public String getAppointmentID() {
@@ -88,19 +70,39 @@ public class Appointment {
 		this.date = date;
 	}
 	
-	public LocalTime getStart() {
+	public Date getStart() {
 		return start;
 	}
-	public void setStart(LocalTime start) {
+	public void setStart(Date start) {
 		this.start = start;
 	}
 	
-	public LocalTime getEnd() {
+	public Date getEnd() {
 		return end;
 	}
-	public void setEnd(LocalTime end) {
+	public void setEnd(Date end) {
 		this.end = end;
 	}
+	public void connect(){
+		Connection conn = null;
+		
+		try {conn =DriverManager.getConnection("jdbc:mysql.stud.ntnu.no/petternr_felles" +
+		                                   "user=petternr_felles&password=gruppe61");
+
+		    // Do something with the Connection
+		
+			
+			
+		} catch (SQLException ex) {
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+
+		
+	}
+	
 	
 	
 	public void change(){

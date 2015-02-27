@@ -17,12 +17,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-<<<<<<< HEAD
       <Button fx:id="registrer" layoutX="375.0" layoutY="385.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
       <Label fx:id="feilLabel" layoutX="288.0" layoutY="254.0" prefHeight="17.0" prefWidth="168.0" textFill="#ee0202" />
-=======
-      <Button fx:id="registrer" layoutX="375.0" layoutY="385.0" mnemonicParsing="false" text="Registrer" />
-      <Label fx:id="feilLabel" layoutX="288.0" layoutY="254.0" prefHeight="17.0" prefWidth="168.0" text="Feil brukernavn eller passord" textFill="#ee0202" />
->>>>>>> e2e6808fca04ebc961f143325a6ef88b1e7b9b45
    </children>
 </Pane>
