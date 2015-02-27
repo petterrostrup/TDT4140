@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class RegistrerController {
+public class RegistrerController extends Application{
 	
 	@FXML
 	private TextField navn;

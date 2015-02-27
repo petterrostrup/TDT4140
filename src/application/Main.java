@@ -29,6 +29,7 @@ public class Main extends Application {
 	
 	
 	
+	
 	//(Kan bare launche ett vindu om gangen, resten må kalles fra andre klasser)
 	public static void main(String[] args) {
 		//launch(args);
