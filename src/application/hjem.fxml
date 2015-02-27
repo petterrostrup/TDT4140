@@ -21,7 +21,7 @@
          <children>
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="HJEM" />
             <Button layoutX="232.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
-            <Button layoutX="464.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
+            <Button layoutX="464.0" mnemonicParsing="false" onAction="#brukerButt" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
             <Button layoutX="696.0" mnemonicParsing="false" onAction="#logoutButt" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
          </children>
       </Pane>

@@ -2,6 +2,7 @@ package application;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class HjemController extends Application {
+	
+	//@FXML
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -41,8 +44,23 @@ public class HjemController extends Application {
 		//Bytter vindu til login
 				public void logoutButt (ActionEvent event) {
 					try {
-						//(Bytt ut med registreringsskjerm når den er laget)
+						
 						new LoginController().start(new Stage());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//Henter stage parameter
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
+				    
+				}
+				
+				//Bytter vindu til bruker
+				public void brukerButt (ActionEvent event) {
+					try {
+						
+						new RedigerBrukerController().start(new Stage());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
