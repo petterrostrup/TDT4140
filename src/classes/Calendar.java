@@ -2,13 +2,17 @@ package classes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calendar {
 	private User owner;
 	private ArrayList<Appointment> appointments;
+
 
 	public User getOwner() {
 		return this.owner;
@@ -48,7 +52,12 @@ public class Calendar {
 				String desc = results.getString("description");
 				String loc = results.getString("location");
 				Room room = getroom(Integer.toString(results.getInt("room")));
+				Date date = results.getDate("date");
+				Time start = results.getTime("start");
+				Time end = results.getTime("end");
 				
+				Appointment returning = new Appointment(name, desc, loc, room, date, start.toLocalTime(), end.toLocalTime());
+				appointments.add(returning);
 				System.out.println("Adding appointment");
 			}
 		} catch (SQLException e) {
@@ -63,23 +72,22 @@ public class Calendar {
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Room room = null;
 		try {
-			while (results.next()) {
-				
-			}
+			results.next();
+			room = new Room(results.getString("name"), results.getString("place"), results.getInt("capacity"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return null;
+		return room;
 	}
 
 	public void fillTest(){
 		Room testRoom = new Room("245", "somewhere", 10);
-		Appointment appointment1 = new Appointment("Gruppemøte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"));
-		Appointment appointment2 = new Appointment("Gruppemøte", "Bygg-1", testRoom,new Date(2015, 04, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"));
-		Appointment appointment3 = new Appointment("Gruppemøte", "Bygg-1", testRoom,new Date(2015, 05, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"));
-		Appointment appointment4 = new Appointment("Gruppemøte", "Bygg-1", testRoom,new Date(2015, 06, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"));
+		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"));
+		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 04, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"));
+		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 05, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"));
+		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 06, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"));
 		
 		appointments.add(appointment1);
 		appointments.add(appointment2);

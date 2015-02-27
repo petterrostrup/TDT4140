@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 
 
 
@@ -50,46 +52,75 @@ public class LoginController extends Application {
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	       
-	        Scene scene = new Scene(root);
+	        final Scene scene = new Scene(root);
 	        
 	        stage.setTitle("Login");
 	        stage.setScene(scene);
 	        stage.show();
+	      //stage.resizableProperty().set(true/false);
 	        
-	        System.out.println("asdf");
-	        feilLabel.setVisible(false);
+	        //System.out.println("hei");
+	        
+	        
+
+	        
 	}
-
-
-	        
-	       
+	
+	
+	
+	//Bytter vindu til registreringsskjerm
+	public void regButt (ActionEvent event) {
+		System.out.println("hade");
+		//RegistrerBrukerKlasse().start(new Stage());
+		try {
+			//(Bytt ut med registreringsskjerm når den er laget)
+			new LagAvtaleController().start(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+		
+	}
+	
+	
+		       
     public void logButt (ActionEvent event) {
-    	System.out.println("hei");
+    	//System.out.println("test");
     	String correctUsername = "admin";
 		String correctPassword = "admin";
-		//System.out.println("testytest");
-	
 		
-		//failedLabel.setText("Feil brukernavn eller passord!");
+		
 			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
 			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
 				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
 				
-				//stage.resizableProperty().set(true);
 				logFail = 0;
 				
 				
-				//stage.close();
-				Platform.exit();
+				try {
+					new HjemController().start(new Stage());
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				//Henter stage parameter
+				Node  source = (Node)  event.getSource(); 
+			    Stage stage  = (Stage) source.getScene().getWindow();
+			    stage.close();
 				
 			}
-		else{	// Gir melding om at brukernavn og passord er feil
+		else{	// Gir melding om at brukernavn eller passord er feil
 			if(logFail == 0){
 				
 				logFail = 1;
-				brukernavn.setText("poop");
+				//brukernavn.setText("noob");
 				brukernavn.setStyle("-fx-background:#FE2E2E");
-				feilLabel.setVisible(true);
+				passord.setStyle("-fx-background:#FE2E2E");
+				feilLabel.setText("Feil brukernavn eller passord");
+				
 				
 			}
 		}
