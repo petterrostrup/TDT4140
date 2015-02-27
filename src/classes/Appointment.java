@@ -19,7 +19,7 @@ public class Appointment {
 	private LocalTime start;
 	private LocalTime end;
 	
-	public Appointment(String name, String location, Room room, Date date, LocalTime start, LocalTime end){
+	public Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end){
 		setName(name);
 		setLocation(location);
 		setRoom(room);
