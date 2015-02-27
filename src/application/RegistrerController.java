@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class RegistrerController extends Application{
@@ -74,6 +75,18 @@ public class RegistrerController extends Application{
 	
 	public void openButt(ActionEvent event){
 		System.out.println("butt iz opened");
+		
+		
+		 FileChooser openfile = new FileChooser();
+		 openfile.setTitle("Open Resource File");
+		 openfile.getExtensionFilters().addAll(
+		         
+		         new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
+		     
+		 File selectedFile = fileChooser.showOpenDialog(mainStage);
+		 if (selectedFile != null) {
+		    mainStage.display(imageview);
+		 }
 	}
 	
 	
