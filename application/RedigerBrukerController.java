@@ -106,28 +106,36 @@ public class RedigerBrukerController extends Application {
 		
 		
 		
-		
+		boolean checkpointReached = false;
 		try {User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
 		System.out.println(varUser.geteMail());
 			
 		} catch (Exception e) {
 			System.out.println(e);
+			
+			ugyldigNavn.setText("Ugyldig navn");
+			ugyldigNyttBrukernavn.setText("Lowercase and numbers allowed between 3 to 15 chars long");
+			ugyldigEpost.setText("Ugyldig epost");
+			ugyldigAdresse.setText("Ugyldig adresse");
+			ugyldigGammeltpassord.setText("Ugyldig gammelt passord");
+			ugyldigNyttpassord.setText("Lower and Upper case, must contain number and at least length of 8");
+			ugyldigGjentapassord.setText("Ugyldig gjenta passord");
+			
+			ugyldigNavn.setTextFill(Color.RED);
+			ugyldigNyttBrukernavn.setTextFill(Color.RED);
+			ugyldigEpost.setTextFill(Color.RED);
+			ugyldigAdresse.setTextFill(Color.RED);
+			ugyldigGammeltpassord.setTextFill(Color.RED);
+			ugyldigNyttpassord.setTextFill(Color.RED);
+			ugyldigGjentapassord.setTextFill(Color.RED);
+			
+			checkpointReached = true;
 		}
-		ugyldigNavn.setText("Ugyldig navn");
-		ugyldigNyttBrukernavn.setText("Lowercase and numbers allowed between 3 to 15 chars long");
-		ugyldigEpost.setText("Ugyldig epost");
-		ugyldigAdresse.setText("Ugyldig adresse");
-		ugyldigGammeltpassord.setText("Ugyldig gammelt passord");
-		ugyldigNyttpassord.setText("Lower and Upper case, must contain number and at least length of 8");
-		ugyldigGjentapassord.setText("Ugyldig gjenta passord");
+		if(!checkpointReached){
+			ugyldigNyttBrukernavn.setText("");
+		}
 		
-		ugyldigNavn.setTextFill(Color.RED);
-		ugyldigNyttBrukernavn.setTextFill(Color.RED);
-		ugyldigEpost.setTextFill(Color.RED);
-		ugyldigAdresse.setTextFill(Color.RED);
-		ugyldigGammeltpassord.setTextFill(Color.RED);
-		ugyldigNyttpassord.setTextFill(Color.RED);
-		ugyldigGjentapassord.setTextFill(Color.RED);
+		
 		
 		
 		
