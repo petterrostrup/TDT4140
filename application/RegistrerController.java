@@ -58,6 +58,9 @@ public class RegistrerController extends Application{
 	@FXML
 	private Label ugyldigEpost;
 	
+	@FXML
+	private Button velgfil;
+	
 	private Desktop desktop = Desktop.getDesktop();
 	
 	@Override
