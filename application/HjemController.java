@@ -28,7 +28,7 @@ public class HjemController extends Application {
 	//Bytter vindu til LagAvtale
 		public void avtaleButt (ActionEvent event) {
 			try {
-				//(Bytt ut med registreringsskjerm når den er laget)
+				
 				new LagAvtaleController().start(new Stage());
 			} catch (Exception e) {
 				e.printStackTrace();
