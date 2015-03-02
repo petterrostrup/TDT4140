@@ -48,7 +48,7 @@ public class HjemController extends Application {
 	}
 	
 	
-//	//Bytter vindu til hjem
+//	//(Bytter vindu til hjem (Trengs ikke fra hjem skjerm, men trengs i andre klasser))
 //	public void hjemButt (ActionEvent event) {
 //		try {
 //			new HjemController().start(new Stage());
