@@ -1,5 +1,11 @@
 package application;
 
+import java.time.LocalTime;
+import java.util.Date;
+
+import classes.Appointment;
+import classes.Calendar;
+import classes.Room;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +13,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class HjemController extends Application {
 	
+	@FXML
+	private GridPane gridpane;
+	
 	//@FXML
+	
+	
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -22,6 +34,17 @@ public class HjemController extends Application {
 	        stage.setTitle("Hjem");
 	        stage.setScene(scene);
 	        stage.show();
+	        
+	        Calendar kalender = new Calendar();
+	        
+	        GridPane nyAvtale = new GridPane();
+	        Room testRoom = new Room("245", "somewhere", 10);
+	        Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30")); 
+	        
+	        
+	        //add to appointmentSSS, write in gridpane(label, 1, 1)
+	        
+	        
 	}
 	
 	
