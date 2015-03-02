@@ -41,7 +41,7 @@
       </Pane>
       <ScrollPane layoutY="248.0" prefHeight="580.0" prefWidth="928.0">
          <content>
-            <GridPane alignment="BOTTOM_LEFT" gridLinesVisible="true" prefHeight="700.0" prefWidth="906.0">
+            <GridPane fx:id="gridpane" alignment="BOTTOM_LEFT" gridLinesVisible="true" prefHeight="700.0" prefWidth="906.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="122.0" />

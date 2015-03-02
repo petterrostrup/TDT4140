@@ -11,6 +11,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class LagAvtaleController extends Application {
@@ -39,6 +40,8 @@ public class LagAvtaleController extends Application {
 	@FXML
 	private Button lagreavtale;
 	
+	@FXML
+	private GridPane gridpane;
 
 	@Override
 	public void start(Stage stage) throws Exception {
