@@ -1,5 +1,10 @@
 package classes;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.Date;
+
 public class User {
 	private String userName;
 	private String password;
@@ -84,9 +89,11 @@ public class User {
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public void logIn(String username, String password){
+	public User logIn(String username, String password){
 		 User varUser = Login.login(username, password);
-		//Insert sql logic for login with this.userName and this.password
+		 
+		 return varUser;
+		 
 	}
 	
 	public void logOut(){
@@ -95,6 +102,12 @@ public class User {
 	
 	public void changeAttending(){
 		//Change an attending status on event
+	}
+	
+	public void saveUser(User user){
+		String sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
+				+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 	}
 	
 	

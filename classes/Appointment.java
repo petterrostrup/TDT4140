@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Appointment {
@@ -102,9 +103,11 @@ public class Appointment {
 		this.end = end;
 	}
 	
-	
-	public void change(){
-		// Change the appointment and save to database
+	public void saveAppointment(Appointment appointment){
+		String sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end) "
+				+ "VALUES (" + appointment.getName() + ", " + appointment.getDescription() + ", " + appointment.getLocation() + ", " + appointment.getRoom().getRoomNr() +", " + appointment.getDate().toString() +", " + appointment.getStart().toString() +", " + appointment.getEnd().toString() + ")";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
 	}
 	
 	public void addParticipant(User user){
