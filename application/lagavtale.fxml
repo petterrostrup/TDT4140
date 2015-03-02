@@ -90,5 +90,6 @@
          </items>
       </SplitMenuButton>
       <ChoiceBox fx:id="rom2" layoutX="392.0" layoutY="212.0" prefWidth="150.0" />
+      <Label fx:id="label1" layoutX="441.0" layoutY="381.0" text="FEEEEIL LABEL" />
    </children>
 </Pane>
