@@ -47,7 +47,7 @@ public class RegistrerController extends Application{
 	private Button registrer;
 	
 	@FXML
-	private Button openFile;
+	private Button velgfil;
 	
 	@FXML
 	private ImageView imageview;
@@ -57,9 +57,7 @@ public class RegistrerController extends Application{
 	
 	@FXML
 	private Label ugyldigEpost;
-	
-	@FXML
-	private Button velgfil;
+
 	
 	private Desktop desktop = Desktop.getDesktop();
 	
@@ -92,17 +90,17 @@ public class RegistrerController extends Application{
 		
 	public void openFile(File file){
 		System.out.println("supp bro, open a file bro");
-//		
-//		
-//		try{
-//			desktop.open(file);
-//		}
-//		catch (IOException ex){
-////			Logger.getLogger(
-////					RegistrerController.class.getName()).log(
-////							Level.SEVERE, null, ex
-////							);
-//		}
+		
+		
+		try{
+			desktop.open(file);
+		}
+		catch (IOException ex){
+			Logger.getLogger(
+					RegistrerController.class.getName()).log(
+							Level.SEVERE, null, ex
+							);
+		}
 		
 	}
 		
