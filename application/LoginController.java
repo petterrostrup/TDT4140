@@ -73,8 +73,7 @@ public class LoginController extends Application {
 		System.out.println("hade");
 		//RegistrerBrukerKlasse().start(new Stage());
 		try {
-			//(Bytt ut med registreringsskjerm når den er laget)
-			new LagAvtaleController().start(new Stage());
+			new RegistrerController().start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

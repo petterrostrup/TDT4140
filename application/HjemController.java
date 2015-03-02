@@ -25,10 +25,24 @@ public class HjemController extends Application {
 	}
 	
 	
+//	//Bytter vindu til hjem
+//	public void hjemButt (ActionEvent event) {
+//		try {
+//			new HjemController().start(new Stage());
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		//Henter stage parameter
+//		Node  source = (Node)  event.getSource(); 
+//	    Stage stage  = (Stage) source.getScene().getWindow();
+//	    stage.close();
+//	}
+	
+	
 	//Bytter vindu til LagAvtale
 		public void avtaleButt (ActionEvent event) {
 			try {
-				//(Bytt ut med registreringsskjerm når den er laget)
 				new LagAvtaleController().start(new Stage());
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -44,7 +58,6 @@ public class HjemController extends Application {
 		//Bytter vindu til login
 				public void logoutButt (ActionEvent event) {
 					try {
-						
 						new LoginController().start(new Stage());
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -65,9 +78,9 @@ public class HjemController extends Application {
 						e.printStackTrace();
 					}
 					//Henter stage parameter
-					Node  source = (Node)  event.getSource(); 
-				    Stage stage  = (Stage) source.getScene().getWindow();
-				    stage.close();
+//					Node  source = (Node)  event.getSource(); 
+//				    Stage stage  = (Stage) source.getScene().getWindow();
+//				    stage.close();
 				    
 				}
 	
