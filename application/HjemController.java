@@ -15,7 +15,7 @@ public class HjemController extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("hjem.fxml"));
+	       Parent root = FXMLLoader.load(getClass().getResource("hjem.fxaml"));
 	       
 	        Scene scene = new Scene(root);
 	        
