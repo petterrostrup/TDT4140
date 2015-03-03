@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LagAvtaleController">
+   <children>
+      <Label layoutX="272.0" layoutY="56.0" text="Lag avtale">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tittel" layoutX="145.0" layoutY="171.0" />
+      <Label layoutX="34.0" layoutY="175.0" text="Tittel:" />
+      <Label layoutX="34.0" layoutY="216.0" text="Rom: " />
+      <Label layoutX="34.0" layoutY="265.0" text="Deltagere:" />
+      <SplitMenuButton fx:id="deltagere" layoutX="145.0" layoutY="261.0" mnemonicParsing="false" text="Deltagere">
+        <items>
+          <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <RadioButton mnemonicParsing="false" text="Kristian" />
+               </graphic>
+            </MenuItem>
+          <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <RadioButton mnemonicParsing="false" text="Emil" />
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <RadioButton mnemonicParsing="false" text="Fredrik" />
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <RadioButton mnemonicParsing="false" text="Petter" />
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <RadioButton mnemonicParsing="false" text="Aleksander" />
+               </graphic>
+            </MenuItem>
+        </items>
+      </SplitMenuButton>
+      <Label layoutX="34.0" layoutY="314.0" text="Dato:" />
+      <DatePicker fx:id="dato" layoutX="145.0" layoutY="310.0" />
+      <Label layoutX="35.0" layoutY="360.0" text="Start" />
+      <Label layoutX="35.0" layoutY="402.0" text="Slutt" />
+      <TextField fx:id="start" layoutX="145.0" layoutY="356.0" />
+      <TextField fx:id="slutt" layoutX="145.0" layoutY="398.0" />
+      <Label layoutX="37.0" layoutY="455.0" text="Beskrivelse" />
+      <TextArea fx:id="beskrivelse" layoutX="141.0" layoutY="455.0" prefHeight="130.0" prefWidth="300.0" />
+      <Button fx:id="lagreavtale" layoutX="141.0" layoutY="620.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+      <SplitMenuButton fx:id="rom" layoutX="145.0" layoutY="212.0" mnemonicParsing="false" text="Rom">
+         <items>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" text="Sted 1">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" text="Sted 2">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" text="Sted 3">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+         </items>
+      </SplitMenuButton>
+      <ChoiceBox fx:id="rom2" layoutX="392.0" layoutY="212.0" prefWidth="150.0" />
+      <Label fx:id="label1" layoutX="441.0" layoutY="381.0" text="FEEEEIL LABEL" />
+   </children>
+</Pane>
