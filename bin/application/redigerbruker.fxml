@@ -30,9 +30,12 @@
       <Button fx:id="openfile" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" onAction="#openButt" text="Åpne fil" />
       <PasswordField fx:id="gnyttpassord" layoutX="146.0" layoutY="460.0" />
       <Label layoutX="31.0" layoutY="464.0" text="Gjenta passord" />
-      <Label fx:id="ugyldigNavn" layoutX="336.0" layoutY="179.0" text="Label" />
-      <Label fx:id="ugyldigNyttBrukernavn" layoutX="336.0" layoutY="220.0" text="Label" />
-      <Label layoutX="336.0" layoutY="261.0" text="Label" />
-      <Label layoutX="336.0" layoutY="305.0" text="Label" />
+      <Label fx:id="ugyldigNavn" layoutX="336.0" layoutY="179.0" />
+      <Label fx:id="ugyldigNyttBrukernavn" layoutX="336.0" layoutY="220.0" />
+      <Label fx:id="ugyldigEpost" layoutX="336.0" layoutY="261.0" />
+      <Label fx:id="ugyldigAdresse" layoutX="336.0" layoutY="305.0" />
+      <Label fx:id="ugyldigGammeltpassord" layoutX="336.0" layoutY="374.0" />
+      <Label fx:id="ugyldigNyttpassord" layoutX="336.0" layoutY="418.0" />
+      <Label fx:id="ugyldigGjentapassord" layoutX="336.0" layoutY="464.0" />
    </children>
 </Pane>

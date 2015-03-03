@@ -47,7 +47,7 @@ public class RegistrerController extends Application{
 	private Button registrer;
 	
 	@FXML
-	private Button openFile;
+	private Button velgfil;
 	
 	@FXML
 	private ImageView imageview;
@@ -57,6 +57,7 @@ public class RegistrerController extends Application{
 	
 	@FXML
 	private Label ugyldigEpost;
+
 	
 	private Desktop desktop = Desktop.getDesktop();
 	
@@ -71,9 +72,9 @@ public class RegistrerController extends Application{
 		
 		
 		final FileChooser fileChooser = new FileChooser();
-		final Button openButton = new Button("Velg bilde");
+		final Button openFile = new Button("Velg bilde");
 		
-		openButton.setOnAction(
+		openFile.setOnAction(
 				new EventHandler<ActionEvent>(){
 					@Override
 					public void handle(final ActionEvent e){
@@ -87,18 +88,17 @@ public class RegistrerController extends Application{
 			
 		}
 		
-	public void openFile(File file){
+	public void openFile(ActionEvent event){
 		System.out.println("supp bro, open a file bro");
+		
+		
 		
 		
 		try{
 			desktop.open(file);
 		}
 		catch (IOException ex){
-//			Logger.getLogger(
-//					RegistrerController.class.getName()).log(
-//							Level.SEVERE, null, ex
-//							);
+			System.out.println("feil, sry");
 		}
 		
 	}
