@@ -27,7 +27,7 @@
       <PasswordField fx:id="passord" layoutX="146.0" layoutY="370.0" />
       <PasswordField fx:id="nyttpassord" layoutX="146.0" layoutY="414.0" />
       <ImageView fx:id="imageview" fitHeight="187.0" fitWidth="249.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="openfile" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" onAction="#openButt" text="Åpne fil" />
+      <Button fx:id="openfile" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" onAction="#openFile" text="Åpne fil" />
       <PasswordField fx:id="gnyttpassord" layoutX="146.0" layoutY="460.0" />
       <Label layoutX="31.0" layoutY="464.0" text="Gjenta passord" />
       <Label fx:id="ugyldigNavn" layoutX="336.0" layoutY="179.0" />

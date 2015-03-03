@@ -1,10 +1,18 @@
 package application;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 
 import classes.User;
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +21,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class RedigerBrukerController extends Application {
@@ -64,6 +74,7 @@ public class RedigerBrukerController extends Application {
 	@FXML
 	private Label ugyldigGjentapassord;
 	
+	
 		
 	String navnRed;
 	String nyttBrukernavnRed;
@@ -78,9 +89,7 @@ public class RedigerBrukerController extends Application {
 	public void start(Stage stage) throws Exception {
 		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       Parent root = FXMLLoader.load(getClass().getResource("redigerbruker.fxml"));
-	       
 	        Scene scene = new Scene(root);
-	        
 	        stage.setTitle("Rediger bruker");
 	        stage.setScene(scene);
 	        stage.show();
@@ -151,21 +160,28 @@ public class RedigerBrukerController extends Application {
 //			ugyldigNavn.setText("Fornavn kan ikke inneholde tall");
 //			dataOk = false;
 //		}
-		
-		
-		
-		
-		
-		
 	
 	}
 	
-	
-	public void openButt (ActionEvent event) {
-		System.out.println("test2");
-		//Åpne bilde
-	
-	}
+	public void openFile(ActionEvent event){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Velg bilde");
+		
+		 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		
+		File file = fileChooser.showOpenDialog(null);
+		
+		try{
+			BufferedImage buffImg = ImageIO.read(file);
+			Image img = SwingFXUtils.toFXImage(buffImg, null);
+			imageview.setImage(img);
+		}
+		catch(IOException ex){
+			Logger.getLogger(RegistrerController.class.getName()).log(Level.SEVERE, null, ex);
+		}	
+}
 	
 	
 	public static void main(String[] args) {
