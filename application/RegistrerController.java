@@ -1,12 +1,15 @@
 package application;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 
-
+import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -58,11 +61,7 @@ public class RegistrerController extends Application{
 	@FXML
 	private Label ugyldigEpost;
 	
-	@FXML
-	private Label visBilde;
-	
-	private Desktop desktop = Desktop.getDesktop();
-	
+	// MÅ ADDE UGJYLDIG-LABELZ
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("registrer.fxml"));
@@ -71,30 +70,35 @@ public class RegistrerController extends Application{
 		stage.setScene(scene);
 		stage.show();
 		
-		
-	
-		
-		
-		
 		}
 		
+	
+	
+	
 	public void openFile(ActionEvent event){
-		System.out.println("åpne fil");
-
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Velg bilde");
 				
-				FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("*", "*");
-				fileChooser.getExtensionFilters().add(extFilter);
+				 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+		            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 				
 				File file = fileChooser.showOpenDialog(null);
-				if(file!=null){
-					//imageview.setImage(new Image(file.getPath()));
-					imageview.setImage(new Image("C:\Users\Kristian\Pictures"));
-					
-					
-				}		
+				
+				try{
+					BufferedImage buffImg = ImageIO.read(file);
+					Image img = SwingFXUtils.toFXImage(buffImg, null);
+					imageview.setImage(img);
+				}
+				catch(IOException ex){
+					Logger.getLogger(RegistrerController.class.getName()).log(Level.SEVERE, null, ex);
+				}	
 	}
+	
+	
+	
+	
+	
 		
 	
 	public void regButt (ActionEvent event){
