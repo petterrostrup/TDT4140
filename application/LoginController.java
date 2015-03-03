@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.RegistrerController;
+
 import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
 
 import javafx.application.Application;
