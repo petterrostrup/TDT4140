@@ -3,9 +3,7 @@ package application;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
-import com.sun.javafx.logging.Logger;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -88,20 +86,20 @@ public class RegistrerController extends Application{
 			
 		}
 		
-	public void openFile(ActionEvent event){
-		System.out.println("supp bro, open a file bro");
-		
-		
-		
-		
-//		try{
-//			desktop.open(file);
-//		}
-//		catch (IOException ex){
-//			System.out.println("feil, sry");
-//		}
-		
-	}
+//	public void openFile(ActionEvent event){
+//		System.out.println("åpne fil");
+//		
+//		
+//		
+//		
+////		try{
+////			desktop.open(file);
+////		}
+////		catch (IOException ex){
+////			System.out.println("feil, sry");
+////		}
+//		
+//	}
 		
 	
 	public void regButt (ActionEvent event){
