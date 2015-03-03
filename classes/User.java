@@ -1,5 +1,10 @@
 package classes;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.Date;
+
 public class User {
 	private String userName;
 	private String password;
@@ -70,7 +75,7 @@ public class User {
 			this.eMail = eMail;			
 		}
 		
-		else throw new IllegalArgumentException("Invalig email");
+		else throw new IllegalArgumentException("Invalid email");
 	}
 
 	public String getAddress() {
@@ -84,17 +89,32 @@ public class User {
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public void logIn(String username, String password){
+	public User logIn(String username, String password){
 		 User varUser = Login.login(username, password);
-		//Insert sql logic for login with this.userName and this.password
+		 
+		 return varUser;
+		 
 	}
 	
 	public void logOut(){
 		//Terminate connection
 	}
 	
-	public void changeAttending(){
+	public void attend(){
 		//Change an attending status on event
+	}
+	
+	public void saveUser(User user){
+		String sqlStatement = "SELECT * FROM USER WHERE username = " + user.getUserName();
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		if (results == null){
+			sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
+					+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
+			results = DatabaseCommunicator.execute(sqlStatement);			
+		}
+		
+		else throw new IllegalArgumentException("User already exists");
 	}
 	
 	

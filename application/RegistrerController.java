@@ -3,9 +3,8 @@ package application;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
-import com.sun.javafx.logging.Logger;
+
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -47,7 +47,7 @@ public class RegistrerController extends Application{
 	private Button registrer;
 	
 	@FXML
-	private Button openFile;
+	private Button velgfil;
 	
 	@FXML
 	private ImageView imageview;
@@ -57,6 +57,9 @@ public class RegistrerController extends Application{
 	
 	@FXML
 	private Label ugyldigEpost;
+	
+	@FXML
+	private Label visBilde;
 	
 	private Desktop desktop = Desktop.getDesktop();
 	
@@ -69,52 +72,34 @@ public class RegistrerController extends Application{
 		stage.show();
 		
 		
+	
 		
-		final FileChooser fileChooser = new FileChooser();
-		final Button openButton = new Button("Velg bilde");
 		
-		openButton.setOnAction(
-				new EventHandler<ActionEvent>(){
-					@Override
-					public void handle(final ActionEvent e){
-						File file = fileChooser.showOpenDialog(stage);
-						if(file != null){
-							openFile(file);
-						}
-					}
+		
+		}
+		
+	public void openFile(ActionEvent event){
+		System.out.println("åpne fil");
+
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Velg bilde");
 				
-				});
-			
-		}
-		
-	public void openFile(File file){
-		System.out.println("supp bro, open a file bro");
-		
-		
-		try{
-			desktop.open(file);
-		}
-		catch (IOException ex){
-//			Logger.getLogger(
-//					RegistrerController.class.getName()).log(
-//							Level.SEVERE, null, ex
-//							);
-		}
-		
+				FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("*", "*");
+				fileChooser.getExtensionFilters().add(extFilter);
+				
+				File file = fileChooser.showOpenDialog(null);
+				if(file!=null){
+					//imageview.setImage(new Image(file.getPath()));
+					imageview.setImage(new Image("C:\Users\Kristian\Pictures"));
+					
+					
+				}		
 	}
 		
 	
 	public void regButt (ActionEvent event){
 		System.out.println("registrert");
-//		try{
-//			new RegistrerController().start(new Stage());
-//		}
-//		catch (Exception e){
-//			e.printStackTrace();
-//		}
-//		Node source = (Node) event.getSource();
-//		Stage stage = (Stage) source.getScene().getWindow();
-//		stage.close();
+
 	}
 	
 

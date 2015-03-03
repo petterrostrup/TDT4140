@@ -1,5 +1,0 @@
-DB
-
-Username: petternr_user
-Password: gruppe61
-Location: mysql.stud.ntnu.no/petternr_calendar
