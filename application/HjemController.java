@@ -73,10 +73,10 @@ public class HjemController extends Application {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//Henter stage parameter
-//			Node  source = (Node)  event.getSource(); 
-//		    Stage stage  = (Stage) source.getScene().getWindow();
-//		    stage.close();
+			
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
 		    
 		}
 		
@@ -104,9 +104,9 @@ public class HjemController extends Application {
 						e.printStackTrace();
 					}
 					//Henter stage parameter
-//					Node  source = (Node)  event.getSource(); 
-//				    Stage stage  = (Stage) source.getScene().getWindow();
-//				    stage.close();
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
 				    
 				}
 	

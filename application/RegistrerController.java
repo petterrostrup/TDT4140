@@ -2,10 +2,10 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 
 import javafx.application.Application;
@@ -102,7 +102,16 @@ public class RegistrerController extends Application{
 		
 	
 	public void regButt (ActionEvent event){
-		System.out.println("registrert");
+		try {
+			new HjemController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 
 	}
 	

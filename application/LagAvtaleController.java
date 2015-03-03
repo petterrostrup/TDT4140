@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -67,6 +68,7 @@ public class LagAvtaleController extends Application {
 	public void lagreButt (ActionEvent event) {
 		System.out.println("test");
 		//Lagre data fra skjema i database
+		Boolean checkpointReached = true;
 		
 		Button lagreButt = new Button("Lagre");
 		lagreButt.setOnAction(new EventHandler<ActionEvent>(){
@@ -81,7 +83,19 @@ public class LagAvtaleController extends Application {
 			}
 			
 		});
-	
+		// hvis validering er godkjent, send til hjem
+		if(checkpointReached){
+			try {
+				new HjemController().start(new Stage());
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//Henter stage parameter
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
+		}
 	
 	}
 	
