@@ -27,8 +27,13 @@
       <Button fx:id="registrer" layoutX="123.0" layoutY="451.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
       <PasswordField fx:id="passord" layoutX="123.0" layoutY="338.0" />
       <PasswordField fx:id="gpassord" layoutX="123.0" layoutY="382.0" />
+<<<<<<< HEAD
       <ImageView fx:id="imageview" fitHeight="300.0" fitWidth="600.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="velgfil" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" onAction="#openFile" text="Åpne fil" />
+=======
+      <ImageView fx:id="imageview" fitHeight="187.0" fitWidth="249.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="velgfil" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" text="Åpne fil" />
+>>>>>>> origin/GUI2
       <Label fx:id="ugyldigBrukernavn" layoutX="281.0" layoutY="228.0" />
       <Label fx:id="ugyldigEpost" layoutX="281.0" layoutY="264.0" prefHeight="17.0" prefWidth="0.0" />
    </children>
