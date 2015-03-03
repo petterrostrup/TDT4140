@@ -71,20 +71,20 @@ public class RegistrerController extends Application{
 		
 		
 		
-		final FileChooser fileChooser = new FileChooser();
-		final Button openFile = new Button("Velg bilde");
+		//final FileChooser fileChooser = new FileChooser();
+		//final Button openFile = new Button("Velg bilde");
 		
-		openFile.setOnAction(
-				new EventHandler<ActionEvent>(){
-					@Override
-					public void handle(final ActionEvent e){
-						File file = fileChooser.showOpenDialog(stage);
-						if(file != null){
-							openFile(file);
-						}
-					}
-				
-				});
+//		openFile.setOnAction(
+//				new EventHandler<ActionEvent>(){
+//					@Override
+//					public void handle(final ActionEvent e){
+//						File file = fileChooser.showOpenDialog(stage);
+//						if(file != null){
+//							openFile(file);
+//						}
+//					}
+//				
+//				});
 			
 		}
 		
@@ -94,12 +94,12 @@ public class RegistrerController extends Application{
 		
 		
 		
-		try{
-			desktop.open(file);
-		}
-		catch (IOException ex){
-			System.out.println("feil, sry");
-		}
+//		try{
+//			desktop.open(file);
+//		}
+//		catch (IOException ex){
+//			System.out.println("feil, sry");
+//		}
 		
 	}
 		
