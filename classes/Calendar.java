@@ -30,9 +30,8 @@ public class Calendar {
 		this.appointments = appointments;
 	}
 	
-	public void createAppointment(){
+	public void saveAppointment(Appointment appointment){
 		// Construct Appointment (this will insert into database)
-		Appointment appointment = null;
 		this.appointments.add(appointment);
 	}
 	
@@ -42,7 +41,7 @@ public class Calendar {
 	}
 	
 	public void getAppointment(int appid){
-		String sqlStatement = 	"SELECT * FROM attending WHERE id = " + appid;
+		String sqlStatement = 	"SELECT * FROM Attending WHERE id = " + appid;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
 		try {
@@ -68,7 +67,7 @@ public class Calendar {
 	}
 	
 	public Room getroom(String roomid) {
-		String sqlStatement = 	"SELECT * FROM room WHERE id = " + roomid;
+		String sqlStatement = 	"SELECT * FROM ROOM WHERE id = " + roomid;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Room room = null;
 		try {
@@ -97,13 +96,13 @@ public class Calendar {
 	
 	public void fillCalendar(){
 		appointments.clear();
-		String id = null; //userid here
-		String sqlStatement = "SELECT * FROM attending WHERE person = " + id;
+		String id = null; //user id here
+		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = " + id;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
 		try {
 			while (results.next()) {
-				getAppointment(results.getInt("APPOINTMENT"));
+				getAppointment(results.getInt("appointment"));
 				System.out.println("Adding appointment");
 			}
 		} catch (SQLException e) {
@@ -112,6 +111,10 @@ public class Calendar {
 		}
 		
 		
+	}
+	
+	public static void main(String[] args) {
+	();
 	}
 	
 }

@@ -36,12 +36,11 @@ public class HjemController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
-//	        Calendar kalender = new Calendar();
+//	        Calendar calendar = new Calendar();
 //	        
 //	        GridPane nyAvtale = new GridPane();
 //	        Room testRoom = new Room("245", "somewhere", 10);
 //	        Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30")); 
-	        
 //	        private  = kalender.getAppointments();
 //	        kalender.fillTest();
 //	        

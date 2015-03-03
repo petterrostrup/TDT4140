@@ -75,7 +75,7 @@ public class User {
 			this.eMail = eMail;			
 		}
 		
-		else throw new IllegalArgumentException("Invalig email");
+		else throw new IllegalArgumentException("Invalid email");
 	}
 
 	public String getAddress() {
@@ -100,14 +100,21 @@ public class User {
 		//Terminate connection
 	}
 	
-	public void changeAttending(){
+	public void attend(){
 		//Change an attending status on event
 	}
 	
 	public void saveUser(User user){
-		String sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
-				+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
+		String sqlStatement = "SELECT * FROM USER WHERE username = " + user.getUserName();
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		if (results == null){
+			sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
+					+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
+			results = DatabaseCommunicator.execute(sqlStatement);			
+		}
+		
+		else throw new IllegalArgumentException("User already exists");
 	}
 	
 	
