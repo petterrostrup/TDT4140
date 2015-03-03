@@ -1,37 +1,44 @@
-package application;
+Label labelFile = new Label();
 
-public class Avtaletest {
+Button btn = new Button();
+
+btn.setText("Browse File");
+
+btn.setOnAction(new EventHandler<ActionEvent>() {
+
+              @Override
 
 
-//Adding a Label
-final Label label = new Label();
-GridPane.setConstraints(label, 0, 3);
-GridPane.setColumnSpan(label, 2);
-grid.getChildren().add(label);
+              public void handle(ActionEvent event) {
 
-//Setting an action for the Submit button
-submit.setOnAction(new EventHandler<ActionEvent>() {
 
-@Override
-  public void handle(ActionEvent e) {
-      if ((comment.getText() != null && !comment.getText().isEmpty())) {
-          label.setText(name.getText() + " " + lastName.getText() + ", "
-              + "thank you for your comment!");
-      } else {
-          label.setText("You have not left a comment.");
-      }
-   }
+                  FileChooser fileChooser = new FileChooser();
+
+
+                  
+                  fileChooser.setTitle("Select File");
+
+
+                  //Set extension filter
+
+
+                  FileChooser.ExtensionFilter extFilter =
+
+new FileChooser.ExtensionFilter("*", "*");
+
+                  fileChooser.getExtensionFilters().add(extFilter);
+
+                 
+
+
+                  //Show open file dialog
+
+                  File file = fileChooser.showOpenDialog(null);
+
+                 if(file!=null)
+
+                  labelFile.setText(file.getPath());
+
+              }
+
 });
-
-//Setting an action for the Clear button
-clear.setOnAction(new EventHandler<ActionEvent>() {
-
-@Override
-  public void handle(ActionEvent e) {
-      name.clear();
-      lastName.clear();
-      comment.clear();
-      label.setText(null);
-  }
-});
-}
