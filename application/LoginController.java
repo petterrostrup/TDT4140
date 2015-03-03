@@ -1,9 +1,12 @@
 package application;
 
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -20,6 +23,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -59,7 +64,22 @@ public class LoginController extends Application {
 	        stage.show();
 	      //stage.resizableProperty().set(true/false);
 	        
-	        //System.out.println("hei");
+	        
+	        
+	        
+//	        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+//	        	@Override
+//	        	public void handle(KeyEvent p) {
+//	        		if(p.getCode()==KeyCode.ENTER)
+//	        		{
+//	        			System.out.println("trykket enter");
+//	        			//logButt();
+//	        			//LoginController().logButt(new ActionEvent());
+//	        			//new LoginController().logButt(new ActionEvent());
+//	        		
+//	        		}
+//	        	}
+//	        });
 	        
 	        
 
@@ -70,7 +90,7 @@ public class LoginController extends Application {
 	
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {
-		System.out.println("hade");
+		//System.out.println("hade");
 		//RegistrerBrukerKlasse().start(new Stage());
 		try {
 			new RegistrerController().start(new Stage());
@@ -85,11 +105,13 @@ public class LoginController extends Application {
 	}
 	
 	
-		       
+	
+	
     public void logButt (ActionEvent event) {
     	//System.out.println("test");
     	String correctUsername = "admin";
 		String correctPassword = "admin";
+		
 		
 		
 			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
@@ -126,9 +148,6 @@ public class LoginController extends Application {
 	}
 
 
-    	
-    	
-    
 	
 
 	public static void main(String[] args) {
