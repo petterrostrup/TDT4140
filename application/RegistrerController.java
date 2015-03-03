@@ -99,15 +99,7 @@ public class RegistrerController extends Application{
 	
 	public void regButt (ActionEvent event){
 		System.out.println("registrert");
-//		try{
-//			new RegistrerController().start(new Stage());
-//		}
-//		catch (Exception e){
-//			e.printStackTrace();
-//		}
-//		Node source = (Node) event.getSource();
-//		Stage stage = (Stage) source.getScene().getWindow();
-//		stage.close();
+
 	}
 	
 
