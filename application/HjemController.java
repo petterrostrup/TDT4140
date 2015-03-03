@@ -1,6 +1,7 @@
 package application;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 import classes.Appointment;
@@ -18,9 +19,9 @@ import javafx.stage.Stage;
 
 public class HjemController extends Application {
 	
-	@FXML
-	private GridPane gridpane;
-	
+//	@FXML
+//	private GridPane gridpane;
+//	
 	//@FXML
 	
 	
@@ -35,20 +36,23 @@ public class HjemController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
-	        Calendar kalender = new Calendar();
+//	        Calendar kalender = new Calendar();
+//	        
+//	        GridPane nyAvtale = new GridPane();
+//	        Room testRoom = new Room("245", "somewhere", 10);
+//	        Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30")); 
 	        
-	        GridPane nyAvtale = new GridPane();
-	        Room testRoom = new Room("245", "somewhere", 10);
-	        Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30")); 
+//	        private  = kalender.getAppointments();
+//	        kalender.fillTest();
+//	        
 	        
-	        appointments
 	        //add to appointmentSSS, write in gridpane(label, 1, 1)
 	        
 	        
 	}
 	
 	
-//	//(Bytter vindu til hjem (Trengs ikke fra hjem skjerm, men trengs i andre klasser))
+//	//Bytter vindu til hjem
 //	public void hjemButt (ActionEvent event) {
 //		try {
 //			new HjemController().start(new Stage());
