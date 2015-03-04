@@ -58,10 +58,6 @@ public class LagAvtaleController extends Application {
 	        stage.setTitle("Lage avtale");
 	        stage.setScene(scene);
 	        stage.show();
-	        
-	        
-	        
-	        
 	}
 	
 	
@@ -100,9 +96,35 @@ public class LagAvtaleController extends Application {
 	}
 	
 	
-	public void regButt (ActionEvent event){
+	public void hjemButt (ActionEvent event){
 		try {
 			new HjemController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+	
+	public void brukerButt (ActionEvent event){
+		try {
+			new RedigerBrukerController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+	
+	public void logoutButt (ActionEvent event){
+		try {
+			new LoginController().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();

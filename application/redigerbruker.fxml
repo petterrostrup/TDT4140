@@ -33,14 +33,14 @@
       <Label fx:id="ugyldigNyttpassord" layoutX="336.0" layoutY="418.0" />
       <Label fx:id="ugyldigGjentapassord" layoutX="336.0" layoutY="464.0" />
       <Button layoutX="696.0" layoutY="1.0" mnemonicParsing="false" onAction="#logoutButt" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
-      <Button layoutX="464.0" layoutY="1.0" mnemonicParsing="false" onAction="#brukerButt" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
+      <Button layoutX="464.0" layoutY="1.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
       <Button layoutX="232.0" layoutY="1.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
       <Button layoutY="1.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="HJEM" />
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="HJEM" />
+            <Button mnemonicParsing="false" onAction="#hjemButt" prefHeight="51.0" prefWidth="232.0" text="HJEM" />
             <Button layoutX="232.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
-            <Button layoutX="464.0" mnemonicParsing="false" onAction="#brukerButt" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
+            <Button layoutX="464.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
             <Button layoutX="696.0" mnemonicParsing="false" onAction="#logoutButt" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
          </children>
       </Pane>
