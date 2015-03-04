@@ -95,12 +95,13 @@ public class Calendar {
 	}
 	
 	public void fillCalendar(){
-		appointments.clear();
 		String id = null; //user id here
 		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = " + id;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
+		
 		try {
+			//System.out.println(results.isClosed());
 			while (results.next()) {
 				getAppointment(results.getInt("appointment"));
 				System.out.println("Adding appointment");
@@ -114,7 +115,8 @@ public class Calendar {
 	}
 	
 	public static void main(String[] args) {
-	();
+		Calendar trialCalendar = new Calendar();
+		trialCalendar.fillCalendar();
 	}
 	
 }
