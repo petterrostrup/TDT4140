@@ -115,7 +115,19 @@ public class RegistrerController extends Application{
 
 	}
 	
+	public void toLogginn (ActionEvent event){
+		try {
+			new LoginController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 
+	}
 	
 	
 	public static void main(String[] args){

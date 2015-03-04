@@ -99,6 +99,21 @@ public class LagAvtaleController extends Application {
 	
 	}
 	
+	
+	public void regButt (ActionEvent event){
+		try {
+			new HjemController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+
+	}
+	
 
 	public static void main(String[] args) {
 		launch(args);
