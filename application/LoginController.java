@@ -69,19 +69,21 @@ public class LoginController extends Application {
 	        
 	        
 	        
-//	        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-//	        	@Override
-//	        	public void handle(KeyEvent p) {
-//	        		if(p.getCode()==KeyCode.ENTER)
-//	        		{
-//	        			System.out.println("trykket enter");
-//	        			//logButt();
-//	        			//LoginController().logButt(new ActionEvent());
-//	        			//new LoginController().logButt(new ActionEvent());
-//	        		
-//	        		}
-//	        	}
-//	        });
+	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+	        	@Override
+	        	public void handle(KeyEvent p) {
+	        		if(p.getCode()==KeyCode.ENTER)
+	        		{
+	        			System.out.println("trykket enter");
+	        			//LoginController().logButt(new ActionEvent());
+	        			//new LoginController().logButt(new ActionEvent());
+	        			//LoginController.logButt(ActionEvent);
+	        			
+	        			
+	        		
+	        		}
+	        	}
+	        });
 	        
 	        
 
