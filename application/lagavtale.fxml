@@ -84,7 +84,7 @@
             </MenuItem>
          </items>
       </SplitMenuButton>
-      <Label fx:id="label1" layoutX="441.0" layoutY="381.0" text="FEEEEIL LABEL" />
+      <Label fx:id="label1" layoutX="441.0" layoutY="381.0" text="" />
       <Button layoutX="696.0" layoutY="1.0" mnemonicParsing="false" onAction="#logoutButt" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
       <Button layoutX="464.0" layoutY="1.0" mnemonicParsing="false" onAction="#brukerButt" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
       <Button layoutX="232.0" layoutY="1.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
