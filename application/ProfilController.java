@@ -49,9 +49,9 @@ public class ProfilController extends Application {
 	}
 
 	
-	public void hjemButt (ActionEvent event) {
+	public void kalenderButt (ActionEvent event) {
 		try {
-			new HjemController().start(new Stage());
+			new KalenderController().start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

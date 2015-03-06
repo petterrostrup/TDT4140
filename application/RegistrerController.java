@@ -103,7 +103,7 @@ public class RegistrerController extends Application{
 	
 	public void regButt (ActionEvent event){
 		try {
-			new HjemController().start(new Stage());
+			new KalenderController().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
