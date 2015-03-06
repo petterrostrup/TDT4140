@@ -200,47 +200,8 @@ public class RedigerBrukerController extends Application {
 		}	
 	}
 	
-	public void hjemButt (ActionEvent event) {
-		//System.out.println("hade");
-		//RegistrerBrukerKlasse().start(new Stage());
-		try {
-			new HjemController().start(new Stage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();	
-	}
 	
-	public void avtaleButt (ActionEvent event) {
-		//System.out.println("hade");
-		//RegistrerBrukerKlasse().start(new Stage());
-		try {
-			new LagAvtaleController().start(new Stage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();		
-	}
-	
-	public void logoutButt (ActionEvent event) {
-		//System.out.println("hade");
-		//RegistrerBrukerKlasse().start(new Stage());
-		try {
-			new LoginController().start(new Stage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
-	}
+
 	
 	
 	public static void main(String[] args) {

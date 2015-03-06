@@ -6,51 +6,44 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerBrukerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerBrukerController">
    <children>
-      <Pane layoutY="179.0" prefHeight="646.0" prefWidth="928.0">
+      <Pane layoutY="128.0" prefHeight="492.0" prefWidth="700.0">
          <children>
-            <Label fx:id="ugyldigNyttBrukernavn" layoutX="293.0" layoutY="41.0" />
-            <Label fx:id="ugyldigNavn" layoutX="293.0" />
-            <Label fx:id="ugyldigNyttpassord" layoutX="293.0" layoutY="239.0" />
-            <Label fx:id="ugyldigEpost" layoutX="293.0" layoutY="82.0" />
-            <Label fx:id="ugyldigGammeltpassord" layoutX="293.0" layoutY="195.0" />
-            <TextField fx:id="brukernavn" layoutX="115.0" layoutY="148.0" />
-            <PasswordField fx:id="nyttpassord" layoutX="116.0" layoutY="346.0" />
-            <Button fx:id="openfile" layoutX="461.0" layoutY="383.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
-            <Label layoutX="1.0" layoutY="350.0" text="Nytt passord" />
-            <Label fx:id="ugyldigAdresse" layoutX="293.0" layoutY="126.0" />
-            <Label layoutX="4.0" layoutY="107.0" text="Navn:" />
-            <TextField fx:id="epost" layoutX="115.0" layoutY="189.0" />
-            <ImageView fx:id="imageview" fitHeight="187.0" fitWidth="249.0" layoutX="365.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="1.0" layoutY="396.0" text="Gjenta passord" />
-            <Label layoutX="3.0" layoutY="185.0" text="E-post:" />
-            <PasswordField fx:id="gnyttpassord" layoutX="116.0" layoutY="392.0" />
-            <TextField fx:id="adresse" layoutX="115.0" layoutY="232.0" />
-            <PasswordField fx:id="passord" layoutX="116.0" layoutY="302.0" />
-            <Label fx:id="ugyldigGjentapassord" layoutX="293.0" layoutY="285.0" />
-            <TextField fx:id="navn" layoutX="115.0" layoutY="107.0" />
-            <Label layoutY="306.0" text="Gammelt passord:" />
-            <Label layoutX="4.0" layoutY="148.0" text="Nytt brukernavn:" />
-            <Label layoutX="3.0" layoutY="228.0" text="Adresse:" />
-            <Button fx:id="lagre" layoutX="93.0" layoutY="473.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+            <Label fx:id="ugyldigNyttBrukernavn" layoutX="314.0" layoutY="88.0" text="123" />
+            <Label fx:id="ugyldigNavn" layoutX="314.0" layoutY="47.0" />
+            <Label fx:id="ugyldigNyttpassord" layoutX="314.0" layoutY="286.0" />
+            <Label fx:id="ugyldigEpost" layoutX="314.0" layoutY="129.0" />
+            <Label fx:id="ugyldigGammeltpassord" layoutX="314.0" layoutY="242.0" />
+            <TextField fx:id="brukernavn" layoutX="120.0" layoutY="80.0" />
+            <PasswordField fx:id="nyttpassord" layoutX="120.0" layoutY="280.0" />
+            <Button fx:id="openfile" layoutX="511.0" layoutY="319.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
+            <Label layoutX="20.0" layoutY="280.0" text="Nytt passord" />
+            <Label fx:id="ugyldigAdresse" layoutX="314.0" layoutY="173.0" />
+            <Label layoutX="20.0" layoutY="40.0" text="Navn:" />
+            <TextField fx:id="epost" layoutX="120.0" layoutY="120.0" />
+            <Label layoutX="20.0" layoutY="320.0" text="Gjenta passord" />
+            <Label layoutX="20.0" layoutY="120.0" text="E-post:" />
+            <PasswordField fx:id="gnyttpassord" layoutX="120.0" layoutY="320.0" />
+            <TextField fx:id="adresse" layoutX="120.0" layoutY="160.0" />
+            <PasswordField fx:id="passord" layoutX="120.0" layoutY="240.0" />
+            <Label fx:id="ugyldigGjentapassord" layoutX="314.0" layoutY="332.0" />
+            <TextField fx:id="navn" layoutX="120.0" layoutY="40.0" />
+            <Label layoutX="20.0" layoutY="240.0" text="Gammelt passord:" />
+            <Label layoutX="20.0" layoutY="80.0" text="Nytt brukernavn:" />
+            <Label layoutX="20.0" layoutY="160.0" text="Adresse:" />
+            <Button fx:id="lagre" layoutX="120.0" layoutY="378.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+            <Button fx:id="Avbryt" layoutX="247.0" layoutY="378.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
+            <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="406.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+      <Pane prefHeight="128.0" prefWidth="700.0" style="-fx-background-color: #E2E2E2;">
          <children>
-            <Label alignment="CENTER" layoutX="396.0" layoutY="39.0" text="Rediger profil">
+            <Label alignment="CENTER" layoutX="245.0" layoutY="39.0" text="Rediger profil">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
-            <Button layoutX="857.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
-         </children>
-      </Pane>
-      <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#hjemButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
-            <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
-            <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
          </children>
       </Pane>
    </children>
