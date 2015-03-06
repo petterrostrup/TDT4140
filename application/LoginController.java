@@ -1,12 +1,15 @@
 package application;
 
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import application.RegistrerController;
+import classes.User;
 
 import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
 
@@ -58,6 +61,7 @@ public class LoginController extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
+	       final Connection con = DriverManager.getConnection("jdbc:mysql://jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       
 	        final Scene scene = new Scene(root);
 	        
@@ -110,11 +114,25 @@ public class LoginController extends Application {
 	
 	
 	
-	
+	User user = new User(null, null, null, null, null);
     public void logButt (ActionEvent event) {
-    	//System.out.println("test");
-    	String correctUsername = "admin";
-		String correctPassword = "admin";
+    	//String correctUsername = user.getUserName();
+    	//String correctPassword = user.getPassword();
+    	//String correctUsername = "admin";
+		//String correctPassword = "admin";
+    	String correctPassword = "";
+		ResultSet resultSet = null;
+		
+		try {
+			PreparedStatement statement = con.prepareStatement ("select * from bruker where brukernavn = " + "'" + brukernavn.getText().toString() + "'");
+			ResultSet results = statement.executeQuery();
+			results.next();
+			resultSet = results;
+			correctPassword += results.getString(8);
+			
+			
+			
+    	
 		
 		
 		
