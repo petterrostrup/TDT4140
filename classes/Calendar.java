@@ -83,7 +83,7 @@ public class Calendar {
 
 	public void fillTest(){
 		Room testRoom = new Room("Realfag 245", "somewhere", 10);
-		User varUser = new User("testuser123", "Testpass12345", "test@mail", "Test Testesen", "Testelia 12");
+		User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
 		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 11, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"), varUser);
 		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 12, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"), varUser);
 		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 13, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"), varUser);
