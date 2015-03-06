@@ -36,6 +36,12 @@ public class KalenderController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
+	        Calendar kalender = new Calendar();
+	        kalender.fillCalendar();
+	        ArrayList<Appointment> avtaler = kalender.getAppointments();
+	        for (Appointment avtale: avtaler){
+	        	
+	        }
 //	        Calendar calendar = new Calendar();
 //	        
 //	        GridPane nyAvtale = new GridPane();
