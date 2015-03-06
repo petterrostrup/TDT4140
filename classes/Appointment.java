@@ -19,17 +19,19 @@ public class Appointment {
 	private Date date;
 	private LocalTime start;
 	private LocalTime end;
+	private User owner;
 	
-	public Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end){
+	public Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user){
 		setName(name);
 		setLocation(location);
 		setRoom(room);
 		setDate(date);
 		setStart(start);
 		setEnd(end);
+		setOwner(user);
 	}
 	
-	public Appointment(String name, String desc, String location, Room room, ArrayList<User> participants, Date date, LocalTime start, LocalTime end){
+	public Appointment(String name, String desc, String location, Room room, ArrayList<User> participants, Date date, LocalTime start, LocalTime end, User user){
 		setName(name);
 		setDescription(desc);
 		setLocation(location);
@@ -38,19 +40,24 @@ public class Appointment {
 		setDate(date);
 		setStart(start);
 		setEnd(end);
+		setOwner(user);
 	}
 	
 	public String getAppointmentID() {
 		return appointmentID;
 	}
 	public void setAppointmentID(String appointmentID) {
-		this.appointmentID = appointmentID;
+		if (appointmentID.matches("([0-9])+")){
+			this.appointmentID = appointmentID;			
+		}
+		else throw new IllegalArgumentException("Invalid id. Must be positive integer");
 	}
 	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
+		// Doesn't need validation here
 		this.name = name;
 	}
 	
@@ -58,6 +65,7 @@ public class Appointment {
 		return description;
 	}
 	public void setDescription(String description) {
+		// Doesn't need validation here
 		this.description = description;
 	}
 	
@@ -65,6 +73,7 @@ public class Appointment {
 		return location;
 	}
 	public void setLocation(String location) {
+		// Doesn't need validation here
 		this.location = location;
 	}
 	
@@ -93,16 +102,33 @@ public class Appointment {
 		return start;
 	}
 	public void setStart(LocalTime start) {
-		this.start = start;
+		LocalTime now = LocalTime.now();
+		int result = now.compareTo(start);
+		if (result < 0){
+			this.start = start;			
+		}
+		else throw new IllegalArgumentException("Start time must be after current time");
 	}
 	
 	public LocalTime getEnd() {
 		return end;
 	}
 	public void setEnd(LocalTime end) {
-		this.end = end;
+		int result = this.start.compareTo(end);
+		if (result < 0){
+			this.end = end;			
+		}
+		else throw new IllegalArgumentException("End time must be after start time");
 	}
 	
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
 	public void saveAppointment(Appointment appointment){
 		String sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end) "
 				+ "VALUES (" + appointment.getName() + ", " + appointment.getDescription() + ", " + appointment.getLocation() + ", " + appointment.getRoom().getRoomNr() +", " + appointment.getDate().toString() +", " + appointment.getStart().toString() +", " + appointment.getEnd().toString() + ")";

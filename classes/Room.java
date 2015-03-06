@@ -53,10 +53,5 @@ public class Room {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
-	
-	public Room findRoom(int id){
-		
-		
-	}
 
 }

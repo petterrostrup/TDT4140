@@ -45,7 +45,7 @@ public class Calendar {
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
 		try {
-			while (results.next()) {
+				results.next();
 				String id = Integer.toString(results.getInt("id"));
 				String name = results.getString("name");
 				String desc = results.getString("description");
@@ -55,10 +55,10 @@ public class Calendar {
 				Time start = results.getTime("start");
 				Time end = results.getTime("end");
 				
-				Appointment returning = new Appointment(name, desc, loc, room, date, start.toLocalTime(), end.toLocalTime());
+				Appointment returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
 				appointments.add(returning);
 				System.out.println("Adding appointment");
-			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,10 +83,10 @@ public class Calendar {
 
 	public void fillTest(){
 		Room testRoom = new Room("245", "somewhere", 10);
-		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"));
-		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 04, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"));
-		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 05, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"));
-		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 06, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"));
+		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,null, new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"), owner);
+		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,null, new Date(2015, 04, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"), owner);
+		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,null, new Date(2015, 05, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"), owner);
+		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,null, new Date(2015, 06, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"), owner);
 		
 		appointments.add(appointment1);
 		appointments.add(appointment2);

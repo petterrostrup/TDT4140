@@ -111,7 +111,7 @@ public class User {
 		if (results == null){
 			sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
 					+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
-			results = DatabaseCommunicator.execute(sqlStatement);			
+			results = DatabaseCommunicator.execute(sqlStatement);		
 		}
 		
 		else throw new IllegalArgumentException("User already exists");
