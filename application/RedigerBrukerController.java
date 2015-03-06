@@ -145,10 +145,10 @@ public class RedigerBrukerController extends Application {
 		
 		
 		
-		// hvis validering er godkjent, send til hjem
+		// hvis validering er godkjent, send tilbake til Profil
 		if(checkpointReached){
 			try {
-				new KalenderController().start(new Stage());
+				new ProfilController().start(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -157,12 +157,14 @@ public class RedigerBrukerController extends Application {
 			Node  source = (Node)  event.getSource(); 
 		    Stage stage  = (Stage) source.getScene().getWindow();
 		    stage.close();
+		    
+//			((Node)(event.getSource())).getScene().getWindow().hide();
 		}
 		else{
 			ugyldigNyttBrukernavn.setText("");
 		}
 		
-		
+
 		
 		
 		

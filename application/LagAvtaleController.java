@@ -82,7 +82,7 @@ public class LagAvtaleController extends Application {
 		// hvis validering er godkjent, send til hjem
 		if(checkpointReached){
 			try {
-				new HjemController().start(new Stage());
+				new KalenderController().start(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();

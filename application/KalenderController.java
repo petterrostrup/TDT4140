@@ -32,7 +32,7 @@ public class KalenderController extends Application {
 	       
 	        Scene scene = new Scene(root);
 	        
-	        stage.setTitle("Hjem");
+	        stage.setTitle("Kalender");
 	        stage.setScene(scene);
 	        stage.show();
 	        
