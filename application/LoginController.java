@@ -144,7 +144,7 @@ public class LoginController extends Application {
 				
 				
 				try {
-					new HjemController().start(new Stage());
+					new KalenderController().start(new Stage());
 				} catch (Exception e) {
 					
 					e.printStackTrace();

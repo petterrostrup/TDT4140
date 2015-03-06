@@ -96,9 +96,9 @@ public class LagAvtaleController extends Application {
 	}
 	
 	
-	public void hjemButt (ActionEvent event){
+	public void kalenderButt (ActionEvent event){
 		try {
-			new HjemController().start(new Stage());
+			new KalenderController().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -109,7 +109,7 @@ public class LagAvtaleController extends Application {
 	    stage.close();
 	}
 	
-	public void brukerButt (ActionEvent event){
+	public void profilButt (ActionEvent event){
 		try {
 			new RedigerBrukerController().start(new Stage());
 		} catch (Exception e) {
