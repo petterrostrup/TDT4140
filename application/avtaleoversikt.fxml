@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="62.0" layoutY="76.0" text="Tittel:" />
+      <Label layoutX="63.0" layoutY="108.0" text="Rom:" />
+      <Label layoutX="63.0" layoutY="139.0" text="Deltagere:" />
+      <Label layoutX="62.0" layoutY="172.0" text="Dato:" />
+      <Label layoutX="63.0" layoutY="204.0" text="Tidspunkt:" />
+      <Label layoutX="60.0" layoutY="249.0" text="Beskrivelse:" />
+      <Label layoutX="130.0" layoutY="14.0" prefHeight="17.0" prefWidth="149.0" text="Avtaleoversikt">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="tittel" layoutX="130.0" layoutY="76.0" />
+      <Label fx:id="rom" layoutX="130.0" layoutY="108.0" />
+      <Label fx:id="deltagere" layoutX="130.0" layoutY="139.0" />
+      <Label fx:id="dato" layoutX="130.0" layoutY="172.0" />
+      <Label fx:id="tidspunkt" layoutX="130.0" layoutY="204.0" />
+      <Label fx:id="beskrivelse" layoutX="128.0" layoutY="249.0" />
+      <Button fx:id="reidgeravtale" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" onAction="#redigerAvtale" text="Rediger avtale" />
+   </children>
+</Pane>
