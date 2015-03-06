@@ -94,9 +94,9 @@ public class ProfilController extends Application {
 			e.printStackTrace();
 		}
 		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();	
+		((Node)(event.getSource())).getScene().getWindow().hide();
+	    
+	    
 	}
 	
 	
