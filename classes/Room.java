@@ -1,5 +1,8 @@
 package classes;
 
+import java.time.LocalTime;
+import java.util.Date;
+
 public class Room {
 	private String roomNr;
 	private String place;
@@ -21,7 +24,10 @@ public class Room {
 
 
 	public void setRoomNr(String roomNr) {
-		this.roomNr = roomNr;
+		if (roomNr.matches("[a-zA-Z]+-?[a-zA-Z]* \\d*")){
+			this.roomNr = roomNr;			
+		}
+		else throw new IllegalArgumentException("Invalid Roomnumber");	
 	}
 
 
@@ -41,11 +47,13 @@ public class Room {
 
 
 	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+		if (capacity > 0){
+			this.capacity = capacity;			
+		}
+		else throw new IllegalArgumentException("Not a valid capacity. Must be positive integer");
 	}
 
-
-	public boolean isAvailable() {
+	public boolean isAvailable(LocalTime start, LocalTime end, Date date) {
 		return available;
 	}
 
