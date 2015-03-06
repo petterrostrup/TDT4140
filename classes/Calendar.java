@@ -41,7 +41,7 @@ public class Calendar {
 	}
 	
 	public void getAppointment(int appid){
-		String sqlStatement = 	"SELECT * FROM Attending WHERE id = " + appid;
+		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = " + appid;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
 		try {

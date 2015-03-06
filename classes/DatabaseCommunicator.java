@@ -66,7 +66,9 @@ public class DatabaseCommunicator {
                 " date DATE, " +
                 " start DATETIME, " +
                 " end DATETIME, " +
+                " owner INTEGER not NULL, " + 
                 " FOREIGN KEY (room) REFERENCES ROOM(id), " +
+                " FOREIGN KEY (owner) REFERENCES USER(id), " +
                 " PRIMARY KEY ( id ))"; 
 		String userTable = "CREATE TABLE IF NOT EXISTS USER " +
                 "(id INTEGER not NULL, " +
@@ -87,10 +89,13 @@ public class DatabaseCommunicator {
                 " name VARCHAR(255), " +  
                 " PRIMARY KEY ( id ))"; 
                 
-		String attendingTable = "CREATE TABLE IF NOT EXISTS ATTENDING " +
+		String connectedTable = "CREATE TABLE IF NOT EXISTS CONNECTED " +
                 "(id INTEGER not NULL, " +
                 " person INTEGER not NULL, " +
-                " appointment INTEGER not NULL, " +
+                " appointment INTEGER not NULL, " + 
+                " status INTEGER, " +  
+                " changed BOOLEAN, " +  
+                " notification INTEGER, " + 
                 " FOREIGN KEY (person) REFERENCES USER(id), " +
                 " FOREIGN KEY (appointment) REFERENCES APPOINTMENT(id), " +
                 " PRIMARY KEY ( id ))"; 
