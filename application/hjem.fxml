@@ -92,7 +92,7 @@
       </Pane>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#hjemButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
             <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
             <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
          </children>
