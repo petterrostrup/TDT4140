@@ -36,6 +36,15 @@ public class HjemController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
+	        Calendar kalender = new Calendar();
+	        kalender.fillCalendar();
+	        ArrayList<Appointment> avtaler = kalender.getAppointments();
+	        for (Appointment avtale: avtaler){
+	        	
+	        }
+	        
+	        //gridpane.add(new Pane(), x, y);
+	        
 //	        Calendar calendar = new Calendar();
 //	        
 //	        GridPane nyAvtale = new GridPane();
