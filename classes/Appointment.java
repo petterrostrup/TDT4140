@@ -95,7 +95,12 @@ public class Appointment {
 		return date;
 	}
 	public void setDate(Date date) {
-		this.date = date;
+		Date now = new Date();
+		int result = now.compareTo(date);
+		if (result < 0){
+			this.date = date;			
+		}
+		else throw new IllegalArgumentException("Date must be after current date");
 	}
 	
 	public LocalTime getStart() {
@@ -137,16 +142,12 @@ public class Appointment {
 	}
 	
 	public void addParticipant(User user){
-		// Find user and add him to the list of participants.
+		this.participants.add(user);
 	}
 	
 	public void removeParticipant(User user){
-		// Find user and remove him from the list of participants.
+		this.participants.remove(user);
 	} 
-	
-	public void findRoom(Room room){
-		// Find room?
-	}
 	
 	public void reserveRoom(Room room){
 		// Add room to this appointment if available
