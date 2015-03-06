@@ -15,12 +15,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class KalenderController extends Application {
 	
-//	@FXML
-//	private GridPane gridpane;
+	@FXML
+	private GridPane gridpane;
 //	
 	//@FXML
 	
@@ -36,12 +37,29 @@ public class KalenderController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
+	        //Creating appointment panes
+	        
 	        Calendar kalender = new Calendar();
-	        kalender.fillCalendar();
+	        kalender.fillTest();
 	        ArrayList<Appointment> avtaler = kalender.getAppointments();
 	        for (Appointment avtale: avtaler){
+	        	LocalTime start = avtale.getStart();
+	        	LocalTime end = avtale.getEnd();
 	        	
+	        	String startString = start.toString();
+	        	String [] startSplit = startString.split(":");
+	        	int startInt = Integer.parseInt(startSplit[0]);
+	        	
+	        	String endString = end.toString();
+	        	String [] endSplit = endString.split(":");
+	        	int endInt = Integer.parseInt(endSplit[0]);
+	        	
+	        	gridpane.add(new Pane(),startInt, endInt );
 	        }
+	        
+	        
+	        
+	        
 //	        Calendar calendar = new Calendar();
 //	        
 //	        GridPane nyAvtale = new GridPane();
