@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import sun.util.logging.resources.logging_pt_BR;
 import application.RegistrerController;
 import classes.User;
 
@@ -42,6 +43,7 @@ import javafx.stage.Stage;
 
 
 
+
 public class LoginController extends Application {
 	
 	private int logFail = 0;
@@ -57,6 +59,9 @@ public class LoginController extends Application {
 	
 	@FXML
 	private Label feilLabel; 
+	
+	@FXML
+	private Button registrer;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -87,15 +92,10 @@ public class LoginController extends Application {
 	        		
 	        		}
 	        	}
-	        });
-	        
-	        
-
-	        
-	}
+	   
 	
 	
-	
+	@FXML
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {
 		//System.out.println("hade");
@@ -114,7 +114,8 @@ public class LoginController extends Application {
 	
 	
 	
-	User user = new User(null, null, null, null, null);
+	//User user = new User(null, null, null, null, null);
+	
     public void logButt (ActionEvent event) {
     	//String correctUsername = user.getUserName();
     	//String correctPassword = user.getPassword();
@@ -124,7 +125,7 @@ public class LoginController extends Application {
 		ResultSet resultSet = null;
 		
 		try {
-			PreparedStatement statement = con.prepareStatement ("select * from bruker where brukernavn = " + "'" + brukernavn.getText().toString() + "'");
+			PreparedStatement statement = con.prepareStatement ("select * from userTable where username = " + "'" + brukernavn.getText().toString() + "'");
 			ResultSet results = statement.executeQuery();
 			results.next();
 			resultSet = results;
@@ -132,16 +133,14 @@ public class LoginController extends Application {
 			
 			
 			
-    	
-		
-		
-		
-			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
-			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
-				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
 				
+				//stage.resizableProperty().set(true);
 				logFail = 0;
-				
 				
 				try {
 					new HjemController().start(new Stage());
@@ -166,10 +165,18 @@ public class LoginController extends Application {
 				
 				
 			}
-		}
-	}
+		;
+	        
+	        
+			
+			
+				
+				
+	        
+	        
 
-
+	        
+	}}});}
 	
 
 	public static void main(String[] args) {
