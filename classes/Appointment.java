@@ -107,23 +107,14 @@ public class Appointment {
 		return start;
 	}
 	public void setStart(LocalTime start) {
-		LocalTime now = LocalTime.now();
-		int result = now.compareTo(start);
-		if (result < 0){
-			this.start = start;			
-		}
-		else throw new IllegalArgumentException("Start time must be after current time");
+		this.start = start;	
 	}
 	
 	public LocalTime getEnd() {
 		return end;
 	}
 	public void setEnd(LocalTime end) {
-		int result = this.start.compareTo(end);
-		if (result < 0){
-			this.end = end;			
-		}
-		else throw new IllegalArgumentException("End time must be after start time");
+		this.end = end;
 	}
 	
 	public User getOwner() {
