@@ -99,6 +99,29 @@ public class ProfilController extends Application {
 	    
 	}
 	
+	public void pickColor(ActionEvent event){
+		try {
+			new ProfilController().start(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+		
+	}
+	
+	public void test(ActionEvent event){
+		try{
+			new ProfilController().start(new Stage());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+	
 	
 	public static void main(String[] args) {
 		launch(args);
