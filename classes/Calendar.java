@@ -89,6 +89,7 @@ public class Calendar {
 		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 13, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"), varUser);
 		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 14, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"), varUser);
 		
+		appointments = new ArrayList<Appointment>();
 		appointments.add(appointment1);
 		appointments.add(appointment2);
 		appointments.add(appointment3);
