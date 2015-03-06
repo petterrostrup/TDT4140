@@ -111,7 +111,7 @@ public class LagAvtaleController extends Application {
 	
 	public void profilButt (ActionEvent event){
 		try {
-			new RedigerBrukerController().start(new Stage());
+			new ProfilController().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();

@@ -200,7 +200,13 @@ public class RedigerBrukerController extends Application {
 		}	
 	}
 	
-	
+	public void avbrytButt (ActionEvent event) {
+		
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	    
+	}
 
 	
 	
