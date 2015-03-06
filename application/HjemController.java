@@ -96,10 +96,10 @@ public class HjemController extends Application {
 				}
 				
 				//Bytter vindu til bruker
-				public void brukerButt (ActionEvent event) {
+				public void profilButt (ActionEvent event) {
 					try {
 						
-						new RedigerBrukerController().start(new Stage());
+						new ProfilController().start(new Stage());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

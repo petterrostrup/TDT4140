@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerBrukerController">
+   <children>
+      <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#hjemButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
+            <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
+            <Button layoutX="619.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Profil" />
+         </children>
+      </Pane>
+      <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+         <children>
+            <Label alignment="CENTER" layoutX="424.0" layoutY="39.0" text="Profil">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="857.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
+         </children>
+      </Pane>
+      <Pane layoutY="179.0" prefHeight="646.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+         <children>
+            <Button layoutX="687.0" layoutY="311.0" mnemonicParsing="false" text="Rediger profil" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
