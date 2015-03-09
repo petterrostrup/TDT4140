@@ -68,9 +68,13 @@ public class LoginController extends Application {
 	        stage.show();
 	      //stage.resizableProperty().set(true/false);
 	        
-//			public void saveUser (User user) {
-//				        	
-//				        }
+	        
+	        
+	        User varUser = new User("testleif", "passord", "test@gmail.com", "Test Testesen", "Testelia 12");
+	        varUser.saveUser();
+	        
+	        
+
 	        
 	        
 	        
@@ -120,7 +124,6 @@ public class LoginController extends Application {
 	
 	
     public User logButt (ActionEvent event) {
-    	//System.out.println("test");
     	//String correctUsername = "admin";
 		//String correctPassword = "admin";
     	
@@ -138,7 +141,7 @@ public class LoginController extends Application {
 		}
 		if(logFail = false){
 			System.out.println("logget inn");
-			//new KalenderController().start(new Stage());
+			new Main().start(new Stage());
 		}
 		else{
 			// Gir melding om at brukernavn eller passord er feil
