@@ -204,7 +204,12 @@ public class RedigerBrukerController extends Application {
 	}
 	
 	public void avbrytButt (ActionEvent event) {
-		
+		try {
+			new ProfilController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();

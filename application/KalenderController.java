@@ -1,5 +1,6 @@
 package application;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -25,12 +27,23 @@ public class KalenderController {
 	
 	@FXML
 	private GridPane gridpane;
-
+	@FXML
+	private DatePicker datepicker;
+	@FXML
+	private Label weeknr;
+	@FXML
+	private Label yearnr;
+	@FXML
+	private Button nextWeek;
+	@FXML
+	private Button prevWeek;
+	
 	
 	@FXML
 	private void initialize(){
 	        
 		//Creating appointment panes
+		datepicker.setValue(LocalDate.now());
 	        
 		Calendar kalender = new Calendar();
 		kalender.fillTest();

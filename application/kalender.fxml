@@ -10,9 +10,9 @@
    <children>
       <Pane layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
          <children>
-            <Button layoutX="511.0" layoutY="6.0" mnemonicParsing="false" text="&gt;" />
-            <Label alignment="CENTER" layoutX="417.0" layoutY="12.0" prefHeight="27.0" prefWidth="94.0" text="Week Year" />
-            <Button layoutX="380.0" layoutY="6.0" mnemonicParsing="false" text="&lt;" />
+            <Button fx:id="nextWeek" layoutX="520.0" layoutY="6.0" mnemonicParsing="false" text="&gt;" />
+            <Label layoutX="417.0" layoutY="12.0" prefHeight="27.0" prefWidth="36.0" text="Uke" />
+            <Button fx:id="prevWeek" layoutX="372.0" layoutY="6.0" mnemonicParsing="false" text="&lt;" />
             <Label alignment="CENTER" layoutX="51.0" layoutY="44.0" prefHeight="27.0" prefWidth="122.0" text="Mandag" />
             <Label alignment="CENTER" layoutX="173.0" layoutY="44.0" prefWidth="122.0" text="Tirsdag" />
             <Label alignment="CENTER" layoutX="295.0" layoutY="44.0" prefWidth="122.0" text="Onsdag" />
@@ -20,6 +20,9 @@
             <Label alignment="CENTER" layoutX="538.0" layoutY="44.0" prefWidth="122.0" text="Fredag" />
             <Label alignment="CENTER" layoutX="660.0" layoutY="44.0" prefWidth="122.0" text="Lørdag" />
             <Label alignment="CENTER" layoutX="782.0" layoutY="44.0" prefWidth="122.0" text="Søndag" />
+            <DatePicker fx:id="datepicker" layoutX="8.0" layoutY="6.0" />
+            <Label fx:id="yearnr" layoutX="480.0" layoutY="12.0" prefHeight="27.0" prefWidth="40.0" text="2055" />
+            <Label fx:id="weeknr" layoutX="453.0" layoutY="12.0" text="55" />
          </children>
       </Pane>
       <ScrollPane layoutY="248.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
