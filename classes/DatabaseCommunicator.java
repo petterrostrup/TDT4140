@@ -88,7 +88,6 @@ public class DatabaseCommunicator {
                 "(id INTEGER not NULL, " +
                 " name VARCHAR(255), " +  
                 " PRIMARY KEY ( id ))"; 
-                
 		String connectedTable = "CREATE TABLE IF NOT EXISTS CONNECTED " +
                 "(id INTEGER not NULL, " +
                 " person INTEGER not NULL, " +
@@ -113,7 +112,6 @@ public class DatabaseCommunicator {
                 " FOREIGN KEY (room) REFERENCES ROOM(id), " +
                 " FOREIGN KEY (appointment) REFERENCES APPOINTMENT(id), " +
                 " PRIMARY KEY ( id ))";  
-		
 		try {
 			System.out.println("Connecting to database");
 			con = DriverManager.getConnection(url, user, password);
@@ -132,7 +130,7 @@ public class DatabaseCommunicator {
 			st.executeUpdate(membergroupTable);
 			//System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  ATTENDING ");
-			st.executeUpdate(attendingTable);
+			st.executeUpdate(connectedTable);
 			//System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  MEMBER ");
 			st.executeUpdate(memberTable);
