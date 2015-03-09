@@ -104,9 +104,9 @@ public class User {
 		//Change an attending status on event
 	}
 	
-	public void saveUser(User user){
+	public void saveUser(){
 			String sqlStatement = "INSERT IGNORE INTO USER (username, password, name, email, address) "
-					+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
+					+ "VALUES (" + this.getUserName() + ", " + this.getPassword() + ", " + this.getName() + ", " + this.geteMail() +", " + this.getAddress() + ")";
 			ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 	}
 	
