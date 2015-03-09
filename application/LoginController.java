@@ -68,8 +68,6 @@ public class LoginController extends Application {
 	        stage.show();
 	      //stage.resizableProperty().set(true/false);
 	        
-	        
-	        
 	        public void saveUser (User user) {
 	        	
 	        }
