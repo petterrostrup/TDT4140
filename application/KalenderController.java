@@ -54,19 +54,30 @@ public class KalenderController {
 	        	
 			String startString = start.toString();
 			String [] startSplit = startString.split(":");
-			int startInt = Integer.parseInt(startSplit[0]);
+			int startInt = Integer.parseInt(startSplit[0])-6;
 	        	
 			String endString = end.toString();
 			String [] endSplit = endString.split(":");
-			int endInt = Integer.parseInt(endSplit[0]);
+			int endInt = Integer.parseInt(endSplit[0])-6;
 			
 			String avtaleNavn = avtale.getName();
 			filler(startInt, avtaleNavn);
-			
+			avtaleTester(12, "Lunsj", "-fx-background-color:#9999FF", 4);
+			avtaleTester(15, "Sluttmøte", "-fx-background-color:FF33CC", 6);
+			avtaleTester(7, "Trening", "-fx-background-color:#33CC33", 7);
+			avtaleTester(9, "Morgenmøte", "-fx-background-color:#0033CC", 2);
 		}
+		
 	}
 	        
-	
+	public void avtaleTester (int startTime, String navn, String style, int dag){
+		Pane avtalePane = new Pane();
+		avtalePane.setStyle(style);
+		avtalePane.setPrefSize(122, 60);
+		Label avtaleNavn = new Label(navn);
+		avtalePane.getChildren().add(avtaleNavn);
+		gridpane.add(avtalePane, dag, startTime-6, 1, 2);	
+	}
 	
 	//Bytter vindu til LagAvtale
 	public void avtaleButt (ActionEvent event) {
