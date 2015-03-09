@@ -105,16 +105,11 @@ public class User {
 	}
 	
 	public void saveUser(User user){
-		String sqlStatement = "SELECT * FROM USER WHERE username = " + user.getUserName();
-		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		
-		if (results == null){
-			sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
+			String sqlStatement = "INSERT IGNORE INTO USER (username, password, name, email, address) "
 					+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
-			results = DatabaseCommunicator.execute(sqlStatement);		
-		}
+			ResultSet results = DatabaseCommunicator.execute(sqlStatement);		
 		
-		else throw new IllegalArgumentException("User already exists");
+
 	}
 	
 	

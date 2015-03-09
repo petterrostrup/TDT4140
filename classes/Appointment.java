@@ -126,7 +126,7 @@ public class Appointment {
 	}
 
 	public void saveAppointment(Appointment appointment){
-		String sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end) "
+		String sqlStatement = "INSERT IGNORE INTO APPOINTMENT (name, description, location, room, date, start, end) "
 				+ "VALUES (" + appointment.getName() + ", " + appointment.getDescription() + ", " + appointment.getLocation() + ", " + appointment.getRoom().getRoomNr() +", " + appointment.getDate().toString() +", " + appointment.getStart().toString() +", " + appointment.getEnd().toString() + ")";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
