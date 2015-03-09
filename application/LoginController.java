@@ -68,9 +68,9 @@ public class LoginController extends Application {
 	        stage.show();
 	      //stage.resizableProperty().set(true/false);
 	        
-	        public void saveUser (User user) {
-	        	
-	        }
+//			public void saveUser (User user) {
+//				        	
+//				        }
 	        
 	        
 	        
@@ -184,48 +184,40 @@ public class LoginController extends Application {
 //		}
 //	}
 
-<<<<<<< HEAD
-			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
-				
-				//stage.resizableProperty().set(true);
-				logFail = 0;
-				
-				try {
-					new Main().start(new Stage());
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-				//Henter stage parameter
-				Node  source = (Node)  event.getSource(); 
-			    Stage stage  = (Stage) source.getScene().getWindow();
-			    stage.close();
-				
-			}
-		else{	// Gir melding om at brukernavn eller passord er feil
-			if(logFail == 0){
-				
-				logFail = 1;
-				//brukernavn.setText("noob");
-				brukernavn.setStyle("-fx-background:#FE2E2E");
-				passord.setStyle("-fx-background:#FE2E2E");
-				feilLabel.setText("Feil brukernavn eller passord");
-				
-				
-			}
-		;
-	        
-	        
-			
-			
-				
-				
-	        
-	        
-=======
->>>>>>> origin/GUI2
 
-	
+//			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
+//				
+//				//stage.resizableProperty().set(true);
+//				logFail = 0;
+//				
+//				try {
+//					new Main().start(new Stage());
+//				} catch (Exception e) {
+//					
+//					e.printStackTrace();
+//				}
+//				//Henter stage parameter
+//				Node  source = (Node)  event.getSource(); 
+//			    Stage stage  = (Stage) source.getScene().getWindow();
+//			    stage.close();
+//				
+//			}
+//		else{	// Gir melding om at brukernavn eller passord er feil
+//			if(logFail == 0){
+//				
+//				logFail = 1;
+//				//brukernavn.setText("noob");
+//				brukernavn.setStyle("-fx-background:#FE2E2E");
+//				passord.setStyle("-fx-background:#FE2E2E");
+//				feilLabel.setText("Feil brukernavn eller passord");
+//				
+//				
+//			}
+//		;
+//	        
+//	        
+			
+			
 
 	public static void main(String[] args) {
 		launch(args);
