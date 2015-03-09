@@ -54,7 +54,7 @@ public class KalenderController extends Application {
 	        	String [] endSplit = endString.split(":");
 	        	int endInt = Integer.parseInt(endSplit[0]);
 	        	
-	        	gridpane.add(new Pane(),startInt, endInt );
+	        	
 	        }
 	        
 	        
