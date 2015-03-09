@@ -70,7 +70,7 @@ public class LoginController extends Application {
 	        
 	        
 	        
-	        User varUser = new User("testleif", "passord", "test@gmail.com", "Test Testesen", "Testelia 12");
+	        User varUser = new User("testleif", "Passord1", "test@gmail.com", "Test Testesen", "Testelia 12");
 	        varUser.saveUser();
 	        
 	        
