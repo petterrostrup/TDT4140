@@ -33,9 +33,6 @@ public class ProfilController extends Application {
 	private ImageView imageview;
 	
 	@FXML
-	private TextField navn;
-	
-	@FXML
 	private TextField brukernavn;
 	
 	@FXML

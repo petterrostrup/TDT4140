@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
    <children>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
@@ -29,7 +29,26 @@
          <children>
             <Button layoutX="827.0" layoutY="557.0" mnemonicParsing="false" onAction="#redigerProfilButt" text="Rediger profil" />
             <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="634.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <ColorPicker layoutX="325.0" layoutY="147.0" onAction="#pickColor" />
+            <ColorPicker layoutX="774.0" layoutY="393.0" onAction="#pickColor" />
+            <Button layoutX="755.0" layoutY="475.0" mnemonicParsing="false" onAction="#test" text="Test" />
+            <Pane fx:id="avtaler" layoutX="14.0" layoutY="280.0" prefHeight="352.0" prefWidth="352.0">
+               <children>
+                  <Label layoutX="38.0" layoutY="64.0" text="avtale1 - *her kan bruker velge status på deltagelse*" />
+                  <Label layoutX="38.0" layoutY="92.0" text="avtale2" />
+                  <Label layoutX="38.0" layoutY="125.0" text="avtale3" />
+                  <Label layoutX="129.0" layoutY="14.0" text="Dine avtaler">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label fx:id="brukernavn" layoutX="399.0" layoutY="28.0" text="*hent in brukernavn her*" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox layoutX="472.0" layoutY="280.0" prefWidth="150.0" />
          </children>
       </Pane>
    </children>
