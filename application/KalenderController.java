@@ -45,8 +45,9 @@ public class KalenderController {
 			String endString = end.toString();
 			String [] endSplit = endString.split(":");
 			int endInt = Integer.parseInt(endSplit[0]);
+			filler(startInt);
+			
 		}
-		filler();
 	}
 	        
 	
@@ -99,9 +100,12 @@ public class KalenderController {
 	}
 	
 	
-	public void filler(){
-		Button avtalePane = new Button();
-		gridpane.add(avtalePane, 1, 1);					
+	public void filler(int startTime){
+		Pane avtalePane = new Pane();
+		avtalePane.setStyle("-fx-background-color:#FE2E2E");
+		avtalePane.setPrefSize(122, 60);
+		gridpane.add(avtalePane, 1, startTime);	
+		
 	}
 
 
