@@ -33,9 +33,6 @@ public class ProfilController extends Application {
 	private ImageView imageview;
 	
 	@FXML
-	private TextField navn;
-	
-	@FXML
 	private TextField brukernavn;
 	
 	@FXML
@@ -108,7 +105,7 @@ public class ProfilController extends Application {
 		
 		
 		mainPane.setStyle("-fx-background-color: red");
-		mainPane.setFill(ColorPicker.getValue());
+//		mainPane.setFill(ColorPicker.getValue());
 		
 	}
 	

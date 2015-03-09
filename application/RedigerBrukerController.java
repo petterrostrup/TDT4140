@@ -196,6 +196,7 @@ public class RedigerBrukerController extends Application {
 			BufferedImage buffImg = ImageIO.read(file);
 			Image img = SwingFXUtils.toFXImage(buffImg, null);
 			imageview.setImage(img);
+
 		}
 		catch(IOException ex){
 			Logger.getLogger(RegistrerController.class.getName()).log(Level.SEVERE, null, ex);
