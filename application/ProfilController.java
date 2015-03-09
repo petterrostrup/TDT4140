@@ -18,9 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -36,6 +38,8 @@ public class ProfilController extends Application {
 	@FXML
 	private TextField brukernavn;
 	
+	@FXML
+	private Pane mainPane;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -100,20 +104,18 @@ public class ProfilController extends Application {
 	}
 	
 	public void pickColor(ActionEvent event){
-		try {
-			new ProfilController().start(new Stage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
+		
+		
+		
+		mainPane.setStyle("-fx-background-color: red");
+		mainPane.setFill(ColorPicker.getValue());
 		
 	}
 	
 	public void test(ActionEvent event){
 		try{
 			new ProfilController().start(new Stage());
+			 
 		}catch (Exception e){
 			e.printStackTrace();
 		}

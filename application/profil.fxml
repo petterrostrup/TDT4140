@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
    <children>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
@@ -30,7 +30,6 @@
             <Button layoutX="827.0" layoutY="557.0" mnemonicParsing="false" onAction="#redigerProfilButt" text="Rediger profil" />
             <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="634.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
             <ColorPicker layoutX="325.0" layoutY="147.0" onAction="#pickColor" />
-            <Button layoutX="167.0" layoutY="187.0" mnemonicParsing="false" onAction="#test" text="Button" />
          </children>
       </Pane>
    </children>
