@@ -1,12 +1,16 @@
 package application;
 
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import sun.util.logging.resources.logging_pt_BR;
 import application.RegistrerController;
+import classes.User;
 
 import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
 
@@ -39,6 +43,7 @@ import javafx.stage.Stage;
 
 
 
+
 public class LoginController extends Application {
 	
 	private int logFail = 0;
@@ -55,9 +60,13 @@ public class LoginController extends Application {
 	@FXML
 	private Label feilLabel; 
 	
+	@FXML
+	private Button registrer;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
+	       final Connection con = DriverManager.getConnection("jdbc:mysql://jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       
 	        final Scene scene = new Scene(root);
 	        
@@ -69,27 +78,24 @@ public class LoginController extends Application {
 	        
 	        
 	        
-//	        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-//	        	@Override
-//	        	public void handle(KeyEvent p) {
-//	        		if(p.getCode()==KeyCode.ENTER)
-//	        		{
-//	        			System.out.println("trykket enter");
-//	        			//logButt();
-//	        			//LoginController().logButt(new ActionEvent());
-//	        			//new LoginController().logButt(new ActionEvent());
-//	        		
-//	        		}
-//	        	}
-//	        });
-	        
-	        
-
-	        
-	}
+	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+	        	@Override
+	        	public void handle(KeyEvent p) {
+	        		if(p.getCode()==KeyCode.ENTER)
+	        		{
+	        			System.out.println("trykket enter");
+	        			//LoginController().logButt(new ActionEvent());
+	        			//new LoginController().logButt(new ActionEvent());
+	        			//LoginController.logButt(ActionEvent);
+	        			
+	        			
+	        		
+	        		}
+	        	}
+	   
 	
 	
-	
+	@FXML
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {
 		//System.out.println("hade");
@@ -108,23 +114,36 @@ public class LoginController extends Application {
 	
 	
 	
+	//User user = new User(null, null, null, null, null);
 	
     public void logButt (ActionEvent event) {
-    	//System.out.println("test");
-    	String correctUsername = "admin";
-		String correctPassword = "admin";
+    	//String correctUsername = user.getUserName();
+    	//String correctPassword = user.getPassword();
+    	//String correctUsername = "admin";
+		//String correctPassword = "admin";
+    	String correctPassword = "";
+		ResultSet resultSet = null;
 		
-		
-		
-			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
-			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
-				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
+		try {
+			PreparedStatement statement = con.prepareStatement ("select * from userTable where username = " + "'" + brukernavn.getText().toString() + "'");
+			ResultSet results = statement.executeQuery();
+			results.next();
+			resultSet = results;
+			correctPassword += results.getString(8);
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
 				
+				//stage.resizableProperty().set(true);
 				logFail = 0;
 				
-				
 				try {
-					new HjemController().start(new Stage());
+					new KalenderController().start(new Stage());
 				} catch (Exception e) {
 					
 					e.printStackTrace();
@@ -146,10 +165,18 @@ public class LoginController extends Application {
 				
 				
 			}
-		}
-	}
+		;
+	        
+	        
+			
+			
+				
+				
+	        
+	        
 
-
+	        
+	}}});}
 	
 
 	public static void main(String[] args) {

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -57,16 +58,13 @@ public class LagAvtaleController extends Application {
 	        stage.setTitle("Lage avtale");
 	        stage.setScene(scene);
 	        stage.show();
-	        
-	        
-	        
-	        
 	}
 	
 	
 	public void lagreButt (ActionEvent event) {
 		System.out.println("test");
 		//Lagre data fra skjema i database
+		Boolean checkpointReached = true;
 		
 		Button lagreButt = new Button("Lagre");
 		lagreButt.setOnAction(new EventHandler<ActionEvent>(){
@@ -81,8 +79,61 @@ public class LagAvtaleController extends Application {
 			}
 			
 		});
+		// hvis validering er godkjent, send til hjem
+		if(checkpointReached){
+			try {
+				new KalenderController().start(new Stage());
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//Henter stage parameter
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
+		}
+	
+	}
 	
 	
+	public void kalenderButt (ActionEvent event){
+		try {
+			new KalenderController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+	
+	public void profilButt (ActionEvent event){
+		try {
+			new ProfilController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+	
+	public void logoutButt (ActionEvent event){
+		try {
+			new LoginController().start(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+
 	}
 	
 

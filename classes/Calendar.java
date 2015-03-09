@@ -41,11 +41,11 @@ public class Calendar {
 	}
 	
 	public void getAppointment(int appid){
-		String sqlStatement = 	"SELECT * FROM Attending WHERE id = " + appid;
+		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = " + appid;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
 		try {
-			while (results.next()) {
+				results.next();
 				String id = Integer.toString(results.getInt("id"));
 				String name = results.getString("name");
 				String desc = results.getString("description");
@@ -55,10 +55,10 @@ public class Calendar {
 				Time start = results.getTime("start");
 				Time end = results.getTime("end");
 				
-				Appointment returning = new Appointment(name, desc, loc, room, date, start.toLocalTime(), end.toLocalTime());
+				Appointment returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
 				appointments.add(returning);
 				System.out.println("Adding appointment");
-			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,12 +82,14 @@ public class Calendar {
 	}
 
 	public void fillTest(){
-		Room testRoom = new Room("245", "somewhere", 10);
-		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 03, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"));
-		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 04, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"));
-		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 05, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"));
-		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,new Date(2015, 06, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"));
+		Room testRoom = new Room("Realfag 245", "somewhere", 10);
+		User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
+		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 11, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"), varUser);
+		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 12, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"), varUser);
+		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 13, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"), varUser);
+		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 14, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"), varUser);
 		
+		appointments = new ArrayList<Appointment>();
 		appointments.add(appointment1);
 		appointments.add(appointment2);
 		appointments.add(appointment3);
@@ -95,12 +97,13 @@ public class Calendar {
 	}
 	
 	public void fillCalendar(){
-		appointments.clear();
 		String id = null; //user id here
 		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = " + id;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
+		
 		try {
+			//System.out.println(results.isClosed());
 			while (results.next()) {
 				getAppointment(results.getInt("appointment"));
 				System.out.println("Adding appointment");
@@ -114,7 +117,8 @@ public class Calendar {
 	}
 	
 	public static void main(String[] args) {
-	();
+		Calendar trialCalendar = new Calendar();
+		trialCalendar.fillCalendar();
 	}
 	
 }

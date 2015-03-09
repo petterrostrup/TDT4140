@@ -6,26 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="825.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HjemController">
+<Pane prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KalenderController">
    <children>
-      <Pane layoutY="-1.0" prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
-         <children>
-            <Label alignment="CENTER" layoutX="396.0" layoutY="39.0" text="Kalender">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutY="127.0" prefHeight="51.0" prefWidth="928.0">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="232.0" text="HJEM" />
-            <Button layoutX="232.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="232.0" text="NY AVTALE" />
-            <Button layoutX="464.0" mnemonicParsing="false" onAction="#brukerButt" prefHeight="51.0" prefWidth="232.0" text="BRUKER" />
-            <Button layoutX="696.0" mnemonicParsing="false" onAction="#logoutButt" prefHeight="51.0" prefWidth="232.0" text="LOGG UT" />
-         </children>
-      </Pane>
-      <Pane layoutY="178.0" prefHeight="71.0" prefWidth="928.0">
+      <Pane layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
          <children>
             <Button layoutX="511.0" layoutY="6.0" mnemonicParsing="false" text="&gt;" />
             <Label alignment="CENTER" layoutX="417.0" layoutY="12.0" prefHeight="27.0" prefWidth="94.0" text="Week Year" />
@@ -39,7 +22,7 @@
             <Label alignment="CENTER" layoutX="782.0" layoutY="44.0" prefWidth="122.0" text="Søndag" />
          </children>
       </Pane>
-      <ScrollPane layoutY="248.0" prefHeight="580.0" prefWidth="928.0">
+      <ScrollPane layoutY="248.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
          <content>
             <GridPane fx:id="gridpane" alignment="BOTTOM_LEFT" gridLinesVisible="true" prefHeight="700.0" prefWidth="906.0">
                <columnConstraints>
@@ -97,5 +80,22 @@
             </GridPane>
          </content>
       </ScrollPane>
+      <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+         <children>
+            <Label alignment="CENTER" layoutX="396.0" layoutY="39.0" text="Kalender">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="857.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
+         </children>
+      </Pane>
+      <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
+            <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
+            <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
+         </children>
+      </Pane>
    </children>
 </Pane>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
+   <children>
+      <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#kalenderButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
+            <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
+            <Button layoutX="619.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Profil" />
+         </children>
+      </Pane>
+      <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+         <children>
+            <Label alignment="CENTER" layoutX="424.0" layoutY="39.0" text="Profil">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="857.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
+         </children>
+      </Pane>
+      <Pane layoutY="179.0" prefHeight="646.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+         <children>
+            <Button layoutX="827.0" layoutY="557.0" mnemonicParsing="false" onAction="#redigerProfilButt" text="Rediger profil" />
+            <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="634.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ColorPicker fx:id="colorpick" layoutX="774.0" layoutY="393.0" onAction="#pickColor" />
+            <Button layoutX="755.0" layoutY="475.0" mnemonicParsing="false" onAction="#test" text="Test" />
+            <Pane fx:id="avtaler" layoutX="14.0" layoutY="280.0" prefHeight="352.0" prefWidth="352.0">
+               <children>
+                  <Label layoutX="38.0" layoutY="64.0" text="avtale1 - *her kan bruker velge status på deltagelse*" />
+                  <Label layoutX="38.0" layoutY="92.0" text="avtale2" />
+                  <Label layoutX="38.0" layoutY="125.0" text="avtale3" />
+                  <Label layoutX="129.0" layoutY="14.0" text="Dine avtaler">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label fx:id="brukernavn" layoutX="366.0" layoutY="28.0" text="*hent in brukernavn her*" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox layoutX="472.0" layoutY="280.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

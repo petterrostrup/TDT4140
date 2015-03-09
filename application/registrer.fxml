@@ -7,29 +7,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegistrerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegistrerController">
    <children>
-      <Label layoutX="281.0" layoutY="54.0" text="Registrer">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Label>
-      <TextField fx:id="navn" layoutX="123.0" layoutY="178.0" />
-      <Label layoutX="35.0" layoutY="178.0" text="Navn:" />
-      <Label layoutX="35.0" layoutY="219.0" text="Brukernavn:" />
-      <TextField fx:id="brukernavn" layoutX="123.0" layoutY="219.0" />
-      <Label layoutX="35.0" layoutY="260.0" text="E-post:" />
-      <TextField fx:id="epost" layoutX="123.0" layoutY="260.0" />
-      <Label layoutX="35.0" layoutY="303.0" text="Adresse:" />
-      <TextField fx:id="adresse" layoutX="123.0" layoutY="303.0" />
-      <Label layoutX="35.0" layoutY="342.0" text="Passord:" />
-      <Label layoutX="35.0" layoutY="386.0" text="Gjenta passord:" />
-      <Button fx:id="registrer" layoutX="123.0" layoutY="451.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
-      <PasswordField fx:id="passord" layoutX="123.0" layoutY="338.0" />
-      <PasswordField fx:id="gpassord" layoutX="123.0" layoutY="382.0" />
-      <ImageView fx:id="imageview" fitHeight="300.0" fitWidth="600.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="velgfil" layoutX="491.0" layoutY="451.0" mnemonicParsing="false" onAction="#openFile" text="Åpne fil" />
-      <Label fx:id="ugyldigBrukernavn" layoutX="281.0" layoutY="228.0" />
-      <Label fx:id="ugyldigEpost" layoutX="281.0" layoutY="264.0" prefHeight="17.0" prefWidth="0.0" />
+      <Pane layoutY="128.0" prefHeight="492.0" prefWidth="700.0">
+         <children>
+            <TextField fx:id="epost" layoutX="108.0" layoutY="120.0" />
+            <TextField fx:id="navn" layoutX="108.0" layoutY="40.0" />
+            <Label layoutX="20.0" layoutY="240.0" text="Gjenta passord:" />
+            <Button fx:id="velgfil" layoutX="511.0" layoutY="319.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
+            <Label layoutX="20.0" layoutY="80.0" text="Brukernavn:" />
+            <Label layoutX="20.0" layoutY="160.0" text="Adresse:" />
+            <Button fx:id="registrer" layoutX="76.0" layoutY="319.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
+            <Label layoutX="20.0" layoutY="200.0" text="Passord:" />
+            <PasswordField fx:id="gpassord" layoutX="108.0" layoutY="240.0" />
+            <Label layoutX="20.0" layoutY="120.0" text="E-post:" />
+            <Label layoutX="20.0" layoutY="40.0" text="Navn:" />
+            <PasswordField fx:id="passord" layoutX="108.0" layoutY="200.0" />
+            <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="406.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="adresse" layoutX="108.0" layoutY="160.0" />
+            <Label fx:id="ugyldigBrukernavn" layoutX="266.0" layoutY="89.0" />
+            <Label fx:id="ugyldigEpost" layoutX="266.0" layoutY="125.0" prefHeight="17.0" prefWidth="0.0" />
+            <Button fx:id="tologginn" layoutX="597.0" layoutY="441.0" mnemonicParsing="false" onAction="#toLogginn" text="Tilbake" />
+            <TextField fx:id="brukernavn" layoutX="108.0" layoutY="80.0" />
+         </children>
+      </Pane>
+      <Pane prefHeight="128.0" prefWidth="700.0" style="-fx-background-color: #E2E2E2;">
+         <children>
+            <Label alignment="CENTER" layoutX="281.0" layoutY="39.0" text="Registrer">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </Pane>

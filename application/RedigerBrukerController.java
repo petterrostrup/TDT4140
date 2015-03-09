@@ -16,6 +16,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -103,7 +104,7 @@ public class RedigerBrukerController extends Application {
 		//System.out.println("test");
 		//boolean dataOk = true;
 		
-		
+
 		navnRed = navn.getText();
 		nyttBrukernavnRed = brukernavn.getText();
 		epostRed = epost.getText();
@@ -115,9 +116,10 @@ public class RedigerBrukerController extends Application {
 		
 		
 		
-		boolean checkpointReached = false;
+		boolean checkpointReached = true;
 		try {User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
 		System.out.println(varUser.geteMail());
+		
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -140,12 +142,29 @@ public class RedigerBrukerController extends Application {
 			
 			checkpointReached = true;
 		}
-		if(!checkpointReached){
+		
+		
+		
+		// hvis validering er godkjent, send tilbake til Profil
+		if(checkpointReached){
+			try {
+				new ProfilController().start(new Stage());
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//Henter stage parameter
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
+		    
+//			((Node)(event.getSource())).getScene().getWindow().hide();
+		}
+		else{
 			ugyldigNyttBrukernavn.setText("");
 		}
 		
-		
-		
+
 		
 		
 		
@@ -177,11 +196,21 @@ public class RedigerBrukerController extends Application {
 			BufferedImage buffImg = ImageIO.read(file);
 			Image img = SwingFXUtils.toFXImage(buffImg, null);
 			imageview.setImage(img);
+
 		}
 		catch(IOException ex){
 			Logger.getLogger(RegistrerController.class.getName()).log(Level.SEVERE, null, ex);
 		}	
-}
+	}
+	
+	public void avbrytButt (ActionEvent event) {
+		
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	    
+	}
+
 	
 	
 	public static void main(String[] args) {

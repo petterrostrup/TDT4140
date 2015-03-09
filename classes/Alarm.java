@@ -1,66 +1,33 @@
 package classes;
 
-public class Alarm {
-	private String noticeID;
-	private String name;
-	private Appointment appointment;
-	private String description;
-	
-	public Alarm(String id, String name, Appointment appointment) {
-		setNoticeID(id);
-		setName(name);
-		setAppointment(appointment);
-	}
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.Date;
 
-
-	public String getNoticeID() {
-		return noticeID;
-	}
-
-
-	public void setNoticeID(String noticeID) {
-		this.noticeID = noticeID;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public Appointment getAppointment() {
-		return appointment;
-	}
-
-
-	public void setAppointment(Appointment appointment) {
-		this.appointment = appointment;
-	}
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
+public class Alarm {	
+	public void setNotification(int appID, int userID, int minutes){
+		String sqlStatement = "UPDATE CONNECTED SET notification = " + minutes + " WHERE appointment = " + appID + " AND person = " + userID;
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 	}
 	
-	public void createNotice(){
+	public int getNotification(int appID, int userID){
+		String sqlStatement = 	"SELECT * FROM CONNECTED WHERE appointment = " + appID + " AND person = " + userID;
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		int i = 0;
 		
-	}
-	
-	public void removeNotice(){
+		try {
+			results.next();
+			i = results.getInt("notification");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return i;
 	}
 	
-	public void sendNotice(){
+	public void sendNotification(){
 		
 	}
 	
