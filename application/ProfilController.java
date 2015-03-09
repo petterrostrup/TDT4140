@@ -18,12 +18,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -40,7 +44,24 @@ public class ProfilController extends Application {
 	
 	@FXML
 	private ColorPicker colorpick;
-	@Override
+	
+	@FXML
+	public void initialize(){
+		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
+	        clip.setArcWidth(20);
+           clip.setArcHeight(20);
+           imageview.setClip(clip);
+           
+           SnapshotParameters parameters = new SnapshotParameters();
+           parameters.setFill(Color.TRANSPARENT);
+           WritableImage image = imageview.snapshot(parameters, null);
+
+           imageview.setClip(null);
+
+           imageview.setEffect(new DropShadow(20, Color.BLACK));
+
+           imageview.setImage(image);
+	}
 	public void start(Stage stage) throws Exception {
 		
 		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
@@ -49,22 +70,22 @@ public class ProfilController extends Application {
 	        stage.setTitle("Profil");
 	        stage.setScene(scene);
 	        stage.show();
-	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	     //   scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        
-//	        Image img = new Image(ProfilController.class.getResourceAsStream("youngmaster.jpg"));
-
-	        Image image = new Image(getClass().getResourceAsStream("youngmaster.jpg"));
-	        imageview.setImage(image);
+	        //Image img = new Image(getClass().getResourceAsStream("http://mikecann.co.uk/wp-content/uploads/2009/12/javafx_logo_color_1.jpg"));
 	        
-//	        
+	        //Image image = new Image(getClass().getResourceAsStream("youngmaster.jpg"));
+	       
+	        //imageview.setImage(new Image("youngmaster.jpg"));
+	        
+	       
 
-	      
 	}
 
 	
 	public void kalenderButt (ActionEvent event) {
 		try {
-			new KalenderController().start(new Stage());
+			new LagAvtaleController().start(new Stage()); // FORANDRES/FJERNES
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
