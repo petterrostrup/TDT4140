@@ -15,18 +15,24 @@ public class Login {
 			user = new User("admin", "admin", "admin@counsil.com", "Human Counselor", "Counsil Towers, Persidium");
 		}
 		
-		String sqlStatement = "SELECT * FROM USER WHERE username = " + username;
+		String sqlStatement = "SELECT * FROM USER WHERE username = '" + username + "';";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			results.next();
-			if (results.getString("password").equals(password)){
-				String name = results.getString("name");
-				String dbPassword = results.getString("password");
-				String dbUsername = results.getString("username");
-				String mail = results.getString("email");
-				String address = results.getString("address");
-				
-				user = new User(dbUsername, dbPassword, name, mail, address);
+			if (results.isClosed()){
+				System.out.println("No user found in database matching that username");
+			}
+			
+			else {
+				if (results.getString(results.findColumn("password")).equals(password)){
+					String name = results.getString(results.findColumn("name"));
+					String dbPassword = results.getString(results.findColumn("password"));
+					String dbUsername = results.getString(results.findColumn("username"));
+					String mail = results.getString(results.findColumn("email"));
+					String address = results.getString(results.findColumn("address"));
+					
+					user = new User(dbUsername, dbPassword, name, mail, address);
+				}				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

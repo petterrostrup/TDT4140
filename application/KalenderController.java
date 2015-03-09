@@ -1,5 +1,6 @@
 package application;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -24,12 +27,23 @@ public class KalenderController {
 	
 	@FXML
 	private GridPane gridpane;
-
+	@FXML
+	private DatePicker datepicker;
+	@FXML
+	private Label weeknr;
+	@FXML
+	private Label yearnr;
+	@FXML
+	private Button nextWeek;
+	@FXML
+	private Button prevWeek;
+	
 	
 	@FXML
 	private void initialize(){
 	        
 		//Creating appointment panes
+		datepicker.setValue(LocalDate.now());
 	        
 		Calendar kalender = new Calendar();
 		kalender.fillTest();
@@ -40,16 +54,30 @@ public class KalenderController {
 	        	
 			String startString = start.toString();
 			String [] startSplit = startString.split(":");
-			int startInt = Integer.parseInt(startSplit[0]);
+			int startInt = Integer.parseInt(startSplit[0])-6;
 	        	
 			String endString = end.toString();
 			String [] endSplit = endString.split(":");
-			int endInt = Integer.parseInt(endSplit[0]);
+			int endInt = Integer.parseInt(endSplit[0])-6;
+			
+			String avtaleNavn = avtale.getName();
+			filler(startInt, avtaleNavn);
+			avtaleTester(12, "Lunsj", "-fx-background-color:#9999FF", 4);
+			avtaleTester(15, "Sluttmøte", "-fx-background-color:FF33CC", 6);
+			avtaleTester(7, "Trening", "-fx-background-color:#33CC33", 7);
+			avtaleTester(9, "Morgenmøte", "-fx-background-color:#0033CC", 2);
 		}
-		filler();
+		
 	}
 	        
-	
+	public void avtaleTester (int startTime, String navn, String style, int dag){
+		Pane avtalePane = new Pane();
+		avtalePane.setStyle(style);
+		avtalePane.setPrefSize(122, 60);
+		Label avtaleNavn = new Label(navn);
+		avtalePane.getChildren().add(avtaleNavn);
+		gridpane.add(avtalePane, dag, startTime-6, 1, 2);	
+	}
 	
 	//Bytter vindu til LagAvtale
 	public void avtaleButt (ActionEvent event) {
@@ -99,9 +127,15 @@ public class KalenderController {
 	}
 	
 	
-	public void filler(){
-		Button avtalePane = new Button();
-		gridpane.add(avtalePane, 1, 1);					
+	public void filler(int startTime, String navn){
+		Pane avtalePane = new Pane();
+		avtalePane.setStyle("-fx-background-color:#FE2E2E");
+		avtalePane.setPrefSize(122, 60);
+		Label avtaleNavn = new Label(navn);
+		avtalePane.getChildren().add(avtaleNavn);
+		gridpane.add(avtalePane, 1, startTime);	
+		
+		
 	}
 
 

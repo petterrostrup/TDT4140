@@ -1,13 +1,33 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 
-.boromirBorder {
-	-fx-border-style: 20;
-}
+
 .color-picker {
     -fx-background-color: #669999; 
     -fx-background-radius: 0 15 15 0; 
 }
 .color-picker .color-picker-label .text {
     -fx-fill: #ccffcc;
+}
+
+/*PULSATING SHIT */
+
+/*Reset*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* @-webkit-keyframes pulse {
+      0% {background-color: #45CEEF;}
+     25% {background-color: #F747D9;}
+     50% {background-color: #47F1F7;}
+     75% {background-color: #6C9596;}
+     100% {background-color: #00DE21;}
+}*/
+
+
+.puls {
+    /*-webkit-animation: pulse 10s infinite alternate;*/
+    -fx-background-color: #45CEEF;
 }

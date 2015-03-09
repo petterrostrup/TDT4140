@@ -88,7 +88,6 @@ public class DatabaseCommunicator {
                 "(id INTEGER not NULL, " +
                 " name VARCHAR(255), " +  
                 " PRIMARY KEY ( id ))"; 
-                
 		String connectedTable = "CREATE TABLE IF NOT EXISTS CONNECTED " +
                 "(id INTEGER not NULL, " +
                 " person INTEGER not NULL, " +
@@ -113,7 +112,6 @@ public class DatabaseCommunicator {
                 " FOREIGN KEY (room) REFERENCES ROOM(id), " +
                 " FOREIGN KEY (appointment) REFERENCES APPOINTMENT(id), " +
                 " PRIMARY KEY ( id ))";  
-		
 		try {
 			System.out.println("Connecting to database");
 			con = DriverManager.getConnection(url, user, password);
@@ -132,7 +130,7 @@ public class DatabaseCommunicator {
 			st.executeUpdate(membergroupTable);
 			//System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  ATTENDING ");
-			st.executeUpdate(attendingTable);
+			st.executeUpdate(connectedTable);
 			//System.out.println("(╯°□°）╯︵ ┻�?┻");
 			//st.executeUpdate("DROP TABLE IF EXISTS  MEMBER ");
 			st.executeUpdate(memberTable);
@@ -166,6 +164,23 @@ public class DatabaseCommunicator {
 		}
 	}
 	
+	public static void update(String statement){
+		Connection con = null;
+		Statement st = null;
+		
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+			st.executeUpdate(statement);
+			System.out.println("Database updated");
+			
+		} catch (SQLException ex) {
+			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
+			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+			System.out.println("Something went wrong updating the database");
+		}
+		}
+	
 	public static ResultSet execute(String statement){
 		Connection con = null;
 		Statement st = null;
@@ -175,28 +190,13 @@ public class DatabaseCommunicator {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
 			rs = st.executeQuery(statement);
+			System.out.println("Query successful... Returning results");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
-			
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-				
-			} catch (SQLException ex) {
-				Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
-				lgr.log(Level.WARNING, ex.getMessage(), ex);
-			}
-		}
+			System.out.println("Something went wrong with executing the query");
+		} 
 		
 		return rs;
 	}

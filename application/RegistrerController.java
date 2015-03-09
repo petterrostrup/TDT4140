@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import classes.User;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -72,9 +73,6 @@ public class RegistrerController extends Application{
 		
 		}
 		
-	
-	
-	
 	public void openFile(ActionEvent event){
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Velg bilde");
@@ -95,23 +93,34 @@ public class RegistrerController extends Application{
 				}	
 	}
 	
-	
-	
-	
-	
-		
-	
 	public void regButt (ActionEvent event){
+		User varUser = null;
+		
 		try {
-			new KalenderController().start(new Stage());
-		} catch (Exception e) {
+			String userName = brukernavn.getText();
+			String password = passord.getText();
+			String name = navn.getText();
+			String eMail = epost.getText();
+			String address = adresse.getText();
 			
+			varUser = new User(userName, password, eMail, name, address);
+			
+			varUser.saveUser();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		if (varUser != null){
+			try {
+				new Main().start(new Stage());
+				Node  source = (Node)  event.getSource(); 
+				Stage stage  = (Stage) source.getScene().getWindow();
+				stage.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
 
 	}
 	

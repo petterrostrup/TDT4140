@@ -82,7 +82,7 @@ public class LagAvtaleController extends Application {
 		// hvis validering er godkjent, send til hjem
 		if(checkpointReached){
 			try {
-				new KalenderController().start(new Stage());
+				new Main().start(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -98,7 +98,7 @@ public class LagAvtaleController extends Application {
 	
 	public void kalenderButt (ActionEvent event){
 		try {
-			new KalenderController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();

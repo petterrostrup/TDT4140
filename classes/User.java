@@ -45,11 +45,11 @@ public class User {
 
 	public void setPassword(String password) {
 		//Lower and Upper case, must contain number and at least length of 8
-		if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")){
+		if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){
 			this.password = password;			
 		}
 		
-		else throw new IllegalArgumentException("Illegal password. Must contain lower and higher case, numbers and at least 8 chars long");
+		else throw new IllegalArgumentException("Illegal password. Must contain lower and higher case, numbers and at least 6 chars long");
 		
 	}
 
@@ -59,10 +59,10 @@ public class User {
 
 	public void setName(String name) {
 		//All unicode chars from any language
-		if (name.matches("^[\\p{L} .'-]+$")){
+		//if (name.matches("^[\\p{L} .'-]+$")){
 			this.name = name;
-		}
-		else throw new IllegalArgumentException("Invalid name");
+		//}
+		//else throw new IllegalArgumentException("Invalid name");
 	}
 
 	public String geteMail() {
@@ -70,12 +70,7 @@ public class User {
 	}
 
 	public void seteMail(String eMail) {
-		if (eMail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
-			this.eMail = eMail;			
-		}
-		
-		else throw new IllegalArgumentException("Invalid email");
+		this.eMail = eMail;
 	}
 
 	public String getAddress() {
@@ -104,12 +99,27 @@ public class User {
 		//Change an attending status on event
 	}
 	
-	public void saveUser(User user){
-			String sqlStatement = "INSERT IGNORE INTO USER (username, password, name, email, address) "
-					+ "VALUES (" + user.getUserName() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.geteMail() +", " + user.getAddress() + ")";
-			ResultSet results = DatabaseCommunicator.execute(sqlStatement);		
+	public void saveUser(){
+		System.out.println(this.getUserName());
+		String sqlStatement = "SELECT * FROM USER WHERE username = '" + this.getUserName() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
+						+ "VALUES ( '" + this.getUserName() + "', '" + this.getPassword() + "', '" + this.getName() + "', '" + this.geteMail() +"', '" + this.getAddress() + "');";
+				System.out.println("Saving user");
+				DatabaseCommunicator.update(sqlStatement);				
+			}
+			else{
+				System.out.println("User exists. Cannot save");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
 		
-
 	}
 	
 	
