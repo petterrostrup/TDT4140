@@ -1,15 +1,13 @@
 package application;
 
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import sun.util.logging.resources.logging_pt_BR;
 import application.RegistrerController;
+import classes.Login;
 import classes.User;
 
 import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
@@ -43,10 +41,9 @@ import javafx.stage.Stage;
 
 
 
-
 public class LoginController extends Application {
 	
-	private int logFail = 0;
+	private boolean logFail = false;
 		
 	@FXML
 	private Button logginn;
@@ -60,13 +57,9 @@ public class LoginController extends Application {
 	@FXML
 	private Label feilLabel; 
 	
-	@FXML
-	private Button registrer;
-	
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
-	       final Connection con = DriverManager.getConnection("jdbc:mysql://jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       
 	        final Scene scene = new Scene(root);
 	        
@@ -92,14 +85,21 @@ public class LoginController extends Application {
 	        		
 	        		}
 	        	}
-	   
+	        });
+	        
+	        
+
+	        
+	}
 	
 	
-	@FXML
+	
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {
 		//System.out.println("hade");
 		//RegistrerBrukerKlasse().start(new Stage());
+		
+				
 		try {
 			new RegistrerController().start(new Stage());
 		} catch (Exception e) {
@@ -114,69 +114,72 @@ public class LoginController extends Application {
 	
 	
 	
-	//User user = new User(null, null, null, null, null);
 	
     public void logButt (ActionEvent event) {
-    	//String correctUsername = user.getUserName();
-    	//String correctPassword = user.getPassword();
+    	//System.out.println("test");
     	//String correctUsername = "admin";
 		//String correctPassword = "admin";
-    	String correctPassword = "";
-		ResultSet resultSet = null;
-		
+    	
+    	
+    	User newuser;
+    	
 		try {
-			PreparedStatement statement = con.prepareStatement ("select * from userTable where username = " + "'" + brukernavn.getText().toString() + "'");
-			ResultSet results = statement.executeQuery();
-			results.next();
-			resultSet = results;
-			correctPassword += results.getString(8);
-			
-			
-			
+			//Henter brukernavn og passord fra tekstfeltene
+			newuser = Login.login(brukernavn.getText(), passord.getText());
+			logFail = false;
 		} catch (Exception e) {
 			System.out.println(e);
+			//System.out.println("test");
+			logFail = true;
 		}
+		if(logFail = false){
+			System.out.println("logget inn");
+			//new KalenderController().start(new Stage());
+		}
+		else{
+			// Gir melding om at brukernavn eller passord er feil
+			brukernavn.setText("noob");
+			brukernavn.setStyle("-fx-background:#FE2E2E");
+			passord.setStyle("-fx-background:#FE2E2E");
+			feilLabel.setText("Feil brukernavn eller passord");
+		}
+    }
+		
+		
+//			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
+//			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
+//				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
+//				
+//				logFail = 0;
+//				
+//				
+//				try {
+//					new HjemController().start(new Stage());
+//				} catch (Exception e) {
+//					
+//					e.printStackTrace();
+//				}
+//				//Henter stage parameter
+//				Node  source = (Node)  event.getSource(); 
+//			    Stage stage  = (Stage) source.getScene().getWindow();
+//			    stage.close();
+//				
+//			}
+//		else{	// Gir melding om at brukernavn eller passord er feil
+//			if(logFail == 0){
+//				
+//				logFail = 1;
+//				//brukernavn.setText("noob");
+//				brukernavn.setStyle("-fx-background:#FE2E2E");
+//				passord.setStyle("-fx-background:#FE2E2E");
+//				feilLabel.setText("Feil brukernavn eller passord");
+//				
+//				
+//			}
+//		}
+//	}
 
-			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
-				
-				//stage.resizableProperty().set(true);
-				logFail = 0;
-				
-				try {
-					new KalenderController().start(new Stage());
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-				//Henter stage parameter
-				Node  source = (Node)  event.getSource(); 
-			    Stage stage  = (Stage) source.getScene().getWindow();
-			    stage.close();
-				
-			}
-		else{	// Gir melding om at brukernavn eller passord er feil
-			if(logFail == 0){
-				
-				logFail = 1;
-				//brukernavn.setText("noob");
-				brukernavn.setStyle("-fx-background:#FE2E2E");
-				passord.setStyle("-fx-background:#FE2E2E");
-				feilLabel.setText("Feil brukernavn eller passord");
-				
-				
-			}
-		;
-	        
-	        
-			
-			
-				
-				
-	        
-	        
 
-	        
-	}}});}
 	
 
 	public static void main(String[] args) {
