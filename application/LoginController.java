@@ -55,7 +55,10 @@ public class LoginController extends Application {
 	private PasswordField passord;
 	
 	@FXML
-	private Label feilLabel; 
+	private Label feilLabel;
+	
+//	@FXML
+//	private Button registrer;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -70,10 +73,10 @@ public class LoginController extends Application {
 	        
 	        
 	        
-	        User varUser = new User("testleif", "Passord1", "test@gmail.com", "Test Testesen", "Testelia 12");
+	        User varUser = new User("testleif", "Passord1", "asdf@gmail.com", "testesen", "testeli 12");
 	        varUser.saveUser();
 	        
-	        
+	        //String user, String pass, String mail, String varName, String varAddress
 
 	        
 	        
@@ -132,12 +135,13 @@ public class LoginController extends Application {
     	
 		try {
 			//Henter brukernavn og passord fra tekstfeltene
-			//newuser = Login.login(brukernavn.getText(), passord.getText());
-			System.out.println("asd");
+			newuser = Login.login(brukernavn.getText(), passord.getText());
+			System.out.println("Logget inn");
+			//new Main().start(new Stage());
 			logFail = false;
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("test");
+			System.out.println("login failed");
 			logFail = true;
 		}
 		if(logFail = false){
@@ -155,6 +159,7 @@ public class LoginController extends Application {
     }
 		
 		
+    
 //			if((!passord.getText().isEmpty() && passord.getText().equals(correctPassword)) &&
 //			(!brukernavn.getText().isEmpty() && brukernavn.getText().equals(correctUsername))){ 
 //				//Sjekker om brukernavn og passord stemmer og bytter skjerm.
@@ -188,40 +193,6 @@ public class LoginController extends Application {
 //		}
 //	}
 
-
-//			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
-//				
-//				//stage.resizableProperty().set(true);
-//				logFail = 0;
-//				
-//				try {
-//					new Main().start(new Stage());
-//				} catch (Exception e) {
-//					
-//					e.printStackTrace();
-//				}
-//				//Henter stage parameter
-//				Node  source = (Node)  event.getSource(); 
-//			    Stage stage  = (Stage) source.getScene().getWindow();
-//			    stage.close();
-//				
-//			}
-//		else{	// Gir melding om at brukernavn eller passord er feil
-//			if(logFail == 0){
-//				
-//				logFail = 1;
-//				//brukernavn.setText("noob");
-//				brukernavn.setStyle("-fx-background:#FE2E2E");
-//				passord.setStyle("-fx-background:#FE2E2E");
-//				feilLabel.setText("Feil brukernavn eller passord");
-//				
-//				
-//			}
-//		;
-//	        
-//	        
-			
-			
 
 	public static void main(String[] args) {
 		launch(args);
