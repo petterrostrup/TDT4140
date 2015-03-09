@@ -82,7 +82,7 @@ public class ProfilController extends Application {
 	
 	public void kalenderButt (ActionEvent event) {
 		try {
-			new LagAvtaleController().start(new Stage()); // FORANDRES/FJERNES
+			new Main().start(new Stage()); // FORANDRES/FJERNES
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -72,9 +72,6 @@ public class RegistrerController extends Application{
 		
 		}
 		
-	
-	
-	
 	public void openFile(ActionEvent event){
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Velg bilde");
@@ -95,15 +92,9 @@ public class RegistrerController extends Application{
 				}	
 	}
 	
-	
-	
-	
-	
-		
-	
 	public void regButt (ActionEvent event){
 		try {
-			new KalenderController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();

@@ -143,7 +143,7 @@ public class LoginController extends Application {
 				logFail = 0;
 				
 				try {
-					new KalenderController().start(new Stage());
+					new Main().start(new Stage());
 				} catch (Exception e) {
 					
 					e.printStackTrace();
