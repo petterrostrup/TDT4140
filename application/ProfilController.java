@@ -49,8 +49,16 @@ public class ProfilController extends Application {
 	        stage.setTitle("Profil");
 	        stage.setScene(scene);
 	        stage.show();
-	        
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        
+//	        Image img = new Image(ProfilController.class.getResourceAsStream("youngmaster.jpg"));
+
+	        Image image = new Image(getClass().getResourceAsStream("youngmaster.jpg"));
+	        imageview.setImage(image);
+	        
+//	        
+
+	      
 	}
 
 	
@@ -79,6 +87,7 @@ public class ProfilController extends Application {
 	}
 	
 	public void logoutButt (ActionEvent event) {
+		
 		try {
 			new LoginController().start(new Stage());
 		} catch (Exception e) {
