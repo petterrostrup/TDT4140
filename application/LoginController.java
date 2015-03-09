@@ -132,11 +132,12 @@ public class LoginController extends Application {
     	
 		try {
 			//Henter brukernavn og passord fra tekstfeltene
-			newuser = Login.login(brukernavn.getText(), passord.getText());
+			//newuser = Login.login(brukernavn.getText(), passord.getText());
+			System.out.println("asd");
 			logFail = false;
 		} catch (Exception e) {
 			System.out.println(e);
-			//System.out.println("test");
+			System.out.println("test");
 			logFail = true;
 		}
 		if(logFail = false){
