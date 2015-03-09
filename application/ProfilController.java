@@ -33,13 +33,16 @@ public class ProfilController extends Application {
 	private ImageView imageview;
 	
 	@FXML
-	private TextField brukernavn;
+	private Label brukernavn;
 	
 	@FXML
 	private Pane mainPane;
 	
+	@FXML
+	private ColorPicker colorpick;
 	@Override
 	public void start(Stage stage) throws Exception {
+		
 		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       Parent root = FXMLLoader.load(getClass().getResource("profil.fxml"));
 	        Scene scene = new Scene(root);
@@ -47,6 +50,7 @@ public class ProfilController extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 	        
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	}
 
 	
@@ -102,11 +106,15 @@ public class ProfilController extends Application {
 	
 	public void pickColor(ActionEvent event){
 		
+		//getStyleClass().add("bordered-titled-border");
+		//mainPane.getStyleClass().add("boromirBorder");
+		//private color = pickColor.
 		
-		
-		mainPane.setStyle("-fx-background-color: red");
 //		mainPane.setFill(ColorPicker.getValue());
 		
+		Color c = colorpick.getValue();
+		System.out.println("Hey this is " + c.getRed() + " and " + c.getBlue());
+//		mainPane.set(colorpick.getValue());
 	}
 	
 	public void test(ActionEvent event){
