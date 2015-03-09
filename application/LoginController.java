@@ -68,6 +68,10 @@ public class LoginController extends Application {
 	        stage.show();
 	      //stage.resizableProperty().set(true/false);
 	        
+	        public void saveUser(User admin){
+	        	
+	        }
+	        
 	        
 	        
 	        
@@ -115,13 +119,13 @@ public class LoginController extends Application {
 	
 	
 	
-    public void logButt (ActionEvent event) {
+    public User logButt (ActionEvent event) {
     	//System.out.println("test");
     	//String correctUsername = "admin";
 		//String correctPassword = "admin";
     	
     	
-    	User newuser;
+    	User newuser = null;
     	
 		try {
 			//Henter brukernavn og passord fra tekstfeltene
@@ -138,11 +142,12 @@ public class LoginController extends Application {
 		}
 		else{
 			// Gir melding om at brukernavn eller passord er feil
-			brukernavn.setText("noob");
+			//brukernavn.setText("noob");
 			brukernavn.setStyle("-fx-background:#FE2E2E");
 			passord.setStyle("-fx-background:#FE2E2E");
 			feilLabel.setText("Feil brukernavn eller passord");
 		}
+		return newuser;
     }
 		
 		
