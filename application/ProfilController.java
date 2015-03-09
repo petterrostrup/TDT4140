@@ -108,7 +108,7 @@ public class ProfilController extends Application {
 		
 		
 		mainPane.setStyle("-fx-background-color: red");
-		mainPane.setFill(ColorPicker.getValue());
+//		mainPane.setFill(ColorPicker.getValue());
 		
 	}
 	
