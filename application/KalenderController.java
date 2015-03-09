@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -45,7 +46,9 @@ public class KalenderController {
 			String endString = end.toString();
 			String [] endSplit = endString.split(":");
 			int endInt = Integer.parseInt(endSplit[0]);
-			filler(startInt);
+			
+			String avtaleNavn = avtale.getName();
+			filler(startInt, avtaleNavn);
 			
 		}
 	}
@@ -100,11 +103,14 @@ public class KalenderController {
 	}
 	
 	
-	public void filler(int startTime){
+	public void filler(int startTime, String navn){
 		Pane avtalePane = new Pane();
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
 		avtalePane.setPrefSize(122, 60);
+		Label avtaleNavn = new Label(navn);
+		avtalePane.getChildren().add(avtaleNavn);
 		gridpane.add(avtalePane, 1, startTime);	
+		
 		
 	}
 
