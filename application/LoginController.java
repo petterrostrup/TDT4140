@@ -69,15 +69,8 @@ public class LoginController extends Application {
 	      //stage.resizableProperty().set(true/false);
 	        
 	        
-	        
 	        User varUser = new User("testleif", "Passord1", "test@gmail.com", "Test Testesen", "Testelia 12");
 	        varUser.saveUser();
-	        
-	        
-
-	        
-	        
-	        
 	        
 	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
 	        	@Override
@@ -93,11 +86,7 @@ public class LoginController extends Application {
 	        		
 	        		}
 	        	}
-	        });
-	        
-	        
-
-	        
+	        });	        
 	}
 	
 	
@@ -132,14 +121,14 @@ public class LoginController extends Application {
     	
 		try {
 			//Henter brukernavn og passord fra tekstfeltene
+			//System.out.println(brukernavn.getText());
+			//System.out.println(passord.getText());
 			newuser = Login.login(brukernavn.getText(), passord.getText());
-			logFail = false;
 		} catch (Exception e) {
 			System.out.println(e);
 			//System.out.println("test");
-			logFail = true;
 		}
-		if(logFail = false){
+		if(newuser != null){
 			System.out.println("logget inn");
 			new Main().start(new Stage());
 		}

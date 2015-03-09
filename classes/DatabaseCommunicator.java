@@ -211,23 +211,7 @@ public class DatabaseCommunicator {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
 			
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-				
-			} catch (SQLException ex) {
-				Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
-				lgr.log(Level.WARNING, ex.getMessage(), ex);
-			}
-		}
+		} 
 		
 		return rs;
 	}

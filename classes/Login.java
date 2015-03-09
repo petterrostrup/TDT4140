@@ -15,16 +15,33 @@ public class Login {
 			user = new User("admin", "admin", "admin@counsil.com", "Human Counselor", "Counsil Towers, Persidium");
 		}
 		
-		String sqlStatement = "SELECT * FROM USER WHERE username = " + username;
+		try {
+			System.out.println("herro");
+			String sqlStatement = "SELECT * FROM USER";
+			ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+			while (results.next()){
+				System.out.println(results.getString(results.findColumn("username")));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		String sqlStatement = "SELECT * FROM USER WHERE username = '" + username + "';";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			results.next();
-			if (results.getString("password").equals(password)){
-				String name = results.getString("name");
-				String dbPassword = results.getString("password");
-				String dbUsername = results.getString("username");
-				String mail = results.getString("email");
-				String address = results.getString("address");
+			if (results.getString(results.findColumn("password")).equals(password)){
+				System.out.println("bro");
+				String name = results.getString(results.findColumn("name"));
+				System.out.println(name);
+				String dbPassword = results.getString(results.findColumn("password"));
+				System.out.println(password);
+				String dbUsername = results.getString(results.findColumn("username"));
+				System.out.println(username);
+				String mail = results.getString(results.findColumn("email"));
+				System.out.println(mail);
+				String address = results.getString(results.findColumn("address"));
+				System.out.println(address);
 				
 				user = new User(dbUsername, dbPassword, name, mail, address);
 			}

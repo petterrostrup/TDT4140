@@ -45,11 +45,11 @@ public class User {
 
 	public void setPassword(String password) {
 		//Lower and Upper case, must contain number and at least length of 8
-		if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")){
+		if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){
 			this.password = password;			
 		}
 		
-		else throw new IllegalArgumentException("Illegal password. Must contain lower and higher case, numbers and at least 8 chars long");
+		else throw new IllegalArgumentException("Illegal password. Must contain lower and higher case, numbers and at least 6 chars long");
 		
 	}
 
@@ -59,10 +59,10 @@ public class User {
 
 	public void setName(String name) {
 		//All unicode chars from any language
-		if (name.matches("^[\\p{L} .'-]+$")){
+		//if (name.matches("^[\\p{L} .'-]+$")){
 			this.name = name;
-		}
-		else throw new IllegalArgumentException("Invalid name");
+		//}
+		//else throw new IllegalArgumentException("Invalid name");
 	}
 
 	public String geteMail() {
@@ -70,12 +70,7 @@ public class User {
 	}
 
 	public void seteMail(String eMail) {
-		if (eMail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
-			this.eMail = eMail;			
-		}
-		
-		else throw new IllegalArgumentException("Invalid email");
+		this.eMail = eMail;
 	}
 
 	public String getAddress() {
@@ -106,7 +101,7 @@ public class User {
 	
 	public void saveUser(){
 			String sqlStatement = "INSERT IGNORE INTO USER (username, password, name, email, address) "
-					+ "VALUES (" + this.getUserName() + ", " + this.getPassword() + ", " + this.getName() + ", " + this.geteMail() +", " + this.getAddress() + ")";
+					+ "VALUES ( '" + this.getUserName() + "', '" + this.getPassword() + "', '" + this.getName() + "', '" + this.geteMail() +"', '" + this.getAddress() + "');";
 			DatabaseCommunicator.update(sqlStatement);
 	}
 	
