@@ -164,6 +164,39 @@ public class DatabaseCommunicator {
 		}
 	}
 	
+	public static void update(String statement){
+		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+			st.executeUpdate(statement);
+			
+		} catch (SQLException ex) {
+			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
+			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+			
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+				
+			} catch (SQLException ex) {
+				Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
+				lgr.log(Level.WARNING, ex.getMessage(), ex);
+			}
+		}
+	}
+	
 	public static ResultSet execute(String statement){
 		Connection con = null;
 		Statement st = null;

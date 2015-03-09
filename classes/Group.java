@@ -30,13 +30,13 @@ public class Group {
 	public void createGroup(){
 		String sqlStatement = "INSERT IGNORE INTO MEMBERGROUP (name) "
 				+ "VALUES (" + getGroupName() + ")";
-		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		DatabaseCommunicator.update(sqlStatement);
 	}
 	
 	public void addMember(int id){
 		String sqlStatement = "INSERT IGNORE INTO MEMBER (person, membergroup) "
 				+ "VALUES (" + id + ", " + this.getGroupID() + ")";
-		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		DatabaseCommunicator.update(sqlStatement);
 	}
 	
 	public void removeMember(int id){

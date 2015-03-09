@@ -107,7 +107,7 @@ public class User {
 	public void saveUser(){
 			String sqlStatement = "INSERT IGNORE INTO USER (username, password, name, email, address) "
 					+ "VALUES (" + this.getUserName() + ", " + this.getPassword() + ", " + this.getName() + ", " + this.geteMail() +", " + this.getAddress() + ")";
-			ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+			DatabaseCommunicator.update(sqlStatement);
 	}
 	
 	
