@@ -1,15 +1,13 @@
 package application;
 
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import sun.util.logging.resources.logging_pt_BR;
 import application.RegistrerController;
+import classes.Login;
 import classes.User;
 
 import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
@@ -43,10 +41,9 @@ import javafx.stage.Stage;
 
 
 
-
 public class LoginController extends Application {
 	
-	private int logFail = 0;
+	private boolean logFail = false;
 		
 	@FXML
 	private Button logginn;
@@ -60,13 +57,9 @@ public class LoginController extends Application {
 	@FXML
 	private Label feilLabel; 
 	
-	@FXML
-	private Button registrer;
-	
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
-	       final Connection con = DriverManager.getConnection("jdbc:mysql://jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       
 	        final Scene scene = new Scene(root);
 	        
@@ -98,14 +91,21 @@ public class LoginController extends Application {
 	        		
 	        		}
 	        	}
-	   
+	        });
+	        
+	        
+
+	        
+	}
 	
 	
-	@FXML
+	
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {
 		//System.out.println("hade");
 		//RegistrerBrukerKlasse().start(new Stage());
+		
+				
 		try {
 			new RegistrerController().start(new Stage());
 		} catch (Exception e) {
@@ -120,9 +120,7 @@ public class LoginController extends Application {
 	
 	
 	
-	//User user = new User(null, null, null, null, null);
 	
-<<<<<<< HEAD
     public User logButt (ActionEvent event) {
     	//System.out.println("test");
     	//String correctUsername = "admin";
@@ -131,29 +129,15 @@ public class LoginController extends Application {
     	
     	User newuser = null;
     	
-=======
-    public void logButt (ActionEvent event) {
-    	//String correctUsername = user.getUserName();
-    	//String correctPassword = user.getPassword();
-    	//String correctUsername = "admin";
-		//String correctPassword = "admin";
-    	String correctPassword = "";
-		ResultSet resultSet = null;
-		
->>>>>>> parent of 6be5ffc... asdf
 		try {
-			PreparedStatement statement = con.prepareStatement ("select * from userTable where username = " + "'" + brukernavn.getText().toString() + "'");
-			ResultSet results = statement.executeQuery();
-			results.next();
-			resultSet = results;
-			correctPassword += results.getString(8);
-			
-			
-			
+			//Henter brukernavn og passord fra tekstfeltene
+			newuser = Login.login(brukernavn.getText(), passord.getText());
+			logFail = false;
 		} catch (Exception e) {
 			System.out.println(e);
+			//System.out.println("test");
+			logFail = true;
 		}
-<<<<<<< HEAD
 		if(logFail = false){
 			System.out.println("logget inn");
 			//new KalenderController().start(new Stage());
@@ -201,9 +185,8 @@ public class LoginController extends Application {
 //			}
 //		}
 //	}
-=======
->>>>>>> parent of 6be5ffc... asdf
 
+<<<<<<< HEAD
 			if(!passord.getText().isEmpty() && passord.getText().equals(correctPassword)){ //Sjekker om brukernavn og passord stemmer og bytter skjermbilde.
 				
 				//stage.resizableProperty().set(true);
@@ -241,9 +224,9 @@ public class LoginController extends Application {
 				
 	        
 	        
+=======
+>>>>>>> origin/GUI2
 
-	        
-	}}});}
 	
 
 	public static void main(String[] args) {
