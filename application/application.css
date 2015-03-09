@@ -1,1 +1,13 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+.boromirBorder {
+	-fx-border-style: 2px solid;
+}
+.color-picker {
+    -fx-background-color: #669999; 
+    -fx-background-radius: 0 15 15 0; 
+}
+.color-picker .color-picker-label .text {
+    -fx-fill: #ccffcc;
+}
