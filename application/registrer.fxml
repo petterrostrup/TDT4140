@@ -29,6 +29,12 @@
             <Label fx:id="ugyldigEpost" layoutX="266.0" layoutY="125.0" prefHeight="17.0" prefWidth="0.0" />
             <Button fx:id="tologginn" layoutX="597.0" layoutY="441.0" mnemonicParsing="false" onAction="#toLogginn" text="Tilbake" />
             <TextField fx:id="brukernavn" layoutX="108.0" layoutY="80.0" />
+            <Label layoutX="257.0" layoutY="44.0" text="(Ingen ugyldige chars)" />
+            <Label layoutX="257.0" layoutY="84.0" text="(Ingen store bokstaver eller mellomrom)" />
+            <Label layoutX="257.0" layoutY="125.0" text="(Må være gyldig e-post)" />
+            <Label layoutX="257.0" layoutY="164.0" text="(Bare gyldig gateadresse)" />
+            <Label layoutX="257.0" layoutY="204.0" text="(Må være 6 karakterer uten mellomrom)" />
+            <Label layoutX="257.0" layoutY="244.0" text="(Må være lik som over)" />
          </children>
       </Pane>
       <Pane prefHeight="128.0" prefWidth="700.0" style="-fx-background-color: #E2E2E2;">

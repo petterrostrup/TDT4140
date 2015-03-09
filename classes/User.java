@@ -100,9 +100,26 @@ public class User {
 	}
 	
 	public void saveUser(){
-			String sqlStatement = "INSERT IGNORE INTO USER (username, password, name, email, address) "
-					+ "VALUES ( '" + this.getUserName() + "', '" + this.getPassword() + "', '" + this.getName() + "', '" + this.geteMail() +"', '" + this.getAddress() + "');";
-			DatabaseCommunicator.update(sqlStatement);
+		System.out.println(this.getUserName());
+		String sqlStatement = "SELECT * FROM USER WHERE username = '" + this.getUserName() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO USER (username, password, name, email, address) "
+						+ "VALUES ( '" + this.getUserName() + "', '" + this.getPassword() + "', '" + this.getName() + "', '" + this.geteMail() +"', '" + this.getAddress() + "');";
+				System.out.println("Saving user");
+				DatabaseCommunicator.update(sqlStatement);				
+			}
+			else{
+				System.out.println("User exists. Cannot save");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+		
 	}
 	
 	

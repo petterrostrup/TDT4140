@@ -7,12 +7,12 @@ import java.util.Date;
 
 public class Alarm {	
 	public void setNotification(int appID, int userID, int minutes){
-		String sqlStatement = "UPDATE CONNECTED SET notification = " + minutes + " WHERE appointment = " + appID + " AND person = " + userID;
+		String sqlStatement = "UPDATE CONNECTED SET notification = '" + minutes + "' WHERE appointment = '" + appID + "' AND person = '" + userID + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 	}
 	
 	public int getNotification(int appID, int userID){
-		String sqlStatement = 	"SELECT * FROM CONNECTED WHERE appointment = " + appID + " AND person = " + userID;
+		String sqlStatement = 	"SELECT * FROM CONNECTED WHERE appointment = '" + appID + "' AND person = '" + userID + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		int i = 0;
 		

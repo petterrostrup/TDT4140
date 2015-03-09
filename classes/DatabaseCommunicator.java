@@ -167,35 +167,19 @@ public class DatabaseCommunicator {
 	public static void update(String statement){
 		Connection con = null;
 		Statement st = null;
-		ResultSet rs = null;
 		
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
 			st.executeUpdate(statement);
+			System.out.println("Database updated");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
-			
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-				
-			} catch (SQLException ex) {
-				Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
-				lgr.log(Level.WARNING, ex.getMessage(), ex);
-			}
+			System.out.println("Something went wrong updating the database");
 		}
-	}
+		}
 	
 	public static ResultSet execute(String statement){
 		Connection con = null;
@@ -206,11 +190,12 @@ public class DatabaseCommunicator {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
 			rs = st.executeQuery(statement);
+			System.out.println("Query successful... Returning results");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
-			
+			System.out.println("Something went wrong with executing the query");
 		} 
 		
 		return rs;
