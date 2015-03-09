@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -44,8 +45,8 @@ public class ProfilController extends Application {
 	
 	@FXML
 	private ColorPicker colorpick;
-	
 	@FXML
+
 	public void initialize(){
 		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
 	        clip.setArcWidth(20);
@@ -70,13 +71,9 @@ public class ProfilController extends Application {
 	        stage.setTitle("Profil");
 	        stage.setScene(scene);
 	        stage.show();
-	     //   scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        
-	        //Image img = new Image(getClass().getResourceAsStream("http://mikecann.co.uk/wp-content/uploads/2009/12/javafx_logo_color_1.jpg"));
 	        
-	        //Image image = new Image(getClass().getResourceAsStream("youngmaster.jpg"));
-	       
-	        //imageview.setImage(new Image("youngmaster.jpg"));
 	        
 	       
 
@@ -149,6 +146,7 @@ public class ProfilController extends Application {
 	
 	public void test(ActionEvent event){
 		try{
+			
 			new ProfilController().start(new Stage());
 			 
 		}catch (Exception e){
