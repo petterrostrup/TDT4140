@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import classes.Appointment;
-import classes.Calendar;
+import classes.MainCalendar;
 import classes.Room;
+import classes.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class KalenderController {
+	
+	private User sessionUser;
 	
 	@FXML
 	private GridPane gridpane;
@@ -45,7 +48,7 @@ public class KalenderController {
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
 	        
-		Calendar kalender = new Calendar();
+		MainCalendar kalender = new MainCalendar();
 		kalender.fillTest();
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		for (Appointment avtale: avtaler){
@@ -68,6 +71,10 @@ public class KalenderController {
 			avtaleTester(9, "Morgenmøte", "-fx-background-color:#0033CC", 2);
 		}
 		
+	}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
 	}
 	        
 	public void avtaleTester (int startTime, String navn, String style, int dag){

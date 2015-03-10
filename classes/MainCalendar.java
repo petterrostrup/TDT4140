@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Calendar {
+public class MainCalendar {
 	private User owner;
 	private ArrayList<Appointment> appointments;
 
@@ -117,7 +117,7 @@ public class Calendar {
 	}
 	
 	public static void main(String[] args) {
-		Calendar trialCalendar = new Calendar();
+		MainCalendar trialCalendar = new MainCalendar();
 		trialCalendar.fillCalendar();
 	}
 	

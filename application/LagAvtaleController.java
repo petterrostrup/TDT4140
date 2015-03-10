@@ -1,5 +1,6 @@
 package application;
 
+import classes.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,6 +19,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class LagAvtaleController extends Application {
+	
+	private User sessionUser;
 	
 	@FXML
 	private TextField tittel;  
@@ -58,6 +61,10 @@ public class LagAvtaleController extends Application {
 	        stage.setTitle("Lage avtale");
 	        stage.setScene(scene);
 	        stage.show();
+	}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
 	}
 	
 	
