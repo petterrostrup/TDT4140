@@ -29,6 +29,8 @@ import javafx.stage.Stage;
 
 public class RegistrerController extends Application{
 	
+	private User sessionUser;
+	
 	@FXML
 	private TextField navn;
 	
@@ -72,6 +74,10 @@ public class RegistrerController extends Application{
 		stage.show();
 		
 		}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
+	}
 		
 	public void openFile(ActionEvent event){
 				FileChooser fileChooser = new FileChooser();
@@ -112,7 +118,9 @@ public class RegistrerController extends Application{
 		
 		if (varUser != null){
 			try {
-				new Main().start(new Stage());
+				Main newMain = new Main();
+				newMain.setSession(varUser);
+				newMain.start(new Stage());
 				Node  source = (Node)  event.getSource(); 
 				Stage stage  = (Stage) source.getScene().getWindow();
 				stage.close();

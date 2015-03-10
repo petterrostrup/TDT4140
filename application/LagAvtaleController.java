@@ -89,7 +89,9 @@ public class LagAvtaleController extends Application {
 		// hvis validering er godkjent, send til hjem
 		if(checkpointReached){
 			try {
-				new Main().start(new Stage());
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.start(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -105,7 +107,9 @@ public class LagAvtaleController extends Application {
 	
 	public void kalenderButt (ActionEvent event){
 		try {
-			new Main().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -118,7 +122,9 @@ public class LagAvtaleController extends Application {
 	
 	public void profilButt (ActionEvent event){
 		try {
-			new ProfilController().start(new Stage());
+			ProfilController newCont = new ProfilController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();

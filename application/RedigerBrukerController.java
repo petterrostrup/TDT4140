@@ -30,6 +30,8 @@ import javafx.stage.Stage;
 
 public class RedigerBrukerController extends Application {
 	
+	private User sessionUser;
+	
 	@FXML
 	private ImageView imageview;
 	
@@ -97,14 +99,16 @@ public class RedigerBrukerController extends Application {
 	        
 	}
 	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
+	}
+	
 	//setTextFill(Color.RED);
 
 	//Lagre data fra skjema i database
 	public void lagreButt (ActionEvent event) {
 		//System.out.println("test");
 		//boolean dataOk = true;
-		
-
 		navnRed = navn.getText();
 		nyttBrukernavnRed = brukernavn.getText();
 		epostRed = epost.getText();
@@ -148,7 +152,9 @@ public class RedigerBrukerController extends Application {
 		// hvis validering er godkjent, send tilbake til Profil
 		if(checkpointReached){
 			try {
-				new ProfilController().start(new Stage());
+				ProfilController newCont = new ProfilController();
+				newCont.setSession(this.sessionUser);
+				newCont.start(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -205,7 +211,9 @@ public class RedigerBrukerController extends Application {
 	
 	public void avbrytButt (ActionEvent event) {
 		try {
-			new ProfilController().start(new Stage());
+			ProfilController newCont = new ProfilController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
