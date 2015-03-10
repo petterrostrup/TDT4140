@@ -75,8 +75,8 @@
             <Label layoutX="58.0" layoutY="410.0" text="Deltagere:" />
             <ListView fx:id="deltarList" layoutX="198.0" layoutY="323.0" prefHeight="97.0" prefWidth="149.0" />
             <ListView fx:id="deltagereList" layoutX="385.0" layoutY="323.0" prefHeight="97.0" prefWidth="149.0" />
-            <Button layoutX="353.0" layoutY="341.0" mnemonicParsing="false" onAction="#toDeltar" text="&lt;" />
-            <Button layoutX="353.0" layoutY="377.0" mnemonicParsing="false" onAction="#toDeltagere" text="&gt;" />
+            <Button fx:id="toDeltar" layoutX="353.0" layoutY="341.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
+            <Button fx:id="toCandidates" layoutX="353.0" layoutY="377.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
             <Label layoutX="87.0" layoutY="149.0" text="Start/Slutt" />
             <TextField fx:id="start1" layoutX="198.0" layoutY="145.0" prefHeight="16.0" prefWidth="93.0" />
             <TextField fx:id="slutt1" layoutX="315.0" layoutY="145.0" prefHeight="26.0" prefWidth="93.0" />
@@ -87,6 +87,7 @@
                 <MenuItem mnemonicParsing="false" text="Grupper" />
               </items>
             </MenuButton>
+            <Button layoutX="89.0" layoutY="365.0" mnemonicParsing="false" onAction="#velgListe2" text="Deltager" />
          </children>
       </Pane>
    </children>
