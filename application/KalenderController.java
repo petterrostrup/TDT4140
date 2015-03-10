@@ -37,6 +37,20 @@ public class KalenderController {
 	@FXML
 	private Label yearnr;
 	@FXML
+	private Label mandato;
+	@FXML
+	private Label tirdato;
+	@FXML
+	private Label onsdato;
+	@FXML
+	private Label torsdato;
+	@FXML
+	private Label fredato;
+	@FXML
+	private Label lordato;
+	@FXML
+	private Label sondato;
+	@FXML
 	private Button nextWeek;
 	@FXML
 	private Button prevWeek;
@@ -47,18 +61,22 @@ public class KalenderController {
 	        
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
-	        
+		fillCalendar();
+	}
+
+	
+	public void fillCalendar(){
 		MainCalendar kalender = new MainCalendar();
 		kalender.fillTest();
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		for (Appointment avtale: avtaler){
 			LocalTime start = avtale.getStart();
 			LocalTime end = avtale.getEnd();
-	        	
+			
 			String startString = start.toString();
 			String [] startSplit = startString.split(":");
 			int startInt = Integer.parseInt(startSplit[0])-6;
-	        	
+			
 			String endString = end.toString();
 			String [] endSplit = endString.split(":");
 			int endInt = Integer.parseInt(endSplit[0])-6;
@@ -70,13 +88,14 @@ public class KalenderController {
 			avtaleTester(7, "Trening", "-fx-background-color:#33CC33", 7);
 			avtaleTester(9, "Morgenmøte", "-fx-background-color:#0033CC", 2);
 		}
-		
 	}
+
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = sessionUser;
 	}
-	        
+	
+	
 	public void avtaleTester (int startTime, String navn, String style, int dag){
 		Pane avtalePane = new Pane();
 		avtalePane.setStyle(style);
@@ -85,6 +104,7 @@ public class KalenderController {
 		avtalePane.getChildren().add(avtaleNavn);
 		gridpane.add(avtalePane, dag, startTime-6, 1, 2);	
 	}
+	
 	
 	//Bytter vindu til LagAvtale
 	public void avtaleButt (ActionEvent event) {
@@ -98,7 +118,6 @@ public class KalenderController {
 		Node  source = (Node)  event.getSource(); 
 		Stage stage  = (Stage) source.getScene().getWindow();
 		stage.close();
-		    
 	}
 		
 		
@@ -115,9 +134,9 @@ public class KalenderController {
 		Node  source = (Node)  event.getSource(); 
 		Stage stage  = (Stage) source.getScene().getWindow();
 		stage.close();
-				    
 	}
-				
+
+	
 	//Bytter vindu til bruker
 	public void profilButt (ActionEvent event) {
 		try {
@@ -130,7 +149,6 @@ public class KalenderController {
 		Node  source = (Node)  event.getSource(); 
 		Stage stage  = (Stage) source.getScene().getWindow();
 		stage.close();
-				    
 	}
 	
 	
@@ -141,8 +159,6 @@ public class KalenderController {
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
 		gridpane.add(avtalePane, 1, startTime);	
-		
-		
 	}
 
 
