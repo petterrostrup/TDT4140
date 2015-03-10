@@ -157,7 +157,7 @@ public class LagAvtaleController {
 	}
 	
 	public void toDeltar (ActionEvent event){
-		
+		System.out.println("toDeltar");
 		  	ObservableList names= FXCollections.observableArrayList();
 			names.addAll("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
 			deltarList.setItems(names);
@@ -165,7 +165,7 @@ public class LagAvtaleController {
 	}
 	
 	public void toDeltagere(ActionEvent event){
-		
+		System.out.println("toDeltagere");
 		
 	}
 	
