@@ -151,6 +151,25 @@ public class LoginController {
 		}
 		return newuser;
     }
+    
+    
+    //FJJEEEERNES
+	public void cheatButt (ActionEvent event) {
+		
+				
+		try {
+			new Main().startKalender(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+		
+	}
+	
+	//FJERNESSLUTT
 
 	
 }
