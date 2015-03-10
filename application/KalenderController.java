@@ -109,7 +109,9 @@ public class KalenderController {
 	//Bytter vindu til LagAvtale
 	public void avtaleButt (ActionEvent event) {
 		try {
-			new LagAvtaleController().start(new Stage());
+			LagAvtaleController newCont =new LagAvtaleController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -140,7 +142,9 @@ public class KalenderController {
 	//Bytter vindu til bruker
 	public void profilButt (ActionEvent event) {
 		try {
-			new ProfilController().start(new Stage());
+			ProfilController newCont = new ProfilController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

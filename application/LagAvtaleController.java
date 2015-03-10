@@ -2,6 +2,8 @@ package application;
 
 import classes.User;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -51,7 +54,14 @@ public class LagAvtaleController extends Application {
 	
 	@FXML
 	private Label label1;
+	
+	@FXML 
+	private ListView deltarList;
+	
+	@FXML 
+	private ListView deltagereList;
 
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("lagavtale.fxml"));
@@ -61,6 +71,11 @@ public class LagAvtaleController extends Application {
 	        stage.setTitle("Lage avtale");
 	        stage.setScene(scene);
 	        stage.show();
+	        
+	        
+	      
+	        
+	        
 	}
 	
 	public void setSession(User sessionUser){
@@ -89,7 +104,9 @@ public class LagAvtaleController extends Application {
 		// hvis validering er godkjent, send til hjem
 		if(checkpointReached){
 			try {
-				new Main().start(new Stage());
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.start(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -105,7 +122,9 @@ public class LagAvtaleController extends Application {
 	
 	public void kalenderButt (ActionEvent event){
 		try {
-			new Main().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -118,7 +137,9 @@ public class LagAvtaleController extends Application {
 	
 	public void profilButt (ActionEvent event){
 		try {
-			new ProfilController().start(new Stage());
+			ProfilController newCont = new ProfilController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -141,6 +162,19 @@ public class LagAvtaleController extends Application {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 
+	}
+	
+	public void toDeltar (ActionEvent event){
+		
+		  ObservableList names= FXCollections.observableArrayList();
+			names.addAll("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
+			deltarList.setItems(names);
+	
+	}
+	
+	public void toDeltagere(ActionEvent event){
+		
+		
 	}
 	
 

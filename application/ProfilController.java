@@ -34,6 +34,8 @@ import javafx.stage.Stage;
 
 public class ProfilController extends Application {
 	
+	private User sessionUser;
+	
 	@FXML
 	private ImageView imageview;
 	
@@ -64,25 +66,24 @@ public class ProfilController extends Application {
            imageview.setImage(image);
 	}
 	public void start(Stage stage) throws Exception {
-		
-		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
 	       Parent root = FXMLLoader.load(getClass().getResource("profil.fxml"));
 	        Scene scene = new Scene(root);
 	        stage.setTitle("Profil");
 	        stage.setScene(scene);
 	        stage.show();
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	        
-	        
-	        
-	       
-
+	}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
 	}
 
 	
 	public void kalenderButt (ActionEvent event) {
 		try {
-			new Main().start(new Stage()); // FORANDRES/FJERNES
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,7 +95,9 @@ public class ProfilController extends Application {
 	
 	public void avtaleButt (ActionEvent event) {
 		try {
-			new LagAvtaleController().start(new Stage());
+			LagAvtaleController newCont = new LagAvtaleController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,7 +124,9 @@ public class ProfilController extends Application {
 	
 	public void redigerProfilButt (ActionEvent event) {
 		try {
-			new RedigerBrukerController().start(new Stage());
+			RedigerBrukerController newCont = new RedigerBrukerController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,8 +151,9 @@ public class ProfilController extends Application {
 	
 	public void test(ActionEvent event){
 		try{
-			
-			new ProfilController().start(new Stage());
+			ProfilController newCont = new ProfilController();
+			newCont.setSession(this.sessionUser);
+			newCont.start(new Stage());
 			 
 		}catch (Exception e){
 			e.printStackTrace();

@@ -43,7 +43,7 @@ import javafx.stage.Stage;
 
 public class LoginController extends Application {
 	
-	private boolean logFail = false;
+	private User sessionUser;
 		
 	@FXML
 	private Button logginn;
@@ -88,6 +88,10 @@ public class LoginController extends Application {
 	        });	        
 	}
 	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
+	}
+	
 	
 	
 	//Bytter vindu til registreringsskjerm
@@ -128,7 +132,9 @@ public class LoginController extends Application {
 		}
 		if(newuser != null){
 			System.out.println("logget inn");
-			new Main().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(newuser);
+			newMain.start(new Stage());
 			
 			Node  source = (Node)  event.getSource(); 
 		    Stage stage  = (Stage) source.getScene().getWindow();

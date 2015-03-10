@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.media.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -16,6 +18,7 @@
                </font>
             </Label>
             <Button layoutX="857.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
+            <Label fx:id="innloggetsom" layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
          </children>
       </Pane>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
@@ -27,48 +30,19 @@
       </Pane>
       <Pane layoutY="179.0" prefHeight="646.0" prefWidth="928.0">
          <children>
-            <Label layoutX="91.0" layoutY="279.0" text="Slutt" />
-            <Button fx:id="lagreavtale" layoutX="194.0" layoutY="507.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
-            <SplitMenuButton fx:id="deltagere" layoutX="201.0" layoutY="138.0" mnemonicParsing="false" text="Deltagere">
-               <items>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <RadioButton mnemonicParsing="false" text="Kristian" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <RadioButton mnemonicParsing="false" text="Emil" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <RadioButton mnemonicParsing="false" text="Fredrik" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <RadioButton mnemonicParsing="false" text="Petter" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <RadioButton mnemonicParsing="false" text="Aleksander" />
-                     </graphic>
-                  </MenuItem>
-               </items>
-            </SplitMenuButton>
-            <TextField fx:id="slutt" layoutX="201.0" layoutY="275.0" />
-            <TextField fx:id="tittel" layoutX="201.0" layoutY="48.0" />
-            <Label layoutX="90.0" layoutY="52.0" text="Tittel:" />
-            <Label layoutX="90.0" layoutY="93.0" text="Rom: " />
-            <Label layoutX="90.0" layoutY="191.0" text="Dato:" />
-            <TextField fx:id="start" layoutX="201.0" layoutY="233.0" />
-            <Label layoutX="90.0" layoutY="342.0" text="Beskrivelse" />
-            <Label layoutX="91.0" layoutY="237.0" text="Start" />
-            <TextArea fx:id="beskrivelse" layoutX="194.0" layoutY="342.0" prefHeight="130.0" prefWidth="300.0" />
-            <DatePicker fx:id="dato" layoutX="201.0" layoutY="187.0" />
-            <SplitMenuButton fx:id="rom" layoutX="201.0" layoutY="89.0" mnemonicParsing="false" text="Rom">
+            <Label layoutX="91.0" layoutY="325.0" text="Slutt" />
+            <Button fx:id="lagreavtale" layoutX="194.0" layoutY="534.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+            <TextField fx:id="slutt" layoutX="201.0" layoutY="321.0" />
+            <TextField fx:id="tittel" layoutX="198.0" layoutY="14.0" />
+            <Label layoutX="87.0" layoutY="18.0" text="Tittel:" />
+            <Label layoutX="87.0" layoutY="59.0" text="Rom: " />
+            <Label layoutX="90.0" layoutY="237.0" text="Dato:" />
+            <TextField fx:id="start" layoutX="201.0" layoutY="279.0" />
+            <Label layoutX="90.0" layoutY="388.0" text="Beskrivelse" />
+            <Label layoutX="91.0" layoutY="283.0" text="Start" />
+            <TextArea fx:id="beskrivelse" layoutX="194.0" layoutY="388.0" prefHeight="130.0" prefWidth="300.0" />
+            <DatePicker fx:id="dato" layoutX="201.0" layoutY="233.0" />
+            <SplitMenuButton fx:id="rom" layoutX="198.0" layoutY="55.0" mnemonicParsing="false" text="Rom">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -103,8 +77,11 @@
                </items>
             </SplitMenuButton>
             <Label layoutX="90.0" layoutY="142.0" text="Deltagere:" />
+            <ListView fx:id="deltarList" layoutX="194.0" layoutY="94.0" prefHeight="97.0" prefWidth="149.0" />
+            <ListView fx:id="deltagereList" layoutX="383.0" layoutY="94.0" prefHeight="97.0" prefWidth="149.0" />
+            <Button layoutX="350.0" layoutY="111.0" mnemonicParsing="false" onAction="#toDeltar" text="&lt;" />
+            <Button layoutX="350.0" layoutY="147.0" mnemonicParsing="false" onAction="#toDeltagere" text="&gt;" />
          </children>
       </Pane>
-      <Label layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
    </children>
 </Pane>

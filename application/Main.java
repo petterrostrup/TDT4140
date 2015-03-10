@@ -1,5 +1,6 @@
 package application;
 	
+import classes.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -10,6 +11,9 @@ import application.LoginController;
 
 
 public class Main extends Application {
+	
+	private User sessionUser;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -23,6 +27,10 @@ public class Main extends Application {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = sessionUser;
 	}
 	
 	

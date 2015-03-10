@@ -107,6 +107,6 @@
             <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
          </children>
       </Pane>
-      <Label layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
+      <Label fx:id="innloggetsom" layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
    </children>
 </Pane>
