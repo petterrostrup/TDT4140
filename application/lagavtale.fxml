@@ -15,7 +15,7 @@
                   <Font size="35.0" />
                </font>
             </Label>
-            <Button layoutX="857.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
+            <Button layoutX="857.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
          </children>
       </Pane>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
@@ -105,5 +105,6 @@
             <Label layoutX="90.0" layoutY="142.0" text="Deltagere:" />
          </children>
       </Pane>
+      <Label layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
    </children>
 </Pane>
