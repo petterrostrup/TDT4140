@@ -60,6 +60,9 @@ public class LagAvtaleController extends Application {
 	
 	@FXML 
 	private ListView deltagereList;
+	
+	@FXML
+	private Label innloggetsom;
 
 	
 	@Override

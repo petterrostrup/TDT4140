@@ -54,7 +54,8 @@ public class KalenderController {
 	private Button nextWeek;
 	@FXML
 	private Button prevWeek;
-	
+	@FXML
+	private Label innloggetsom;
 	
 	@FXML
 	private void initialize(){
