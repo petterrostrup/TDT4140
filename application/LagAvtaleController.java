@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -63,7 +64,9 @@ public class LagAvtaleController {
 	
 	@FXML
 	private Label innloggetsom;
-
+	
+	@FXML
+	private MenuButton listevalg;
 	
 	@FXML
 	private void initialize(){
@@ -167,6 +170,10 @@ public class LagAvtaleController {
 	public void toDeltagere(ActionEvent event){
 		System.out.println("toDeltagere");
 		
+	}
+	
+	public void velgListe (ActionEvent event){
+		System.out.println("HERROERROR LOL");
 	}
 	
 }
