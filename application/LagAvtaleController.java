@@ -60,6 +60,9 @@ public class LagAvtaleController {
 	
 	@FXML 
 	private ListView deltagereList;
+	
+	@FXML
+	private Label innloggetsom;
 
 	
 	@FXML
@@ -155,7 +158,7 @@ public class LagAvtaleController {
 	
 	public void toDeltar (ActionEvent event){
 		
-		  ObservableList names= FXCollections.observableArrayList();
+		  	ObservableList names= FXCollections.observableArrayList();
 			names.addAll("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
 			deltarList.setItems(names);
 	

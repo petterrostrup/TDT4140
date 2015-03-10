@@ -48,6 +48,8 @@ public class ProfilController {
 	@FXML
 	private ColorPicker colorpick;
 	@FXML
+	private Label innloggetsom;
+	@FXML
 
 	public void initialize(){
 		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
