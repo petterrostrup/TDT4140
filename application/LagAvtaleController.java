@@ -89,7 +89,7 @@ public class LagAvtaleController {
 	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Bitches", "Fredrik", "Emil");
 	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0));
 	
-	//listen over skal hente inn info fra database, stående verdier i listene skal FJERNES
+	//listene over skal hente inn info fra database, stående verdier i listene skal FJERNES
 	
 	@FXML
 	private void initialize(){
