@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import classes.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -16,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -28,12 +31,6 @@ public class LagAvtaleController {
 	
 	@FXML
 	private TextField tittel;  
-	
-	@FXML
-	private SplitMenuButton rom;
-	
-	@FXML
-	private SplitMenuButton deltagere;
 	
 	@FXML
 	private DatePicker dato;
@@ -60,66 +57,117 @@ public class LagAvtaleController {
 	private Label innloggetsom;
 	
 	@FXML
+	private Label text1;
+	@FXML
+	private Label text2;
+	@FXML
+	private Label medlemmerText;
+	@FXML
 	private MenuButton listevalg;
-	
-	
-	
+	@FXML
+	private MenuItem visPersoner;
+	@FXML
+	private MenuItem visGrupper;
 	@FXML 
 	private ListView deltarList;
 	@FXML 
 	private ListView deltagereList;
-
+	@FXML
+	private ListView gruppeMedlemmer;
 	@FXML
 	private Button toDeltar;
 	@FXML
 	private Button toCandidates;
-	@FXML
-	ObservableList<String> names= FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
+	// start lister
+	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
+	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
+	
+	private ObservableList<String> PettersBitches = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
+	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(PettersBitches.get(0), "testGruppe3"); // denne skal være Null
 	
 	
-	@FXML
-	ObservableList<String> selected = FXCollections.observableArrayList();
+	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Bitches", "Fredrik", "Emil");
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0));
+	
+	//listen over skal hente inn info fra database, stående verdier i listene skal FJERNES
 	
 	@FXML
 	private void initialize(){
 		
+		deltarList.setVisible(false);
+		deltagereList.setVisible(false);
+		toDeltar.setVisible(false);
+		toCandidates.setVisible(false);
+		gruppeMedlemmer.setVisible(false);
+		medlemmerText.setVisible(false);
+		
 		//initialiserer med en gang siden loades
-		
-		
-		
 	}
-	public void velgListe2(ActionEvent event){
+	
+	public void visPersonerList(ActionEvent event){
+		deltarList.setItems(valgtePersoner);
+		deltagereList.setItems(deltagere);
+		
+		
+		listevalg.setText(visPersoner.getText());
+		text1.setText("Valgt");
+		text2.setText("Personer");
 
-		
-		deltarList.setItems(names);
-		deltagereList.setItems(selected);
-		
-		//initialiserer når button (skal være liste) velges
+		deltarList.setVisible(true);
+		deltagereList.setVisible(true);
+		toDeltar.setVisible(true);
+		toCandidates.setVisible(true);
 	}
+	public void visGrupperList(ActionEvent event){
+		deltarList.setItems(valgteGrupper);
+		deltagereList.setItems(grupper);
+		
+		listevalg.setText(visGrupper.getText());
+		text1.setText("Valgt");
+		text2.setText("Grupper");
+		
+		deltarList.setVisible(true);
+		deltagereList.setVisible(true);
+		toDeltar.setVisible(true);
+		toCandidates.setVisible(true);
+		gruppeMedlemmer.setVisible(true);
+		medlemmerText.setVisible(true);
+	}
+
 	public void sendRight(ActionEvent event){
 		
-		String potential = (String) deltarList.getSelectionModel().getSelectedItem();
-		if(potential != null){
+		Object fjern = (Object) deltarList.getSelectionModel().getSelectedItem();
+		if(fjern != null){
 			deltarList.getSelectionModel().clearSelection();
-			names.remove(potential);
-			selected.add(potential);
+			
+			if(listevalg.getText().equals(visPersoner.getText())){
+				valgtePersoner.remove(fjern);
+				deltagere.add((String) fjern);
+			}
+			else if(listevalg.getText().equals(visGrupper.getText())){
+				valgteGrupper.remove(fjern);
+				grupper.add(fjern);
+			}
 		}
 	}
+	
 	public void sendLeft (ActionEvent event){
-		String s = (String) deltagereList.getSelectionModel().getSelectedItem();
-		if(s != null){
+		Object leggtil = (Object) deltagereList.getSelectionModel().getSelectedItem();
+//		String leggtil2 = (String) 
+		if(leggtil != null){
 			deltagereList.getSelectionModel().clearSelection();
-			selected.remove(s);
-			names.add(s);
+			
+			if(listevalg.getText().equals(visPersoner.getText())){
+				deltagere.remove(leggtil);
+				valgtePersoner.add((String) leggtil);
+			}
+			else if(listevalg.getText().equals(visGrupper.getText())){
+				grupper.remove(leggtil);
+				valgteGrupper.add(leggtil);
+			}
+			
 		}
-	}
-	
-
-	
-	public void velgListe (ActionEvent event){
-		System.out.println("HERROERROR LOL");
-		
-	}
+	}// PRInT TIL MEDLEMTINGEN NEXT BOI
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = sessionUser;

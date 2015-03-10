@@ -36,7 +36,7 @@
             <Label layoutX="87.0" layoutY="59.0" text="Rom: " />
             <Label layoutX="87.0" layoutY="102.0" text="Dato:" />
             <Label layoutX="87.0" layoutY="196.0" text="Beskrivelse" />
-            <TextArea fx:id="beskrivelse" layoutX="198.0" layoutY="196.0" prefHeight="103.0" prefWidth="238.0" />
+            <TextArea fx:id="beskrivelse" layoutX="198.0" layoutY="196.0" prefHeight="103.0" prefWidth="259.0" />
             <DatePicker fx:id="dato" layoutX="198.0" layoutY="98.0" />
             <SplitMenuButton fx:id="rom" layoutX="198.0" layoutY="55.0" mnemonicParsing="false" text="Rom">
                <items>
@@ -72,22 +72,24 @@
                   </MenuItem>
                </items>
             </SplitMenuButton>
-            <Label layoutX="58.0" layoutY="410.0" text="Deltagere:" />
-            <ListView fx:id="deltarList" layoutX="198.0" layoutY="323.0" prefHeight="97.0" prefWidth="149.0" />
-            <ListView fx:id="deltagereList" layoutX="385.0" layoutY="323.0" prefHeight="97.0" prefWidth="149.0" />
-            <Button fx:id="toDeltar" layoutX="353.0" layoutY="341.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
-            <Button fx:id="toCandidates" layoutX="353.0" layoutY="377.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
+            <ListView fx:id="deltarList" layoutX="198.0" layoutY="345.0" prefHeight="97.0" prefWidth="150.0" />
+            <ListView fx:id="deltagereList" layoutX="382.0" layoutY="345.0" prefHeight="97.0" prefWidth="150.0" />
+            <Button fx:id="toDeltar" layoutX="352.0" layoutY="363.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
+            <Button fx:id="toCandidates" layoutX="352.0" layoutY="399.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
             <Label layoutX="87.0" layoutY="149.0" text="Start/Slutt" />
             <TextField fx:id="start1" layoutX="198.0" layoutY="145.0" prefHeight="16.0" prefWidth="93.0" />
             <TextField fx:id="slutt1" layoutX="315.0" layoutY="145.0" prefHeight="26.0" prefWidth="93.0" />
             <Label layoutX="300.0" layoutY="149.0" text="/" />
-            <MenuButton fx:id="listevalg" layoutX="81.0" layoutY="326.0" mnemonicParsing="false" onAction="#velgListe" text="Deltagere">
+            <MenuButton fx:id="listevalg" layoutX="78.0" layoutY="348.0" mnemonicParsing="false" text="Deltagere">
               <items>
-                <MenuItem mnemonicParsing="false" text="Personer" />
-                <MenuItem mnemonicParsing="false" text="Grupper" />
+                <MenuItem fx:id="visPersoner" mnemonicParsing="false" onAction="#visPersonerList" text="Personer" />
+                <MenuItem fx:id="visGrupper" mnemonicParsing="false" onAction="#visGrupperList" text="Grupper" />
               </items>
             </MenuButton>
-            <Button layoutX="89.0" layoutY="365.0" mnemonicParsing="false" onAction="#velgListe2" text="Deltager" />
+            <Label fx:id="text1" layoutX="259.0" layoutY="323.0" />
+            <Label fx:id="text2" layoutX="444.0" layoutY="323.0" />
+            <ListView fx:id="gruppeMedlemmer" layoutX="585.0" layoutY="345.0" prefHeight="180.0" prefWidth="180.0" />
+            <Label fx:id="medlemmerText" layoutX="643.0" layoutY="323.0" text="Medlemmer" />
          </children>
       </Pane>
    </children>
