@@ -105,6 +105,6 @@
             <Label layoutX="90.0" layoutY="142.0" text="Deltagere:" />
          </children>
       </Pane>
-      <Label layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
+      <Label fx:id="innloggetsom" layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
    </children>
 </Pane>
