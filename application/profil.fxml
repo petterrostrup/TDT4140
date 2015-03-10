@@ -43,7 +43,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ScrollPane layoutX="14.0" layoutY="418.0" prefHeight="214.0" prefWidth="342.0">
+            <ScrollPane fx:id="avtalePane" layoutX="14.0" layoutY="418.0" prefHeight="214.0" prefWidth="342.0">
                <content>
                   <Label text="TITTEL avtale1 + *her kan bruker velge status på deltagelse*" />
                </content>
