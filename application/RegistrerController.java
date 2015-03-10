@@ -27,7 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class RegistrerController extends Application{
+public class RegistrerController {
 	
 	private User sessionUser;
 	
@@ -65,15 +65,10 @@ public class RegistrerController extends Application{
 	private Label ugyldigEpost;
 	
 	// MÅ ADDE UGJYLDIG-LABELZ
-	@Override
-	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("registrer.fxml"));
-		Scene scene = new Scene(root);
-		stage.setTitle("Registrer");
-		stage.setScene(scene);
-		stage.show();
+	@FXML
+	private void initialize(){
 		
-		}
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = sessionUser;
@@ -134,7 +129,7 @@ public class RegistrerController extends Application{
 	
 	public void toLogginn (ActionEvent event){
 		try {
-			new LoginController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -146,9 +141,4 @@ public class RegistrerController extends Application{
 
 	}
 	
-	
-	public static void main(String[] args){
-		launch(args);
-	}
-
 }

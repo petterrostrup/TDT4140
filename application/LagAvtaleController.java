@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class LagAvtaleController extends Application {
+public class LagAvtaleController {
 	
 	private User sessionUser;
 	
@@ -62,20 +62,9 @@ public class LagAvtaleController extends Application {
 	private ListView deltagereList;
 
 	
-	@Override
-	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("lagavtale.fxml"));
-	       
-	        Scene scene = new Scene(root);
-	        
-	        stage.setTitle("Lage avtale");
-	        stage.setScene(scene);
-	        stage.show();
-	        
-	        
-	      
-	        
-	        
+	@FXML
+	private void initialize(){
+		
 	}
 	
 	public void setSession(User sessionUser){
@@ -124,7 +113,7 @@ public class LagAvtaleController extends Application {
 		try {
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
-			newMain.start(new Stage());
+			newMain.startKalender(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -137,9 +126,9 @@ public class LagAvtaleController extends Application {
 	
 	public void profilButt (ActionEvent event){
 		try {
-			ProfilController newCont = new ProfilController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -152,7 +141,7 @@ public class LagAvtaleController extends Application {
 	
 	public void logoutButt (ActionEvent event){
 		try {
-			new LoginController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -177,8 +166,4 @@ public class LagAvtaleController extends Application {
 		
 	}
 	
-
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

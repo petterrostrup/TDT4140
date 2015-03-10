@@ -41,7 +41,7 @@ import javafx.stage.Stage;
 
 
 
-public class LoginController extends Application {
+public class LoginController {
 	
 	private User sessionUser;
 		
@@ -60,33 +60,36 @@ public class LoginController extends Application {
 //	@FXML
 //	private Button registrer;
 	
-	@Override
-	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
-	       
-	        final Scene scene = new Scene(root);
-	        
-	        stage.setTitle("Login");
-	        stage.setScene(scene);
-	        stage.show();
-	      //stage.resizableProperty().set(true/false);
-	        
-	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
-	        //varUser.saveUser();
-	        
-	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-	        	@Override
-	        	public void handle(KeyEvent p) {
-	        		if(p.getCode()==KeyCode.ENTER)
-	        		{
-	        			System.out.println("trykket enter");
-	        			//LoginController().logButt(new ActionEvent());
-	        			//new LoginController().logButt(new ActionEvent());
-	        			//LoginController.logButt(ActionEvent);
-	        		}
-	        	}
-	        });	        
+	@FXML
+	private void initialize(){
+		
 	}
+//	public void start(Stage stage) throws Exception {
+//	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
+//	       
+//	        final Scene scene = new Scene(root);
+//	        
+//	        stage.setTitle("Login");
+//	        stage.setScene(scene);
+//	        stage.show();
+//	      //stage.resizableProperty().set(true/false);
+//	        
+//	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
+//	        //varUser.saveUser();
+//	        
+//	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+//	        	@Override
+//	        	public void handle(KeyEvent p) {
+//	        		if(p.getCode()==KeyCode.ENTER)
+//	        		{
+//	        			System.out.println("trykket enter");
+//	        			//LoginController().logButt(new ActionEvent());
+//	        			//new LoginController().logButt(new ActionEvent());
+//	        			//LoginController.logButt(ActionEvent);
+//	        		}
+//	        	}
+//	        });	        
+//	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = sessionUser;
@@ -101,7 +104,7 @@ public class LoginController extends Application {
 		
 				
 		try {
-			new RegistrerController().start(new Stage());
+			new Main().startRegister(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,7 +137,7 @@ public class LoginController extends Application {
 			System.out.println("logget inn");
 			Main newMain = new Main();
 			newMain.setSession(newuser);
-			newMain.start(new Stage());
+			newMain.startKalender(new Stage());
 			
 			Node  source = (Node)  event.getSource(); 
 		    Stage stage  = (Stage) source.getScene().getWindow();
@@ -149,7 +152,5 @@ public class LoginController extends Application {
 		return newuser;
     }
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }

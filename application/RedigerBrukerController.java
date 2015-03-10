@@ -28,7 +28,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class RedigerBrukerController extends Application {
+public class RedigerBrukerController {
 	
 	private User sessionUser;
 	
@@ -88,15 +88,9 @@ public class RedigerBrukerController extends Application {
 	String gnyttPassordRed;
 	
 	
-	@Override
-	public void start(Stage stage) throws Exception {
-		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
-	       Parent root = FXMLLoader.load(getClass().getResource("redigerbruker.fxml"));
-	        Scene scene = new Scene(root);
-	        stage.setTitle("Rediger bruker");
-	        stage.setScene(scene);
-	        stage.show();
-	        
+	@FXML
+	private void initialize(){
+		
 	}
 	
 	public void setSession(User sessionUser){
@@ -152,9 +146,9 @@ public class RedigerBrukerController extends Application {
 		// hvis validering er godkjent, send tilbake til Profil
 		if(checkpointReached){
 			try {
-				ProfilController newCont = new ProfilController();
-				newCont.setSession(this.sessionUser);
-				newCont.start(new Stage());
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.startProfil(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -211,9 +205,9 @@ public class RedigerBrukerController extends Application {
 	
 	public void avbrytButt (ActionEvent event) {
 		try {
-			ProfilController newCont = new ProfilController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -224,11 +218,7 @@ public class RedigerBrukerController extends Application {
 	    
 	}
 
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 	
 	
 }

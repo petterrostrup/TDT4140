@@ -32,7 +32,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ProfilController extends Application {
+public class ProfilController {
 	
 	private User sessionUser;
 	
@@ -65,14 +65,7 @@ public class ProfilController extends Application {
 
            imageview.setImage(image);
 	}
-	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("profil.fxml"));
-	        Scene scene = new Scene(root);
-	        stage.setTitle("Profil");
-	        stage.setScene(scene);
-	        stage.show();
-	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	}
+
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = sessionUser;
@@ -83,7 +76,7 @@ public class ProfilController extends Application {
 		try {
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
-			newMain.start(new Stage());
+			newMain.startKalender(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,9 +88,9 @@ public class ProfilController extends Application {
 	
 	public void avtaleButt (ActionEvent event) {
 		try {
-			LagAvtaleController newCont = new LagAvtaleController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startLagAvtale(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,7 +103,7 @@ public class ProfilController extends Application {
 	public void logoutButt (ActionEvent event) {
 		
 		try {
-			new LoginController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,9 +117,9 @@ public class ProfilController extends Application {
 	
 	public void redigerProfilButt (ActionEvent event) {
 		try {
-			RedigerBrukerController newCont = new RedigerBrukerController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startRedigerBruker(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,9 +144,9 @@ public class ProfilController extends Application {
 	
 	public void test(ActionEvent event){
 		try{
-			ProfilController newCont = new ProfilController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain= new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 			 
 		}catch (Exception e){
 			e.printStackTrace();
@@ -162,11 +155,7 @@ public class ProfilController extends Application {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 	
 	
 }

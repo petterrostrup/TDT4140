@@ -109,9 +109,9 @@ public class KalenderController {
 	//Bytter vindu til LagAvtale
 	public void avtaleButt (ActionEvent event) {
 		try {
-			LagAvtaleController newCont =new LagAvtaleController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain =new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startLagAvtale(new Stage());
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -126,7 +126,7 @@ public class KalenderController {
 	//Bytter vindu til login
 	public void logoutButt (ActionEvent event) {
 		try {
-			new LoginController().start(new Stage());
+			new Main().start(new Stage());
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -142,9 +142,9 @@ public class KalenderController {
 	//Bytter vindu til bruker
 	public void profilButt (ActionEvent event) {
 		try {
-			ProfilController newCont = new ProfilController();
-			newCont.setSession(this.sessionUser);
-			newCont.start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -165,5 +165,7 @@ public class KalenderController {
 		gridpane.add(avtalePane, 1, startTime);	
 	}
 
+	
+	
 
 }
