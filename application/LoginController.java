@@ -136,6 +136,7 @@ public class LoginController {
 		if(newuser != null){
 			System.out.println("logget inn");
 			Main newMain = new Main();
+			System.out.println(newuser.getName());
 			newMain.setSession(newuser);
 			newMain.startKalender(new Stage());
 			

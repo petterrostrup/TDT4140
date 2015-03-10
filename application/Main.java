@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -47,10 +48,16 @@ public class Main extends Application {
 	
 	public void startKalender(Stage primaryStage) {
 		try {
-		    Parent root = FXMLLoader.load(getClass().getResource("kalender.fxml"));
-			Scene scene = new Scene(root);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("kalender.fxml"));
+		    
+		    primaryStage = new Stage(StageStyle.DECORATED);
+		    
+		    
+		    Scene scene = new Scene(loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			KalenderController newCont = loader.<KalenderController>getController();
+			newCont.setSession(this.sessionUser);
 			primaryStage.show();
 		} 
 		
@@ -121,7 +128,8 @@ public class Main extends Application {
 	
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = sessionUser;
+		System.out.println(sessionUser.getName());
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
 	}
 	
 	
