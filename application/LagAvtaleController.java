@@ -169,7 +169,7 @@ public class LagAvtaleController extends Application {
 	
 	public void toDeltar (ActionEvent event){
 		
-		  ObservableList names= FXCollections.observableArrayList();
+		  	ObservableList names= FXCollections.observableArrayList();
 			names.addAll("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
 			deltarList.setItems(names);
 	
