@@ -156,7 +156,7 @@ public class KalenderController {
 
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
 	}
 	
