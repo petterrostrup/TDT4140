@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class User {
-	private int id;
+	private String id;
 	private String userName;
 	private String password;
 	private String name;
@@ -27,7 +27,7 @@ public class User {
 		setAddress(varAddress);
 	}
 	
-	public User(String user, String pass, String mail, String varName, String varAddress, int id){
+	public User(String user, String pass, String mail, String varName, String varAddress, String id){
 		setUserName(user);
 		setPassword(pass);
 		seteMail(mail);
@@ -94,11 +94,11 @@ public class User {
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

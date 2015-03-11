@@ -1,6 +1,7 @@
 package classes;
 
 import java.sql.ResultSet;
+import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Date;
@@ -25,10 +26,11 @@ public class Login {
 					String dbUsername = results.getString(results.findColumn("username"));
 					String mail = results.getString(results.findColumn("email"));
 					String address = results.getString(results.findColumn("address"));
-					int id = results.getInt(results.findColumn("id"));
+					Long id = results.getLong(1);
 					
+					System.out.println(id.toString());
 					
-					user = new User(dbUsername, dbPassword, mail, name, address, id);
+					user = new User(dbUsername, dbPassword, mail, name, address, id.toString());
 				}				
 			}
 			
