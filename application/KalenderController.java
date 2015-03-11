@@ -59,6 +59,7 @@ public class KalenderController {
 	private Label innloggetsom;
 	
 	private Calendar cal = Calendar.getInstance();
+	private Calendar tempCal;
 	private int dato = cal.get(Calendar.DAY_OF_MONTH);
 	private int week = cal.get(Calendar.WEEK_OF_YEAR);
 	private int year = cal.get(Calendar.YEAR);
@@ -87,32 +88,25 @@ public class KalenderController {
 
 	
 	public void setWeek(){
-		Calendar kalender = this.cal;
-		weeknr.setText(Integer.toString(kalender.get(Calendar.WEEK_OF_YEAR)));
+		tempCal = this.cal;
+		weeknr.setText(Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR)));
 
-		yearnr.setText(Integer.toString(kalender.get(Calendar.YEAR)));
+		yearnr.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
 		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		mandato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
-		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-		tirdato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
-		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-		onsdato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
-		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-		torsdato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
-		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		fredato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
-		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		lordato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
-		
-		kalender.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		sondato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
+		setDayLabel(mandato, 2);
+		setDayLabel(tirdato, 3);
+		setDayLabel(onsdato, 4);
+		setDayLabel(torsdato, 5);
+		setDayLabel(fredato, 6);
+		setDayLabel(lordato, 7);
+		setDayLabel(sondato, 1);
+		}
+	
+	public void setDayLabel(Label label, int weekDay){
+		tempCal.set(Calendar.DAY_OF_WEEK, weekDay);
+		label.setText(Integer.toString(tempCal.get(Calendar.DAY_OF_MONTH)));
 	}
+	
 	
 	
 	public void fillCalendar(){
