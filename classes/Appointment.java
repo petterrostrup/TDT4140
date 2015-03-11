@@ -98,7 +98,8 @@ public class Appointment {
 		Date now = new Date();
 		int result = now.compareTo(date);
 		if (result < 0){
-			this.date = date;			
+			this.date = date;
+			
 		}
 		else throw new IllegalArgumentException("Date must be after current date");
 	}
