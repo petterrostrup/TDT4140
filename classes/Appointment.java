@@ -130,8 +130,8 @@ public class Appointment {
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			if (!results.next()){
-				sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end) "
-						+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + appointment.getRoom().getRoomNr() +"', '" + appointment.getDate().toString() +"', '" + appointment.getStart().toString() +"', '" + appointment.getEnd().toString() + "')";
+				sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end, owner) "
+						+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + appointment.getRoom().getRoomNr() +"', '" + appointment.getDate().toString() +"', '" + appointment.getStart().toString() +"', '" + appointment.getEnd().toString() +"', '" + appointment.getOwner().getId() + "')";
 				System.out.println("Saving appointment");
 				DatabaseCommunicator.update(sqlStatement);				
 			}

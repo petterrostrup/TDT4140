@@ -1,5 +1,9 @@
 package application;
 	
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
 import classes.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -27,6 +31,16 @@ public class Main extends Application {
 	        stage.setTitle("Login");
 	        stage.setScene(scene);
 	        stage.show();
+	        
+	        //Image image = new ImageIcon("picture.gif").getImage();
+	        
+//	        URL url = new URL("com/xyz/resources/camera.png");
+//	        Toolkit kit = Toolkit.getDefaultToolkit();
+//	        Image img = kit.createImage(url);
+//	        getFrame().setIconImage(img);
+	        
+	        //java.net.URL url = ClassLoader.getSystemResource("com/xyz/resources/camera.png");
+	        
 	      //stage.resizableProperty().set(true/false);
 	        
 	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
