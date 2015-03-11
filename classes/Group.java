@@ -68,11 +68,21 @@ public class Group {
 	}
 	
 	public void removeMember(int id){
-		String sqlStatement = "DELETE FROM MEMBER WHERE person = " + id;
+		String sqlStatement = "DELETE FROM MEMBER WHERE person = '" + id + "' AND membergroup = '" + this.getGroupID() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 	}
 	
-	public void getMembers(){
+	public void readMembers(){
+		String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + this.getGroupID() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		
+		try {
+			while (results.next()){
+				persons.add(User.readUser(results.getLong(1)));
+				System.out.println("Added user with ID: " + results.getLong(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
