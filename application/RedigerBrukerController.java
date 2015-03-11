@@ -94,7 +94,11 @@ public class RedigerBrukerController {
 	}
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = sessionUser;
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
+		navn.setText(this.sessionUser.getName());
+		brukernavn.setText(this.sessionUser.getUserName());
+		epost.setText(this.sessionUser.geteMail());
+		adresse.setText(this.sessionUser.getAddress());
 	}
 	
 	//setTextFill(Color.RED);
@@ -115,8 +119,13 @@ public class RedigerBrukerController {
 		
 		
 		boolean checkpointReached = true;
-		try {User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
-		System.out.println(varUser.geteMail());
+		try {
+			if (nyttPassordRed.isEmpty()){
+				nyttPassordRed = this.sessionUser.getPassword();
+			}
+			User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
+			
+			varUser.saveUser();
 		
 			
 		} catch (Exception e) {

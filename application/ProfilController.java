@@ -70,7 +70,8 @@ public class ProfilController {
 
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = sessionUser;
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
+		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
 	}
 
 	

@@ -122,5 +122,27 @@ public class User {
 		
 	}
 	
+	public void updateUser(){
+		System.out.println(this.getUserName());
+		String sqlStatement = "SELECT * FROM USER WHERE username = '" + this.getUserName() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+				sqlStatement = "UPDATE USER SET 'name' = '" + this.getName() + "', 'email' = '" + this.geteMail() + "', 'address' = 'True Korea 12\' WHERE `USER`.`id` = 9"
+						+ "VALUES ( '" + this.getUserName() + "', '" + this.getPassword() + "', '" + this.getName() + "', '" + this.geteMail() +"', '" + this.getAddress() + "');";
+				System.out.println("Saving user");
+				DatabaseCommunicator.update(sqlStatement);				
+			}
+			else{
+				System.out.println("User exists. Cannot save");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+	}
+	
 	
 }

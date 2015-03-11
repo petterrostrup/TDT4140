@@ -92,7 +92,7 @@ public class LoginController {
 //	}
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = sessionUser;
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
 	}
 	
 	
@@ -119,16 +119,11 @@ public class LoginController {
 	
 	
     public User logButt (ActionEvent event) {
-    	//String correctUsername = "admin";
-		//String correctPassword = "admin";
-    	
     	
     	User newuser = null;
     	
 		try {
 			//Henter brukernavn og passord fra tekstfeltene
-			//System.out.println(brukernavn.getText());
-			//System.out.println(passord.getText());
 			newuser = Login.login(brukernavn.getText(), passord.getText());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -136,7 +131,6 @@ public class LoginController {
 		if(newuser != null){
 			System.out.println("logget inn");
 			Main newMain = new Main();
-			System.out.println(newuser.getName());
 			newMain.setSession(newuser);
 			newMain.startKalender(new Stage());
 			
