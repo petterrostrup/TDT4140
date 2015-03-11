@@ -59,6 +59,9 @@ public class KalenderController {
 	private Label innloggetsom;
 	
 	private Calendar cal = Calendar.getInstance();
+	private int dato = cal.get(Calendar.DAY_OF_MONTH);
+	private int week = cal.get(Calendar.WEEK_OF_YEAR);
+	private int year = cal.get(Calendar.YEAR);
 	
 	@FXML
 	private void initialize(){
@@ -76,11 +79,13 @@ public class KalenderController {
 		setWeek();
 	}
 	
+	
 	public void lastWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
 		setWeek();
 	}
 
+	
 	public void setWeek(){
 		Calendar kalender = this.cal;
 		weeknr.setText(Integer.toString(kalender.get(Calendar.WEEK_OF_YEAR)));
@@ -109,6 +114,7 @@ public class KalenderController {
 		sondato.setText(Integer.toString(kalender.get(Calendar.DAY_OF_MONTH)));
 	}
 	
+	
 	public void fillCalendar(){
 		MainCalendar kalender = new MainCalendar();
 		kalender.fillTest();
@@ -117,21 +123,17 @@ public class KalenderController {
 			LocalTime start = avtale.getStart();
 			LocalTime end = avtale.getEnd();
 			
-			String startString = start.toString();
-			String [] startSplit = startString.split(":");
-			int startInt = Integer.parseInt(startSplit[0])-6;
-			
-			String endString = end.toString();
-			String [] endSplit = endString.split(":");
-			int endInt = Integer.parseInt(endSplit[0])-6;
-			
 			String avtaleNavn = avtale.getName();
-			filler(startInt, avtaleNavn);
-			avtaleTester(12, "Lunsj", "-fx-background-color:#9999FF", 4);
-			avtaleTester(15, "Sluttmøte", "-fx-background-color:FF33CC", 6);
-			avtaleTester(7, "Trening", "-fx-background-color:#33CC33", 7);
-			avtaleTester(9, "Morgenmøte", "-fx-background-color:#0033CC", 2);
+			filler(timeToGrid(start), avtaleNavn);
 		}
+	}
+	
+	
+	public int timeToGrid(LocalTime time){
+		String timeString = time.toString();
+		String [] timeSplit = timeString.split(":");
+		int timeInt = Integer.parseInt(timeSplit[0])-6;
+		return timeInt;
 	}
 
 	
@@ -207,6 +209,7 @@ public class KalenderController {
 		avtalePane.setPrefSize(122, 60);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
+		
 		gridpane.add(avtalePane, 1, startTime);	
 	}
 
