@@ -49,7 +49,7 @@ public class Main extends Application {
 	public void startKalender(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("kalender.fxml"));
-		    Scene scene = new Scene(loader.load());
+		    Scene scene = new Scene((Parent) loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			KalenderController newCont = loader.<KalenderController>getController();
@@ -66,7 +66,7 @@ public class Main extends Application {
 	public void startRegister(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("registrer.fxml"));		    
-		    Scene scene = new Scene(loader.load());
+		    Scene scene = new Scene((Parent) loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			RegistrerController newCont = loader.<RegistrerController>getController();
@@ -83,7 +83,7 @@ public class Main extends Application {
 	public void startLagAvtale(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("lagavtale.fxml"));		    
-		    Scene scene = new Scene(loader.load());
+		    Scene scene = new Scene((Parent) loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			LagAvtaleController newCont = loader.<LagAvtaleController>getController();
@@ -100,7 +100,7 @@ public class Main extends Application {
 	public void startProfil(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));		    
-		    Scene scene = new Scene(loader.load());
+		    Scene scene = new Scene((Parent) loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			ProfilController newCont = loader.<ProfilController>getController();
@@ -117,7 +117,7 @@ public class Main extends Application {
 	public void startRedigerBruker(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigerbruker.fxml"));		    
-		    Scene scene = new Scene(loader.load());
+		    Scene scene = new Scene((Parent) loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			RedigerBrukerController newCont = loader.<RedigerBrukerController>getController();
