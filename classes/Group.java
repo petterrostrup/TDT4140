@@ -1,6 +1,7 @@
 package classes;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Group {
@@ -28,19 +29,46 @@ public class Group {
 	}
 	
 	public void createGroup(){
-		String sqlStatement = "INSERT IGNORE INTO MEMBERGROUP (name) "
-				+ "VALUES (" + getGroupName() + ")";
-		DatabaseCommunicator.update(sqlStatement);
+		String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE name = '" + this.getGroupName() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO MEMBERGROUP (name) "
+						+ "VALUES ( '" + getGroupName() + "')";
+				System.out.println("Saving group");
+				DatabaseCommunicator.update(sqlStatement);			
+			}
+			else{
+				System.out.println("Group exists. Cannot save");
+			}}  catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went wrong connecting to the database");
+				}
+
 	}
 	
 	public void addMember(int id){
-		String sqlStatement = "INSERT IGNORE INTO MEMBER (person, membergroup) "
-				+ "VALUES (" + id + ", " + this.getGroupID() + ")";
-		DatabaseCommunicator.update(sqlStatement);
+		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + id + "' AND membergroup = '" + this.getGroupID() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO MEMBER (person, membergroup) "
+						+ "VALUES ( '" + id + "', '" + this.getGroupID() + "')";
+				System.out.println("Saving group");
+				DatabaseCommunicator.update(sqlStatement);			
+			}
+			else{
+				System.out.println("Group exists. Cannot save");
+			}}  catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went wrong connecting to the database");
+				}
 	}
 	
 	public void removeMember(int id){
-		String sqlStatement = "DELETE IGNORE FROM MEMBER WHERE person = " + id;
+		String sqlStatement = "DELETE FROM MEMBER WHERE person = " + id;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 	}
 	

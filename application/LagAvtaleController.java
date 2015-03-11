@@ -1,6 +1,16 @@
 package application;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
+
+import classes.Appointment;
+import classes.Room;
+import classes.User;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,22 +21,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class LagAvtaleController extends Application {
+public class LagAvtaleController {
+	
+	private User sessionUser;
 	
 	@FXML
 	private TextField tittel;  
-	
-	@FXML
-	private SplitMenuButton rom;
-	
-	@FXML
-	private SplitMenuButton deltagere;
 	
 	@FXML
 	private DatePicker dato;
@@ -48,18 +57,147 @@ public class LagAvtaleController extends Application {
 	
 	@FXML
 	private Label label1;
-
-	@Override
-	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("lagavtale.fxml"));
-	       
-	        Scene scene = new Scene(root);
-	        
-	        stage.setTitle("Lage avtale");
-	        stage.setScene(scene);
-	        stage.show();
+	
+	@FXML
+	private Label innloggetsom;
+	
+	@FXML
+	private Label text1;
+	@FXML
+	private Label text2;
+	@FXML
+	private Label medlemmerText;
+	@FXML
+	private MenuButton listevalg;
+	@FXML
+	private MenuItem visPersoner;
+	@FXML
+	private MenuItem visGrupper;
+	@FXML 
+	private ListView deltarList;
+	@FXML 
+	private ListView deltagereList;
+	@FXML
+	private ListView gruppeMedlemmer;
+	@FXML
+	private Button toDeltar;
+	@FXML
+	private Button toCandidates;
+	// start lister
+	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
+	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
+	
+	private ObservableList<String> PettersBitches = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
+	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(PettersBitches.get(0), "testGruppe3"); // denne skal være Null
+	
+	
+	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Bitches", "Fredrik", "Emil");
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0));
+	
+	//listene over skal hente inn info fra database, stående verdier i listene skal FJERNES
+	
+	@FXML
+	private void initialize(){
+		
+		deltarList.setVisible(false);
+		deltagereList.setVisible(false);
+		toDeltar.setVisible(false);
+		toCandidates.setVisible(false);
+		gruppeMedlemmer.setVisible(false);
+		medlemmerText.setVisible(false);
+		
+		//initialiserer med en gang siden loades
+		
+		
 	}
 	
+	public void visPersonerList(ActionEvent event){
+		deltarList.setItems(valgtePersoner);
+		deltagereList.setItems(deltagere);
+		
+		
+		listevalg.setText(visPersoner.getText());
+		text1.setText("Valgt");
+		text2.setText("Personer");
+
+		deltarList.setVisible(true);
+		deltagereList.setVisible(true);
+		toDeltar.setVisible(true);
+		toCandidates.setVisible(true);
+	}
+	public void visGrupperList(ActionEvent event){
+		deltarList.setItems(valgteGrupper);
+		deltagereList.setItems(grupper);
+		
+		listevalg.setText(visGrupper.getText());
+		text1.setText("Valgt");
+		text2.setText("Grupper");
+		
+		deltarList.setVisible(true);
+		deltagereList.setVisible(true);
+		toDeltar.setVisible(true);
+		toCandidates.setVisible(true);
+		gruppeMedlemmer.setVisible(true);
+		medlemmerText.setVisible(true);
+	}
+
+	public void sendRight(ActionEvent event){
+		
+		Object fjern = (Object) deltarList.getSelectionModel().getSelectedItem();
+		if(fjern != null){
+			deltarList.getSelectionModel().clearSelection();
+			
+			if(listevalg.getText().equals(visPersoner.getText())){
+				valgtePersoner.remove(fjern);
+				deltagere.add((String) fjern);
+			}
+			else if(listevalg.getText().equals(visGrupper.getText())){
+				valgteGrupper.remove(fjern);
+				grupper.add(fjern);
+			}
+		}
+	}
+	
+	public void sendLeft (ActionEvent event){
+		Object leggtil = (Object) deltagereList.getSelectionModel().getSelectedItem();
+//		String leggtil2 = (String) 
+		if(leggtil != null){
+			deltagereList.getSelectionModel().clearSelection();
+			
+			if(listevalg.getText().equals(visPersoner.getText())){
+				deltagere.remove(leggtil);
+				valgtePersoner.add((String) leggtil);
+			}
+			else if(listevalg.getText().equals(visGrupper.getText())){
+				grupper.remove(leggtil);
+				valgteGrupper.add(leggtil);
+			}
+			
+		}
+	}// PRInT TIL MEDLEMTINGEN NEXT BOI
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		
+		
+		//LagAvtale test
+		
+//		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//		Date date = df.parse(date);
+		
+		
+		//String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+				//(request.getParameter("date")));
+		
+		Room VarRoom = new Room("Real 56","Realfagsbygget", 5);
+		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new Date(2015, 13, 03), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
+		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
+		newAppointment.saveAppointment(newAppointment);
+		
+		//Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user)
+		
+	}
 	
 	public void lagreButt (ActionEvent event) {
 		System.out.println("test");
@@ -82,7 +220,9 @@ public class LagAvtaleController extends Application {
 		// hvis validering er godkjent, send til hjem
 		if(checkpointReached){
 			try {
-				new Main().start(new Stage());
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.startKalender(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -95,10 +235,11 @@ public class LagAvtaleController extends Application {
 	
 	}
 	
-	
 	public void kalenderButt (ActionEvent event){
 		try {
-			new Main().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startKalender(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -111,7 +252,9 @@ public class LagAvtaleController extends Application {
 	
 	public void profilButt (ActionEvent event){
 		try {
-			new ProfilController().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -124,7 +267,7 @@ public class LagAvtaleController extends Application {
 	
 	public void logoutButt (ActionEvent event){
 		try {
-			new LoginController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -137,7 +280,5 @@ public class LagAvtaleController extends Application {
 	}
 	
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }

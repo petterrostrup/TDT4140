@@ -32,7 +32,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ProfilController extends Application {
+public class ProfilController {
+	
+	private User sessionUser;
 	
 	@FXML
 	private ImageView imageview;
@@ -41,10 +43,19 @@ public class ProfilController extends Application {
 	private Label brukernavn;
 	
 	@FXML
+	private Label adresse;
+	
+	@FXML
+	private Label email;
+	
+	
+	@FXML
 	private Pane mainPane;
 	
 	@FXML
 	private ColorPicker colorpick;
+	@FXML
+	private Label innloggetsom;
 	@FXML
 
 	public void initialize(){
@@ -63,26 +74,22 @@ public class ProfilController extends Application {
 
            imageview.setImage(image);
 	}
-	public void start(Stage stage) throws Exception {
-		
-		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
-	       Parent root = FXMLLoader.load(getClass().getResource("profil.fxml"));
-	        Scene scene = new Scene(root);
-	        stage.setTitle("Profil");
-	        stage.setScene(scene);
-	        stage.show();
-	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	        
-	        
-	        
-	       
 
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		brukernavn.setText(this.sessionUser.getUserName() + " - " + this.sessionUser.getName());
+		email.setText(this.sessionUser.geteMail());
+		adresse.setText(this.sessionUser.getAddress());
 	}
 
 	
 	public void kalenderButt (ActionEvent event) {
 		try {
-			new Main().start(new Stage()); // FORANDRES/FJERNES
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startKalender(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,7 +101,9 @@ public class ProfilController extends Application {
 	
 	public void avtaleButt (ActionEvent event) {
 		try {
-			new LagAvtaleController().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startLagAvtale(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,7 +116,7 @@ public class ProfilController extends Application {
 	public void logoutButt (ActionEvent event) {
 		
 		try {
-			new LoginController().start(new Stage());
+			new Main().start(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,7 +130,9 @@ public class ProfilController extends Application {
 	
 	public void redigerProfilButt (ActionEvent event) {
 		try {
-			new RedigerBrukerController().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startRedigerBruker(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,8 +157,9 @@ public class ProfilController extends Application {
 	
 	public void test(ActionEvent event){
 		try{
-			
-			new ProfilController().start(new Stage());
+			Main newMain= new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 			 
 		}catch (Exception e){
 			e.printStackTrace();
@@ -156,11 +168,7 @@ public class ProfilController extends Application {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 	
 	
 }

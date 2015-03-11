@@ -28,7 +28,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class RedigerBrukerController extends Application {
+public class RedigerBrukerController {
+	
+	private User sessionUser;
 	
 	@FXML
 	private ImageView imageview;
@@ -85,16 +87,20 @@ public class RedigerBrukerController extends Application {
 	String nyttPassordRed;
 	String gnyttPassordRed;
 	
+	private User varUser;
 	
-	@Override
-	public void start(Stage stage) throws Exception {
-		//final Connection con = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no/petternr_calendar", "petternr_user" , "gruppe61");
-	       Parent root = FXMLLoader.load(getClass().getResource("redigerbruker.fxml"));
-	        Scene scene = new Scene(root);
-	        stage.setTitle("Rediger bruker");
-	        stage.setScene(scene);
-	        stage.show();
-	        
+	
+	@FXML
+	private void initialize(){
+		
+	}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		navn.setText(this.sessionUser.getName());
+		brukernavn.setText(this.sessionUser.getUserName());
+		epost.setText(this.sessionUser.geteMail());
+		adresse.setText(this.sessionUser.getAddress());
 	}
 	
 	//setTextFill(Color.RED);
@@ -103,8 +109,6 @@ public class RedigerBrukerController extends Application {
 	public void lagreButt (ActionEvent event) {
 		//System.out.println("test");
 		//boolean dataOk = true;
-		
-
 		navnRed = navn.getText();
 		nyttBrukernavnRed = brukernavn.getText();
 		epostRed = epost.getText();
@@ -117,8 +121,19 @@ public class RedigerBrukerController extends Application {
 		
 		
 		boolean checkpointReached = true;
-		try {User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
-		System.out.println(varUser.geteMail());
+		try {
+			if (nyttPassordRed.isEmpty()){
+				gammeltPassordRed = this.sessionUser.getPassword();
+				nyttPassordRed = this.sessionUser.getPassword();
+				gnyttPassordRed = this.sessionUser.getPassword();
+			}
+			
+			if (gammeltPassordRed.equals(this.sessionUser.getPassword()) && nyttPassordRed.equals(gnyttPassordRed)){
+				varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
+				if (!varUser.equals(this.sessionUser)) varUser.updateUser();				
+			}
+			
+			else System.out.println("Passordene stemmer ikke");
 		
 			
 		} catch (Exception e) {
@@ -148,7 +163,9 @@ public class RedigerBrukerController extends Application {
 		// hvis validering er godkjent, send tilbake til Profil
 		if(checkpointReached){
 			try {
-				new ProfilController().start(new Stage());
+				Main newMain = new Main();
+				newMain.setSession(varUser);
+				newMain.startProfil(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -205,7 +222,9 @@ public class RedigerBrukerController extends Application {
 	
 	public void avbrytButt (ActionEvent event) {
 		try {
-			new ProfilController().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -216,11 +235,7 @@ public class RedigerBrukerController extends Application {
 	    
 	}
 
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 	
 	
 }

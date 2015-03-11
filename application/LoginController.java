@@ -41,9 +41,9 @@ import javafx.stage.Stage;
 
 
 
-public class LoginController extends Application {
+public class LoginController {
 	
-	private boolean logFail = false;
+	private User sessionUser;
 		
 	@FXML
 	private Button logginn;
@@ -60,32 +60,39 @@ public class LoginController extends Application {
 //	@FXML
 //	private Button registrer;
 	
-	@Override
-	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
-	       
-	        final Scene scene = new Scene(root);
-	        
-	        stage.setTitle("Login");
-	        stage.setScene(scene);
-	        stage.show();
-	      //stage.resizableProperty().set(true/false);
-	        
-	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
-	        //varUser.saveUser();
-	        
-	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-	        	@Override
-	        	public void handle(KeyEvent p) {
-	        		if(p.getCode()==KeyCode.ENTER)
-	        		{
-	        			System.out.println("trykket enter");
-	        			//LoginController().logButt(new ActionEvent());
-	        			//new LoginController().logButt(new ActionEvent());
-	        			//LoginController.logButt(ActionEvent);
-	        		}
-	        	}
-	        });	        
+	@FXML
+	private void initialize(){
+		
+	}
+//	public void start(Stage stage) throws Exception {
+//	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
+//	       
+//	        final Scene scene = new Scene(root);
+//	        
+//	        stage.setTitle("Login");
+//	        stage.setScene(scene);
+//	        stage.show();
+//	      //stage.resizableProperty().set(true/false);
+//	        
+//	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
+//	        //varUser.saveUser();
+//	        
+//	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+//	        	@Override
+//	        	public void handle(KeyEvent p) {
+//	        		if(p.getCode()==KeyCode.ENTER)
+//	        		{
+//	        			System.out.println("trykket enter");
+//	        			//LoginController().logButt(new ActionEvent());
+//	        			//new LoginController().logButt(new ActionEvent());
+//	        			//LoginController.logButt(ActionEvent);
+//	        		}
+//	        	}
+//	        });	        
+//	}
+	
+	public void setSession(User sessionUser){
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
 	}
 	
 	
@@ -97,7 +104,7 @@ public class LoginController extends Application {
 		
 				
 		try {
-			new RegistrerController().start(new Stage());
+			new Main().startRegister(new Stage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,23 +119,20 @@ public class LoginController extends Application {
 	
 	
     public User logButt (ActionEvent event) {
-    	//String correctUsername = "admin";
-		//String correctPassword = "admin";
-    	
     	
     	User newuser = null;
     	
 		try {
 			//Henter brukernavn og passord fra tekstfeltene
-			//System.out.println(brukernavn.getText());
-			//System.out.println(passord.getText());
 			newuser = Login.login(brukernavn.getText(), passord.getText());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		if(newuser != null){
 			System.out.println("logget inn");
-			new Main().start(new Stage());
+			Main newMain = new Main();
+			newMain.setSession(newuser);
+			newMain.startKalender(new Stage());
 			
 			Node  source = (Node)  event.getSource(); 
 		    Stage stage  = (Stage) source.getScene().getWindow();
@@ -141,9 +145,36 @@ public class LoginController extends Application {
 			feilLabel.setText("Feil brukernavn eller passord");
 		}
 		return newuser;
+		
+		
+//				brukernavn.setOnAction((event) ->{
+//					logButt.fire();
+//				});
+//				passord.setOnAction((event) ->{
+//					logButt.fire();
+//				});
     }
-
-	public static void main(String[] args) {
-		launch(args);
+    
+    
+    
+    
+    //FJJEEEERNES
+	public void cheatButt (ActionEvent event) {
+		
+				
+		try {
+			new Main().startKalender(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+		
 	}
+	
+	//FJERNESSLUTT
+
+	
 }

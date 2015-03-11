@@ -98,7 +98,8 @@ public class Appointment {
 		Date now = new Date();
 		int result = now.compareTo(date);
 		if (result < 0){
-			this.date = date;			
+			this.date = date;
+			
 		}
 		else throw new IllegalArgumentException("Date must be after current date");
 	}
@@ -126,10 +127,25 @@ public class Appointment {
 	}
 
 	public void saveAppointment(Appointment appointment){
-		String sqlStatement = "INSERT IGNORE INTO APPOINTMENT (name, description, location, room, date, start, end) "
-				+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + appointment.getRoom().getRoomNr() +"', '" + appointment.getDate().toString() +"', '" + appointment.getStart().toString() +"', '" + appointment.getEnd().toString() + "')";
-		DatabaseCommunicator.update(sqlStatement);
-		
+		String sqlStatement = "SELECT * FROM APPOINTMENT WHERE owner = '" + this.getOwner() + "' AND start = '" + this.getStart() + "' AND date = '" + this.getDate() + "'" ;
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				System.out.println(appointment.getOwner().getId());
+				sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end, owner) "
+						+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + 1 +"', '" + appointment.getDate().toString() +"', '" + appointment.getStart().toString() +"', '" + appointment.getEnd().toString() +"', '" + appointment.getOwner().getId() + "')";
+				System.out.println("Saving appointment");
+				DatabaseCommunicator.update(sqlStatement);				
+			}
+			else{
+				System.out.println("Appointment exists. Cannot save");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
 	}
 	
 	public void addParticipant(User user){

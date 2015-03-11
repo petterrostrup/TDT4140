@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class User {
+	private String id;
 	private String userName;
 	private String password;
 	private String name;
@@ -24,6 +25,15 @@ public class User {
 		seteMail(mail);
 		setName(varName);
 		setAddress(varAddress);
+	}
+	
+	public User(String user, String pass, String mail, String varName, String varAddress, String id){
+		setUserName(user);
+		setPassword(pass);
+		seteMail(mail);
+		setName(varName);
+		setAddress(varAddress);
+		setId(id);
 	}
 
 	public String getUserName() {
@@ -84,6 +94,14 @@ public class User {
 		else throw new IllegalArgumentException("Invalid street address");
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public User logIn(String username, String password){
 		 User varUser = Login.login(username, password);
 		 
@@ -120,6 +138,26 @@ public class User {
 			System.out.println("Something went wrong connecting to the database");
 		}
 		
+	}
+	
+	public void updateUser(){
+		System.out.println(this.getUserName());
+		String sqlStatement = "SELECT * FROM USER WHERE username = '" + this.getUserName() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+				sqlStatement = "UPDATE USER SET name = '" + this.getName() + "', email = '" + this.geteMail() + "', address = '" + this.getAddress() + "', password = '" + this.getPassword() + "' WHERE username = '" + this.getUserName() + "'";
+				System.out.println("Updating user");
+				DatabaseCommunicator.update(sqlStatement);				
+			}
+			else{
+				System.out.println("User does not exists. Cannot save changes");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
 	}
 	
 	
