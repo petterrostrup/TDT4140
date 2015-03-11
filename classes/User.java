@@ -128,17 +128,15 @@ public class User {
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			if (results.next()){
-				sqlStatement = "UPDATE USER SET 'name' = '" + this.getName() + "', 'email' = '" + this.geteMail() + "', 'address' = 'True Korea 12\' WHERE `USER`.`id` = 9"
-						+ "VALUES ( '" + this.getUserName() + "', '" + this.getPassword() + "', '" + this.getName() + "', '" + this.geteMail() +"', '" + this.getAddress() + "');";
-				System.out.println("Saving user");
+				sqlStatement = "UPDATE USER SET name = '" + this.getName() + "', email = '" + this.geteMail() + "', address = '" + this.getAddress() + "', password = '" + this.getPassword() + "' WHERE username = '" + this.getUserName() + "'";
+				System.out.println("Updating user");
 				DatabaseCommunicator.update(sqlStatement);				
 			}
 			else{
-				System.out.println("User exists. Cannot save");
+				System.out.println("User does not exists. Cannot save changes");
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Something went wrong connecting to the database");
 		}
