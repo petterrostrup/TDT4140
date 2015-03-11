@@ -1,31 +1,33 @@
 package classes;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Date;
 
 public class Room {
-	private String roomNr;
+	private String name;
 	private String place;
 	private int capacity;
 	private boolean available;
 	
 
 	public Room(String room, String place, int cap) {
-		setRoomNr(room);
+		setName(room);
 		setPlace(place);
 		setCapacity(cap);
 		setAvailable(false);
 	}
 
 
-	public String getRoomNr() {
-		return roomNr;
+	public String getName() {
+		return name;
 	}
 
 
-	public void setRoomNr(String roomNr) {
+	public void setName(String roomNr) {
 		if (roomNr.matches("[a-zA-Z]+-?[a-zA-Z]* \\d*")){
-			this.roomNr = roomNr;			
+			this.name = roomNr;			
 		}
 		else throw new IllegalArgumentException("Invalid Roomnumber");	
 	}
@@ -60,6 +62,27 @@ public class Room {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+	
+	public void saveRoom(){
+		String sqlStatement = "SELECT * FROM ROOM WHERE name = '" + this.getName() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO USER (name, place, capacity) "
+						+ "VALUES ( '" + this.getName() + "', '" + this.getPlace() + "', '" + this.getCapacity() + "')";
+				System.out.println("Saving room");
+				DatabaseCommunicator.update(sqlStatement);				
+			}
+			else{
+				System.out.println("Room exists. Cannot save");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
 	}
 
 }
