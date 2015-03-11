@@ -52,7 +52,7 @@ public class KalenderController {
 	@FXML
 	private Label sondato;
 	@FXML
-	private Button nextWeek;
+	private Button nesteUke;
 	@FXML
 	private Button prevWeek;
 	@FXML
@@ -67,6 +67,7 @@ public class KalenderController {
 	private int søndag;
 	private int week;
 	private int year;
+	private Calendar cal = Calendar.getInstance();
 	
 	@FXML
 	private void initialize(){
@@ -74,15 +75,58 @@ public class KalenderController {
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
 		fillCalendar();
-		ukedato();
-		String ukenr = Integer.toString(week);
-		weeknr.setText(ukenr);
+		setWeek();
 		
 	}
+	
+	public void nextWeek(ActionEvent event){
+		cal.set(Calendar.WEEK_OF_YEAR, week+1);
+		setWeek();
+		
+	}
+	
+	public void lastWeek(ActionEvent event){
+		cal.set(Calendar.WEEK_OF_YEAR, week-1);
+		setWeek();
+	}
 
-	public void ukedato(){
-		Calendar cal = Calendar.getInstance();
-		this.week = cal.get(Calendar.WEEK_OF_YEAR);
+	public void setWeek(){
+		Calendar kalender = this.cal;
+		this.week = kalender.get(Calendar.WEEK_OF_YEAR);
+		weeknr.setText(Integer.toString(week));
+
+		this.year = kalender.get(Calendar.YEAR);
+		yearnr.setText(Integer.toString(year));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		this.mandag = kalender.get(Calendar.DAY_OF_MONTH);
+		mandato.setText(Integer.toString(mandag));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+		this.tirsdag = kalender.get(Calendar.DAY_OF_MONTH);
+		tirdato.setText(Integer.toString(tirsdag));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+		this.onsdag = kalender.get(Calendar.DAY_OF_MONTH);
+		onsdato.setText(Integer.toString(onsdag));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+		this.torsdag = kalender.get(Calendar.DAY_OF_MONTH);
+		torsdato.setText(Integer.toString(torsdag));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+		this.fredag = kalender.get(Calendar.DAY_OF_MONTH);
+		fredato.setText(Integer.toString(fredag));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+		this.lørdag = kalender.get(Calendar.DAY_OF_MONTH);
+		lordato.setText(Integer.toString(lørdag));
+		
+		kalender.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		this.søndag = kalender.get(Calendar.DAY_OF_MONTH);
+		sondato.setText(Integer.toString(søndag));
+		
+		
 	}
 	
 	public void fillCalendar(){
