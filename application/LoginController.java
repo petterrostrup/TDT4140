@@ -145,7 +145,17 @@ public class LoginController {
 			feilLabel.setText("Feil brukernavn eller passord");
 		}
 		return newuser;
+		
+		
+//				brukernavn.setOnAction((event) ->{
+//					logButt.fire();
+//				});
+//				passord.setOnAction((event) ->{
+//					logButt.fire();
+//				});
     }
+    
+    
     
     
     //FJJEEEERNES

@@ -37,7 +37,7 @@ public class Main extends Application {
 	        	public void handle(KeyEvent p) {
 	        		if(p.getCode()==KeyCode.ENTER)
 	        		{
-	        			System.out.println("trykket enter");
+	        			System.out.println("trykket enter");	        			
 	        			//LoginController().logButt(new ActionEvent());
 	        			//new LoginController().logButt(new ActionEvent());
 	        			//LoginController.logButt(ActionEvent);
