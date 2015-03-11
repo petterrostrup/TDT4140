@@ -108,10 +108,6 @@ public class LagAvtaleController {
 		//initialiserer med en gang siden loades
 		
 		//LagAvtale test
-		Room VarRoom = new Room("Real 56","Realfagsbygget", 5);
-		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new Date(2015, 13, 03), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
-		newAppointment.saveAppointment(newAppointment);
-		
 		
 		
 		//Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user)
@@ -185,6 +181,11 @@ public class LagAvtaleController {
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		
+		Room VarRoom = new Room("Real 56","Realfagsbygget", 5);
+		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new Date(2015, 13, 03), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
+		newAppointment.saveAppointment(newAppointment);
+		
 	}
 	
 	public void lagreButt (ActionEvent event) {
