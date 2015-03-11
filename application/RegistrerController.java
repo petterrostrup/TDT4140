@@ -71,7 +71,7 @@ public class RegistrerController {
 	}
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = sessionUser;
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
 	}
 		
 	public void openFile(ActionEvent event){

@@ -87,6 +87,8 @@ public class RedigerBrukerController {
 	String nyttPassordRed;
 	String gnyttPassordRed;
 	
+	private User varUser;
+	
 	
 	@FXML
 	private void initialize(){
@@ -94,7 +96,11 @@ public class RedigerBrukerController {
 	}
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = sessionUser;
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
+		navn.setText(this.sessionUser.getName());
+		brukernavn.setText(this.sessionUser.getUserName());
+		epost.setText(this.sessionUser.geteMail());
+		adresse.setText(this.sessionUser.getAddress());
 	}
 	
 	//setTextFill(Color.RED);
@@ -115,8 +121,18 @@ public class RedigerBrukerController {
 		
 		
 		boolean checkpointReached = true;
-		try {User varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
-		System.out.println(varUser.geteMail());
+		try {
+			if (nyttPassordRed.isEmpty()){
+				nyttPassordRed = this.sessionUser.getPassword();
+				gnyttPassordRed = this.sessionUser.getPassword();
+			}
+			
+			if (gammeltPassordRed.equals(this.sessionUser.getPassword()) && nyttPassordRed.equals(gnyttPassordRed)){
+				varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
+				if (!varUser.equals(this.sessionUser)) varUser.updateUser();				
+			}
+			
+			else System.out.println("Passordene stemmer ikke");
 		
 			
 		} catch (Exception e) {
@@ -147,7 +163,7 @@ public class RedigerBrukerController {
 		if(checkpointReached){
 			try {
 				Main newMain = new Main();
-				newMain.setSession(this.sessionUser);
+				newMain.setSession(varUser);
 				newMain.startProfil(new Stage());
 			} catch (Exception e) {
 				

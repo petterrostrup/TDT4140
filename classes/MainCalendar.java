@@ -60,7 +60,7 @@ public class MainCalendar {
 				System.out.println("Adding appointment");
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			//SUCK MY DIIIIIICK IM A SHAAAARK
 			e.printStackTrace();
 		}
 		
