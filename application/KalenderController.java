@@ -3,6 +3,7 @@ package application;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import classes.Appointment;
@@ -57,14 +58,32 @@ public class KalenderController {
 	@FXML
 	private Label innloggetsom;
 	
+	private int mandag;
+	private int tirsdag;
+	private int onsdag;
+	private int torsdag;
+	private int fredag;
+	private int lørdag;
+	private int søndag;
+	private int week;
+	private int year;
+	
 	@FXML
 	private void initialize(){
 	        
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
 		fillCalendar();
+		ukedato();
+		String ukenr = Integer.toString(week);
+		weeknr.setText(ukenr);
+		
 	}
 
+	public void ukedato(){
+		Calendar cal = Calendar.getInstance();
+		this.week = cal.get(Calendar.WEEK_OF_YEAR);
+	}
 	
 	public void fillCalendar(){
 		MainCalendar kalender = new MainCalendar();
