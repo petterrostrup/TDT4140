@@ -37,8 +37,8 @@
             </ImageView>
             
             <ColorPicker fx:id="colorpick" layoutX="732.0" layoutY="607.0" onAction="#pickColor" promptText="Theme" />
-            <Button fx:id="test" layoutX="445.0" layoutY="61.0" mnemonicParsing="false" onAction="#test" text="Test" />
-            <Label fx:id="brukernavn" layoutX="366.0" layoutY="28.0" text="*hent in brukernavn her*" textAlignment="CENTER">
+            <Button fx:id="test" layoutX="445.0" layoutY="173.0" mnemonicParsing="false" onAction="#test" text="Test" />
+            <Label fx:id="brukernavn" layoutX="366.0" layoutY="28.0" text="Brukernavn - Navn" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -48,6 +48,16 @@
                   <Label text="TITTEL avtale1 + *her kan bruker velge status på deltagelse*" />
                </content>
             </ScrollPane>
+            <Label fx:id="email" layoutX="366.0" layoutY="55.0" text="E-mail" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="adresse" layoutX="366.0" layoutY="82.0" text="Adresse" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

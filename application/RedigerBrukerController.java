@@ -123,6 +123,7 @@ public class RedigerBrukerController {
 		boolean checkpointReached = true;
 		try {
 			if (nyttPassordRed.isEmpty()){
+				gammeltPassordRed = this.sessionUser.getPassword();
 				nyttPassordRed = this.sessionUser.getPassword();
 				gnyttPassordRed = this.sessionUser.getPassword();
 			}
