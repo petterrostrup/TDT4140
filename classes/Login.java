@@ -25,8 +25,10 @@ public class Login {
 					String dbUsername = results.getString(results.findColumn("username"));
 					String mail = results.getString(results.findColumn("email"));
 					String address = results.getString(results.findColumn("address"));
+					int id = results.getInt(results.findColumn("id"));
 					
-					user = new User(dbUsername, dbPassword, mail, name, address);
+					
+					user = new User(dbUsername, dbPassword, mail, name, address, id);
 				}				
 			}
 			

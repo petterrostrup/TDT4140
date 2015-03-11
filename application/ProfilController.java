@@ -77,7 +77,7 @@ public class ProfilController {
 
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
 		brukernavn.setText(this.sessionUser.getUserName() + " - " + this.sessionUser.getName());
 		email.setText(this.sessionUser.geteMail());
