@@ -90,7 +90,6 @@ public class KalenderController {
 	public void setWeek(){
 		tempCal = this.cal;
 		weeknr.setText(Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR)));
-
 		yearnr.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
 		
 		setDayLabel(mandato, 2);
