@@ -84,5 +84,26 @@ public class Room {
 			System.out.println("Something went wrong connecting to the database");
 		}
 	}
+	
+	public void readRoom(String id){
+		String sqlStatement = "SELECT * FROM ROOM WHERE id = '" + id + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+				this.setName(results.getString(results.findColumn("name")));
+				this.setPlace(results.getString(results.findColumn("place")));
+				this.setCapacity(results.getInt(results.findColumn("capacity")));
+			}
+			else{
+				System.out.println("Room does not exist. Cannot read");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+		
+	}
 
 }
