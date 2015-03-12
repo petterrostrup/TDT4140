@@ -66,6 +66,10 @@ public class LagAvtaleController {
 	@FXML
 	private Label text2;
 	@FXML
+	private Label valgtePersonerText;
+	@FXML
+	private Label valgteGrupperText;
+	@FXML
 	private Label medlemmerText;
 	@FXML
 	private MenuButton listevalg;
@@ -74,37 +78,60 @@ public class LagAvtaleController {
 	@FXML
 	private MenuItem visGrupper;
 	@FXML 
-	private ListView deltarList;
-	@FXML 
-	private ListView deltagereList;
+	private ListView valgtePersonerList;
 	@FXML
-	private ListView gruppeMedlemmer;
+	private ListView valgteGrupperList;
+	@FXML 
+	private ListView personListe;
+	@FXML
+	private ListView gruppeListe;
+	@FXML
+	private ListView gruppeMedlemmerList;
 	@FXML
 	private Button toDeltar;
 	@FXML
 	private Button toCandidates;
+	@FXML
+	private Button leggtilmedlem;
+	
 	// start lister
+
+	///////////////////////////////////////////////////////////////////////////////
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
-	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
+	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil"); // Her henter vi inn enkelt-PERSONER fra database - PETTER
+	//RANDOM GRUPPER START
+	private ObservableList<String> PettersGruppe = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
+	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Gruppe", "Fredrik", "Emil");
 	
-	private ObservableList<String> PettersBitches = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
-	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(PettersBitches.get(0), "testGruppe3"); // denne skal være Null
+	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0), PettersGruppe.get(0)); // Her henter vi inn grupper fra database - PETTER
+	//rANDOM GRUPPER SLUTT
+	//MEDLEMMER START
+	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
+	//MEDLEMMER SLUTT
 	
 	
-	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Bitches", "Fredrik", "Emil");
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0));
 	
-	//listene over skal hente inn info fra database, stående verdier i listene skal FJERNES
-	
+	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper); // Denne gruppen inneholder valgte personer/grupper  - PETTER
+
+	//slutt lister
 	@FXML
 	private void initialize(){
+		personListe.setItems(deltagere);
+		gruppeListe.setItems(grupper);
+		gruppeMedlemmerList.setItems(medlemmer);
 		
-		deltarList.setVisible(false);
-		deltagereList.setVisible(false);
+		valgtePersonerList.setVisible(false);
+		valgteGrupperList.setVisible(false);
+		personListe.setVisible(false);
+		gruppeListe.setVisible(false);
 		toDeltar.setVisible(false);
 		toCandidates.setVisible(false);
-		gruppeMedlemmer.setVisible(false);
+		gruppeMedlemmerList.setVisible(false);
 		medlemmerText.setVisible(false);
+		leggtilmedlem.setVisible(false);
+		valgtePersonerText.setVisible(false);
+		valgteGrupperText.setVisible(false);
 		
 		//initialiserer med en gang siden loades
 		
@@ -112,69 +139,133 @@ public class LagAvtaleController {
 	}
 	
 	public void visPersonerList(ActionEvent event){
-		deltarList.setItems(valgtePersoner);
-		deltagereList.setItems(deltagere);
+		valgtePersonerList.setItems(valgtePersoner);
+		valgteGrupperList.setItems(valgteGrupper);
+		
 		
 		
 		listevalg.setText(visPersoner.getText());
 		text1.setText("Valgt");
 		text2.setText("Personer");
 
-		deltarList.setVisible(true);
-		deltagereList.setVisible(true);
+		valgtePersonerList.setVisible(true);
+		valgteGrupperList.setVisible(true);
+		personListe.setVisible(true);
+		gruppeListe.setVisible(false);
 		toDeltar.setVisible(true);
 		toCandidates.setVisible(true);
+		gruppeMedlemmerList.setVisible(false);
+		medlemmerText.setVisible(false);
+		leggtilmedlem.setVisible(false);
+		valgtePersonerText.setVisible(true);
+		valgteGrupperText.setVisible(true);
 	}
 	public void visGrupperList(ActionEvent event){
-		deltarList.setItems(valgteGrupper);
-		deltagereList.setItems(grupper);
+		valgtePersonerList.setItems(valgtePersoner);
+		valgteGrupperList.setItems(valgteGrupper);
 		
 		listevalg.setText(visGrupper.getText());
 		text1.setText("Valgt");
 		text2.setText("Grupper");
 		
-		deltarList.setVisible(true);
-		deltagereList.setVisible(true);
+		valgtePersonerList.setVisible(true);
+		valgteGrupperList.setVisible(true);
+		personListe.setVisible(false);
+		gruppeListe.setVisible(true);
 		toDeltar.setVisible(true);
 		toCandidates.setVisible(true);
-		gruppeMedlemmer.setVisible(true);
+		gruppeMedlemmerList.setVisible(true);
 		medlemmerText.setVisible(true);
+		leggtilmedlem.setVisible(true);
+		valgtePersonerText.setVisible(true);
+		valgteGrupperText.setVisible(true);
 	}
 
 	public void sendRight(ActionEvent event){
-		
-		Object fjern = (Object) deltarList.getSelectionModel().getSelectedItem();
-		if(fjern != null){
-			deltarList.getSelectionModel().clearSelection();
-			
-			if(listevalg.getText().equals(visPersoner.getText())){
-				valgtePersoner.remove(fjern);
-				deltagere.add((String) fjern);
-			}
-			else if(listevalg.getText().equals(visGrupper.getText())){
-				valgteGrupper.remove(fjern);
-				grupper.add(fjern);
-			}
+		Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
+		if(fjernPerson != null){
+			valgtePersonerList.getSelectionModel().clearSelection();
+			valgtePersoner.remove(fjernPerson);
+			deltagere.add((String) fjernPerson);
 		}
+		Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
+		if(fjernGruppe != null){
+			valgteGrupperList.getSelectionModel().clearSelection();
+			valgteGrupper.remove(fjernGruppe);
+			grupper.add(fjernGruppe);
+		}
+		
+//		if(listevalg.getText().equals(visPersoner.getText())){
+//			Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
+//			if(fjernPerson != null){
+//				valgtePersonerList.getSelectionModel().clearSelection();
+//				valgtePersoner.remove(fjernPerson);
+//				deltagere.add((String) fjernPerson);
+//			}
+//		}
+//		else if(listevalg.getText().equals(visGrupper.getText())){
+//			Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
+//			if(fjernGruppe != null){
+//				valgteGrupperList.getSelectionModel().clearSelection();
+//				valgteGrupper.remove(fjernGruppe);
+//				grupper.add(fjernGruppe);
+//			}
+//		}
 	}
 	
+	
 	public void sendLeft (ActionEvent event){
-		Object leggtil = (Object) deltagereList.getSelectionModel().getSelectedItem();
-//		String leggtil2 = (String) 
-		if(leggtil != null){
-			deltagereList.getSelectionModel().clearSelection();
+		if(listevalg.getText().equals(visPersoner.getText())){
+			Object leggtilPerson = (Object) personListe.getSelectionModel().getSelectedItem();
+			if(leggtilPerson != null){
+				personListe.getSelectionModel().clearSelection();
+				deltagere.remove(leggtilPerson);
+				valgtePersoner.add((String) leggtilPerson);
+			}
+		}
+		else if(listevalg.getText().equals(visGrupper.getText())){
+			Object leggtilGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+			if(leggtilGruppe != null){
+				gruppeListe.getSelectionModel().clearSelection();
+				grupper.remove(leggtilGruppe);
+				valgteGrupper.add((String) leggtilGruppe);
+				
+				
+			}
 			
+			
+		}
+		Object leggtil = (Object) personListe.getSelectionModel().getSelectedItem();
+		if(leggtil != null){
+			personListe.getSelectionModel().clearSelection();	
 			if(listevalg.getText().equals(visPersoner.getText())){
 				deltagere.remove(leggtil);
 				valgtePersoner.add((String) leggtil);
 			}
 			else if(listevalg.getText().equals(visGrupper.getText())){
 				grupper.remove(leggtil);
-				valgteGrupper.add(leggtil);
+				valgteGrupper.add((String) leggtil);
 			}
-			
 		}
-	}// PRInT TIL MEDLEMTINGEN NEXT BOI
+	}
+	
+	public void addGruppeMedlem(ActionEvent event){
+		Object leggtilMedlem = (Object) gruppeMedlemmerList.getSelectionModel().getSelectedItem();
+		if(leggtilMedlem != null){
+			gruppeMedlemmerList.getSelectionModel().clearSelection();
+			
+			medlemmer.remove(leggtilMedlem);
+			valgtePersoner.add((String) leggtilMedlem);
+		}
+	}
+	
+	public void visMedlemmer(ActionEvent event){
+		Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+		if(visMedlemmer != null){
+			//valgtePersoner.remove(visMedlemmer);
+			medlemmer.add((String) visMedlemmer);
+		}
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
