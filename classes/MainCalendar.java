@@ -40,10 +40,10 @@ public class MainCalendar {
 		this.appointments.remove(appointment);
 	}
 	
-	public void getAppointment(int appid){
-		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = '" + appid + "'";
+	public Appointment getAppointment(int appointmentID){
+		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = '" + appointmentID + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		
+		Appointment returning = null;
 		try {
 				results.next();
 				String id = Integer.toString(results.getInt("id"));
@@ -55,7 +55,7 @@ public class MainCalendar {
 				Time start = results.getTime("start");
 				Time end = results.getTime("end");
 				
-				Appointment returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
+				returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
 				appointments.add(returning);
 				System.out.println("Adding appointment");
 			
@@ -63,6 +63,7 @@ public class MainCalendar {
 			//SUCK MY DIIIIIICK IM A SHAAAARK
 			e.printStackTrace();
 		}
+		return returning;
 		
 	}
 	
@@ -100,11 +101,13 @@ public class MainCalendar {
 		String id = null; //user id here
 		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		Appointment adding = null;
 		try {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
-				getAppointment(results.getInt(results.findColumn("appointment")));
+				adding = getAppointment(results.getInt(results.findColumn("appointment")));
 				System.out.println("Adding appointment");
+				appointments.add(adding);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -115,5 +115,43 @@ public class Room {
 		}
 		
 	}
+	
+	public void checkAvailable(Date date, LocalTime start, LocalTime end){
+		String sqlStatement = "SELECT * FROM BOOKING WHERE room = '" + this.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		ResultSet inner;
+		String innersql;
+		MainCalendar methods = new MainCalendar();
+		boolean crossesStart, crossesEnd;
+		try {
+			while (results.next()){
+				crossesStart = false;
+				crossesEnd = false;
+				int appointmentID = (int) results.getLong(3);
+				Appointment comparing = methods.getAppointment(appointmentID);
+				if (date.equals(comparing.getDate())){
+					
+				}
+				else continue;
+				
+			}
+			
+			if (results.next()){
+				this.setId(id);
+				this.setName(results.getString(results.findColumn("name")));
+				this.setPlace(results.getString(results.findColumn("place")));
+				this.setCapacity(results.getInt(results.findColumn("capacity")));
+			}
+			else{
+				System.out.println("Room does not exist. Cannot read");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+	}
+	
 
 }
