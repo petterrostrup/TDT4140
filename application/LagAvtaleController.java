@@ -112,7 +112,7 @@ public class LagAvtaleController {
 	
 	
 	
-	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper); // Denne gruppen inneholder valgte personer/grupper  - PETTER
+	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
 
 	//slutt lister
 	@FXML
