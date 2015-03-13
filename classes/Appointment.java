@@ -1,12 +1,15 @@
 package classes;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class Appointment {
 	// Make logic to generate appointmentID
@@ -17,11 +20,11 @@ public class Appointment {
 	private Room room;
 	private ArrayList<User> participants;
 	private Date date;
-	private LocalTime start;
-	private LocalTime end;
+	private Timestamp start;
+	private Timestamp end;
 	private User owner;
 	
-	public Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user){
+	public Appointment(String name, String desc, String location, Room room, Date date, Timestamp start, Timestamp end, User user){
 		setName(name);
 		setLocation(location);
 		setRoom(room);
@@ -31,7 +34,7 @@ public class Appointment {
 		setOwner(user);
 	}
 	
-	public Appointment(String name, String desc, String location, Room room, ArrayList<User> participants, Date date, LocalTime start, LocalTime end, User user){
+	public Appointment(String name, String desc, String location, Room room, ArrayList<User> participants, Date date, Timestamp start, Timestamp end, User user){
 		setName(name);
 		setDescription(desc);
 		setLocation(location);
@@ -104,17 +107,17 @@ public class Appointment {
 		else throw new IllegalArgumentException("Date must be after current date");
 	}
 	
-	public LocalTime getStart() {
+	public Timestamp getStart() {
 		return start;
 	}
-	public void setStart(LocalTime start) {
-		this.start = start;	
+	public void setStart(Timestamp start2) {
+		this.start = start2;	
 	}
 	
-	public LocalTime getEnd() {
+	public Timestamp getEnd() {
 		return end;
 	}
-	public void setEnd(LocalTime end) {
+	public void setEnd(Timestamp end) {
 		this.end = end;
 	}
 	
@@ -129,11 +132,13 @@ public class Appointment {
 	public void saveAppointment(Appointment appointment){
 		String sqlStatement = "SELECT * FROM APPOINTMENT WHERE owner = '" + this.getOwner() + "' AND start = '" + this.getStart() + "' AND date = '" + this.getDate() + "'" ;
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		try {
 			if (!results.next()){
 				System.out.println(appointment.getOwner().getId());
 				sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end, owner) "
-						+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + 1 +"', '" + appointment.getDate().toString() +"', '" + appointment.getStart().toString() +"', '" + appointment.getEnd().toString() +"', '" + appointment.getOwner().getId() + "')";
+						+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + 1 +"', '" + sdf.format(appointment.getDate()) +"', '" + appointment.getStart() +"', '" + appointment.getEnd() +"', '" + appointment.getOwner().getId() + "')";
 				System.out.println("Saving appointment");
 				DatabaseCommunicator.update(sqlStatement);				
 			}
@@ -155,6 +160,30 @@ public class Appointment {
 	public void removeParticipant(User user){
 		this.participants.remove(user);
 	} 
+
+	public void inviteParticipant(String personId){
+		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + personId + "' AND membergroup = '" + this.getAppointmentID() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO CONNECTED (person, appointment, status, changed, notification) "
+						+ "VALUES ( '" + personId + "', '" + this.getAppointmentID() + "', '" + 0 + "', '" + false + "', '" + 0 + "')";
+				System.out.println("Saving group");
+				DatabaseCommunicator.update(sqlStatement);			
+			}
+			else{
+				System.out.println("Group exists. Cannot save");
+			}}  catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went wrong connecting to the database");
+				}
+	}
+	
+	public void deleteParticipant(String personId){
+		
+	}
+	
 	
 	public void reserveRoom(Room room){
 		// Add room to this appointment if available

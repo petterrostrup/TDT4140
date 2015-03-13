@@ -4,13 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import classes.Appointment;
 import classes.MainCalendar;
 import classes.Room;
 import classes.User;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,7 +35,10 @@ public class KalenderController {
 	private User sessionUser;
 	
 	@FXML
+	private ScrollPane scrollpane;
+	@FXML
 	private GridPane gridpane;
+	private GridPane saveGrid = gridpane;
 	@FXML
 	private DatePicker datepicker;
 	@FXML
@@ -60,16 +68,14 @@ public class KalenderController {
 	
 	private Calendar cal = Calendar.getInstance();
 	private Calendar tempCal;
-	private int dato = cal.get(Calendar.DAY_OF_MONTH);
-	private int week = cal.get(Calendar.WEEK_OF_YEAR);
-	private int year = cal.get(Calendar.YEAR);
+	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
 	
+
 	@FXML
 	private void initialize(){
-	        
+		avtaleCollection.addAll(gridpane.getChildren());
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
-		fillCalendar();
 		setWeek();
 		
 	}
@@ -77,12 +83,16 @@ public class KalenderController {
 	
 	public void nextWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, +1);
+		gridpane.getChildren().clear();
+		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
 	}
 	
 	
 	public void lastWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
+		gridpane.getChildren().clear();
+		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
 	}
 
@@ -91,21 +101,22 @@ public class KalenderController {
 		tempCal = this.cal;
 		weeknr.setText(Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR)));
 		yearnr.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
+		fillCalendar();
 		
 		setDayLabel(mandato, 2);
 		setDayLabel(tirdato, 3);
 		setDayLabel(onsdato, 4);
-		setDayLabel(torsdato, 5);
+		setDayLabel(torsdato,5);
 		setDayLabel(fredato, 6);
 		setDayLabel(lordato, 7);
 		setDayLabel(sondato, 1);
-		}
+		
+	}
 	
 	public void setDayLabel(Label label, int weekDay){
 		tempCal.set(Calendar.DAY_OF_WEEK, weekDay);
 		label.setText(Integer.toString(tempCal.get(Calendar.DAY_OF_MONTH)));
 	}
-	
 	
 	
 	public void fillCalendar(){
@@ -115,10 +126,33 @@ public class KalenderController {
 		for (Appointment avtale: avtaler){
 			LocalTime start = avtale.getStart();
 			LocalTime end = avtale.getEnd();
-			
 			String avtaleNavn = avtale.getName();
-			filler(timeToGrid(start), avtaleNavn);
+			
+			Date date = avtale.getDate();
+			Calendar calDate = Calendar.getInstance();
+			calDate.setTime(date);
+			
+			if (calDate.get(Calendar.WEEK_OF_YEAR) == tempCal.get(Calendar.WEEK_OF_YEAR)
+					&& calDate.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)){
+				if (calDate.get(Calendar.DAY_OF_WEEK) == 1){
+					filler(timeToGrid(start), avtaleNavn, 7, timeToGrid(end));
+				}
+				else{
+					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1, timeToGrid(end));
+				}
+			}
 		}
+	}
+	
+
+	public void filler(int startTime, String navn, int weekDay, int endTime){
+		Pane avtalePane = new Pane();
+		int span = endTime - startTime;
+		avtalePane.setStyle("-fx-background-color:#FE2E2E");
+		avtalePane.setPrefSize(122, 60);
+		Label avtaleNavn = new Label(navn);
+		avtalePane.getChildren().add(avtaleNavn);
+		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
 	
 	
@@ -196,15 +230,7 @@ public class KalenderController {
 	}
 	
 	
-	public void filler(int startTime, String navn){
-		Pane avtalePane = new Pane();
-		avtalePane.setStyle("-fx-background-color:#FE2E2E");
-		avtalePane.setPrefSize(122, 60);
-		Label avtaleNavn = new Label(navn);
-		avtalePane.getChildren().add(avtaleNavn);
-		
-		gridpane.add(avtalePane, 1, startTime);	
-	}
+	
 
 	
 	
