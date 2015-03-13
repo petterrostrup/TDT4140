@@ -80,15 +80,17 @@ public class ProfilController {
            medlemAvGrupper.setItems(grupper);
 	}
 
-	public void administrerGrupper(){
-//		try {
-//			new Main().start(new Stage());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		Node  source = (Node)  event.getSource(); 
-//	    Stage stage  = (Stage) source.getScene().getWindow();
-//	    stage.close();
+	public void administrerGrupperButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startAdministrerGrupper(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Node source = (Node) event.getSource();
+		Stage stage = (Stage) source.getScene().getWindow();
+		stage.close();
 	}
 	
 	public void setSession(User sessionUser){

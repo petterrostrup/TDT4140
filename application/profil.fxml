@@ -60,7 +60,7 @@
             </Label>
             <ListView fx:id="medlemAvGrupper" layoutX="396.0" layoutY="441.0" prefHeight="191.0" prefWidth="173.0" />
             <Label layoutX="431.0" layoutY="418.0" text="Medlem av gruppe:" />
-            <Button layoutX="594.0" layoutY="607.0" mnemonicParsing="false" onAction="#administrerGrupper" text="Administrer grupper" />
+            <Button layoutX="594.0" layoutY="607.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
          </children>
       </Pane>
    </children>

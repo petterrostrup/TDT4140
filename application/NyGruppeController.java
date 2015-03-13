@@ -3,7 +3,6 @@ package application;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import classes.Appointment;
 import classes.Room;
@@ -22,29 +21,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class AdministrerGrupper {
+public class NyGruppeController {
 	
 	private User sessionUser;
 	
 	@FXML
-	private TextField tittel;  
-	
-	
+	private TextField gruppeNavn;
+	@FXML
+	private ListView allePersonerList;
+	@FXML
+	private ListView nyGruppeMedlemmerList;
+
+	//Lister
+	private ObservableList<String> medlemmerNyGruppe = FXCollections.observableArrayList(); // liste over medlemmer i den nye gruppen
+	private ObservableList<String> personer = FXCollections.observableArrayList("Emil", "Aleksander", "Fredrik"); //liste over alle personer som man kan legge til
+	//ListerSlutt
 	@FXML
 	private void initialize(){
-			
+		nyGruppeMedlemmerList.setItems(medlemmerNyGruppe);
+		allePersonerList.setItems(personer);
 	}
-	
-	public void nyGruppe(){
-		System.out.println("STARTER NyGruppe.java");
+	public void sendRight(ActionEvent event){
+		String fjernPerson = (String) nyGruppeMedlemmerList.getSelectionModel().getSelectedItem();
+		if(fjernPerson != null){
+			nyGruppeMedlemmerList.getSelectionModel().clearSelection();
+			medlemmerNyGruppe.remove(fjernPerson);
+			personer.add(fjernPerson);
+		}
+	}
+		
+	public void sendLeft (ActionEvent event){
+
+		String leggtilPerson = (String) allePersonerList.getSelectionModel().getSelectedItem();
+		if(leggtilPerson != null){
+			allePersonerList.getSelectionModel().clearSelection();
+			personer.remove(leggtilPerson);
+			medlemmerNyGruppe.add(leggtilPerson);
+		}
 	}
 	
 	public void setSession(User sessionUser){
@@ -58,7 +74,7 @@ public class AdministrerGrupper {
 			try {
 				Main newMain = new Main();
 				newMain.setSession(this.sessionUser);
-				newMain.startKalender(new Stage());
+				newMain.startProfil(new Stage());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
