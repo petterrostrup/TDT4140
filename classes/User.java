@@ -117,7 +117,7 @@ public class User {
 					String dbUsername = results.getString(results.findColumn("username"));
 					String mail = results.getString(results.findColumn("email"));
 					String address = results.getString(results.findColumn("address"));
-					Long id = results.getLong(1);		
+					Long id = results.getLong(1);
 					user = new User(dbUsername, dbPassword, mail, name, address, id.toString());
 			}
 			else {

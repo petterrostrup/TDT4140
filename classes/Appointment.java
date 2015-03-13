@@ -155,6 +155,30 @@ public class Appointment {
 	public void removeParticipant(User user){
 		this.participants.remove(user);
 	} 
+
+	public void inviteParticipant(String personId){
+		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + personId + "' AND membergroup = '" + this.getAppointmentID() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (!results.next()){
+				sqlStatement = "INSERT INTO CONNECTED (person, appointment, status, changed, notification) "
+						+ "VALUES ( '" + personId + "', '" + this.getAppointmentID() + "', '" + 0 + "', '" + false + "', '" + 0 + "')";
+				System.out.println("Saving group");
+				DatabaseCommunicator.update(sqlStatement);			
+			}
+			else{
+				System.out.println("Group exists. Cannot save");
+			}}  catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went wrong connecting to the database");
+				}
+	}
+	
+	public void deleteParticipant(String personId){
+		
+	}
+	
 	
 	public void reserveRoom(Room room){
 		// Add room to this appointment if available

@@ -41,10 +41,10 @@ public class MainCalendar {
 		this.appointments.remove(appointment);
 	}
 	
-	public void getAppointment(int appid){
-		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = " + appid;
+	public Appointment getAppointment(int appointmentID){
+		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = '" + appointmentID + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		
+		Appointment returning = null;
 		try {
 				results.next();
 				String id = Integer.toString(results.getInt("id"));
@@ -56,7 +56,7 @@ public class MainCalendar {
 				Time start = results.getTime("start");
 				Time end = results.getTime("end");
 				
-				Appointment returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
+				returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
 				appointments.add(returning);
 				System.out.println("Adding appointment");
 			
@@ -64,16 +64,17 @@ public class MainCalendar {
 			//SUCK MY DIIIIIICK IM A SHAAAARK
 			e.printStackTrace();
 		}
+		return returning;
 		
 	}
 	
 	public Room getroom(String roomid) {
-		String sqlStatement = 	"SELECT * FROM ROOM WHERE id = " + roomid;
+		String sqlStatement = 	"SELECT * FROM ROOM WHERE id = '" + roomid + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Room room = null;
 		try {
 			results.next();
-			room = new Room(results.getString("name"), results.getString("place"), results.getInt("capacity"));
+			room = new Room(String.valueOf(results.getLong(1)),results.getString("name"), results.getString("place"), results.getInt("capacity"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,7 +85,7 @@ public class MainCalendar {
 
 	public void fillTest(){
 		Calendar c1 = Calendar.getInstance();
-		Room testRoom = new Room("Realfag 245", "somewhere", 10);
+		Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
 		User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
 		c1.set(2015, Calendar.MARCH, 15);
 		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,LocalTime.parse("16:00"),LocalTime.parse("17:30"), varUser);
@@ -104,15 +105,15 @@ public class MainCalendar {
 	
 	public void fillCalendar(){
 		String id = null; //user id here
-		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = " + id;
+		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		
-		
+		Appointment adding = null;
 		try {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
-				getAppointment(results.getInt("appointment"));
+				adding = getAppointment(results.getInt(results.findColumn("appointment")));
 				System.out.println("Adding appointment");
+				appointments.add(adding);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
