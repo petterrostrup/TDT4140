@@ -139,7 +139,7 @@ public class DatabaseCommunicator {
 			st.executeUpdate(bookingTable);
 			//System.out.println("(╯°□°）╯︵ ┻�?┻");
 			
-			System.out.println("Created all tables. Databases is initialized");
+			System.out.println("Created all tables. Database is initialized");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());

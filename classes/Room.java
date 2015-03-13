@@ -6,19 +6,28 @@ import java.time.LocalTime;
 import java.util.Date;
 
 public class Room {
+	private String id;
 	private String name;
 	private String place;
 	private int capacity;
 	private boolean available;
 	
-
-	public Room(String room, String place, int cap) {
+	public Room(String id, String room, String place, int cap) {
+		setId(id);
 		setName(room);
 		setPlace(place);
 		setCapacity(cap);
 		setAvailable(false);
 	}
 
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -90,6 +99,7 @@ public class Room {
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			if (results.next()){
+				this.setId(id);
 				this.setName(results.getString(results.findColumn("name")));
 				this.setPlace(results.getString(results.findColumn("place")));
 				this.setCapacity(results.getInt(results.findColumn("capacity")));

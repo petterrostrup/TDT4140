@@ -34,7 +34,7 @@ public class Group {
 		try {
 			if (!results.next()){
 				sqlStatement = "INSERT INTO MEMBERGROUP (name) "
-						+ "VALUES ( '" + getGroupName() + "')";
+						+ "VALUES ( '" + this.getGroupName() + "')";
 				System.out.println("Saving group");
 				DatabaseCommunicator.update(sqlStatement);			
 			}
