@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="tittel" layoutX="144.0" layoutY="14.0" text="Administrer Grupper">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="medlemmer" layoutX="144.0" layoutY="129.0" prefHeight="264.0" prefWidth="163.0" />
+      <ListView fx:id="personer" layoutX="315.0" layoutY="129.0" prefHeight="264.0" prefWidth="163.0" />
+      <Button layoutX="307.0" layoutY="412.0" mnemonicParsing="false" onAction="#nyGruppe" text="Ny gruppe" />
+      <Button layoutX="390.0" layoutY="412.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+      <MenuButton fx:id="grupper" layoutX="14.0" layoutY="67.0" mnemonicParsing="false" text="Grupper">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#visPersonerList" text="Personer" />
+            <MenuItem fx:id="visGrupper" mnemonicParsing="false" onAction="#visGrupperList" text="Grupper" />
+         </items>
+      </MenuButton>
+   </children>
+</Pane>

@@ -143,6 +143,21 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void startAdministrerGrupper(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("administrergrupper.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			AdministrerGrupper newCont = loader.<AdministrerGrupper>getController();
+			newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public void setSession(User sessionUser){

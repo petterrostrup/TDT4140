@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 
 import classes.User;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,8 +50,6 @@ public class ProfilController {
 	
 	@FXML
 	private Label email;
-	
-	
 	@FXML
 	private Pane mainPane;
 	
@@ -57,7 +58,11 @@ public class ProfilController {
 	@FXML
 	private Label innloggetsom;
 	@FXML
-
+	private ListView medlemAvGrupper;
+	
+	private ObservableList<String> grupper = FXCollections.observableArrayList("a", "b", "c", "fu"); // HENT INN GRUPPER
+	
+	@FXML
 	public void initialize(){
 		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
 	        clip.setArcWidth(20);
@@ -69,12 +74,22 @@ public class ProfilController {
            WritableImage image = imageview.snapshot(parameters, null);
 
            imageview.setClip(null);
-
            imageview.setEffect(new DropShadow(20, Color.BLACK));
-
            imageview.setImage(image);
+           
+           medlemAvGrupper.setItems(grupper);
 	}
 
+	public void administrerGrupper(){
+//		try {
+//			new Main().start(new Stage());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		Node  source = (Node)  event.getSource(); 
+//	    Stage stage  = (Stage) source.getScene().getWindow();
+//	    stage.close();
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
@@ -84,7 +99,6 @@ public class ProfilController {
 		adresse.setText(this.sessionUser.getAddress());
 	}
 
-	
 	public void kalenderButt (ActionEvent event) {
 		try {
 			Main newMain = new Main();
@@ -125,8 +139,7 @@ public class ProfilController {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
-	
-	
+		
 	
 	public void redigerProfilButt (ActionEvent event) {
 		try {
