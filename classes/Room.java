@@ -130,7 +130,7 @@ public class Room {
 				int appointmentID = (int) results.getLong(3);
 				Appointment comparing = methods.getAppointment(appointmentID);
 				if (date.equals(comparing.getDate())){
-					
+					//add time comparison
 				}
 				else continue;
 				

@@ -3,6 +3,7 @@ package classes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,10 +54,10 @@ public class MainCalendar {
 				String loc = results.getString("location");
 				Room room = getroom(Integer.toString(results.getInt("room")));
 				Date date = results.getDate("date");
-				Time start = results.getTime("start");
-				Time end = results.getTime("end");
+				Timestamp start = results.getTimestamp("start");
+				Timestamp end = results.getTimestamp("end");
 				
-				returning = new Appointment(name, desc, loc, room, null, date, start.toLocalTime(), end.toLocalTime(), owner);
+				returning = new Appointment(name, desc, loc, room, null, date, start, end, owner);
 				appointments.add(returning);
 				System.out.println("Adding appointment");
 			
@@ -88,13 +89,13 @@ public class MainCalendar {
 		Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
 		User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
 		c1.set(2015, Calendar.MARCH, 15);
-		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,LocalTime.parse("16:00"),LocalTime.parse("17:30"), varUser);
+		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), varUser);
 		c1.set(2015, Calendar.MARCH, 16);
-		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),LocalTime.parse("15:00"),LocalTime.parse("16:30"), varUser);
+		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-16 18:00:00.0"),Timestamp.valueOf("2015-03-16 20:00:00.0"), varUser);
 		c1.set(2015, Calendar.MARCH, 17);
-		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),LocalTime.parse("14:00"),LocalTime.parse("15:30"), varUser);
+		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-17 18:00:00.0"),Timestamp.valueOf("2015-03-17 20:00:00.0"), varUser);
 		c1.set(2015, Calendar.MARCH, 18);
-		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),LocalTime.parse("13:00"),LocalTime.parse("14:30"), varUser);
+		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-18 18:00:00.0"),Timestamp.valueOf("2015-03-18 20:00:00.0"), varUser);
 		
 		appointments = new ArrayList<Appointment>();
 		appointments.add(appointment1);

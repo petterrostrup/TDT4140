@@ -1,8 +1,10 @@
 package application;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import classes.Appointment;
@@ -281,8 +283,10 @@ public class LagAvtaleController {
 		//String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 				//(request.getParameter("date")));
 		
-		Room VarRoom = new Room("Real 56","Realfagsbygget", 5);
-		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new Date(2015, 13, 03), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
+		Room VarRoom = new Room("10", "Real 56","Realfagsbygget", 5);
+		Calendar c1 = Calendar.getInstance();
+		c1.set(2015, Calendar.MARCH, 18);
+		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, c1.getTime(),Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), sessionUser);
 		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
 		newAppointment.saveAppointment(newAppointment);
 		
