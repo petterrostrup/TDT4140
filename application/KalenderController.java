@@ -68,12 +68,12 @@ public class KalenderController {
 	
 	private Calendar cal = Calendar.getInstance();
 	private Calendar tempCal;
-	private ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
+	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
 	
 
 	@FXML
 	private void initialize(){
-	        
+		avtaleCollection.addAll(gridpane.getChildren());
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
 		setWeek();
@@ -83,12 +83,16 @@ public class KalenderController {
 	
 	public void nextWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, +1);
+		gridpane.getChildren().clear();
+		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
 	}
 	
 	
 	public void lastWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
+		gridpane.getChildren().clear();
+		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
 	}
 
@@ -131,23 +135,24 @@ public class KalenderController {
 			if (calDate.get(Calendar.WEEK_OF_YEAR) == tempCal.get(Calendar.WEEK_OF_YEAR)
 					&& calDate.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)){
 				if (calDate.get(Calendar.DAY_OF_WEEK) == 1){
-					filler(timeToGrid(start), avtaleNavn, 7);
+					filler(timeToGrid(start), avtaleNavn, 7, timeToGrid(end));
 				}
 				else{
-					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1);
+					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1, timeToGrid(end));
 				}
 			}
 		}
 	}
 	
-	
-	public void filler(int startTime, String navn, int weekDay){
+
+	public void filler(int startTime, String navn, int weekDay, int endTime){
 		Pane avtalePane = new Pane();
+		int span = endTime - startTime;
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
 		avtalePane.setPrefSize(122, 60);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
-		gridpane.add(avtalePane, weekDay, startTime);	
+		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
 	
 	
