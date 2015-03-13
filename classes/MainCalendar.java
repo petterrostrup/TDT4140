@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,12 +83,17 @@ public class MainCalendar {
 	}
 
 	public void fillTest(){
+		Calendar c1 = Calendar.getInstance();
 		Room testRoom = new Room("Realfag 245", "somewhere", 10);
 		User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
-		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 11, 02),LocalTime.parse("16:00"),LocalTime.parse("17:30"), varUser);
-		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 12, 02),LocalTime.parse("15:00"),LocalTime.parse("16:30"), varUser);
-		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 13, 02),LocalTime.parse("14:00"),LocalTime.parse("15:30"), varUser);
-		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new Date(2015, 14, 02),LocalTime.parse("13:00"),LocalTime.parse("14:30"), varUser);
+		c1.set(2015, Calendar.MARCH, 15);
+		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,LocalTime.parse("16:00"),LocalTime.parse("17:30"), varUser);
+		c1.set(2015, Calendar.MARCH, 16);
+		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),LocalTime.parse("15:00"),LocalTime.parse("16:30"), varUser);
+		c1.set(2015, Calendar.MARCH, 17);
+		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),LocalTime.parse("14:00"),LocalTime.parse("15:30"), varUser);
+		c1.set(2015, Calendar.MARCH, 18);
+		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),LocalTime.parse("13:00"),LocalTime.parse("14:30"), varUser);
 		
 		appointments = new ArrayList<Appointment>();
 		appointments.add(appointment1);
