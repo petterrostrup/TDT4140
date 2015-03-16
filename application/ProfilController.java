@@ -58,7 +58,7 @@ public class ProfilController {
 	@FXML
 	private Label innloggetsom;
 	@FXML
-	private ListView medlemAvGrupper;
+	private ListView dineGrupper;
 	
 	private ObservableList<String> grupper = FXCollections.observableArrayList("a", "b", "c", "fu"); // HENT INN GRUPPER
 	
@@ -77,7 +77,7 @@ public class ProfilController {
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
            
-           medlemAvGrupper.setItems(grupper);
+           dineGrupper.setItems(grupper);
 	}
 
 	public void administrerGrupperButt(ActionEvent event){

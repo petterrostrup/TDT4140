@@ -31,6 +31,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -75,6 +76,7 @@ public class AdministrerGrupperController {
 		
 		medlemmerList.setItems(medlemmer);
 		allePersonerList.setItems(personer);
+		dineGrupper.setItems(grupper);
 	}
 	public void sendRight(ActionEvent event){
 		String fjernPerson = (String) medlemmerList.getSelectionModel().getSelectedItem();
@@ -96,6 +98,23 @@ public class AdministrerGrupperController {
 			personer.remove(leggtilPerson);
 			medlemmer.add(leggtilPerson);
 		}
+	}
+	
+	public void visMedlemmerGruppe(MouseEvent event){
+		System.out.println("viser medlemmer");
+		medlemmer.clear();
+		Object visMedlemmerIGruppe = (Object) dineGrupper.getSelectionModel().getSelectedItem();
+		if(visMedlemmerIGruppe != null){
+			dineGrupper.getSelectionModel().clearSelection();
+			for (Object i : grupper) {
+//				medlemmer.addAll(i, visMedlemmerIGruppe);;
+				medlemmer.setAll(visMedlemmerIGruppe);
+			}
+			
+//			gruppeListe.getSelectionModel().clearSelection();
+//			medlemmer.add(visMedlemmerIGruppe);
+		}
+
 	}
 	
 	public void visMedlemmerList(ActionEvent event){

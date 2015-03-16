@@ -30,6 +30,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -110,7 +111,7 @@ public class LagAvtaleController {
 	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Aleksander", "Fredrik", "Emil", "Petter");
 	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe, FXCollections.observableArrayList("a", "b", "c")); // Her henter vi inn grupper fra database - PETTER
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe); // Her henter vi inn grupper fra database - PETTER
 	//rANDOM GRUPPER SLUTT
 	//MEDLEMMER START
 	
@@ -268,28 +269,21 @@ public class LagAvtaleController {
 		}
 	}
 	
-	public void visMedlemmer(ActionEvent event){
-		Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
-		if(visMedlemmer != null){
-			//valgtePersoner.remove(visMedlemmer);
-			medlemmer.add(visMedlemmer);
-		}
-	}
-	
-	public void visMedlemmer2(ActionEvent event){
-		
-//		 ((M) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
-//		ArrayList visMedlemmer = gruppeListe.getSelectionModel().getSelectedItem();
-		
-		 Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
-		
-		
-		if(visMedlemmer != null){
+	public void visMedlemmer(MouseEvent event){
+		System.out.println("herro");
+		medlemmer.clear();
+		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+		if(visMedlemmerIGruppe != null){
 			gruppeListe.getSelectionModel().clearSelection();
-			grupper.remove(visMedlemmer);
-			medlemmer.add(visMedlemmer);
+			for (Object i : grupper) {
+//				medlemmer.addAll(i, visMedlemmerIGruppe);;
+				medlemmer.setAll(visMedlemmerIGruppe);
+			}
 			
+//			gruppeListe.getSelectionModel().clearSelection();
+//			medlemmer.add(visMedlemmerIGruppe);
 		}
+
 	}
 	
 	public void setSession(User sessionUser){
