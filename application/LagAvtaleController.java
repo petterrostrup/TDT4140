@@ -270,18 +270,17 @@ public class LagAvtaleController {
 	}
 	public void visMedlemmer2(ActionEvent event){
 		
-		 ((MenuButton) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
+//		 ((M) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
 //		ArrayList visMedlemmer = gruppeListe.getSelectionModel().getSelectedItem();
 		
-		ArrayList<Object> medlemmerIgruppe = new ArrayList<Object>();
+		 Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		
-		if(medlemmer != null){
-			medlemmer.addAll(grupper);
-			//valgtePersoner.remove(visMedlemmer);
-//			for (int i = 0; i < medlemmer.size(); i++) {
-//				medlemmer..add(i);
-//			}
-//			medlemmer.add(visMedlemmer);
+		
+		if(visMedlemmer != null){
+			gruppeListe.getSelectionModel().clearSelection();
+			grupper.remove(visMedlemmer);
+			medlemmer.add(visMedlemmer);
+			
 		}
 	}
 	public void setSession(User sessionUser){
