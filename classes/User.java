@@ -173,5 +173,22 @@ public class User {
 		}
 	}
 	
+	public String findUser(String name){
+		String sqlStatement = "SELECT * FROM USER WHERE name = '" + name + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			results.next();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+		
+		
+		
+		return name;
+	}
+	
 	
 }

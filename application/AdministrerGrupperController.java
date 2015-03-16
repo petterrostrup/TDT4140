@@ -1,11 +1,15 @@
 package application;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 import classes.Appointment;
+import classes.DatabaseCommunicator;
+import classes.Group;
 import classes.Room;
 import classes.User;
 import javafx.application.Application;
@@ -41,13 +45,35 @@ public class AdministrerGrupperController {
 	private ListView allePersonerList;
 	@FXML
 	private ListView medlemmerList;
+
 	//Lister
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("gruppe1", "gruppe2", "gruppe3"); //henter inn grupper man har
-	private ObservableList<Object> medlemmer = FXCollections.observableArrayList("Per", "Pål"); //liste over medlemmer i gruppen
-	private ObservableList<Object> personer = FXCollections.observableArrayList("Emil", "Aleksander", "Fredrik", "Petter", "Kristian");  //liste over alle personer som man kan legge til
+	private ArrayList<User> userMedlemmerNyGruppe = new ArrayList<User>();
+	private ArrayList<User> userPersoner = new ArrayList<User>();
+	private ArrayList<Group> adminGroups = new ArrayList<Group>();
+	private ArrayList<User> groupMedlemmer = new ArrayList<User>();
+	
+	
+	private ObservableList<String> personer = FXCollections.observableArrayList(); //liste over alle personer som man kan legge til
+	
+	private ObservableList<String> grupper = FXCollections.observableArrayList("gruppe1", "gruppe2", "gruppe3"); //henter inn grupper man har
+	private ObservableList<String> medlemmer = FXCollections.observableArrayList("Petter", "Kristian"); //liste over medlemmer i gruppen
 	//ListerSlutt
 	@FXML
 	private void initialize(){
+		String sqlStatement = "SELECT * FROM USER";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		User newUser;
+		try {
+			while (results.next()){
+				newUser = User.readUser(results.getLong(1));
+				userPersoner.add(newUser);
+				personer.add(newUser.getName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		medlemmerList.setItems(medlemmer);
 		allePersonerList.setItems(personer);
 		dineGrupper.setItems(grupper);
@@ -56,6 +82,9 @@ public class AdministrerGrupperController {
 		String fjernPerson = (String) medlemmerList.getSelectionModel().getSelectedItem();
 		if(fjernPerson != null){
 			medlemmerList.getSelectionModel().clearSelection();
+			
+			
+			
 			medlemmer.remove(fjernPerson);
 			personer.add(fjernPerson);
 		}
@@ -93,7 +122,6 @@ public class AdministrerGrupperController {
 	}
 	
 	public void nyGruppe(ActionEvent event){
-		System.out.println("STARTER NyGruppe.java");
 		try {
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
@@ -108,6 +136,23 @@ public class AdministrerGrupperController {
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		
+		String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE leader = '" + this.sessionUser.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		Group newGroup;
+		try {
+			while (results.next()){
+				String name = results.getString("name");
+				Long id = results.getLong(1);
+				int leader = results.getInt("leader");
+				newGroup = new Group(name,leader + "", id.toString());
+				adminGroups.add(newGroup);
+				grupper.add(newGroup.getGroupName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	public void oppdaterButt (ActionEvent event) {
