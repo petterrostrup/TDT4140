@@ -297,12 +297,12 @@ public class LagAvtaleController {
 		//String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 				//(request.getParameter("date")));
 		
-		Room VarRoom = new Room("10", "Real 56","Realfagsbygget", 5);
-		Calendar c1 = Calendar.getInstance();
-		c1.set(2015, Calendar.MARCH, 18);
-		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, c1.getTime(),Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), sessionUser);
-		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
-		newAppointment.saveAppointment(newAppointment);
+//		Room VarRoom = new Room("10", "Real 56","Realfagsbygget", 5);
+//		Calendar c1 = Calendar.getInstance();
+//		c1.set(2015, Calendar.MARCH, 18);
+//		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, c1.getTime(),Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), sessionUser);
+//		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
+//		newAppointment.saveAppointment(newAppointment);
 		
 		//Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user)
 		

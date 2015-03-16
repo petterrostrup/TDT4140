@@ -88,14 +88,14 @@ public class MainCalendar {
 		Calendar c1 = Calendar.getInstance();
 		Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
 		User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
-		c1.set(2015, Calendar.MARCH, 15);
-		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), varUser);
-		c1.set(2015, Calendar.MARCH, 16);
-		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-16 18:00:00.0"),Timestamp.valueOf("2015-03-16 20:00:00.0"), varUser);
-		c1.set(2015, Calendar.MARCH, 17);
-		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-17 18:00:00.0"),Timestamp.valueOf("2015-03-17 20:00:00.0"), varUser);
-		c1.set(2015, Calendar.MARCH, 18);
-		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-18 18:00:00.0"),Timestamp.valueOf("2015-03-18 20:00:00.0"), varUser);
+		c1.set(2015, Calendar.MARCH, 23);
+		Appointment appointment1 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,Timestamp.valueOf("2015-03-23 18:00:00.0"),Timestamp.valueOf("2015-03-23 20:00:00.0"), varUser);
+		c1.set(2015, Calendar.MARCH, 24);
+		Appointment appointment2 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-24 19:00:00.0"),Timestamp.valueOf("2015-03-24 21:00:00.0"), varUser);
+		c1.set(2015, Calendar.MARCH, 25);
+		Appointment appointment3 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-25 20:00:00.0"),Timestamp.valueOf("2015-03-25 22:00:00.0"), varUser);
+		c1.set(2015, Calendar.MARCH, 26);
+		Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser);
 		
 		appointments = new ArrayList<Appointment>();
 		appointments.add(appointment1);
