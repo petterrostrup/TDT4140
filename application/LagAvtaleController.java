@@ -271,11 +271,12 @@ public class LagAvtaleController {
 	
 	public void visMedlemmer(MouseEvent event){
 		System.out.println("herro");
+		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
 			gruppeListe.getSelectionModel().clearSelection();
 			for (int i = 0; i < grupper.size(); i++) {
-				medlemmer.add(i);
+				medlemmer.indexOf(i);
 			}
 			
 //			gruppeListe.getSelectionModel().clearSelection();
