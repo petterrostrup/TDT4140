@@ -30,6 +30,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -268,28 +269,36 @@ public class LagAvtaleController {
 		}
 	}
 	
-	public void visMedlemmer(ActionEvent event){
-		Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
-		if(visMedlemmer != null){
-			//valgtePersoner.remove(visMedlemmer);
-			medlemmer.add(visMedlemmer);
+	public void visMedlemmer(MouseEvent event){
+		System.out.println("herro");
+		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+		if(visMedlemmerIGruppe != null){
+			gruppeListe.getSelectionModel().clearSelection();
+			for (int i = 0; i < grupper.size(); i++) {
+				medlemmer.add(i);
+			}
+			
+//			gruppeListe.getSelectionModel().clearSelection();
+//			medlemmer.add(visMedlemmerIGruppe);
 		}
+
 	}
+
 	
 	public void visMedlemmer2(ActionEvent event){
-		
-//		 ((M) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
-//		ArrayList visMedlemmer = gruppeListe.getSelectionModel().getSelectedItem();
-		
-		 Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
-		
-		
-		if(visMedlemmer != null){
-			gruppeListe.getSelectionModel().clearSelection();
-			grupper.remove(visMedlemmer);
-			medlemmer.add(visMedlemmer);
-			
-		}
+//		System.out.println("herro");
+////		 ((M) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
+////		ArrayList visMedlemmer = gruppeListe.getSelectionModel().getSelectedItem();
+//		
+//		 Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+//		
+//		
+//		if(visMedlemmer != null){
+//			gruppeListe.getSelectionModel().clearSelection();
+//			grupper.remove(visMedlemmer);
+//			medlemmer.add(visMedlemmer);
+//			
+//		}
 	}
 	
 	public void setSession(User sessionUser){
