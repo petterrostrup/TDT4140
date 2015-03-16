@@ -27,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -39,7 +40,6 @@ public class KalenderController {
 	private ScrollPane scrollpane;
 	@FXML
 	private GridPane gridpane;
-	private GridPane saveGrid = gridpane;
 	@FXML
 	private DatePicker datepicker;
 	@FXML
@@ -80,6 +80,14 @@ public class KalenderController {
 		setWeek();
 		
 	}
+	
+//	public void radioUke(ActionEvent event){
+//		
+//	}
+//	
+//	public void radioMoned(ActionEvent event){
+//		
+//	}
 	
 	
 	public void nextWeek(ActionEvent event){
