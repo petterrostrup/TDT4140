@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -96,6 +97,9 @@ public class LagAvtaleController {
 	@FXML
 	private Button leggtilmedlem;
 	
+	
+	
+	
 	// start lister
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -112,9 +116,6 @@ public class LagAvtaleController {
 	
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
 	//MEDLEMMER SLUTT
-	
-//	private ObservableList<Object> testList = FXCollections.observableArrayList();
-	
 	
 	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper/*(hent gruppemedlemmer fra gruppene i listen "grupper*/); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
 
@@ -140,6 +141,12 @@ public class LagAvtaleController {
 		//initialiserer med en gang siden loades
 		
 		
+	}
+	public Color farger(){
+		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
+		return fargekoder;
+		
+		// SE HER ALEKSANDER
 	}
 	
 	public void visPersonerList(ActionEvent event){
@@ -268,6 +275,7 @@ public class LagAvtaleController {
 			medlemmer.add(visMedlemmer);
 		}
 	}
+	
 	public void visMedlemmer2(ActionEvent event){
 		
 //		 ((M) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
@@ -283,6 +291,7 @@ public class LagAvtaleController {
 			
 		}
 	}
+	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
