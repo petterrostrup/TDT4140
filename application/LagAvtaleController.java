@@ -102,19 +102,21 @@ public class LagAvtaleController {
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
 	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil"); // Her henter vi inn enkelt-PERSONER fra database - PETTER
 	//RANDOM GRUPPER START
-	private ObservableList<String> PettersGruppe = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
-	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Gruppe", "Fredrik", "Emil");
+	//private ObservableList<String> PettersGruppe = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
+	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Aleksander", "Fredrik", "Emil", "Petter");
 	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0), PettersGruppe.get(0)); // Her henter vi inn grupper fra database - PETTER
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe, FXCollections.observableArrayList("a", "b", "c")); // Her henter vi inn grupper fra database - PETTER
 	//rANDOM GRUPPER SLUTT
 	//MEDLEMMER START
+	
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
 	//MEDLEMMER SLUTT
 	
+//	private ObservableList<Object> testList = FXCollections.observableArrayList();
 	
 	
-	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
+	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper/*(hent gruppemedlemmer fra gruppene i listen "grupper*/); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
 
 	//slutt lister
 	@FXML
@@ -141,6 +143,7 @@ public class LagAvtaleController {
 	}
 	
 	public void visPersonerList(ActionEvent event){
+
 		valgtePersonerList.setItems(valgtePersoner);
 		valgteGrupperList.setItems(valgteGrupper);
 		
@@ -162,6 +165,7 @@ public class LagAvtaleController {
 		valgtePersonerText.setVisible(true);
 		valgteGrupperText.setVisible(true);
 	}
+	
 	public void visGrupperList(ActionEvent event){
 		valgtePersonerList.setItems(valgtePersoner);
 		valgteGrupperList.setItems(valgteGrupper);
@@ -214,8 +218,7 @@ public class LagAvtaleController {
 //			}
 //		}
 	}
-	
-	
+		
 	public void sendLeft (ActionEvent event){
 		if(listevalg.getText().equals(visPersoner.getText())){
 			Object leggtilPerson = (Object) personListe.getSelectionModel().getSelectedItem();
@@ -230,25 +233,22 @@ public class LagAvtaleController {
 			if(leggtilGruppe != null){
 				gruppeListe.getSelectionModel().clearSelection();
 				grupper.remove(leggtilGruppe);
-				valgteGrupper.add((String) leggtilGruppe);
-				
-				
-			}
-			
-			
-		}
-		Object leggtil = (Object) personListe.getSelectionModel().getSelectedItem();
-		if(leggtil != null){
-			personListe.getSelectionModel().clearSelection();	
-			if(listevalg.getText().equals(visPersoner.getText())){
-				deltagere.remove(leggtil);
-				valgtePersoner.add((String) leggtil);
-			}
-			else if(listevalg.getText().equals(visGrupper.getText())){
-				grupper.remove(leggtil);
-				valgteGrupper.add((String) leggtil);
+				valgteGrupper.add((Object) leggtilGruppe);	
 			}
 		}
+		
+//		Object leggtil = (Object) personListe.getSelectionModel().getSelectedItem();
+//		if(leggtil != null){
+//			personListe.getSelectionModel().clearSelection();	
+//			if(listevalg.getText().equals(visPersoner.getText())){
+//				deltagere.remove(leggtil);
+//				valgtePersoner.add((String) leggtil);
+//			}
+//			else if(listevalg.getText().equals(visGrupper.getText())){
+//				grupper.remove(leggtil);
+//				valgteGrupper.add((String) leggtil);
+//			}
+//		}
 	}
 	
 	public void addGruppeMedlem(ActionEvent event){
@@ -265,10 +265,25 @@ public class LagAvtaleController {
 		Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmer != null){
 			//valgtePersoner.remove(visMedlemmer);
-			medlemmer.add((String) visMedlemmer);
+			medlemmer.add(visMedlemmer);
 		}
 	}
-	
+	public void visMedlemmer2(ActionEvent event){
+		
+		 ((MenuButton) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
+//		ArrayList visMedlemmer = gruppeListe.getSelectionModel().getSelectedItem();
+		
+		ArrayList<Object> medlemmerIgruppe = new ArrayList<Object>();
+		
+		if(medlemmer != null){
+			medlemmer.addAll(grupper);
+			//valgtePersoner.remove(visMedlemmer);
+//			for (int i = 0; i < medlemmer.size(); i++) {
+//				medlemmer..add(i);
+//			}
+//			medlemmer.add(visMedlemmer);
+		}
+	}
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
@@ -373,7 +388,5 @@ public class LagAvtaleController {
 	    stage.close();
 
 	}
-	
-
 	
 }

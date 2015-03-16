@@ -143,7 +143,36 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	public void startAdministrerGrupper(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("administrergrupper.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			AdministrerGrupperController newCont = loader.<AdministrerGrupperController>getController();
+			newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void startNyGruppe(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("nygruppe.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			NyGruppeController newCont = loader.<NyGruppeController>getController();
+			newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
