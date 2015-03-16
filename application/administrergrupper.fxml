@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="application.AdministrerGrupperController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdministrerGrupperController">
    <children>
       <Label fx:id="tittel" layoutX="169.0" layoutY="14.0" text="Administrer Grupper">
          <font>
@@ -16,7 +16,7 @@
       <ListView fx:id="allePersonerList" layoutX="276.0" layoutY="98.0" prefHeight="350.0" prefWidth="163.0" />
       <Button layoutX="330.0" layoutY="461.0" mnemonicParsing="false" onAction="#nyGruppe" text="Ny gruppe" />
       <Button layoutX="419.0" layoutY="461.0" mnemonicParsing="false" onAction="#oppdaterButt" text="Oppdater" />
-      <ListView fx:id="dineGrupper" layoutX="61.0" layoutY="98.0" onMouseClicked="#visMedlemmerList" prefHeight="150.0" prefWidth="160.0" />
+      <ListView fx:id="dineGrupper" layoutX="61.0" layoutY="98.0" onMouseClicked="#visMedlemmerGruppe" prefHeight="150.0" prefWidth="160.0" />
       <Button layoutX="233.0" layoutY="377.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
       <Button layoutX="233.0" layoutY="344.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
       <Label layoutX="106.0" layoutY="75.0" text="Dine grupper" />

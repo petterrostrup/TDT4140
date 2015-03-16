@@ -8,6 +8,22 @@ public class Group {
 	private String groupID;
 	private String groupName;
 	private ArrayList<User> persons;
+	private String leader;
+	
+	public Group(String groupName){
+		setGroupName(groupName);
+	}
+	
+	public Group(String groupName, String leader){
+		setGroupName(groupName);
+		setLeader(leader);
+	}
+	
+	public Group(String groupName, String leader, String id){
+		setGroupName(groupName);
+		setLeader(leader);
+		setGroupID(id);
+	}
 	
 	public String getGroupID() {
 		return groupID;
@@ -28,13 +44,21 @@ public class Group {
 		this.persons = persons;
 	}
 	
+	public String getLeader() {
+		return leader;
+	}
+
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
+
 	public void createGroup(){
 		String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE name = '" + this.getGroupName() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			if (!results.next()){
-				sqlStatement = "INSERT INTO MEMBERGROUP (name) "
-						+ "VALUES ( '" + this.getGroupName() + "')";
+				sqlStatement = "INSERT INTO MEMBERGROUP (name, leader) "
+						+ "VALUES ( '" + this.getGroupName() + "', '" + this.getLeader() + "')";
 				System.out.println("Saving group");
 				DatabaseCommunicator.update(sqlStatement);			
 			}
@@ -48,18 +72,18 @@ public class Group {
 
 	}
 	
-	public void addMember(int id){
+	public void addMember(String id){
 		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + id + "' AND membergroup = '" + this.getGroupID() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		try {
 			if (!results.next()){
 				sqlStatement = "INSERT INTO MEMBER (person, membergroup) "
 						+ "VALUES ( '" + id + "', '" + this.getGroupID() + "')";
-				System.out.println("Saving group");
+				System.out.println("Adding member to group");
 				DatabaseCommunicator.update(sqlStatement);			
 			}
 			else{
-				System.out.println("Group exists. Cannot save");
+				System.out.println("User is already in group");
 			}}  catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -85,4 +109,70 @@ public class Group {
 			e.printStackTrace();
 		}
 	}
+	
+	public Group readGroup(String name){
+		Group returnGroup = null;
+		String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE name = '" + name + "';";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+					Long id = results.getLong(1);
+					int leader = results.getInt("leader");
+					returnGroup = new Group(name,leader + "", id.toString());
+			}
+			else {
+				System.out.println("No group found in database matching that name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return returnGroup;
+	}
+	
+	public Group readGroupId(String gId){
+		Group returnGroup = null;
+		String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE id = '" + gId + "';";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+				String name = results.getString("name");
+				Long id = results.getLong(1);
+				int leader = results.getInt("leader");
+				returnGroup = new Group(name,leader + "", id.toString());
+			}
+			else {
+				System.out.println("No group found in database matching that name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return returnGroup;
+	}
+	
+	public Group getMyGroups(String pId){
+		Group returnGroup = null;
+		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + pId + "';";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+				String name = results.getString("name");
+				Long id = results.getLong(1);
+				returnGroup = new Group(name,leader, id.toString());
+			}
+			else {
+				System.out.println("No group found in database matching that name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return returnGroup;
+	}
+	
+	
 }

@@ -13,6 +13,11 @@
             <Button mnemonicParsing="false" onAction="#kalenderButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
             <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
             <Button layoutX="619.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Profil" />
+            <Label fx:id="notification" layoutX="635.0" layoutY="6.0" text="!" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
@@ -58,7 +63,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ListView fx:id="medlemAvGrupper" layoutX="396.0" layoutY="441.0" prefHeight="191.0" prefWidth="173.0" />
+            <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="441.0" prefHeight="191.0" prefWidth="173.0" />
             <Label layoutX="431.0" layoutY="418.0" text="Medlem av gruppe:" />
             <Button layoutX="594.0" layoutY="607.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
          </children>

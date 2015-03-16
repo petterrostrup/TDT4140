@@ -1,11 +1,15 @@
 package application;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 import classes.Appointment;
+import classes.DatabaseCommunicator;
+import classes.Group;
 import classes.Room;
 import classes.User;
 import javafx.application.Application;
@@ -27,6 +31,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -40,20 +45,46 @@ public class AdministrerGrupperController {
 	private ListView allePersonerList;
 	@FXML
 	private ListView medlemmerList;
+
 	//Lister
+	private ArrayList<User> userMedlemmerNyGruppe = new ArrayList<User>();
+	private ArrayList<User> userPersoner = new ArrayList<User>();
+	private ArrayList<Group> adminGroups = new ArrayList<Group>();
+	private ArrayList<User> groupMedlemmer = new ArrayList<User>();
+	
+	
+	private ObservableList<String> personer = FXCollections.observableArrayList(); //liste over alle personer som man kan legge til
+	
 	private ObservableList<String> grupper = FXCollections.observableArrayList("gruppe1", "gruppe2", "gruppe3"); //henter inn grupper man har
 	private ObservableList<String> medlemmer = FXCollections.observableArrayList("Petter", "Kristian"); //liste over medlemmer i gruppen
-	private ObservableList<String> personer = FXCollections.observableArrayList("Emil", "Aleksander", "Fredrik");  //liste over alle personer som man kan legge til
 	//ListerSlutt
 	@FXML
 	private void initialize(){
+		String sqlStatement = "SELECT * FROM USER";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		User newUser;
+		try {
+			while (results.next()){
+				newUser = User.readUser(results.getLong(1));
+				userPersoner.add(newUser);
+				personer.add(newUser.getName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		medlemmerList.setItems(medlemmer);
 		allePersonerList.setItems(personer);
+		dineGrupper.setItems(grupper);
 	}
 	public void sendRight(ActionEvent event){
 		String fjernPerson = (String) medlemmerList.getSelectionModel().getSelectedItem();
 		if(fjernPerson != null){
 			medlemmerList.getSelectionModel().clearSelection();
+			
+			
+			
 			medlemmer.remove(fjernPerson);
 			personer.add(fjernPerson);
 		}
@@ -69,12 +100,28 @@ public class AdministrerGrupperController {
 		}
 	}
 	
+	public void visMedlemmerGruppe(MouseEvent event){
+		System.out.println("viser medlemmer");
+		medlemmer.clear();
+		Object visMedlemmerIGruppe = (Object) dineGrupper.getSelectionModel().getSelectedItem();
+		if(visMedlemmerIGruppe != null){
+			dineGrupper.getSelectionModel().clearSelection();
+			for (Object i : grupper) {
+//				medlemmer.addAll(i, visMedlemmerIGruppe);;
+				medlemmer.setAll(visMedlemmerIGruppe);
+			}
+			
+//			gruppeListe.getSelectionModel().clearSelection();
+//			medlemmer.add(visMedlemmerIGruppe);
+		}
+
+	}
+	
 	public void visMedlemmerList(ActionEvent event){
 		
 	}
 	
 	public void nyGruppe(ActionEvent event){
-		System.out.println("STARTER NyGruppe.java");
 		try {
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
@@ -89,6 +136,23 @@ public class AdministrerGrupperController {
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		
+		String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE leader = '" + this.sessionUser.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		Group newGroup;
+		try {
+			while (results.next()){
+				String name = results.getString("name");
+				Long id = results.getLong(1);
+				int leader = results.getInt("leader");
+				newGroup = new Group(name,leader + "", id.toString());
+				adminGroups.add(newGroup);
+				grupper.add(newGroup.getGroupName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	public void oppdaterButt (ActionEvent event) {

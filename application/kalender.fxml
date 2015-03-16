@@ -116,6 +116,11 @@
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
             <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
             <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
+            <Label fx:id="notification" layoutX="635.0" layoutY="6.0" text="!" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Label fx:id="innloggetsom" layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
