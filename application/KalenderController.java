@@ -1,5 +1,6 @@
 package application;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -123,9 +124,10 @@ public class KalenderController {
 		MainCalendar kalender = new MainCalendar();
 		kalender.fillTest();
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		for (Appointment avtale: avtaler){
-			LocalTime start = avtale.getStart();
-			LocalTime end = avtale.getEnd();
+			LocalTime start = LocalTime.parse(sdf.format(avtale.getStart()));
+			LocalTime end = LocalTime.parse(sdf.format(avtale.getEnd()));
 			String avtaleNavn = avtale.getName();
 			
 			Date date = avtale.getDate();
