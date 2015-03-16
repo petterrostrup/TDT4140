@@ -27,6 +27,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -41,14 +42,15 @@ public class AdministrerGrupperController {
 	@FXML
 	private ListView medlemmerList;
 	//Lister
-	private ObservableList<String> grupper = FXCollections.observableArrayList("gruppe1", "gruppe2", "gruppe3"); //henter inn grupper man har
-	private ObservableList<String> medlemmer = FXCollections.observableArrayList("Petter", "Kristian"); //liste over medlemmer i gruppen
-	private ObservableList<String> personer = FXCollections.observableArrayList("Emil", "Aleksander", "Fredrik");  //liste over alle personer som man kan legge til
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("gruppe1", "gruppe2", "gruppe3"); //henter inn grupper man har
+	private ObservableList<Object> medlemmer = FXCollections.observableArrayList("Per", "Pål"); //liste over medlemmer i gruppen
+	private ObservableList<Object> personer = FXCollections.observableArrayList("Emil", "Aleksander", "Fredrik", "Petter", "Kristian");  //liste over alle personer som man kan legge til
 	//ListerSlutt
 	@FXML
 	private void initialize(){
 		medlemmerList.setItems(medlemmer);
 		allePersonerList.setItems(personer);
+		dineGrupper.setItems(grupper);
 	}
 	public void sendRight(ActionEvent event){
 		String fjernPerson = (String) medlemmerList.getSelectionModel().getSelectedItem();
@@ -67,6 +69,23 @@ public class AdministrerGrupperController {
 			personer.remove(leggtilPerson);
 			medlemmer.add(leggtilPerson);
 		}
+	}
+	
+	public void visMedlemmerGruppe(MouseEvent event){
+		System.out.println("viser medlemmer");
+		medlemmer.clear();
+		Object visMedlemmerIGruppe = (Object) dineGrupper.getSelectionModel().getSelectedItem();
+		if(visMedlemmerIGruppe != null){
+			dineGrupper.getSelectionModel().clearSelection();
+			for (Object i : grupper) {
+//				medlemmer.addAll(i, visMedlemmerIGruppe);;
+				medlemmer.setAll(visMedlemmerIGruppe);
+			}
+			
+//			gruppeListe.getSelectionModel().clearSelection();
+//			medlemmer.add(visMedlemmerIGruppe);
+		}
+
 	}
 	
 	public void visMedlemmerList(ActionEvent event){

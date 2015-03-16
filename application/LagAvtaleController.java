@@ -111,7 +111,7 @@ public class LagAvtaleController {
 	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Aleksander", "Fredrik", "Emil", "Petter");
 	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe, FXCollections.observableArrayList("a", "b", "c")); // Her henter vi inn grupper fra database - PETTER
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe); // Her henter vi inn grupper fra database - PETTER
 	//rANDOM GRUPPER SLUTT
 	//MEDLEMMER START
 	
@@ -275,31 +275,15 @@ public class LagAvtaleController {
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
 			gruppeListe.getSelectionModel().clearSelection();
-			for (int i = 0; i < grupper.size(); i++) {
-				medlemmer.indexOf(i);
+			for (Object i : grupper) {
+//				medlemmer.addAll(i, visMedlemmerIGruppe);;
+				medlemmer.setAll(visMedlemmerIGruppe);
 			}
 			
 //			gruppeListe.getSelectionModel().clearSelection();
 //			medlemmer.add(visMedlemmerIGruppe);
 		}
 
-	}
-
-	
-	public void visMedlemmer2(ActionEvent event){
-//		System.out.println("herro");
-////		 ((M) grupper).getItems().removeAll(new ArrayList<Object>(gruppeMedlemmerList.getSelectionModel().getSelectedItems()));
-////		ArrayList visMedlemmer = gruppeListe.getSelectionModel().getSelectedItem();
-//		
-//		 Object visMedlemmer = (Object) gruppeListe.getSelectionModel().getSelectedItem();
-//		
-//		
-//		if(visMedlemmer != null){
-//			gruppeListe.getSelectionModel().clearSelection();
-//			grupper.remove(visMedlemmer);
-//			medlemmer.add(visMedlemmer);
-//			
-//		}
 	}
 	
 	public void setSession(User sessionUser){

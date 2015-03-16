@@ -95,7 +95,6 @@
             <Label fx:id="valgteGrupperText" layoutX="145.0" layoutY="490.0" text="Grupper" />
             <Label fx:id="valgtePersonerText" layoutX="143.0" layoutY="391.0" text="Personer" />
             <ListView fx:id="gruppeListe" layoutX="382.0" layoutY="345.0" onMouseClicked="#visMedlemmer" prefHeight="205.0" prefWidth="150.0" />
-            <Button layoutX="532.0" layoutY="274.0" mnemonicParsing="false" onAction="#visMedlemmer2" text="stupehd" />
          </children>
       </Pane>
    </children>
