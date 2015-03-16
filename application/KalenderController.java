@@ -65,7 +65,21 @@ public class KalenderController {
 	@FXML
 	private Button prevWeek;
 	@FXML
+	private Pane monthPane;
+	@FXML
+	private GridPane monthGrid;
+	@FXML
+	private Pane monthHeaderPane;
+	@FXML
+	private Pane weekHeaderPane;
+	@FXML
+	private Label monthLabel;
+	@FXML
+	private Label yearMonth;
+	@FXML
 	private Label innloggetsom;
+	@FXML
+	private Label ukeLabel;
 	
 	private Calendar cal = Calendar.getInstance();
 	private Calendar tempCal;
@@ -77,17 +91,32 @@ public class KalenderController {
 		avtaleCollection.addAll(gridpane.getChildren());
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
+		scrollpane.setVisible(true);
+		weekHeaderPane.setVisible(true);
+		monthPane.setVisible(false);
+		monthHeaderPane.setVisible(false);
 		setWeek();
 		
 	}
 	
-//	public void radioUke(ActionEvent event){
-//		
-//	}
-//	
-//	public void radioMoned(ActionEvent event){
-//		
-//	}
+	public void radioUke(ActionEvent event){
+		scrollpane.setVisible(true);
+		weekHeaderPane.setVisible(true);
+		monthPane.setVisible(false);
+		monthHeaderPane.setVisible(false);
+		
+		
+		setWeek();
+		
+	}
+	
+	public void radioMoned(ActionEvent event){
+		monthPane.setVisible(true);
+		scrollpane.setVisible(false);
+		weekHeaderPane.setVisible(false);
+		monthHeaderPane.setVisible(true);
+		setMonth();
+	}
 	
 	
 	public void nextWeek(ActionEvent event){
@@ -119,6 +148,52 @@ public class KalenderController {
 		setDayLabel(fredato, 6);
 		setDayLabel(lordato, 7);
 		setDayLabel(sondato, 1);
+		
+	}
+	
+	public void nextMonth(ActionEvent event){
+		cal.add(Calendar.MONTH, +1);
+		setMonth();
+	}
+	
+	public void lastMonth(ActionEvent event){
+		cal.add(Calendar.MONTH, -1);
+		setMonth();
+	}
+	
+	public void setMonth(){
+		tempCal = this.cal;
+		monthLabel.setText(monthString(tempCal.get(Calendar.MONTH)));
+		
+	}
+	public String monthString(int month){
+		if (month == 1){
+			return "Januar";}
+		else if (month == 2){
+			return "Februar";}
+		else if (month == 3){
+			return "Mars";}
+		else if (month == 4){
+			return "April";}
+		else if (month == 5){
+			return "Mai";}
+		else if (month == 6){
+			return "Juni";}
+		else if (month == 7){
+			return "Juli";}
+		else if (month == 8){
+			return "August";}
+		else if (month == 9){
+			return "September";}
+		else if (month == 10){
+			return "Oktober";}
+		else if (month == 11){
+			return "November";}
+		else if (month == 12){
+			return "Desember";}
+		else{
+			return "No int given";
+		}
 		
 	}
 	
