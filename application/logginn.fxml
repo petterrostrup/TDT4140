@@ -8,8 +8,8 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
       <Button fx:id="logginn" layoutX="205.0" layoutY="224.0" mnemonicParsing="false" onAction="#logButt" text="Logg inn" />
-      <TextField fx:id="brukernavn" layoutX="204.0" layoutY="125.0" />
-      <PasswordField fx:id="passord" layoutX="204.0" layoutY="174.0" />
+      <TextField fx:id="brukernavn" onAction="#logButt" layoutX="204.0" layoutY="125.0" />
+      <PasswordField fx:id="passord" onAction="#logButt" layoutX="204.0" layoutY="174.0" />
       <Label layoutX="121.0" layoutY="125.0" text="Brukernavn:" />
       <Label layoutX="121.0" layoutY="174.0" text="Passord:" />
       <Label layoutX="211.0" layoutY="36.0" text="Logg inn">
