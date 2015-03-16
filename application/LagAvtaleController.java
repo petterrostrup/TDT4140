@@ -106,7 +106,7 @@ public class LagAvtaleController {
 	@FXML
 	private Button leggtilmedlem;
 	
-	private Boolean checkpointReached = false;
+	private Boolean checkpointReached;
 	
 	
 	// start lister
@@ -157,6 +157,8 @@ public class LagAvtaleController {
 		feilBeskrivelseLabel.setVisible(false);
 		feilDeltagerLabel.setVisible(false);
 		//feil-labels slutt
+		
+		checkpointReached = false;
 	}
 	public Color farger(){
 		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
@@ -326,25 +328,16 @@ public class LagAvtaleController {
 		
 	}
 	
-	public void lagreButt (ActionEvent event) {
-		System.out.println("*lagrer avtalen*");
-		//Lagre data fra skjema i database
-		
+	public void lagreButt (ActionEvent event) {		
 		//tittel
-		if(tittel.getText().isEmpty()){
-			feilTittelLabel.setVisible(true);
+		if(!tittel.getText().isEmpty()){
+			checkpointReached = true;
+			System.out.println(tittel);
 		}
 		else{
-			checkpointReached = true;
+			feilTittelLabel.setVisible(true);
 		}
-		//rom
-//		if(rom != null){
-//			checkpointReached = true;
-//		}
-//		else{
-//			feilRomLabel.setVisible(true);
-//		}
-		//dato
+
 //		Date now = new Date();
 //		int result = now.compareTo(dato);
 //		if (result < 0){
@@ -357,41 +350,26 @@ public class LagAvtaleController {
 //		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
 //			checkpointReached = true;
 //		}
-//		else{
-//			feilStartSluttLabel.setVisible(true);
-//		}
-//		//beskrivelse
-//		if(beskrivelse != null){
-//			checkpointReached = true;
-//		}
-//		else{
-//			feilBeskrivelseLabel.setVisible(true);
-//		}
-//		//deltagere
-//		if(deltagere != null){
-//			checkpointReached = true;
-//		}
-//		else{
-//			feilDeltagerLabel.setVisible(false);
-//		}
+
 		
 		if(checkpointReached = true){
-			System.out.println(checkpointReached);
-			try {
-				Main newMain = new Main();
-				newMain.setSession(this.sessionUser);
-				newMain.startKalender(new Stage());
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-			//Henter stage parameter
-			Node  source = (Node)  event.getSource(); 
-		    Stage stage  = (Stage) source.getScene().getWindow();
-		    stage.close();
+			System.out.println("GODKJENT");
+//			try {
+//				Main newMain = new Main();
+//				newMain.setSession(this.sessionUser);
+//				newMain.startKalender(new Stage());
+//			} catch (Exception e) {
+//				
+//				e.printStackTrace();
+//			}
+//			//Henter stage parameter
+//			Node  source = (Node)  event.getSource(); 
+//		    Stage stage  = (Stage) source.getScene().getWindow();
+//		    stage.close();
 		}
-		else{// if(checkpointReached = false){
-			System.out.println(checkpointReached);
+		else{
+			System.out.println("IKKE GODKJENT");
+//			lagreavtale.disabledProperty();
 		}
 	
 	}
