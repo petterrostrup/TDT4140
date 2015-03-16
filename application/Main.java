@@ -43,21 +43,7 @@ public class Main extends Application {
 	        
 	      //stage.resizableProperty().set(true/false);
 	        
-	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
-	        //varUser.saveUser();
-	        
-	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-	        	@Override
-	        	public void handle(KeyEvent p) {
-	        		if(p.getCode()==KeyCode.ENTER)
-	        		{
-	        			System.out.println("trykket enter");	        			
-	        			//LoginController().logButt(new ActionEvent());
-	        			//new LoginController().logButt(new ActionEvent());
-	        			//LoginController.logButt(ActionEvent);
-	        		}
-	        	}
-	        });	        
+		        
 	}
 	
 	public void startKalender(Stage primaryStage) {

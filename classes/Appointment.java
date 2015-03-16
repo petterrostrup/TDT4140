@@ -136,7 +136,6 @@ public class Appointment {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		try {
 			if (!results.next()){
-				System.out.println(appointment.getOwner().getId());
 				sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end, owner) "
 						+ "VALUES ('" + appointment.getName() + "', '" + appointment.getDescription() + "', '" + appointment.getLocation() + "', '" + 1 +"', '" + sdf.format(appointment.getDate()) +"', '" + appointment.getStart() +"', '" + appointment.getEnd() +"', '" + appointment.getOwner().getId() + "')";
 				System.out.println("Saving appointment");
