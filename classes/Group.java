@@ -25,6 +25,10 @@ public class Group {
 		setGroupID(id);
 	}
 	
+	public Group() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getGroupID() {
 		return groupID;
 	}

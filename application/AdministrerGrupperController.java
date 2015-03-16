@@ -47,16 +47,13 @@ public class AdministrerGrupperController {
 	private ListView medlemmerList;
 
 	//Lister
-	private ArrayList<User> userMedlemmerNyGruppe = new ArrayList<User>();
 	private ArrayList<User> userPersoner = new ArrayList<User>();
 	private ArrayList<Group> adminGroups = new ArrayList<Group>();
 	private ArrayList<User> groupMedlemmer = new ArrayList<User>();
-	
-	
-	private ObservableList<String> personer = FXCollections.observableArrayList(); //liste over alle personer som man kan legge til
-	
-	private ObservableList<String> grupper = FXCollections.observableArrayList("gruppe1", "gruppe2", "gruppe3"); //henter inn grupper man har
-	private ObservableList<String> medlemmer = FXCollections.observableArrayList("Petter", "Kristian"); //liste over medlemmer i gruppen
+
+	private ObservableList<Object> grupper = FXCollections.observableArrayList(); //henter inn grupper man har
+	private ObservableList<Object> medlemmer = FXCollections.observableArrayList(); //liste over medlemmer i gruppen
+	private ObservableList<Object> personer = FXCollections.observableArrayList();  //liste over alle personer som man kan legge til
 	//ListerSlutt
 	@FXML
 	private void initialize(){
@@ -102,14 +99,49 @@ public class AdministrerGrupperController {
 	
 	public void visMedlemmerGruppe(MouseEvent event){
 		System.out.println("viser medlemmer");
+		personer.addAll(medlemmer);
 		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) dineGrupper.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
-			dineGrupper.getSelectionModel().clearSelection();
-			for (Object i : grupper) {
-//				medlemmer.addAll(i, visMedlemmerIGruppe);;
-				medlemmer.setAll(visMedlemmerIGruppe);
+			
+			String sqlStatement = "SELECT * FROM MEMBERGROUP WHERE name = '" + visMedlemmerIGruppe.toString() + "'";
+			ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+			Group newGroup = null;
+			try {
+				while (results.next()){
+					String name = results.getString("name");
+					Long id = results.getLong(1);
+					int leader = results.getInt("leader");
+					newGroup = new Group(name,leader + "", id.toString());
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
+			sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + newGroup.getGroupID() + "'";
+			results = DatabaseCommunicator.execute(sqlStatement);
+			User newUser;
+			try {
+				while (results.next()){
+					System.out.println(newGroup.getGroupName());
+					System.out.println(results.getLong(2));
+					newUser = User.readUser(results.getLong(2));
+					System.out.println(newUser.getUserName());
+					groupMedlemmer.add(newUser);
+					medlemmer.add(newUser.getName());
+					System.out.println(newUser.getName());
+					System.out.println("Added user with ID: " + results.getLong(2));
+					if (personer.contains(newUser.getName())){
+						personer.remove(newUser.getName());
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			dineGrupper.getSelectionModel().clearSelection();
+			medlemmerList.setItems(medlemmer);
 			
 //			gruppeListe.getSelectionModel().clearSelection();
 //			medlemmer.add(visMedlemmerIGruppe);
