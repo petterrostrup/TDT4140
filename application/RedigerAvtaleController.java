@@ -171,12 +171,12 @@ public class RedigerAvtaleController {
 		
 		checkpointReached = false;
 	}
-	public Color farger(){
-		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
-		return fargekoder;
-		
-		// SE HER ALEKSANDER
-	}
+//	public Color farger(){
+//		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
+//		return fargekoder;
+//		
+//		// SE HER ALEKSANDER
+//	}
 	
 	public void visPersonerList(ActionEvent event){
 
@@ -408,5 +408,20 @@ public class RedigerAvtaleController {
 //			lagreavtale.disabledProperty();
 		}
 	
+	}
+
+	public void avbrytButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startKalender(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 	}
 }
