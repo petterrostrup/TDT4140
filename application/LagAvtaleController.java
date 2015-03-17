@@ -332,7 +332,7 @@ public class LagAvtaleController {
 		//tittel
 		if(!tittel.getText().isEmpty()){
 			checkpointReached = true;
-			System.out.println(tittel);
+			
 		}
 		else{
 			feilTittelLabel.setVisible(true);
@@ -367,10 +367,10 @@ public class LagAvtaleController {
 //		    Stage stage  = (Stage) source.getScene().getWindow();
 //		    stage.close();
 		}
-		else{
-			System.out.println("IKKE GODKJENT");
-//			lagreavtale.disabledProperty();
-		}
+//		else if (checkpointReached = false){
+//			System.out.println("IKKE GODKJENT");
+////			lagreavtale.disabledProperty();
+//		}
 	
 	}
 	
