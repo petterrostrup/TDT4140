@@ -103,6 +103,13 @@ public class AdministrerGrupperController {
 
 		String leggtilPerson = (String) allePersonerList.getSelectionModel().getSelectedItem();
 		if(leggtilPerson != null){
+			for (int i = 0; i < userPersoner.size(); i++) {
+				if (userPersoner.get(i).getName().equals(leggtilPerson)){
+					groupMedlemmer.add(userPersoner.get(i));
+					userPersoner.remove(i);
+				}
+			}
+			
 			allePersonerList.getSelectionModel().clearSelection();
 			personer.remove(leggtilPerson);
 			medlemmer.add(leggtilPerson);
