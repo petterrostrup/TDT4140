@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -30,6 +31,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -58,6 +60,10 @@ public class LagAvtaleController {
 	
 	@FXML
 	private GridPane gridpane;
+	@FXML
+	private Label visRomInfo;
+	@FXML
+	private ComboBox visRom;
 	
 	@FXML
 	private Label feilTittelLabel;
@@ -131,6 +137,9 @@ public class LagAvtaleController {
 	//slutt lister
 	@FXML
 	private void initialize(){
+		//rom
+		visRom.getItems().addAll("rom1", "rom2", "rom3", "rom4");
+		//
 		personListe.setItems(deltagere);
 		gruppeListe.setItems(grupper);
 		gruppeMedlemmerList.setItems(medlemmer);
@@ -326,6 +335,10 @@ public class LagAvtaleController {
 		
 		//Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user)
 		
+	}
+	
+	public void velgRom(ActionEvent event){
+		visRomInfo.setText((String) visRom.getSelectionModel().getSelectedItem());
 	}
 	
 	public void lagreButt (ActionEvent event) {
