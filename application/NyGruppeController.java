@@ -54,7 +54,14 @@ public class NyGruppeController {
 		User newUser;
 		try {
 			while (results.next()){
-				newUser = User.readUser(results.getLong(1));
+				String name = results.getString(results.findColumn("name"));
+				String dbPassword = results.getString(results.findColumn("password"));
+				String dbUsername = results.getString(results.findColumn("username"));
+				String mail = results.getString(results.findColumn("email"));
+				String address = results.getString(results.findColumn("address"));
+				Long id = results.getLong(1);
+				newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+				
 				userPersoner.add(newUser);
 				personer.add(newUser.getName());
 			}

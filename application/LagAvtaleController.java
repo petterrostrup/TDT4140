@@ -1,6 +1,8 @@
 package application;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -9,6 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import classes.Appointment;
+import classes.DatabaseCommunicator;
+import classes.Group;
 import classes.Room;
 import classes.User;
 import javafx.application.Application;
@@ -116,16 +120,19 @@ public class LagAvtaleController {
 	
 	
 	// start lister
+	
+	private ArrayList<User> allUsers = new ArrayList<User>();
+	private ArrayList<Room> allRooms = new ArrayList<Room>();
+	private ArrayList<Group> allGroups = new ArrayList<Group>();
+	private ArrayList<User> groupMedlemmer = new ArrayList<User>();
 
 	///////////////////////////////////////////////////////////////////////////////
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
-	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil"); // Her henter vi inn enkelt-PERSONER fra database - PETTER
+	private ObservableList<String> deltagere = FXCollections.observableArrayList(); // Her henter vi inn enkelt-PERSONER fra database - PETTER
 	//RANDOM GRUPPER START
-	//private ObservableList<String> PettersGruppe = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
-	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Aleksander", "Fredrik", "Emil", "Petter");
 	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe); // Her henter vi inn grupper fra database - PETTER
+	private ObservableList<Object> grupper = FXCollections.observableArrayList(); // Her henter vi inn grupper fra database - PETTER
 	//rANDOM GRUPPER SLUTT
 	//MEDLEMMER START
 	
@@ -137,10 +144,67 @@ public class LagAvtaleController {
 	//slutt lister
 	@FXML
 	private void initialize(){
-		//rom
+		// Gets all rooms and adds them to the list
+		String sqlStatement = "SELECT * FROM ROOM";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		Room newRoom;
+		try {
+			while (results.next()){
+				newRoom = new Room(results.getLong(1) + "", results.getString("name"), results.getString("place"), results.getInt("capacity"));
+				
+				allRooms.add(newRoom);
+				visRom.getItems().add(newRoom.getName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Gets all users and adds them to the list
+		
+		sqlStatement = "SELECT * FROM USER";
+		results = DatabaseCommunicator.execute(sqlStatement);
+		User newUser;
+		try {
+			while (results.next()){
+				String name = results.getString(results.findColumn("name"));
+				String dbPassword = results.getString(results.findColumn("password"));
+				String dbUsername = results.getString(results.findColumn("username"));
+				String mail = results.getString(results.findColumn("email"));
+				String address = results.getString(results.findColumn("address"));
+				Long id = results.getLong(1);
+				newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+				
+				allUsers.add(newUser);
+				deltagere.add(newUser.getName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Gets all groups and adds them to the list
+		
+		sqlStatement = "SELECT * FROM MEMBERGROUP";
+		results = DatabaseCommunicator.execute(sqlStatement);
+		Group newGroup;
+		try {
+			while (results.next()){
+				String name = results.getString("name");
+				Long id = results.getLong(1);
+				int leader = results.getInt("leader");
+				newGroup = new Group(name,leader + "", id.toString());
+				
+				allGroups.add(newGroup);
+				grupper.add(newGroup.getGroupName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		System.out.println(valgte);
-		visRom.getItems().addAll("rom1", "rom2", "rom3", "rom4");
 		//
 		personListe.setItems(deltagere);
 		gruppeListe.setItems(grupper);
