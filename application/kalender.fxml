@@ -12,10 +12,6 @@
       <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" visible="false">
          <children>
             <Button fx:id="nesteUke" layoutX="520.0" layoutY="6.0" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
-            <Label fx:id="ukeLabel" layoutX="402.0" layoutY="8.0" prefHeight="27.0" prefWidth="40.0" text="Uke">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
             <Button fx:id="prevWeek" layoutX="372.0" layoutY="6.0" mnemonicParsing="false" onAction="#lastWeek" text="&lt;" />
             <Label alignment="CENTER" layoutX="51.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Mandag" />
             <Label alignment="CENTER" layoutX="173.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Tirsdag" />
@@ -40,7 +36,6 @@
             <Label fx:id="fredato" layoutX="615.0" layoutY="47.0" text="01" />
             <Label fx:id="lordato" layoutX="737.0" layoutY="47.0" text="01" />
             <Label fx:id="sondato" layoutX="859.0" layoutY="47.0" text="01" />
-            <Label layoutX="1.0" layoutY="44.0" text="Uke" />
          </children>
       </Pane>
       <ScrollPane fx:id="scrollpane" layoutY="248.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: #FEFEFE;" visible="false">
