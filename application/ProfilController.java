@@ -6,11 +6,18 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import classes.DatabaseCommunicator;
+import classes.Group;
 import classes.User;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +29,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,8 +55,6 @@ public class ProfilController {
 	
 	@FXML
 	private Label email;
-	
-	
 	@FXML
 	private Pane mainPane;
 	
@@ -57,7 +63,13 @@ public class ProfilController {
 	@FXML
 	private Label innloggetsom;
 	@FXML
-
+	private ListView dineGrupper;
+	
+	private ArrayList<Group> myGroups = new ArrayList<Group>();
+	
+	private ObservableList<String> grupper = FXCollections.observableArrayList(); // HENT INN GRUPPER
+	
+	@FXML
 	public void initialize(){
 		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
 	        clip.setArcWidth(20);
@@ -69,12 +81,25 @@ public class ProfilController {
            WritableImage image = imageview.snapshot(parameters, null);
 
            imageview.setClip(null);
-
            imageview.setEffect(new DropShadow(20, Color.BLACK));
-
            imageview.setImage(image);
+           
+           
+           
 	}
 
+	public void administrerGrupperButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startAdministrerGrupper(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Node source = (Node) event.getSource();
+		Stage stage = (Stage) source.getScene().getWindow();
+		stage.close();
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
@@ -82,9 +107,34 @@ public class ProfilController {
 		brukernavn.setText(this.sessionUser.getUserName() + " - " + this.sessionUser.getName());
 		email.setText(this.sessionUser.geteMail());
 		adresse.setText(this.sessionUser.getAddress());
+		
+		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		Group newGroup;
+		try {
+			while (results.next()){
+				
+				String innerSql = "SELECT * FROM MEMBERGROUP WHERE id = '" + results.getLong(3) + "'";
+				ResultSet innerResults = DatabaseCommunicator.execute(innerSql);
+				innerResults.next();
+				
+				String name = innerResults.getString("name");
+				Long id = innerResults.getLong(1);
+				int leader = innerResults.getInt("leader");
+				newGroup = new Group(name,leader + "", id.toString());
+				myGroups.add(newGroup);
+				grupper.add(newGroup.getGroupName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		dineGrupper.setItems(grupper);
+		
 	}
 
-	
 	public void kalenderButt (ActionEvent event) {
 		try {
 			Main newMain = new Main();
@@ -125,8 +175,7 @@ public class ProfilController {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
-	
-	
+		
 	
 	public void redigerProfilButt (ActionEvent event) {
 		try {

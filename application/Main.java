@@ -31,33 +31,7 @@ public class Main extends Application {
 	        stage.setTitle("Login");
 	        stage.setScene(scene);
 	        stage.show();
-	        
-	        //Image image = new ImageIcon("picture.gif").getImage();
-	        
-//	        URL url = new URL("com/xyz/resources/camera.png");
-//	        Toolkit kit = Toolkit.getDefaultToolkit();
-//	        Image img = kit.createImage(url);
-//	        getFrame().setIconImage(img);
-	        
-	        //java.net.URL url = ClassLoader.getSystemResource("com/xyz/resources/camera.png");
-	        
-	      //stage.resizableProperty().set(true/false);
-	        
-	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
-	        //varUser.saveUser();
-	        
-	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-	        	@Override
-	        	public void handle(KeyEvent p) {
-	        		if(p.getCode()==KeyCode.ENTER)
-	        		{
-	        			System.out.println("trykket enter");	        			
-	        			//LoginController().logButt(new ActionEvent());
-	        			//new LoginController().logButt(new ActionEvent());
-	        			//LoginController.logButt(ActionEvent);
-	        		}
-	        	}
-	        });	        
+	        		        
 	}
 	
 	public void startKalender(Stage primaryStage) {
@@ -84,7 +58,6 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			RegistrerController newCont = loader.<RegistrerController>getController();
-			newCont.setSession(this.sessionUser);
 			primaryStage.show();
 		} 
 		
@@ -143,7 +116,36 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	public void startAdministrerGrupper(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("administrergrupper.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			AdministrerGrupperController newCont = loader.<AdministrerGrupperController>getController();
+			newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void startNyGruppe(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("nygruppe.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			NyGruppeController newCont = loader.<NyGruppeController>getController();
+			newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());

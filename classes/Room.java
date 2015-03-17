@@ -6,19 +6,28 @@ import java.time.LocalTime;
 import java.util.Date;
 
 public class Room {
+	private String id;
 	private String name;
 	private String place;
 	private int capacity;
 	private boolean available;
 	
-
-	public Room(String room, String place, int cap) {
+	public Room(String id, String room, String place, int cap) {
+		setId(id);
 		setName(room);
 		setPlace(place);
 		setCapacity(cap);
 		setAvailable(false);
 	}
 
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -84,5 +93,65 @@ public class Room {
 			System.out.println("Something went wrong connecting to the database");
 		}
 	}
+	
+	public void readRoom(String id){
+		String sqlStatement = "SELECT * FROM ROOM WHERE id = '" + id + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		try {
+			if (results.next()){
+				this.setId(id);
+				this.setName(results.getString(results.findColumn("name")));
+				this.setPlace(results.getString(results.findColumn("place")));
+				this.setCapacity(results.getInt(results.findColumn("capacity")));
+			}
+			else{
+				System.out.println("Room does not exist. Cannot read");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+		
+	}
+	
+	public void checkAvailable(Date date, LocalTime start, LocalTime end){
+		String sqlStatement = "SELECT * FROM BOOKING WHERE room = '" + this.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		ResultSet inner;
+		String innersql;
+		MainCalendar methods = new MainCalendar();
+		boolean crossesStart, crossesEnd;
+		try {
+			while (results.next()){
+				crossesStart = false;
+				crossesEnd = false;
+				int appointmentID = (int) results.getLong(3);
+				Appointment comparing = methods.getAppointment(appointmentID);
+				if (date.equals(comparing.getDate())){
+					//add time comparison
+				}
+				else continue;
+				
+			}
+			
+			if (results.next()){
+				this.setId(id);
+				this.setName(results.getString(results.findColumn("name")));
+				this.setPlace(results.getString(results.findColumn("place")));
+				this.setCapacity(results.getInt(results.findColumn("capacity")));
+			}
+			else{
+				System.out.println("Room does not exist. Cannot read");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+	}
+	
 
 }

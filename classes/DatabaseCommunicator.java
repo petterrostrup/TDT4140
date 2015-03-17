@@ -139,7 +139,7 @@ public class DatabaseCommunicator {
 			st.executeUpdate(bookingTable);
 			//System.out.println("(╯°□°）╯︵ ┻�?┻");
 			
-			System.out.println("Created all tables. Databases is initialized");
+			System.out.println("Created all tables. Database is initialized");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
@@ -172,7 +172,6 @@ public class DatabaseCommunicator {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
 			st.executeUpdate(statement);
-			System.out.println("Database updated");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
@@ -190,7 +189,6 @@ public class DatabaseCommunicator {
 			con = DriverManager.getConnection(url, user, password);
 			st = con.createStatement();
 			rs = st.executeQuery(statement);
-			System.out.println("Query successful... Returning results");
 			
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());

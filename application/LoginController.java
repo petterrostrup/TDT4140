@@ -62,47 +62,16 @@ public class LoginController {
 	
 	@FXML
 	private void initialize(){
-		
 	}
-//	public void start(Stage stage) throws Exception {
-//	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
-//	       
-//	        final Scene scene = new Scene(root);
-//	        
-//	        stage.setTitle("Login");
-//	        stage.setScene(scene);
-//	        stage.show();
-//	      //stage.resizableProperty().set(true/false);
-//	        
-//	        //User varUser = new User("testabrur", "Pass123", "tester@gmail.com", "Testus Testson", "Testelia 14");
-//	        //varUser.saveUser();
-//	        
-//	        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-//	        	@Override
-//	        	public void handle(KeyEvent p) {
-//	        		if(p.getCode()==KeyCode.ENTER)
-//	        		{
-//	        			System.out.println("trykket enter");
-//	        			//LoginController().logButt(new ActionEvent());
-//	        			//new LoginController().logButt(new ActionEvent());
-//	        			//LoginController.logButt(ActionEvent);
-//	        		}
-//	        	}
-//	        });	        
-//	}
 	
 	public void setSession(User sessionUser){
-		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress());
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 	}
 	
 	
 	
 	//Bytter vindu til registreringsskjerm
-	public void regButt (ActionEvent event) {
-		//System.out.println("hade");
-		//RegistrerBrukerKlasse().start(new Stage());
-		
-				
+	public void regButt (ActionEvent event) {				
 		try {
 			new Main().startRegister(new Stage());
 		} catch (Exception e) {
@@ -154,27 +123,5 @@ public class LoginController {
 //					logButt.fire();
 //				});
     }
-    
-    
-    
-    
-    //FJJEEEERNES
-	public void cheatButt (ActionEvent event) {
-		
-				
-		try {
-			new Main().startKalender(new Stage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
-		
-	}
-	
-	//FJERNESSLUTT
-
 	
 }

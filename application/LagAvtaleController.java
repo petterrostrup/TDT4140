@@ -1,8 +1,11 @@
 package application;
 
+import java.awt.Color;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import classes.Appointment;
@@ -27,6 +30,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -56,15 +60,27 @@ public class LagAvtaleController {
 	private GridPane gridpane;
 	
 	@FXML
-	private Label label1;
-	
+	private Label feilTittelLabel;
+	@FXML
+	private Label feilRomLabel;
+	@FXML
+	private Label feilDatoLabel;
+	@FXML
+	private Label feilStartSluttLabel;
+	@FXML
+	private Label feilBeskrivelseLabel;
+	@FXML
+	private Label feilDeltagerLabel;
 	@FXML
 	private Label innloggetsom;
-	
 	@FXML
 	private Label text1;
 	@FXML
 	private Label text2;
+	@FXML
+	private Label valgtePersonerText;
+	@FXML
+	private Label valgteGrupperText;
 	@FXML
 	private Label medlemmerText;
 	@FXML
@@ -74,107 +90,218 @@ public class LagAvtaleController {
 	@FXML
 	private MenuItem visGrupper;
 	@FXML 
-	private ListView deltarList;
-	@FXML 
-	private ListView deltagereList;
+	private ListView valgtePersonerList;
 	@FXML
-	private ListView gruppeMedlemmer;
+	private ListView valgteGrupperList;
+	@FXML 
+	private ListView personListe;
+	@FXML
+	private ListView gruppeListe;
+	@FXML
+	private ListView gruppeMedlemmerList;
 	@FXML
 	private Button toDeltar;
 	@FXML
 	private Button toCandidates;
+	@FXML
+	private Button leggtilmedlem;
+	
+	private Boolean checkpointReached;
+	
+	
 	// start lister
+
+	///////////////////////////////////////////////////////////////////////////////
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
-	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil");
+	private ObservableList<String> deltagere = FXCollections.observableArrayList("Petter", "Kristian", "Fredrik", "Aleksander", "Emil"); // Her henter vi inn enkelt-PERSONER fra database - PETTER
+	//RANDOM GRUPPER START
+	//private ObservableList<String> PettersGruppe = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
+	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Aleksander", "Fredrik", "Emil", "Petter");
 	
-	private ObservableList<String> PettersBitches = FXCollections.observableArrayList("Petters Bitches", "Aleksander", "Everbody");
-	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(PettersBitches.get(0), "testGruppe3"); // denne skal være Null
+	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
+	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe); // Her henter vi inn grupper fra database - PETTER
+	//rANDOM GRUPPER SLUTT
+	//MEDLEMMER START
 	
+	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
+	//MEDLEMMER SLUTT
 	
-	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList("Kristians Bitches", "Fredrik", "Emil");
-	private ObservableList<Object> grupper = FXCollections.observableArrayList("testGruppe1", "testGruppe2", KristiansGruppe.get(0));
-	
-	//listene over skal hente inn info fra database, stående verdier i listene skal FJERNES
-	
+	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper/*(hent gruppemedlemmer fra gruppene i listen "grupper*/); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
+
+	//slutt lister
 	@FXML
 	private void initialize(){
+		personListe.setItems(deltagere);
+		gruppeListe.setItems(grupper);
+		gruppeMedlemmerList.setItems(medlemmer);
 		
-		deltarList.setVisible(false);
-		deltagereList.setVisible(false);
+		valgtePersonerList.setVisible(false);
+		valgteGrupperList.setVisible(false);
+		personListe.setVisible(false);
+		gruppeListe.setVisible(false);
 		toDeltar.setVisible(false);
 		toCandidates.setVisible(false);
-		gruppeMedlemmer.setVisible(false);
+		gruppeMedlemmerList.setVisible(false);
 		medlemmerText.setVisible(false);
+		leggtilmedlem.setVisible(false);
+		valgtePersonerText.setVisible(false);
+		valgteGrupperText.setVisible(false);
 		
 		//initialiserer med en gang siden loades
 		
+		//feil-labels
+		feilTittelLabel.setVisible(false);
+		feilRomLabel.setVisible(false);
+		feilDatoLabel.setVisible(false);
+		feilStartSluttLabel.setVisible(false);
+		feilBeskrivelseLabel.setVisible(false);
+		feilDeltagerLabel.setVisible(false);
+		//feil-labels slutt
 		
+		checkpointReached = false;
+	}
+	public Color farger(){
+		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
+		return fargekoder;
+		
+		// SE HER ALEKSANDER
 	}
 	
 	public void visPersonerList(ActionEvent event){
-		deltarList.setItems(valgtePersoner);
-		deltagereList.setItems(deltagere);
+
+		valgtePersonerList.setItems(valgtePersoner);
+		valgteGrupperList.setItems(valgteGrupper);
+		
 		
 		
 		listevalg.setText(visPersoner.getText());
 		text1.setText("Valgt");
 		text2.setText("Personer");
 
-		deltarList.setVisible(true);
-		deltagereList.setVisible(true);
+		valgtePersonerList.setVisible(true);
+		valgteGrupperList.setVisible(true);
+		personListe.setVisible(true);
+		gruppeListe.setVisible(false);
 		toDeltar.setVisible(true);
 		toCandidates.setVisible(true);
+		gruppeMedlemmerList.setVisible(false);
+		medlemmerText.setVisible(false);
+		leggtilmedlem.setVisible(false);
+		valgtePersonerText.setVisible(true);
+		valgteGrupperText.setVisible(true);
 	}
+	
 	public void visGrupperList(ActionEvent event){
-		deltarList.setItems(valgteGrupper);
-		deltagereList.setItems(grupper);
+		valgtePersonerList.setItems(valgtePersoner);
+		valgteGrupperList.setItems(valgteGrupper);
 		
 		listevalg.setText(visGrupper.getText());
 		text1.setText("Valgt");
 		text2.setText("Grupper");
 		
-		deltarList.setVisible(true);
-		deltagereList.setVisible(true);
+		valgtePersonerList.setVisible(true);
+		valgteGrupperList.setVisible(true);
+		personListe.setVisible(false);
+		gruppeListe.setVisible(true);
 		toDeltar.setVisible(true);
 		toCandidates.setVisible(true);
-		gruppeMedlemmer.setVisible(true);
+		gruppeMedlemmerList.setVisible(true);
 		medlemmerText.setVisible(true);
+		leggtilmedlem.setVisible(true);
+		valgtePersonerText.setVisible(true);
+		valgteGrupperText.setVisible(true);
 	}
 
 	public void sendRight(ActionEvent event){
+		Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
+		if(fjernPerson != null){
+			valgtePersonerList.getSelectionModel().clearSelection();
+			valgtePersoner.remove(fjernPerson);
+			deltagere.add((String) fjernPerson);
+		}
+		Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
+		if(fjernGruppe != null){
+			valgteGrupperList.getSelectionModel().clearSelection();
+			valgteGrupper.remove(fjernGruppe);
+			grupper.add(fjernGruppe);
+		}
 		
-		Object fjern = (Object) deltarList.getSelectionModel().getSelectedItem();
-		if(fjern != null){
-			deltarList.getSelectionModel().clearSelection();
+//		if(listevalg.getText().equals(visPersoner.getText())){
+//			Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
+//			if(fjernPerson != null){
+//				valgtePersonerList.getSelectionModel().clearSelection();
+//				valgtePersoner.remove(fjernPerson);
+//				deltagere.add((String) fjernPerson);
+//			}
+//		}
+//		else if(listevalg.getText().equals(visGrupper.getText())){
+//			Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
+//			if(fjernGruppe != null){
+//				valgteGrupperList.getSelectionModel().clearSelection();
+//				valgteGrupper.remove(fjernGruppe);
+//				grupper.add(fjernGruppe);
+//			}
+//		}
+	}
+		
+	public void sendLeft (ActionEvent event){
+		if(listevalg.getText().equals(visPersoner.getText())){
+			Object leggtilPerson = (Object) personListe.getSelectionModel().getSelectedItem();
+			if(leggtilPerson != null){
+				personListe.getSelectionModel().clearSelection();
+				deltagere.remove(leggtilPerson);
+				valgtePersoner.add((String) leggtilPerson);
+			}
+		}
+		else if(listevalg.getText().equals(visGrupper.getText())){
+			Object leggtilGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+			if(leggtilGruppe != null){
+				gruppeListe.getSelectionModel().clearSelection();
+				grupper.remove(leggtilGruppe);
+				valgteGrupper.add((Object) leggtilGruppe);	
+			}
+		}
+		
+//		Object leggtil = (Object) personListe.getSelectionModel().getSelectedItem();
+//		if(leggtil != null){
+//			personListe.getSelectionModel().clearSelection();	
+//			if(listevalg.getText().equals(visPersoner.getText())){
+//				deltagere.remove(leggtil);
+//				valgtePersoner.add((String) leggtil);
+//			}
+//			else if(listevalg.getText().equals(visGrupper.getText())){
+//				grupper.remove(leggtil);
+//				valgteGrupper.add((String) leggtil);
+//			}
+//		}
+	}
+	
+	public void addGruppeMedlem(ActionEvent event){
+		Object leggtilMedlem = (Object) gruppeMedlemmerList.getSelectionModel().getSelectedItem();
+		if(leggtilMedlem != null){
+			gruppeMedlemmerList.getSelectionModel().clearSelection();
 			
-			if(listevalg.getText().equals(visPersoner.getText())){
-				valgtePersoner.remove(fjern);
-				deltagere.add((String) fjern);
-			}
-			else if(listevalg.getText().equals(visGrupper.getText())){
-				valgteGrupper.remove(fjern);
-				grupper.add(fjern);
-			}
+			medlemmer.remove(leggtilMedlem);
+			valgtePersoner.add((String) leggtilMedlem);
 		}
 	}
 	
-	public void sendLeft (ActionEvent event){
-		Object leggtil = (Object) deltagereList.getSelectionModel().getSelectedItem();
-//		String leggtil2 = (String) 
-		if(leggtil != null){
-			deltagereList.getSelectionModel().clearSelection();
-			
-			if(listevalg.getText().equals(visPersoner.getText())){
-				deltagere.remove(leggtil);
-				valgtePersoner.add((String) leggtil);
-			}
-			else if(listevalg.getText().equals(visGrupper.getText())){
-				grupper.remove(leggtil);
-				valgteGrupper.add(leggtil);
+	public void visMedlemmer(MouseEvent event){
+		System.out.println("herro");
+		medlemmer.clear();
+		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
+		if(visMedlemmerIGruppe != null){
+			gruppeListe.getSelectionModel().clearSelection();
+			for (Object i : grupper) {
+//				medlemmer.addAll(i, visMedlemmerIGruppe);;
+				medlemmer.setAll(visMedlemmerIGruppe);
 			}
 			
+//			gruppeListe.getSelectionModel().clearSelection();
+//			medlemmer.add(visMedlemmerIGruppe);
 		}
-	}// PRInT TIL MEDLEMTINGEN NEXT BOI
+
+	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
@@ -190,47 +317,76 @@ public class LagAvtaleController {
 		//String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 				//(request.getParameter("date")));
 		
-		Room VarRoom = new Room("Real 56","Realfagsbygget", 5);
-		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new Date(2015, 13, 03), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
-		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
-		newAppointment.saveAppointment(newAppointment);
+//		Room VarRoom = new Room("10", "Real 56","Realfagsbygget", 5);
+//		Calendar c1 = Calendar.getInstance();
+//		c1.set(2015, Calendar.MARCH, 18);
+//		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, c1.getTime(),Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), sessionUser);
+//		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
+//		newAppointment.saveAppointment(newAppointment);
 		
 		//Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user)
 		
 	}
 	
 	public void lagreButt (ActionEvent event) {
-		System.out.println("test");
-		//Lagre data fra skjema i database
-		Boolean checkpointReached = true;
-		
-		Button lagreButt = new Button("Lagre");
-		lagreButt.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-			public void handle(ActionEvent e){
-				if ((tittel.getText() != null && !tittel.getText().isEmpty())) {
-					label1.setText(tittel.getText()); //utvides og kobles til korrekt LABEL/BUTTON(kalenderelement)
-				}
-				else{
-					label1.setText("Fyll in det feltet"); //kobles med feilmeldingslabels
-				}
-			}
+		feilTittelLabel.setVisible(false);
+		feilRomLabel.setVisible(false);
+		feilDatoLabel.setVisible(false);
+		feilStartSluttLabel.setVisible(false);
+		feilBeskrivelseLabel.setVisible(false);
+		feilDeltagerLabel.setVisible(false);
+		boolean checkpointReached = false;
+//tittel
+		if(!tittel.getText().isEmpty()){
+			checkpointReached = true;
 			
-		});
-		// hvis validering er godkjent, send til hjem
+		}
+		else{
+			feilTittelLabel.setVisible(true);
+		}
+//dato
+//		Date now = new Date();
+//		int result = now.compareTo(dato);
+//		if (result < 0){
+//			this.date = date;
+//			
+//		}
+//		else throw new IllegalArgumentException("Date must be after current date");
+
+//start/slutt
+		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
+			checkpointReached = true;
+
+		}
+		else{
+			feilStartSluttLabel.setVisible(true);
+		}
+//beskrivelse
+		if(!beskrivelse.getText().isEmpty()){
+			checkpointReached = true;
+		}
+		else{
+			feilBeskrivelseLabel.setVisible(true);
+		}
+		
 		if(checkpointReached){
-			try {
-				Main newMain = new Main();
-				newMain.setSession(this.sessionUser);
-				newMain.startKalender(new Stage());
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-			//Henter stage parameter
-			Node  source = (Node)  event.getSource(); 
-		    Stage stage  = (Stage) source.getScene().getWindow();
-		    stage.close();
+			System.out.println("GODKJENT");
+//			try {
+//				Main newMain = new Main();
+//				newMain.setSession(this.sessionUser);
+//				newMain.startKalender(new Stage());
+//			} catch (Exception e) {
+//				
+//				e.printStackTrace();
+//			}
+//			//Henter stage parameter
+//			Node  source = (Node)  event.getSource(); 
+//		    Stage stage  = (Stage) source.getScene().getWindow();
+//		    stage.close();
+		}
+		else{
+			System.out.println("IKKE GODKJENT");
+//			lagreavtale.disabledProperty();
 		}
 	
 	}
@@ -278,7 +434,5 @@ public class LagAvtaleController {
 	    stage.close();
 
 	}
-	
-
 	
 }
