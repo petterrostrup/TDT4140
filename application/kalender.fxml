@@ -161,13 +161,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="800.0" layoutY="31.0" prefHeight="21.0" prefWidth="125.0" text="Mandag">
+            <Label alignment="CENTER" layoutX="800.0" layoutY="31.0" prefHeight="21.0" prefWidth="125.0" text="Søndag">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="nextMonth" layoutX="519.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
-            <Button fx:id="lastMonth" layoutX="373.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextWeek" text="&lt;" />
+            <Button fx:id="nesteMoned" layoutX="519.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
+            <Button fx:id="sisteMoned" layoutX="373.0" layoutY="5.0" mnemonicParsing="false" onAction="#lastMonth" text="&lt;" />
             <Label fx:id="monthLabel" alignment="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="27.0" prefWidth="73.0" text="Januar">
                <font>
                   <Font size="18.0" />
