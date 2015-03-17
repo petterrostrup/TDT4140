@@ -163,6 +163,21 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void startRedigerAvtale(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigeravtale.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			RedigerAvtaleController newCont = loader.<RedigerAvtaleController>getController();
+			newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
