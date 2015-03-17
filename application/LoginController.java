@@ -71,11 +71,7 @@ public class LoginController {
 	
 	
 	//Bytter vindu til registreringsskjerm
-	public void regButt (ActionEvent event) {
-		//System.out.println("hade");
-		//RegistrerBrukerKlasse().start(new Stage());
-		
-				
+	public void regButt (ActionEvent event) {				
 		try {
 			new Main().startRegister(new Stage());
 		} catch (Exception e) {
