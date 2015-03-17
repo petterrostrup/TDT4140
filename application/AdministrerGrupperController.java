@@ -45,6 +45,8 @@ public class AdministrerGrupperController {
 	private ListView allePersonerList;
 	@FXML
 	private ListView medlemmerList;
+	
+	private Group currentGroup;
 
 	//Lister
 	private ArrayList<User> userPersoner = new ArrayList<User>();
@@ -78,10 +80,13 @@ public class AdministrerGrupperController {
 	public void sendRight(ActionEvent event){
 		String fjernPerson = (String) medlemmerList.getSelectionModel().getSelectedItem();
 		if(fjernPerson != null){
+			for (int i = 0; i < groupMedlemmer.size(); i++) {
+				if (groupMedlemmer.get(i).getName().equals(fjernPerson)){
+					userPersoner.add(groupMedlemmer.get(i));
+					groupMedlemmer.remove(i);	
+				}
+			}
 			medlemmerList.getSelectionModel().clearSelection();
-			
-			
-			
 			medlemmer.remove(fjernPerson);
 			personer.add(fjernPerson);
 		}
@@ -100,7 +105,9 @@ public class AdministrerGrupperController {
 	public void visMedlemmerGruppe(MouseEvent event){
 		System.out.println("viser medlemmer");
 		personer.addAll(medlemmer);
+		userPersoner.addAll(groupMedlemmer);
 		medlemmer.clear();
+		groupMedlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) dineGrupper.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
 			
@@ -113,6 +120,7 @@ public class AdministrerGrupperController {
 					Long id = results.getLong(1);
 					int leader = results.getInt("leader");
 					newGroup = new Group(name,leader + "", id.toString());
+					currentGroup = newGroup;
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -124,15 +132,12 @@ public class AdministrerGrupperController {
 			User newUser;
 			try {
 				while (results.next()){
-					System.out.println(newGroup.getGroupName());
-					System.out.println(results.getLong(2));
 					newUser = User.readUser(results.getLong(2));
-					System.out.println(newUser.getUserName());
 					groupMedlemmer.add(newUser);
 					medlemmer.add(newUser.getName());
-					System.out.println(newUser.getName());
 					System.out.println("Added user with ID: " + results.getLong(2));
 					if (personer.contains(newUser.getName())){
+						userPersoner.remove(newUser);
 						personer.remove(newUser.getName());
 					}
 				}
@@ -178,6 +183,7 @@ public class AdministrerGrupperController {
 				Long id = results.getLong(1);
 				int leader = results.getInt("leader");
 				newGroup = new Group(name,leader + "", id.toString());
+				currentGroup = newGroup;
 				adminGroups.add(newGroup);
 				grupper.add(newGroup.getGroupName());
 			}
@@ -188,10 +194,23 @@ public class AdministrerGrupperController {
 	}
 	
 	public void oppdaterButt (ActionEvent event) {
-		System.out.println("test");
 		Boolean checkpointReached = true;
 		if(checkpointReached){
 			try {
+				String sqlStatement = "DELETE FROM MEMBER WHERE membergroup = '" + currentGroup.getGroupID() + "'";
+				DatabaseCommunicator.update(sqlStatement);
+				
+				
+				for (int i = 0; i < groupMedlemmer.size(); i++) {
+					User member = groupMedlemmer.get(i);
+					System.out.println(member.getId());
+					try {
+						currentGroup.addMember(member.getId());
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+				
 				Main newMain = new Main();
 				newMain.setSession(this.sessionUser);
 				newMain.startProfil(new Stage());
