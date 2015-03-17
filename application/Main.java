@@ -147,6 +147,25 @@ public class Main extends Application {
 		}
 	}
 	
+	
+	public void startAvtaleOversikt(Stage primaryStage){
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("avtaleoversikt.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			AvtaleOversiktController newCont = loader.<AvtaleOversiktController>getController();
+			//newCont.setSession(this.sessionUser);
+			primaryStage.show();
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 	}
