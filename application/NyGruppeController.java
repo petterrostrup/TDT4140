@@ -54,7 +54,14 @@ public class NyGruppeController {
 		User newUser;
 		try {
 			while (results.next()){
-				newUser = User.readUser(results.getLong(1));
+				String name = results.getString(results.findColumn("name"));
+				String dbPassword = results.getString(results.findColumn("password"));
+				String dbUsername = results.getString(results.findColumn("username"));
+				String mail = results.getString(results.findColumn("email"));
+				String address = results.getString(results.findColumn("address"));
+				Long id = results.getLong(1);
+				newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+				
 				userPersoner.add(newUser);
 				personer.add(newUser.getName());
 			}
@@ -141,5 +148,19 @@ public class NyGruppeController {
 		}
 		
 		else throw new IllegalArgumentException("Navnet må være definert og medlemmer må legges til");
+	}
+	
+	public void avbrytButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 	}
 }

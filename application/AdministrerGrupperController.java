@@ -64,7 +64,14 @@ public class AdministrerGrupperController {
 		User newUser;
 		try {
 			while (results.next()){
-				newUser = User.readUser(results.getLong(1));
+				String name = results.getString(results.findColumn("name"));
+				String dbPassword = results.getString(results.findColumn("password"));
+				String dbUsername = results.getString(results.findColumn("username"));
+				String mail = results.getString(results.findColumn("email"));
+				String address = results.getString(results.findColumn("address"));
+				Long id = results.getLong(1);
+				newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+				
 				userPersoner.add(newUser);
 				personer.add(newUser.getName());
 			}
@@ -96,6 +103,13 @@ public class AdministrerGrupperController {
 
 		String leggtilPerson = (String) allePersonerList.getSelectionModel().getSelectedItem();
 		if(leggtilPerson != null){
+			for (int i = 0; i < userPersoner.size(); i++) {
+				if (userPersoner.get(i).getName().equals(leggtilPerson)){
+					groupMedlemmer.add(userPersoner.get(i));
+					userPersoner.remove(i);
+				}
+			}
+			
 			allePersonerList.getSelectionModel().clearSelection();
 			personer.remove(leggtilPerson);
 			medlemmer.add(leggtilPerson);
@@ -223,5 +237,18 @@ public class AdministrerGrupperController {
 		    Stage stage  = (Stage) source.getScene().getWindow();
 		    stage.close();
 		    }
+	}
+	public void avbrytButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 	}
 }

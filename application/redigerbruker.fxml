@@ -10,31 +10,22 @@
    <children>
       <Pane layoutY="128.0" prefHeight="492.0" prefWidth="700.0">
          <children>
-            <Label fx:id="ugyldigNyttBrukernavn" layoutX="314.0" layoutY="88.0" text="123" />
-            <Label fx:id="ugyldigNavn" layoutX="314.0" layoutY="47.0" />
-            <Label fx:id="ugyldigNyttpassord" layoutX="314.0" layoutY="286.0" />
-            <Label fx:id="ugyldigEpost" layoutX="314.0" layoutY="129.0" />
-            <Label fx:id="ugyldigGammeltpassord" layoutX="314.0" layoutY="242.0" />
-            <TextField fx:id="brukernavn" layoutX="120.0" layoutY="80.0" />
-            <PasswordField fx:id="nyttpassord" layoutX="120.0" layoutY="280.0" />
-            <Button fx:id="openfile" layoutX="511.0" layoutY="319.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
-            <Label layoutX="20.0" layoutY="280.0" text="Nytt passord" />
-            <Label fx:id="ugyldigAdresse" layoutX="314.0" layoutY="173.0" />
-            <Label layoutX="20.0" layoutY="40.0" text="Navn:" />
-            <TextField fx:id="epost" layoutX="120.0" layoutY="120.0" />
-            <Label layoutX="20.0" layoutY="320.0" text="Gjenta passord" />
-            <Label layoutX="20.0" layoutY="120.0" text="E-post:" />
-            <PasswordField fx:id="gnyttpassord" layoutX="120.0" layoutY="320.0" />
-            <TextField fx:id="adresse" layoutX="120.0" layoutY="160.0" />
-            <PasswordField fx:id="passord" layoutX="120.0" layoutY="240.0" />
-            <Label fx:id="ugyldigGjentapassord" layoutX="314.0" layoutY="332.0" />
             <TextField fx:id="navn" layoutX="120.0" layoutY="40.0" />
-            <Label layoutX="20.0" layoutY="240.0" text="Gammelt passord:" />
-            <Label layoutX="20.0" layoutY="80.0" text="Nytt brukernavn:" />
-            <Label layoutX="20.0" layoutY="160.0" text="Adresse:" />
+            <TextField fx:id="epost" layoutX="120.0" layoutY="83.0" />
+            <TextField fx:id="adresse" layoutX="120.0" layoutY="123.0" />
+            <PasswordField fx:id="passord" layoutX="120.0" layoutY="203.0" />
+            <PasswordField fx:id="nyttpassord" layoutX="120.0" layoutY="243.0" />
+            <PasswordField fx:id="gnyttpassord" layoutX="120.0" layoutY="283.0" />
+            <Button fx:id="openfile" layoutX="533.0" layoutY="288.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
+            <Label layoutX="20.0" layoutY="243.0" text="Nytt passord" />
+            <Label layoutX="20.0" layoutY="40.0" text="Navn:" />
+            <Label layoutX="20.0" layoutY="283.0" text="Gjenta passord" />
+            <Label layoutX="20.0" layoutY="83.0" text="E-post:" />
+            <Label layoutX="20.0" layoutY="203.0" text="Gammelt passord:" />
+            <Label layoutX="20.0" layoutY="123.0" text="Adresse:" />
             <Button fx:id="lagre" layoutX="120.0" layoutY="378.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
             <Button fx:id="Avbryt" layoutX="247.0" layoutY="378.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
-            <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="406.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageview" fitHeight="244.0" fitWidth="236.0" layoutX="450.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
       <Pane prefHeight="128.0" prefWidth="700.0" style="-fx-background-color: #E2E2E2;">

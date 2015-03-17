@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="780.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerAvtaleController">
    <children>
-      <Label fx:id="tittel" layoutX="304.0" layoutY="14.0" text="Rediger Avtale">
+      <Label layoutX="304.0" layoutY="14.0" text="Rediger Avtale">
          <font>
             <Font size="30.0" />
          </font>
@@ -15,7 +15,7 @@
       <Pane layoutY="83.0" prefHeight="631.0" prefWidth="780.0">
          <children>
             <Button fx:id="lagreavtale" layoutX="169.0" layoutY="594.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
-            <TextField fx:id="tittel1" layoutX="169.0" layoutY="12.0" />
+            <TextField fx:id="tittel" layoutX="169.0" layoutY="12.0" />
             <Label layoutX="58.0" layoutY="16.0" text="Tittel" />
             <Label layoutX="58.0" layoutY="57.0" text="Rom: " />
             <Label layoutX="58.0" layoutY="100.0" text="Dato:" />
@@ -53,6 +53,7 @@
             <Label fx:id="feilDeltagerLabel" layoutX="182.0" layoutY="558.0" text="Må ha minst 1 deltager" textFill="RED" />
             <Label fx:id="visRomInfo" layoutX="331.0" layoutY="57.0" />
             <ComboBox fx:id="visRom" layoutX="168.0" layoutY="53.0" onAction="#velgRom" prefHeight="25.0" prefWidth="148.0" />
+            <Button fx:id="avbryt" layoutX="715.0" layoutY="594.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
          </children>
       </Pane>
    </children>

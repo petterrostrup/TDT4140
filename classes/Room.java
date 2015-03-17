@@ -35,10 +35,10 @@ public class Room {
 
 
 	public void setName(String roomNr) {
-		if (roomNr.matches("[a-zA-Z]+-?[a-zA-Z]* \\d*")){
-			this.name = roomNr;			
-		}
-		else throw new IllegalArgumentException("Invalid Roomnumber");	
+//		if (roomNr.matches("[a-zA-Z]+-?[a-zA-Z]* \\d*")){
+		this.name = roomNr;			
+//		}
+//		else throw new IllegalArgumentException("Invalid Roomnumber");	
 	}
 
 
