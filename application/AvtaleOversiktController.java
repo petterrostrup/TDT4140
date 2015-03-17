@@ -57,13 +57,13 @@ public class AvtaleOversiktController {
 		
 
 		tittel.setText(appz.getName());
-		//rom.setText(appz.getRoom().toString()); må få vist romnavnet fra Room klassen
-		//deltagere.setText(appz.getParticipants().toString()); må vise en liste over deltagere
+		//rom.setText(room.getName);
+		rom.setText(testRoom.getName());
+		//deltagere.setText(appz.getParticipants().toString()); Skal vise en liste over deltagere
 		dato.setText(appz.getDate().toString());
-		tidspunkt.setText(appz.getStart().toString() + "-");
-		tidspunkt.setText(appz.getEnd() + "-" );
-		System.out.println(appz.getDescription());
-		beskrivelse.setText(appz.getDescription());
+		tidspunkt.setText(appz.getStart().toString() + (" - ") + appz.getEnd());
+		//tidspunkt.setText(appz.getEnd() + "-" );
+		//beskrivelse.setText(appz.getDescription()); TEXTAREA SUCKS, THIS DOESN'T WORK
 		
 	}
 	
