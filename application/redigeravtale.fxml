@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="780.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerAvtaleController">
+   <children>
+      <Label layoutX="304.0" layoutY="14.0" text="Rediger Avtale">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Pane layoutY="83.0" prefHeight="631.0" prefWidth="780.0">
+         <children>
+            <Button fx:id="lagreavtale" layoutX="169.0" layoutY="594.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+            <TextField fx:id="tittel" layoutX="169.0" layoutY="12.0" />
+            <Label layoutX="58.0" layoutY="16.0" text="Tittel" />
+            <Label layoutX="58.0" layoutY="57.0" text="Rom: " />
+            <Label layoutX="58.0" layoutY="100.0" text="Dato:" />
+            <Label layoutX="58.0" layoutY="194.0" text="Beskrivelse" />
+            <TextArea fx:id="beskrivelse" layoutX="169.0" layoutY="194.0" prefHeight="103.0" prefWidth="259.0" />
+            <DatePicker fx:id="dato" layoutX="169.0" layoutY="96.0" />
+            <ListView fx:id="valgtePersonerList" layoutX="169.0" layoutY="343.0" prefHeight="97.0" prefWidth="150.0" />
+            <ListView fx:id="personListe" layoutX="353.0" layoutY="343.0" prefHeight="205.0" prefWidth="150.0" />
+            <Button fx:id="toDeltar" layoutX="323.0" layoutY="415.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
+            <Button fx:id="toCandidates" layoutX="323.0" layoutY="448.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
+            <Label layoutX="58.0" layoutY="147.0" text="Start/Slutt" />
+            <TextField fx:id="start" layoutX="169.0" layoutY="143.0" prefHeight="16.0" prefWidth="93.0" />
+            <TextField fx:id="slutt" layoutX="286.0" layoutY="143.0" prefHeight="26.0" prefWidth="93.0" />
+            <Label layoutX="271.0" layoutY="147.0" text="/" />
+            <MenuButton fx:id="listevalg" layoutX="46.0" layoutY="331.0" mnemonicParsing="false" text="Deltagere">
+               <items>
+                  <MenuItem fx:id="visPersoner" mnemonicParsing="false" onAction="#visPersonerList" text="Personer" />
+                  <MenuItem fx:id="visGrupper" mnemonicParsing="false" onAction="#visGrupperList" text="Grupper" />
+               </items>
+            </MenuButton>
+            <Label fx:id="text1" layoutX="230.0" layoutY="321.0" />
+            <Label fx:id="text2" layoutX="415.0" layoutY="321.0" />
+            <ListView fx:id="gruppeMedlemmerList" layoutX="556.0" layoutY="343.0" prefHeight="180.0" prefWidth="180.0" />
+            <Label fx:id="medlemmerText" layoutX="614.0" layoutY="321.0" text="Medlemmer" />
+            <Button fx:id="leggtilmedlem" layoutX="634.0" layoutY="533.0" mnemonicParsing="false" onAction="#addGruppeMedlem" text="&lt;" />
+            <ListView fx:id="valgteGrupperList" layoutX="168.0" layoutY="448.0" prefHeight="97.0" prefWidth="150.0" />
+            <Label fx:id="valgteGrupperText" layoutX="116.0" layoutY="488.0" text="Grupper" />
+            <Label fx:id="valgtePersonerText" layoutX="114.0" layoutY="389.0" text="Personer" />
+            <ListView fx:id="gruppeListe" layoutX="353.0" layoutY="343.0" onMouseClicked="#visMedlemmer" prefHeight="205.0" prefWidth="150.0" />
+            <Label fx:id="feilTittelLabel" layoutX="333.0" layoutY="16.0" text="Feltet må fylles ut" textFill="RED" />
+            <Label fx:id="feilRomLabel" layoutX="482.0" layoutY="57.0" text="Du må velge rom" textFill="RED" />
+            <Label fx:id="feilDatoLabel" layoutX="353.0" layoutY="100.0" text="Du må velge dato" textFill="RED" />
+            <Label fx:id="feilStartSluttLabel" layoutX="400.0" layoutY="147.0" text="Feil input, eks: &quot;10:00&quot; / &quot;11:00&quot;" textFill="RED" />
+            <Label fx:id="feilBeskrivelseLabel" layoutX="447.0" layoutY="229.0" text="Feltet må fylles ut" textFill="RED" />
+            <Label fx:id="feilDeltagerLabel" layoutX="182.0" layoutY="558.0" text="Må ha minst 1 deltager" textFill="RED" />
+            <Label fx:id="visRomInfo" layoutX="331.0" layoutY="57.0" />
+            <ComboBox fx:id="visRom" layoutX="168.0" layoutY="53.0" onAction="#velgRom" prefHeight="25.0" prefWidth="148.0" />
+            <Button fx:id="avbryt" layoutX="715.0" layoutY="594.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

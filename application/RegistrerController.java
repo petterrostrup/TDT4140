@@ -104,7 +104,7 @@ public class RegistrerController {
 			String eMail = epost.getText();
 			String address = adresse.getText();
 			
-			varUser = new User(userName, password, eMail, name, address, this.sessionUser.getId());
+			varUser = new User(userName, password, eMail, name, address);
 			
 			varUser.saveUser();
 		} catch (Exception e) {
