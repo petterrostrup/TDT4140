@@ -133,11 +133,13 @@ public class LagAvtaleController {
 	//MEDLEMMER SLUTT
 	
 	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper/*(hent gruppemedlemmer fra gruppene i listen "grupper*/); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
-
+	private ArrayList<String> supervalgte = new ArrayList<String>();
 	//slutt lister
 	@FXML
 	private void initialize(){
 		//rom
+		
+		System.out.println(valgte);
 		visRom.getItems().addAll("rom1", "rom2", "rom3", "rom4");
 		//
 		personListe.setItems(deltagere);
@@ -357,6 +359,13 @@ public class LagAvtaleController {
 		else{
 			feilTittelLabel.setVisible(true);
 		}
+//rom
+		if(!visRomInfo.getText().equals("")){
+			checkpointReached = true;
+		}
+		else{
+			feilRomLabel.setVisible(true);
+		}
 //dato
 //		Date now = new Date();
 //		int result = now.compareTo(dato);
@@ -368,12 +377,22 @@ public class LagAvtaleController {
 
 //start/slutt
 		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
-			checkpointReached = true;
-
+	
+			String startstring = start.getText().replace(":", "");
+			String sluttstring = slutt.getText().replace(":", "");
+			int startint = Integer.parseInt(startstring);
+			int sluttint = Integer.parseInt(sluttstring);
+			//System.out.println(startint + " " + sluttint);
+			if(startint < sluttint){
+				checkpointReached = true;
+			}
+			else{
+				feilStartSluttLabel.setText("Starttid må være etter slutttid.");
+				feilStartSluttLabel.setVisible(true);			}
 		}
-		else{
-			feilStartSluttLabel.setVisible(true);
-		}
+		else{feilStartSluttLabel.setVisible(true);
+			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
+		
 //beskrivelse
 		if(!beskrivelse.getText().isEmpty()){
 			checkpointReached = true;
@@ -381,7 +400,15 @@ public class LagAvtaleController {
 		else{
 			feilBeskrivelseLabel.setVisible(true);
 		}
+//deltagere
+		if(!valgte.contains(equals(null))){
+			checkpointReached = true;
+		}
+		else{
+			feilDeltagerLabel.setVisible(true);
+		}
 		
+//if nirvana reached, save the stuff
 		if(checkpointReached){
 			System.out.println("GODKJENT");
 //			try {
