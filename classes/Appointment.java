@@ -98,13 +98,13 @@ public class Appointment {
 		return date;
 	}
 	public void setDate(Date date) {
-		Date now = new Date();
-		int result = now.compareTo(date);
-		if (result < 0){
+//		Date now = new Date();
+//		int result = now.compareTo(date);
+//		if (result < 0){
 			this.date = date;
 			
-		}
-		else throw new IllegalArgumentException("Date must be after current date");
+//		}
+//		else throw new IllegalArgumentException("Date must be after current date");
 	}
 	
 	public Timestamp getStart() {

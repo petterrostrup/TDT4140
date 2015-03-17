@@ -208,7 +208,7 @@ public class ProfilController {
 		try{
 			Main newMain= new Main();
 			newMain.setSession(this.sessionUser);
-			newMain.startProfil(new Stage());
+			newMain.startAvtaleOversikt(new Stage());
 			 
 		}catch (Exception e){
 			e.printStackTrace();
