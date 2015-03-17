@@ -85,54 +85,19 @@ public class AvtaleOversiktController {
 //	}
 	
 	
-	public Appointment redigerAvtale (ActionEvent event) {	
-		
-		//Calendar avt = Calendar.getInstance();
-		//avt.set
-		
-		
-		
-		Appointment nyApp = new Appointment(null, null, null, null, null, null, null, null, sessionUser);
-		//Appointment nyApp = new Appointment(null, null, null, null, null, null, null, sessionUser);
-		//Appointment nyApp = new Appointment();
-		
-		
+	public void redigerAvtale (ActionEvent event) {	
 		try {
-			nyApp.getName();			
-			System.out.println(nyApp.getName());
-			System.out.println("tst");
-			
-						
-			
-			
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startRedigerAvtale(new Stage());
 		} catch (Exception e) {
-			System.out.println("asd");
-			System.out.println(e);
-		
-		}if(nyApp != null){
-			System.out.println("Viser avtaleoversikt");
 			
-//			tittel.setText(null);
-//			rom.setText(null);
-//			deltagere.setText(null);
-//			dato.setText(null);
-//			tidspunkt.setText(null);
-//			beskrivelse.setText(null);
-			
-			
-//			Node  source = (Node)  event.getSource(); 
-//		    Stage stage  = (Stage) source.getScene().getWindow();
-//		    stage.close();
+			e.printStackTrace();
 		}
-		else{
-		
-		
-		
-		
-		return nyApp;
-		
-		}
-		return nyApp;
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 	}
 
 
