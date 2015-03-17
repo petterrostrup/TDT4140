@@ -11,24 +11,24 @@
    <children>
       <Pane layoutY="128.0" prefHeight="492.0" prefWidth="700.0">
          <children>
-            <TextField fx:id="epost" layoutX="108.0" layoutY="120.0" />
             <TextField fx:id="navn" layoutX="108.0" layoutY="40.0" />
-            <Label layoutX="20.0" layoutY="240.0" text="Gjenta passord:" />
+            <TextField fx:id="brukernavn" layoutX="108.0" layoutY="80.0" />
+            <TextField fx:id="epost" layoutX="108.0" layoutY="120.0" />
+            <TextField fx:id="adresse" layoutX="108.0" layoutY="160.0" />
+            <PasswordField fx:id="passord" layoutX="108.0" layoutY="200.0" />
+            <PasswordField fx:id="gpassord" layoutX="108.0" layoutY="240.0" />
             <Button fx:id="velgfil" layoutX="511.0" layoutY="319.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
+            <Button fx:id="registrer" layoutX="76.0" layoutY="319.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
+            <Button fx:id="tologginn" layoutX="597.0" layoutY="441.0" mnemonicParsing="false" onAction="#toLogginn" text="Tilbake" />
+            <Label layoutX="20.0" layoutY="240.0" text="Gjenta passord:" />
             <Label layoutX="20.0" layoutY="80.0" text="Brukernavn:" />
             <Label layoutX="20.0" layoutY="160.0" text="Adresse:" />
-            <Button fx:id="registrer" layoutX="76.0" layoutY="319.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
             <Label layoutX="20.0" layoutY="200.0" text="Passord:" />
-            <PasswordField fx:id="gpassord" layoutX="108.0" layoutY="240.0" />
             <Label layoutX="20.0" layoutY="120.0" text="E-post:" />
             <Label layoutX="20.0" layoutY="40.0" text="Navn:" />
-            <PasswordField fx:id="passord" layoutX="108.0" layoutY="200.0" />
             <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="406.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="adresse" layoutX="108.0" layoutY="160.0" />
             <Label fx:id="ugyldigBrukernavn" layoutX="266.0" layoutY="89.0" />
             <Label fx:id="ugyldigEpost" layoutX="266.0" layoutY="125.0" prefHeight="17.0" prefWidth="0.0" />
-            <Button fx:id="tologginn" layoutX="597.0" layoutY="441.0" mnemonicParsing="false" onAction="#toLogginn" text="Tilbake" />
-            <TextField fx:id="brukernavn" layoutX="108.0" layoutY="80.0" />
             <Label layoutX="257.0" layoutY="44.0" text="(Ingen ugyldige chars)" />
             <Label layoutX="257.0" layoutY="84.0" text="(Ingen store bokstaver eller mellomrom)" />
             <Label layoutX="257.0" layoutY="125.0" text="(Må være gyldig e-post)" />
