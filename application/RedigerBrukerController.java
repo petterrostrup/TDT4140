@@ -129,7 +129,7 @@ public class RedigerBrukerController {
 			}
 			
 			if (gammeltPassordRed.equals(this.sessionUser.getPassword()) && nyttPassordRed.equals(gnyttPassordRed)){
-				varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed);
+				varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed, this.sessionUser.getId());
 				if (!varUser.equals(this.sessionUser)) varUser.updateUser();				
 			}
 			

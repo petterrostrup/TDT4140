@@ -6,9 +6,14 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import classes.DatabaseCommunicator;
+import classes.Group;
 import classes.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -60,7 +65,9 @@ public class ProfilController {
 	@FXML
 	private ListView dineGrupper;
 	
-	private ObservableList<String> grupper = FXCollections.observableArrayList("a", "b", "c", "fu"); // HENT INN GRUPPER
+	private ArrayList<Group> myGroups = new ArrayList<Group>();
+	
+	private ObservableList<String> grupper = FXCollections.observableArrayList(); // HENT INN GRUPPER
 	
 	@FXML
 	public void initialize(){
@@ -77,7 +84,8 @@ public class ProfilController {
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
            
-           dineGrupper.setItems(grupper);
+           
+           
 	}
 
 	public void administrerGrupperButt(ActionEvent event){
@@ -99,6 +107,32 @@ public class ProfilController {
 		brukernavn.setText(this.sessionUser.getUserName() + " - " + this.sessionUser.getName());
 		email.setText(this.sessionUser.geteMail());
 		adresse.setText(this.sessionUser.getAddress());
+		
+		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		Group newGroup;
+		try {
+			while (results.next()){
+				
+				String innerSql = "SELECT * FROM MEMBERGROUP WHERE id = '" + results.getLong(3) + "'";
+				ResultSet innerResults = DatabaseCommunicator.execute(innerSql);
+				innerResults.next();
+				
+				String name = innerResults.getString("name");
+				Long id = innerResults.getLong(1);
+				int leader = innerResults.getInt("leader");
+				newGroup = new Group(name,leader + "", id.toString());
+				myGroups.add(newGroup);
+				grupper.add(newGroup.getGroupName());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		dineGrupper.setItems(grupper);
+		
 	}
 
 	public void kalenderButt (ActionEvent event) {
