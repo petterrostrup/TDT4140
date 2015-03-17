@@ -43,40 +43,6 @@
             <Label layoutX="87.0" layoutY="196.0" text="Beskrivelse" />
             <TextArea fx:id="beskrivelse" layoutX="198.0" layoutY="196.0" prefHeight="103.0" prefWidth="259.0" />
             <DatePicker fx:id="dato" layoutX="198.0" layoutY="98.0" />
-            <SplitMenuButton fx:id="rom" layoutX="198.0" layoutY="55.0" mnemonicParsing="false" text="Rom">
-               <items>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <SplitMenuButton mnemonicParsing="false" text="Sted 1">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </SplitMenuButton>
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <SplitMenuButton mnemonicParsing="false" text="Sted 2">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </SplitMenuButton>
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false">
-                     <graphic>
-                        <SplitMenuButton mnemonicParsing="false" text="Sted 3">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </SplitMenuButton>
-                     </graphic>
-                  </MenuItem>
-               </items>
-            </SplitMenuButton>
             <ListView fx:id="valgtePersonerList" layoutX="198.0" layoutY="345.0" prefHeight="97.0" prefWidth="150.0" />
             <ListView fx:id="personListe" layoutX="382.0" layoutY="345.0" prefHeight="205.0" prefWidth="150.0" />
             <Button fx:id="toDeltar" layoutX="352.0" layoutY="417.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
@@ -101,11 +67,13 @@
             <Label fx:id="valgtePersonerText" layoutX="143.0" layoutY="391.0" text="Personer" />
             <ListView fx:id="gruppeListe" layoutX="382.0" layoutY="345.0" onMouseClicked="#visMedlemmer" prefHeight="205.0" prefWidth="150.0" />
             <Label fx:id="feilTittelLabel" layoutX="362.0" layoutY="18.0" text="Feltet må fylles ut" textFill="RED" />
-            <Label fx:id="feilRomLabel" layoutX="282.0" layoutY="59.0" text="Du må velge rom" textFill="RED" />
+            <Label fx:id="feilRomLabel" layoutX="511.0" layoutY="59.0" text="Du må velge rom" textFill="RED" />
             <Label fx:id="feilDatoLabel" layoutX="382.0" layoutY="102.0" text="Du må velge dato" textFill="RED" />
             <Label fx:id="feilStartSluttLabel" layoutX="429.0" layoutY="149.0" text="Feil input, eks: &quot;10:00&quot; / &quot;11:00&quot;" textFill="RED" />
             <Label fx:id="feilBeskrivelseLabel" layoutX="476.0" layoutY="231.0" text="Feltet må fylles ut" textFill="RED" />
             <Label fx:id="feilDeltagerLabel" layoutX="211.0" layoutY="560.0" text="Må ha minst 1 deltager" textFill="RED" />
+            <Label fx:id="visRomInfo" layoutX="360.0" layoutY="59.0" />
+            <ComboBox fx:id="visRom" layoutX="197.0" layoutY="55.0" onAction="#velgRom" prefHeight="25.0" prefWidth="148.0" />
          </children>
       </Pane>
    </children>
