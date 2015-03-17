@@ -31,19 +31,7 @@ public class Main extends Application {
 	        stage.setTitle("Login");
 	        stage.setScene(scene);
 	        stage.show();
-	        
-	        //Image image = new ImageIcon("picture.gif").getImage();
-	        
-//	        URL url = new URL("com/xyz/resources/camera.png");
-//	        Toolkit kit = Toolkit.getDefaultToolkit();
-//	        Image img = kit.createImage(url);
-//	        getFrame().setIconImage(img);
-	        
-	        //java.net.URL url = ClassLoader.getSystemResource("com/xyz/resources/camera.png");
-	        
-	      //stage.resizableProperty().set(true/false);
-	        
-		        
+	        		        
 	}
 	
 	public void startKalender(Stage primaryStage) {

@@ -328,8 +328,15 @@ public class LagAvtaleController {
 		
 	}
 	
-	public void lagreButt (ActionEvent event) {		
-		//tittel
+	public void lagreButt (ActionEvent event) {
+		feilTittelLabel.setVisible(false);
+		feilRomLabel.setVisible(false);
+		feilDatoLabel.setVisible(false);
+		feilStartSluttLabel.setVisible(false);
+		feilBeskrivelseLabel.setVisible(false);
+		feilDeltagerLabel.setVisible(false);
+		boolean checkpointReached = false;
+//tittel
 		if(!tittel.getText().isEmpty()){
 			checkpointReached = true;
 			
@@ -337,7 +344,7 @@ public class LagAvtaleController {
 		else{
 			feilTittelLabel.setVisible(true);
 		}
-
+//dato
 //		Date now = new Date();
 //		int result = now.compareTo(dato);
 //		if (result < 0){
@@ -346,13 +353,23 @@ public class LagAvtaleController {
 //		}
 //		else throw new IllegalArgumentException("Date must be after current date");
 
-		//start/slutt
-//		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
-//			checkpointReached = true;
-//		}
+//start/slutt
+		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
+			checkpointReached = true;
 
+		}
+		else{
+			feilStartSluttLabel.setVisible(true);
+		}
+//beskrivelse
+		if(!beskrivelse.getText().isEmpty()){
+			checkpointReached = true;
+		}
+		else{
+			feilBeskrivelseLabel.setVisible(true);
+		}
 		
-		if(checkpointReached = true){
+		if(checkpointReached){
 			System.out.println("GODKJENT");
 //			try {
 //				Main newMain = new Main();
@@ -367,10 +384,10 @@ public class LagAvtaleController {
 //		    Stage stage  = (Stage) source.getScene().getWindow();
 //		    stage.close();
 		}
-//		else if (checkpointReached = false){
-//			System.out.println("IKKE GODKJENT");
-////			lagreavtale.disabledProperty();
-//		}
+		else{
+			System.out.println("IKKE GODKJENT");
+//			lagreavtale.disabledProperty();
+		}
 	
 	}
 	

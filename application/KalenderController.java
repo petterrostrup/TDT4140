@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
@@ -36,50 +37,227 @@ public class KalenderController {
 	
 	private User sessionUser;
 	
-	@FXML
-	private ScrollPane scrollpane;
-	@FXML
-	private GridPane gridpane;
-	@FXML
-	private DatePicker datepicker;
-	@FXML
-	private Label weeknr;
-	@FXML
-	private Label yearnr;
-	@FXML
-	private Label mandato;
-	@FXML
-	private Label tirdato;
-	@FXML
-	private Label onsdato;
-	@FXML
-	private Label torsdato;
-	@FXML
-	private Label fredato;
-	@FXML
-	private Label lordato;
-	@FXML
-	private Label sondato;
-	@FXML
-	private Button nesteUke;
-	@FXML
-	private Button prevWeek;
-	@FXML
-	private Pane monthPane;
-	@FXML
-	private GridPane monthGrid;
-	@FXML
-	private Pane monthHeaderPane;
-	@FXML
-	private Pane weekHeaderPane;
-	@FXML
-	private Label monthLabel;
-	@FXML
-	private Label yearMonth;
-	@FXML
-	private Label innloggetsom;
-	@FXML
-	private Label ukeLabel;
+    @FXML
+    private Label week1;
+    @FXML
+    private Label week2;
+    @FXML
+    private Label week3;
+    @FXML
+    private Label lordato;
+
+    @FXML
+    private Label month63;
+
+    @FXML
+    private Label month62;
+
+    @FXML
+    private Label month21;
+
+    @FXML
+    private Label month65;
+
+    @FXML
+    private Label month20;
+
+    @FXML
+    private Label month64;
+
+    @FXML
+    private Pane weekHeaderPane;
+
+    @FXML
+    private Pane monthPane;
+
+    @FXML
+    private Label monthLabel;
+
+    @FXML
+    private Label month61;
+
+    @FXML
+    private Label month60;
+
+    @FXML
+    private Label notification;
+
+    @FXML
+    private Label month15;
+
+    @FXML
+    private Label month12;
+
+    @FXML
+    private Label month11;
+
+    @FXML
+    private Label month55;
+
+    @FXML
+    private Label month14;
+
+    @FXML
+    private Label month13;
+
+    @FXML
+    private Label tirdato;
+
+    @FXML
+    private Label onsdato;
+
+    @FXML
+    private RadioButton radioWeek;
+
+    @FXML
+    private Label yearMonth;
+
+    @FXML
+    private Button nesteUke;
+
+    @FXML
+    private Label month52;
+
+    @FXML
+    private Label month51;
+
+    @FXML
+    private Label innloggetsom;
+
+    @FXML
+    private Label month10;
+
+    @FXML
+    private Label month54;
+
+    @FXML
+    private Label month53;
+
+    @FXML
+    private DatePicker datepicker;
+
+    @FXML
+    private Label month50;
+
+    @FXML
+    private GridPane gridpane;
+
+    @FXML
+    private Label month45;
+
+    @FXML
+    private ScrollPane scrollpane;
+
+    @FXML
+    private Label month44;
+
+    @FXML
+    private Label month41;
+
+    @FXML
+    private Label month40;
+
+    @FXML
+    private Label month43;
+
+    @FXML
+    private Label month42;
+
+    @FXML
+    private Button prevWeek;
+
+    @FXML
+    private Pane monthHeaderPane;
+
+    @FXML
+    private Button nesteMoned;
+
+    @FXML
+    private Label torsdato;
+
+    @FXML
+    private Label fredato;
+
+    @FXML
+    private Label month34;
+
+    @FXML
+    private Label month33;
+
+    @FXML
+    private ToggleGroup radioGroup1;
+
+    @FXML
+    private Label month35;
+
+    @FXML
+    private Label mandato;
+
+    @FXML
+    private Label sondato;
+
+    @FXML
+    private GridPane monthGrid;
+
+    @FXML
+    private Label month30;
+
+    @FXML
+    private Label month74;
+
+    @FXML
+    private Button sisteMoned;
+
+    @FXML
+    private Label month73;
+
+    @FXML
+    private Label month32;
+
+    @FXML
+    private Label month31;
+
+    @FXML
+    private Label month75;
+
+    @FXML
+    private Label month70;
+
+    @FXML
+    private Label month72;
+
+    @FXML
+    private Label month71;
+
+    @FXML
+    private Label month23;
+
+    @FXML
+    private Label month22;
+
+    @FXML
+    private Label yearnr;
+
+    @FXML
+    private Label month25;
+
+    @FXML
+    private Label weeknr;
+
+    @FXML
+    private Label month24;
+
+    @FXML
+    private Label week4;
+
+    @FXML
+    private Label week5;
+
+    @FXML
+    private Label week6;
+
+    @FXML
+    private Label ukeLabel;
 	
 	private Calendar cal = Calendar.getInstance();
 	private Calendar tempCal;
@@ -102,8 +280,10 @@ public class KalenderController {
 	public void radioUke(ActionEvent event){
 		scrollpane.setVisible(true);
 		weekHeaderPane.setVisible(true);
+		weekHeaderPane.setDisable(false);
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
+		monthHeaderPane.setDisable(true);
 		
 		
 		setWeek();
@@ -114,7 +294,9 @@ public class KalenderController {
 		monthPane.setVisible(true);
 		scrollpane.setVisible(false);
 		weekHeaderPane.setVisible(false);
+		weekHeaderPane.setDisable(true);
 		monthHeaderPane.setVisible(true);
+		monthHeaderPane.setDisable(false);
 		setMonth();
 	}
 	
@@ -164,8 +346,19 @@ public class KalenderController {
 	public void setMonth(){
 		tempCal = this.cal;
 		monthLabel.setText(monthString(tempCal.get(Calendar.MONTH)));
+		yearMonth.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
 		
 	}
+	
+//	public String monthDayName(){
+//		String dayName;
+//		for (int i = 0; i < 6; i++){
+//			for (int j = 1; j<8; j++){
+//				dayName = "month"+j+i;
+//				
+//			}
+//		}
+//	}
 	public String monthString(int month){
 		if (month == 1){
 			return "Januar";}
