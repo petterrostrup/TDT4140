@@ -474,22 +474,21 @@ public class LagAvtaleController {
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
 			// DO THE SHIT
-//			try {
-//				Main newMain = new Main();
-//				newMain.setSession(this.sessionUser);
-//				newMain.startKalender(new Stage());
-//			} catch (Exception e) {
-//				
-//				e.printStackTrace();
-//			}
-//			//Henter stage parameter
-//			Node  source = (Node)  event.getSource(); 
-//		    Stage stage  = (Stage) source.getScene().getWindow();
-//		    stage.close();
+			try {
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.startKalender(new Stage());
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//Henter stage parameter
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
 		}
 		else{
 			System.out.println("IKKE GODKJENT");
-//			lagreavtale.disabledProperty();
 		}
 	
 	}
