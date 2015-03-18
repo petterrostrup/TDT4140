@@ -445,7 +445,6 @@ public class LagAvtaleController {
 			LocalDate datoidag = LocalDate.now();
 			int test = datoValgt.compareTo(datoidag);
 			if(!(test == 0 || test > 0)){
-				System.out.println("NOO");
 				feilDatoLabel.setVisible(true);
 				feilDatoLabel.setText("Må sette en dato fram i tid");
 			}
@@ -487,19 +486,37 @@ public class LagAvtaleController {
 //if nirvana reached, save the stuff
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
-			// DO THE SHIT
-			try {
-				Main newMain = new Main();
-				newMain.setSession(this.sessionUser);
-				newMain.startKalender(new Stage());
-			} catch (Exception e) {
-				
+			
+//			(name, description, location, room, date, start, end, owner)
+			User varUser = null;
+			// DO THE STUFF
+			try{
+				String name = tittel.getText();
+				String room = visRomInfo.getText();
+//				String location = visRomInfo.getText(); Trenger vi denne?
+				String description = beskrivelse.getText();
+				LocalDate date = dato.getValue();
+//				String start = start.getText();
+				String end = slutt.getText();
+				String owner = this.sessionUser.getUserName();
+			
+			}catch(Exception e){
 				e.printStackTrace();
 			}
-			//Henter stage parameter
-			Node  source = (Node)  event.getSource(); 
-		    Stage stage  = (Stage) source.getScene().getWindow();
-		    stage.close();
+			
+			if(varUser != null){
+				try {
+					Main newMain = new Main();
+					newMain.setSession(this.sessionUser);
+					newMain.startKalender(new Stage());
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+			}
 		}
 		else{
 			System.out.println("IKKE GODKJENT");
