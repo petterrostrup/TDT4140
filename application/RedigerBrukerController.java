@@ -39,16 +39,13 @@ public class RedigerBrukerController {
 	private TextField navn;
 	
 	@FXML
-	private TextField brukernavn;
-	
-	@FXML
 	private TextField epost;
 	
 	@FXML
 	private TextField adresse;
 	
 	@FXML
-	private PasswordField passord;
+	private PasswordField gammeltpassord;
 	
 	@FXML
 	private PasswordField nyttpassord;
@@ -57,145 +54,158 @@ public class RedigerBrukerController {
 	private PasswordField gnyttpassord;
 	
 	@FXML
-	private Label ugyldigNavn;
-	
+	private Label feilNavnText;
 	@FXML
-	private Label ugyldigNyttBrukernavn;
-	
+	private Label feilEpostText;
 	@FXML
-	private Label ugyldigEpost;
-	
+	private Label feilAdresseText;
 	@FXML
-	private Label ugyldigAdresse;
-	
+	private Label feilGammeltPassordText;
 	@FXML
-	private Label ugyldigGammeltpassord;
-	
+	private Label feilNyttPassordText;
 	@FXML
-	private Label ugyldigNyttpassord;
-	
-	@FXML
-	private Label ugyldigGjentapassord;
+	private Label feilGPassordText;
 	
 	
 		
-	String navnRed;
-	String nyttBrukernavnRed;
-	String epostRed;
-	String adresseRed;
-	String gammeltPassordRed;
-	String nyttPassordRed;
-	String gnyttPassordRed;
-	
+//	String navnRed;
+//	String epostRed;
+//	String adresseRed;
+//	String gammeltPassordRed;
+//	String nyttPassordRed;
+//	String gnyttPassordRed;
+//	
 	private User varUser;
 	
 	
 	@FXML
 	private void initialize(){
-		
+		feilNavnText.setVisible(false);
+		feilEpostText.setVisible(false);
+		feilAdresseText.setVisible(false);
+		feilGammeltPassordText.setVisible(false);
+		feilNyttPassordText.setVisible(false);
+		feilGPassordText.setVisible(false);
 	}
 	
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		navn.setText(this.sessionUser.getName());
-		brukernavn.setText(this.sessionUser.getUserName());
 		epost.setText(this.sessionUser.geteMail());
 		adresse.setText(this.sessionUser.getAddress());
+		
 	}
-	
-	//setTextFill(Color.RED);
 
 	//Lagre data fra skjema i database
 	public void lagreButt (ActionEvent event) {
-		//System.out.println("test");
-		//boolean dataOk = true;
-		navnRed = navn.getText();
-		nyttBrukernavnRed = brukernavn.getText();
-		epostRed = epost.getText();
-		adresseRed = adresse.getText();
-		gammeltPassordRed = passord.getText();
-		nyttPassordRed = nyttpassord.getText();
-		gnyttPassordRed = gnyttpassord.getText();
-		//System.out.println(nyttBrukernavnRed);
-		
-		
-		
-		boolean checkpointReached = true;
-		try {
-			if (nyttPassordRed.isEmpty()){
-				gammeltPassordRed = this.sessionUser.getPassword();
-				nyttPassordRed = this.sessionUser.getPassword();
-				gnyttPassordRed = this.sessionUser.getPassword();
-			}
-			
-			if (gammeltPassordRed.equals(this.sessionUser.getPassword()) && nyttPassordRed.equals(gnyttPassordRed)){
-				varUser = new User(nyttBrukernavnRed, nyttPassordRed, epostRed, navnRed, adresseRed, this.sessionUser.getId());
-				if (!varUser.equals(this.sessionUser)) varUser.updateUser();				
-			}
-			
-			else System.out.println("Passordene stemmer ikke");
-		
-			
-		} catch (Exception e) {
-			System.out.println(e);
-			
-			ugyldigNavn.setText("Ugyldig navn");
-			ugyldigNyttBrukernavn.setText("Lowercase and numbers allowed between 3 to 15 chars long");
-			ugyldigEpost.setText("Ugyldig epost");
-			ugyldigAdresse.setText("Ugyldig adresse");
-			ugyldigGammeltpassord.setText("Ugyldig gammelt passord");
-			ugyldigNyttpassord.setText("Lower and Upper case, must contain number and at least length of 8");
-			ugyldigGjentapassord.setText("Ugyldig gjenta passord");
-			
-			ugyldigNavn.setTextFill(Color.RED);
-			ugyldigNyttBrukernavn.setTextFill(Color.RED);
-			ugyldigEpost.setTextFill(Color.RED);
-			ugyldigAdresse.setTextFill(Color.RED);
-			ugyldigGammeltpassord.setTextFill(Color.RED);
-			ugyldigNyttpassord.setTextFill(Color.RED);
-			ugyldigGjentapassord.setTextFill(Color.RED);
-			
-			checkpointReached = true;
+
+		feilNavnText.setVisible(false);
+		feilEpostText.setVisible(false);
+		feilAdresseText.setVisible(false);
+		feilGammeltPassordText.setVisible(false);
+		feilNyttPassordText.setVisible(false);
+		feilGPassordText.setVisible(false);
+//validering start		-------------------------------------
+//navn
+		if(navn.getText().isEmpty()){
+			feilNavnText.setVisible(true);
+			feilNavnText.setText("Må fylles ut");
 		}
-		
-		
-		
-		//hvis validering er godkjent, send tilbake til Profil
-		if(checkpointReached){
-			try {
-				Main newMain = new Main();
-				newMain.setSession(varUser);
-				newMain.startProfil(new Stage());
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-			//Henter stage parameter
-			Node  source = (Node)  event.getSource(); 
-		    Stage stage  = (Stage) source.getScene().getWindow();
-		    stage.close();
-		    
-//			((Node)(event.getSource())).getScene().getWindow().hide();
+		else if(!navn.getText().matches("[a-zA-Z]+")){
+			feilNavnText.setVisible(true);
+			feilNavnText.setText("Navn kan bare inneholde bokstaver");
 		}
-		else{
-			ugyldigNyttBrukernavn.setText("");
+
+//epost
+		if(epost.getText().isEmpty()){
+			feilEpostText.setVisible(true);
+			feilEpostText.setText("Må fylles ut");
 		}
-		
+		else if(!epost.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
+			feilEpostText.setVisible(true);
+			feilEpostText.setText("Ugyldig epost, eks: 'abc@ntnu.no'");
+		}
+
+//adresse
+		if(adresse.getText().isEmpty()){
+			feilAdresseText.setVisible(true);
+			feilAdresseText.setText("Må fylles ut");
+		}
+		else if(!adresse.getText().matches("((([A-Z]?[a-z]* ?)*)[0-9]+)")){
+			feilAdresseText.setVisible(true);
+			feilAdresseText.setText("Ugyldig adresse, eks: 'ntnu 1'");
+		}
+
 
 		
+//nyttpassord
+		if(nyttpassord.getText().isEmpty()){
+			feilNyttPassordText.setVisible(true);
+			feilNyttPassordText.setText("Må fylles ut");
+		}
+		else if(!nyttpassord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){ // IKKE LAGET NO-WHITESPACEVALIDATION
+			//^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
+			feilNyttPassordText.setVisible(true);
+			feilNyttPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
+		}
+
+//gjentapassord
+		if(gnyttpassord.getText().isEmpty()){
+			feilGPassordText.setVisible(true);
+			feilGPassordText.setText("Må fylles ut");
+		}
+		else if(!gnyttpassord.getText().equals(nyttpassord.getText())){
+			feilGPassordText.setVisible(true);
+			feilGPassordText.setText("Passordene er ulike");
+		}
 		
-		
-		
-		
-//		if(navnRed.length()<2){
-//			ugyldigNavn.setText("lol");
-//			dataOk = false;
-//		}
-//		//Inneholder tall
-//		else if(navnRed.matches(".*\\d.*")){
-//			ugyldigNavn.setText("Fornavn kan ikke inneholde tall");
-//			dataOk = false;
-//		}
+//gammeltpassord
+		if(gammeltpassord.getText().isEmpty()){
+			feilGammeltPassordText.setVisible(true);
+			feilGammeltPassordText.setText("Må fylles ut");
+			System.out.println(this.sessionUser.getPassword());
+		}
+		else if(!(gammeltpassord.getText().equals(this.sessionUser.getPassword()))){
+//			gammeltpassord.setText(this.sessionUser.getPassword());
+			feilGammeltPassordText.setVisible(true);
+			feilGammeltPassordText.setText("Passordet er feil");
+		}
+
+//validering slutt		--------------------------------
+	
+		//hvis validering er godkjent, send tilbake til Profil
+		if(!(feilNavnText.isVisible()) && !(feilEpostText.isVisible()) && !(feilAdresseText.isVisible()) && !(feilGammeltPassordText.isVisible()) && !(feilNyttPassordText.isVisible()) &&!(feilGPassordText.isVisible())){
+			System.out.println("godkjent");
+			User varUser = null;
+			try{
+				String userName = this.sessionUser.getUserName();
+				String password = nyttpassord.getText();
+				String name = navn.getText();
+				String eMail = epost.getText();
+				String address = adresse.getText();
+				
+				varUser = new User(userName, password, eMail, name, address);
+			
+				varUser.updateUser();
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			if(varUser != null){
+				try {
+					Main newMain = new Main();
+					newMain.setSession(varUser);
+					newMain.startProfil(new Stage());
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		else{
+			System.out.println("feil");
+		}
 	
 	}
 	

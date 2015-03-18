@@ -82,7 +82,6 @@ public class RegistrerController {
 		feilPassordText.setVisible(false);
 		feilGPassordText.setVisible(false);
 		
-		accept = false;
 	}
 	
 	public void setSession(User sessionUser){
@@ -126,21 +125,17 @@ public class RegistrerController {
 			feilNavnText.setVisible(true);
 			feilNavnText.setText("Navn kan bare inneholde bokstaver");
 		}
-//		else{
-//			accept = true;
-//		}
+
 //brukernavn
 		if(brukernavn.getText().isEmpty()){
 			feilBrukernavnText.setVisible(true);
 			feilBrukernavnText.setText("Må fylles ut");
 		}
-		else if(!brukernavn.getText().matches("[a-z]+")){
+		else if(!brukernavn.getText().matches("^[a-z0-9_-]{3,15}$")){
 			feilBrukernavnText.setVisible(true);
-			feilBrukernavnText.setText("Bare lower-case bokstaver");
+			feilBrukernavnText.setText("Bare lower-case bokstaver og 3-15 langt");
 		}
-//		else{
-//			accept = true;
-//		}
+
 //epost
 		if(epost.getText().isEmpty()){
 			feilEpostText.setVisible(true);
@@ -150,34 +145,28 @@ public class RegistrerController {
 			feilEpostText.setVisible(true);
 			feilEpostText.setText("Ugyldig epost, eks: 'abc@ntnu.no'");
 		}
-//		else{
-//			accept = true;
-//		}
+
 //adresse
 		if(adresse.getText().isEmpty()){
 			feilAdresseText.setVisible(true);
 			feilAdresseText.setText("Må fylles ut");
 		}
-		else if(!adresse.getText().matches("^.*\\d$")){
+		else if(!adresse.getText().matches("((([A-Z]?[a-z]* ?)*)[0-9]+)")){
 			feilAdresseText.setVisible(true);
 			feilAdresseText.setText("Ugyldig adresse, eks: 'ntnu 1'");
 		}
-//		else{
-//			accept = true;
-//		}
+
 //passord
 		if(passord.getText().isEmpty()){
 			feilPassordText.setVisible(true);
 			feilPassordText.setText("Må fylles ut");
 		}
-		else if(!passord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$")){ // IKKE LAGET NO-WHITESPACEVALIDATION
+		else if(!passord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){ // IKKE LAGET NO-WHITESPACEVALIDATION
 			//^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
 			feilPassordText.setVisible(true);
 			feilPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
 		}
-//		else{
-//			accept = true;
-//		}
+
 //gjentapassord
 		if(gpassord.getText().isEmpty()){
 			feilGPassordText.setVisible(true);
@@ -187,10 +176,7 @@ public class RegistrerController {
 			feilGPassordText.setVisible(true);
 			feilGPassordText.setText("Passordene er ulike");
 		}
-//		else{
-//			accept = true;
-//		}
-//		
+
 //validering slutt		
 
 		//hvis godkjent, gjør dette
