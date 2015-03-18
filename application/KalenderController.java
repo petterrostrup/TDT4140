@@ -32,6 +32,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class KalenderController {
@@ -51,11 +52,8 @@ public class KalenderController {
     @FXML
     private Label month64, month74, month15, month25, month35, month45, month55, month65, month75;
     
-    Label[] dayList = new Label[]{month10, month20, month30, month40, month50, month60, month70, month11, month21, month31, month41,
-    		month51, month61, month71, month12, month22, month32, month42, month52, month62, month72, month13, month23, month33, month43,
-    		month53, month63, month73, month14, month24, month34, month44, month54, month64, month74, month15, month25, month35, month45,
-    		month55, month65, month75};
-    private ArrayList<Label> monthDays;
+    Label[] dayList = new Label[]{};
+    ObservableList<Label> monthDays = FXCollections.observableArrayList();
     @FXML
     private Label notification;
     @FXML
@@ -98,14 +96,17 @@ public class KalenderController {
     private Label ukeLabel;
     
 	private Calendar cal = Calendar.getInstance();
-	private Calendar tempCal;
+	private Calendar tempCal = Calendar.getInstance();
 	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
+	ObservableList<Node> avtaleMonthCollection = FXCollections.observableArrayList();
+	
 	
 
 	@FXML
 	private void initialize(){
-//		monthDays.addAll(Arrays.asList(dayList));
+		addToMonthDays();
 		avtaleCollection.addAll(gridpane.getChildren());
+		avtaleMonthCollection.addAll(monthGrid.getChildren());
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
 		scrollpane.setVisible(true);
@@ -113,7 +114,17 @@ public class KalenderController {
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
 		setWeek();
+		setMonth();
 		
+	}
+	public void addToMonthDays(){
+		this.dayList = new Label[]{month10, month20, month30, month40, month50, month60, month70, month11, month21, month31, month41,
+	    		month51, month61, month71, month12, month22, month32, month42, month52, month62, month72, month13, month23, month33, month43,
+	    		month53, month63, month73, month14, month24, month34, month44, month54, month64, month74, month15, month25, month35, month45,
+	    		month55, month65, month75};
+		for (Label label: dayList){
+			this.monthDays.add(label);
+		}
 	}
 	
 	public void radioUke(ActionEvent event){
@@ -136,12 +147,12 @@ public class KalenderController {
 		weekHeaderPane.setDisable(true);
 		monthHeaderPane.setVisible(true);
 		monthHeaderPane.setDisable(false);
-		setMonth();
+//		setMonth();
 	}
 	
 	
 	public void nextWeek(ActionEvent event){
-		cal.add(Calendar.WEEK_OF_YEAR, +1);
+		cal.add(Calendar.WEEK_OF_YEAR, 1);
 		gridpane.getChildren().clear();
 		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
@@ -157,7 +168,7 @@ public class KalenderController {
 
 	
 	public void setWeek(){
-		tempCal = this.cal;
+		tempCal.setTime(this.cal.getTime());;
 		weeknr.setText(Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR)));
 		yearnr.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
 		fillCalendar();
@@ -173,7 +184,7 @@ public class KalenderController {
 	}
 	
 	public void nextMonth(ActionEvent event){
-		cal.add(Calendar.MONTH, +1);
+		cal.add(Calendar.MONTH, 1);
 		setMonth();
 	}
 	
@@ -182,78 +193,100 @@ public class KalenderController {
 		setMonth();
 	}
 	
-	public void setMonth(){
-		tempCal = this.cal;
-		int days = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		int indentTop;
-		int missingBottom;
-		int max = 42;
-		monthLabel.setText(monthString(tempCal.get(Calendar.MONTH)));
-		yearMonth.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
-//		
-//		if (tempCal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
-//			indentTop = 7;
-//			missingBottom = max -(indentTop + days);
-//			for (int day = 7; day < monthDays.size()-missingBottom; day++){
-//				monthDays.get(day).setText(Integer.toString(Calendar.));
-//				tempCal.set(Calendar.DAY_OF_MONTH, +1);
-//			}
-//		}
-//		else {
-//			
-//		}
-//		
-//		tempCal.set(Calendar.WEEK_OF_MONTH, 1);
-//		if (tempCal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
-//			setDayLabel(month11,2); setDayLabel(month21,3); setDayLabel(month31,4); setDayLabel(month41,5); setDayLabel(month51,6); setDayLabel(month61,7); setDayLabel(month71,1);
-//			tempCal.set(Calendar.WEEK_OF_MONTH, 2);
-//			setDayLabel(month12,2); setDayLabel(month22,3); setDayLabel(month32,4); setDayLabel(month42,5); setDayLabel(month52,6); setDayLabel(month62,7); setDayLabel(month72,1);
-//			tempCal.set(Calendar.WEEK_OF_MONTH, 3);
-//			setDayLabel(month13,2); setDayLabel(month23,3); setDayLabel(month33,4); setDayLabel(month43,5); setDayLabel(month53,6); setDayLabel(month63,7); setDayLabel(month73,1);
-//			tempCal.set(Calendar.WEEK_OF_MONTH, 4);
-//			setDayLabel(month14,2); setDayLabel(month24,3); setDayLabel(month34,4); setDayLabel(month44,5); setDayLabel(month54,6); setDayLabel(month64,7); setDayLabel(month74,1);
-//			tempCal.set(Calendar.WEEK_OF_MONTH, 5);
-//			setDayLabel(month15,2); setDayLabel(month25,3); setDayLabel(month35,4); setDayLabel(month45,5); setDayLabel(month55,6); setDayLabel(month65,7); setDayLabel(month75,1);
-//			tempCal.set(Calendar.WEEK_OF_MONTH, 1);
-//			setDayLabel(month10,2); setDayLabel(month20,3); setDayLabel(month30,4); setDayLabel(month40,5); setDayLabel(month50,6); setDayLabel(month60,7); setDayLabel(month70,1);
-//			
-//		}
+	public int calculateIndentation(Calendar date){
+		int indentation = 0;
+		Calendar monthDate = Calendar.getInstance();
+		monthDate.setTime(date.getTime());
+		monthDate.set(Calendar.DAY_OF_MONTH, 1);
+		if (monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
+			indentation = 7;
+		}
+		else if(monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY){
+			indentation = 1;
+		}
+		else if(monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY){
+			indentation = 2;
+		}
+		else if(monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY){
+			indentation = 3;
+		}
+		else if(monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
+			indentation = 4;
+		}
+		else if(monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
+			indentation = 5;
+		}
+		else if (monthDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+			indentation = 6;
+		}
+		return indentation;
 	}
 	
-//	public void monthDayName(){
-//		String dayName;
-//		int day = 1;
-//		for (int i = 0; i < 6; i++){
-//			for (int j = 1; j<8; j++){
-//				dayName = "month"+j+i;
-//				dayName.setText(Integer.toString(tempCal.get(Calendar.DAY_OF_WEEK_IN_MONTH)));
-//			}
-//		}
-//	}
-	public String monthString(int month){
-		if (month == 1){
+	
+	public void setMonth(){
+		Calendar brukKalender = Calendar.getInstance();
+		brukKalender.setTime(this.cal.getTime());
+		monthLabel.setText(monthString(brukKalender));
+		yearMonth.setText(Integer.toString(brukKalender.get(Calendar.YEAR)));
+		int max = 42;
+		int days = brukKalender.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+		int indentTop = calculateIndentation(brukKalender);
+		int missingBottom = (max - (days+indentTop));
+		
+		brukKalender.set(Calendar.DAY_OF_MONTH, 1);
+		
+		
+		for (int day = indentTop; day < monthDays.size(); day++){
+			monthDays.get(day).setText(Integer.toString(brukKalender.get(Calendar.DAY_OF_MONTH)));
+			monthDays.get(day).setTextFill(Color.BLACK);
+			brukKalender.add(Calendar.DAY_OF_YEAR, +1);
+			
+			if (day >= (max-missingBottom)){
+				monthDays.get(day).setTextFill(Color.GRAY);
+			}
+			
+		}
+
+		brukKalender.setTime(this.cal.getTime());
+		brukKalender.add(Calendar.MONTH, -1);
+		brukKalender.set(Calendar.DAY_OF_MONTH, brukKalender.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+		for (int day = indentTop-1; day > -1; day--){
+			monthDays.get(day).setText(Integer.toString(brukKalender.get(Calendar.DAY_OF_MONTH)));
+			monthDays.get(day).setTextFill(Color.GRAY);
+			if (!(day == 0)){
+				brukKalender.add(Calendar.DAY_OF_YEAR, -1);
+			}
+		}
+	}
+	
+
+	public String monthString(Calendar cal){
+		int month = cal.get(Calendar.MONTH);
+		if (month == Calendar.JANUARY){
 			return "Januar";}
-		else if (month == 2){
+		else if (month == Calendar.FEBRUARY){
 			return "Februar";}
-		else if (month == 3){
+		else if (month == Calendar.MARCH){
 			return "Mars";}
-		else if (month == 4){
+		else if (month == Calendar.APRIL){
 			return "April";}
-		else if (month == 5){
+		else if (month == Calendar.MAY){
 			return "Mai";}
-		else if (month == 6){
+		else if (month == Calendar.JUNE){
 			return "Juni";}
-		else if (month == 7){
+		else if (month == Calendar.JULY){
 			return "Juli";}
-		else if (month == 8){
+		else if (month == Calendar.AUGUST){
 			return "August";}
-		else if (month == 9){
+		else if (month == Calendar.SEPTEMBER){
 			return "September";}
-		else if (month == 10){
+		else if (month == Calendar.OCTOBER){
 			return "Oktober";}
-		else if (month == 11){
+		else if (month == Calendar.NOVEMBER){
 			return "November";}
-		else if (month == 12){
+		else if (month == Calendar.DECEMBER){
 			return "Desember";}
 		else{
 			return "No int given";
