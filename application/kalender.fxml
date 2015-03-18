@@ -9,35 +9,6 @@
 
 <Pane maxWidth="928.0" minWidth="928.0" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KalenderController">
    <children>
-      <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" visible="false">
-         <children>
-            <Button fx:id="nesteUke" layoutX="520.0" layoutY="6.0" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
-            <Button fx:id="prevWeek" layoutX="372.0" layoutY="6.0" mnemonicParsing="false" onAction="#lastWeek" text="&lt;" />
-            <Label alignment="CENTER" layoutX="51.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Mandag" />
-            <Label alignment="CENTER" layoutX="173.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Tirsdag" />
-            <Label alignment="CENTER" layoutX="295.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Onsdag" />
-            <Label alignment="CENTER" layoutX="416.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Torsdag" />
-            <Label alignment="CENTER" layoutX="538.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Fredag" />
-            <Label alignment="CENTER" layoutX="660.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Lørdag" />
-            <Label alignment="CENTER" layoutX="782.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Søndag" />
-            <DatePicker fx:id="datepicker" layoutX="8.0" layoutY="6.0" />
-            <Label fx:id="yearnr" layoutX="476.0" layoutY="8.0" prefHeight="27.0" prefWidth="40.0" text="2015">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
-            <Label fx:id="weeknr" alignment="CENTER" layoutX="436.0" layoutY="8.0" prefHeight="27.0" prefWidth="40.0" text="10">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
-            <Label fx:id="mandato" layoutX="128.0" layoutY="47.0" text="01" />
-            <Label fx:id="tirdato" layoutX="250.0" layoutY="47.0" text="01" />
-            <Label fx:id="onsdato" layoutX="372.0" layoutY="47.0" text="01" />
-            <Label fx:id="torsdato" layoutX="493.0" layoutY="47.0" text="01" />
-            <Label fx:id="fredato" layoutX="615.0" layoutY="47.0" text="01" />
-            <Label fx:id="lordato" layoutX="737.0" layoutY="47.0" text="01" />
-            <Label fx:id="sondato" layoutX="859.0" layoutY="47.0" text="01" />
-         </children>
-      </Pane>
       <ScrollPane fx:id="scrollpane" layoutY="248.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: #FEFEFE;" visible="false">
          <content>
             <GridPane fx:id="gridpane" alignment="BOTTOM_LEFT" gridLinesVisible="true" prefHeight="700.0" prefWidth="906.0">
@@ -161,14 +132,14 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="nesteMoned" layoutX="519.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
-            <Button fx:id="sisteMoned" layoutX="373.0" layoutY="5.0" mnemonicParsing="false" onAction="#lastMonth" text="&lt;" />
-            <Label fx:id="monthLabel" alignment="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="27.0" prefWidth="73.0" text="Januar">
+            <Button fx:id="nesteMoned" layoutX="535.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
+            <Button fx:id="sisteMoned" layoutX="363.0" layoutY="5.0" mnemonicParsing="false" onAction="#lastMonth" text="&lt;" />
+            <Label fx:id="monthLabel" alignment="CENTER" layoutX="393.0" layoutY="7.0" prefHeight="27.0" prefWidth="101.0" text="Desember">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="yearMonth" layoutX="480.0" layoutY="10.0" prefHeight="27.0" prefWidth="40.0" text="2015">
+            <Label fx:id="yearMonth" layoutX="495.0" layoutY="7.0" prefHeight="27.0" prefWidth="40.0" text="2015">
                <font>
                   <Font size="18.0" />
                </font>
@@ -443,6 +414,40 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton layoutX="112.0" layoutY="4.0" mnemonicParsing="false" onAction="#radioMoned" text="Måned" toggleGroup="$radioGroup1" />
+         </children>
+      </Pane>
+      <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" visible="false">
+         <children>
+            <Label layoutX="405.0" layoutY="8.0" text="Uke">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="nesteUke" layoutX="520.0" layoutY="6.0" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
+            <Button fx:id="prevWeek" layoutX="372.0" layoutY="6.0" mnemonicParsing="false" onAction="#lastWeek" text="&lt;" />
+            <Label alignment="CENTER" layoutX="51.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Mandag" />
+            <Label alignment="CENTER" layoutX="173.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Tirsdag" />
+            <Label alignment="CENTER" layoutX="295.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Onsdag" />
+            <Label alignment="CENTER" layoutX="416.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Torsdag" />
+            <Label alignment="CENTER" layoutX="538.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Fredag" />
+            <Label alignment="CENTER" layoutX="660.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Lørdag" />
+            <Label alignment="CENTER" layoutX="782.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Søndag" />
+            <DatePicker fx:id="datepicker" layoutX="8.0" layoutY="6.0" />
+            <Label fx:id="yearnr" layoutX="476.0" layoutY="8.0" prefHeight="27.0" prefWidth="40.0" text="2015">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="weeknr" alignment="CENTER" layoutX="436.0" layoutY="8.0" prefHeight="27.0" prefWidth="40.0" text="10">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="mandato" layoutX="128.0" layoutY="47.0" text="01" />
+            <Label fx:id="tirdato" layoutX="250.0" layoutY="47.0" text="01" />
+            <Label fx:id="onsdato" layoutX="372.0" layoutY="47.0" text="01" />
+            <Label fx:id="torsdato" layoutX="493.0" layoutY="47.0" text="01" />
+            <Label fx:id="fredato" layoutX="615.0" layoutY="47.0" text="01" />
+            <Label fx:id="lordato" layoutX="737.0" layoutY="47.0" text="01" />
+            <Label fx:id="sondato" layoutX="859.0" layoutY="47.0" text="01" />
          </children>
       </Pane>
    </children>
