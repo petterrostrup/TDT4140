@@ -1,8 +1,8 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .root{
-	-fx-background-image: url("gifbackground.gif");
-	-fx-background-size: 100%;
+	-fx-background-image: url("mindblown.gif");
+	-fx-background-size: 150%;
 	}
 .label {
     
