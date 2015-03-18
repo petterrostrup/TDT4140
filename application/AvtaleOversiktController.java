@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
 
@@ -39,23 +40,26 @@ public class AvtaleOversiktController {
 	@FXML
 	private Button redigerAvtale;
 	
-
-	//private Appointment nyApp;
-	
-	
-	
+	@FXML
+	private RadioButton deltarIkke;
 	
 	@FXML
+	private RadioButton deltar;
+	
+
+	@FXML
 	private void initialize(){
-		//Lager
+		//Lager instanser for testing
 		Calendar c1 = Calendar.getInstance();
 		Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
 		
 		
+		//Instans av appointment
 		Appointment appz = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,Timestamp.valueOf("2015-03-23 18:00:00.0"),Timestamp.valueOf("2015-03-23 20:00:00.0"), sessionUser);
 		//Appointment appz = new Appointment(null, null, null, testRoom, null, null, null, null, sessionUser);
 		
-
+		
+		//Setter info teksten til avtalen du trykker på
 		tittel.setText(appz.getName());
 		//rom.setText(room.getName);
 		rom.setText(testRoom.getName());
@@ -67,24 +71,21 @@ public class AvtaleOversiktController {
 		
 	}
 	
-//	private Appointment VisAvtale(){
-//		
-//		Appointment visApp = null;
-//		
-//		//newuser = Login.login(brukernavn.getText(), passord.getText());
-//		visApp = new Appointment(null, null, null, null, null, null, null, null, null);
-//		//nyApp.getName();
-//		System.out.println(visApp.getName());
-//		System.out.println("asd");
-//		//tittel.setText(visApp.getName());
-//		tittel.setText("hei");
-//		
-//		
-//		return visApp;
-//		
-//	}
+	
+	//Radiobutton til å velge attending
+	public void attendButt(ActionEvent event) {
+		System.out.println("halla");
+		
+	}
+	
+	//Radiobutton til å velge ikke attending
+	public void notAttendButt(ActionEvent event) {
+		System.out.println("hade");
+	}
 	
 	
+
+	//Knapp til redigerAvtale vindu
 	public void redigerAvtale (ActionEvent event) {	
 		try {
 			Main newMain = new Main();
