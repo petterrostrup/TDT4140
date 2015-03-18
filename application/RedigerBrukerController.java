@@ -160,7 +160,7 @@ public class RedigerBrukerController {
 		
 		
 		
-		// hvis validering er godkjent, send tilbake til Profil
+		//hvis validering er godkjent, send tilbake til Profil
 		if(checkpointReached){
 			try {
 				Main newMain = new Main();

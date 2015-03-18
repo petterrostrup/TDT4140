@@ -204,6 +204,8 @@ public class ProfilController {
 //		mainPane.set(colorpick.getValue());
 	}
 	
+	
+	//Testknapp, tar deg nå til avtaleOversikt
 	public void test(ActionEvent event){
 		try{
 			Main newMain= new Main();
