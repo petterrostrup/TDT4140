@@ -46,7 +46,7 @@ public class AvtaleOversiktController {
 	@FXML
 	private RadioButton deltar;
 	
-
+	//public eller private initialize?
 	@FXML
 	private void initialize(){
 		//Lager instanser for testing
@@ -74,6 +74,8 @@ public class AvtaleOversiktController {
 	
 	//Radiobutton til å velge attending
 	public void attendButt(ActionEvent event) {
+		//Når vi får en attending data verdi i databasen, skal denne endre en avtales data til attending
+		
 		System.out.println("halla");
 		
 	}
