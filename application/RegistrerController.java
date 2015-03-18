@@ -126,9 +126,9 @@ public class RegistrerController {
 			feilNavnText.setVisible(true);
 			feilNavnText.setText("Navn kan bare inneholde bokstaver");
 		}
-		else{
-			accept = true;
-		}
+//		else{
+//			accept = true;
+//		}
 //brukernavn
 		if(brukernavn.getText().isEmpty()){
 			feilBrukernavnText.setVisible(true);
@@ -138,9 +138,9 @@ public class RegistrerController {
 			feilBrukernavnText.setVisible(true);
 			feilBrukernavnText.setText("Bare lower-case bokstaver");
 		}
-		else{
-			accept = true;
-		}
+//		else{
+//			accept = true;
+//		}
 //epost
 		if(epost.getText().isEmpty()){
 			feilEpostText.setVisible(true);
@@ -150,9 +150,9 @@ public class RegistrerController {
 			feilEpostText.setVisible(true);
 			feilEpostText.setText("Ugyldig epost, eks: 'abc@ntnu.no'");
 		}
-		else{
-			accept = true;
-		}
+//		else{
+//			accept = true;
+//		}
 //adresse
 		if(adresse.getText().isEmpty()){
 			feilAdresseText.setVisible(true);
@@ -162,22 +162,22 @@ public class RegistrerController {
 			feilAdresseText.setVisible(true);
 			feilAdresseText.setText("Ugyldig adresse, eks: 'ntnu 1'");
 		}
-		else{
-			accept = true;
-		}
+//		else{
+//			accept = true;
+//		}
 //passord
 		if(passord.getText().isEmpty()){
 			feilPassordText.setVisible(true);
 			feilPassordText.setText("Må fylles ut");
 		}
 		else if(!passord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$")){ // IKKE LAGET NO-WHITESPACEVALIDATION
-										//^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
+			//^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
 			feilPassordText.setVisible(true);
 			feilPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
 		}
-		else{
-			accept = true;
-		}
+//		else{
+//			accept = true;
+//		}
 //gjentapassord
 		if(gpassord.getText().isEmpty()){
 			feilGPassordText.setVisible(true);
@@ -187,47 +187,43 @@ public class RegistrerController {
 			feilGPassordText.setVisible(true);
 			feilGPassordText.setText("Passordene er ulike");
 		}
-		else{
-			accept = true;
-		}
-		
-//		if(feilNavnText.isVisible() || feilBrukernavnText.isVisible() || feilEpostText.isVisible() || feilAdresseText.isVisible() || feilPassordText.isVisible() || feilGPassordText.isVisible()){
-//			accept = false;
-//		} JALLA METODE FOR Å SJEKKE HVORFOR ACCEPT BLIR SATT TIL TRUE NOMATTER WHAT
-		
+//		else{
+//			accept = true;
+//		}
+//		
 //validering slutt		
 
-		//hvis godkjent, gjør dette && "^[^\\d\\s]+$"
+		//hvis godkjent, gjør dette
 		
-			if(accept=true){
+			if(!(feilNavnText.isVisible()) && !(feilBrukernavnText.isVisible()) && !(feilEpostText.isVisible()) && !(feilAdresseText.isVisible()) && !(feilPassordText.isVisible()) && !(feilGPassordText.isVisible())){
 				System.out.println("GODKJENT");
-//				User varUser = null;
-//				try {
-//					String userName = brukernavn.getText();
-//					String password = passord.getText();
-//					String name = navn.getText();
-//					String eMail = epost.getText();
-//					String address = adresse.getText();
-//					
-//					varUser = new User(userName, password, eMail, name, address);
-//					
-//					varUser.saveUser();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//				
-//				if (varUser != null){
-//					try {
-//						Main newMain = new Main();
-//						newMain.setSession(varUser);
-//						newMain.start(new Stage());
-//						Node  source = (Node)  event.getSource(); 
-//						Stage stage  = (Stage) source.getScene().getWindow();
-//						stage.close();
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
+				User varUser = null;
+				try {
+					String userName = brukernavn.getText();
+					String password = passord.getText();
+					String name = navn.getText();
+					String eMail = epost.getText();
+					String address = adresse.getText();
+					
+					varUser = new User(userName, password, eMail, name, address);
+					
+					varUser.saveUser();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				if (varUser != null){
+					try {
+						Main newMain = new Main();
+						newMain.setSession(varUser);
+						newMain.start(new Stage());
+						Node  source = (Node)  event.getSource(); 
+						Stage stage  = (Stage) source.getScene().getWindow();
+						stage.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			else{
 				System.out.println("Ikke godkjent");

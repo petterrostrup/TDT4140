@@ -206,6 +206,7 @@ public class LagAvtaleController {
 		
 		
 		System.out.println(valgte);
+		dato.setValue(LocalDate.now());
 		//
 		personListe.setItems(deltagere);
 		gruppeListe.setItems(grupper);
@@ -415,33 +416,24 @@ public class LagAvtaleController {
 		feilStartSluttLabel.setVisible(false);
 		feilBeskrivelseLabel.setVisible(false);
 		feilDeltagerLabel.setVisible(false);
-		boolean checkpointReached = false;
+//		boolean checkpointReached = false;
 //tittel
-		if(!tittel.getText().isEmpty()){
-			checkpointReached = true;
-			
-		}
-		else{
+		if(tittel.getText().isEmpty()){
 			feilTittelLabel.setVisible(true);
 		}
 //rom
-		if(!visRomInfo.getText().equals("")){
-			checkpointReached = true;
-		}
-		else{
+		if(visRomInfo.getText().equals("")){
 			feilRomLabel.setVisible(true);
 		}
 //dato
 		if(dato.getValue() != null){
-			int dayToday = LocalDate.now().getDayOfYear();
-			int dayChosen = dato.getValue().getDayOfYear();
-			
-			if((dayChosen > dayToday)){
-//						check = true;
-			}
-			else{
+			LocalDate datoValgt = dato.getValue();
+			LocalDate datoidag = LocalDate.now();
+			int test = datoValgt.compareTo(datoidag);
+			if(!(test == 0 || test > 0)){
+				System.out.println("NOO");
 				feilDatoLabel.setVisible(true);
-				feilDatoLabel.setText("Må velge en dato fram i tid");
+				feilDatoLabel.setText("Må sette en dato fram i tid");
 			}
 		}
 		else{
@@ -457,23 +449,19 @@ public class LagAvtaleController {
 			int startint = Integer.parseInt(startstring);
 			int sluttint = Integer.parseInt(sluttstring);
 			//System.out.println(startint + " " + sluttint);
-			if(startint < sluttint){
-				checkpointReached = true;
-			}
-			else{
+			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være etter slutttid.");
-				feilStartSluttLabel.setVisible(true);			}
+				feilStartSluttLabel.setVisible(true);
+			}
 		}
 		else{feilStartSluttLabel.setVisible(true);
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
-		if(!beskrivelse.getText().isEmpty()){
-			checkpointReached = true;
-		}
-		else{
+		if(beskrivelse.getText().isEmpty()){
 			feilBeskrivelseLabel.setVisible(true);
 		}
+		
 //deltagere
 		if(!valgte.contains(equals(null))){
 			checkpointReached = true;
@@ -483,8 +471,9 @@ public class LagAvtaleController {
 		}
 		
 //if nirvana reached, save the stuff
-		if(checkpointReached){
+		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
+			// DO THE SHIT
 //			try {
 //				Main newMain = new Main();
 //				newMain.setSession(this.sessionUser);
