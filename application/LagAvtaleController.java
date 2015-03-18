@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -431,13 +432,22 @@ public class LagAvtaleController {
 			feilRomLabel.setVisible(true);
 		}
 //dato
-//		Date now = new Date();
-//		int result = now.compareTo(dato);
-//		if (result < 0){
-//			this.date = date;
-//			
-//		}
-//		else throw new IllegalArgumentException("Date must be after current date");
+		if(dato.getValue() != null){
+			int dayToday = LocalDate.now().getDayOfYear();
+			int dayChosen = dato.getValue().getDayOfYear();
+			
+			if((dayChosen > dayToday)){
+//						check = true;
+			}
+			else{
+				feilDatoLabel.setVisible(true);
+				feilDatoLabel.setText("Må velge en dato fram i tid");
+			}
+		}
+		else{
+			feilDatoLabel.setVisible(true);
+			feilDatoLabel.setText("Må velge dato");
+		}
 
 //start/slutt
 		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
