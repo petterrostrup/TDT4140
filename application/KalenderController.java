@@ -114,7 +114,7 @@ public class KalenderController {
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
 		setWeek();
-		setMonth();
+
 		
 	}
 	public void addToMonthDays(){
@@ -147,7 +147,7 @@ public class KalenderController {
 		weekHeaderPane.setDisable(true);
 		monthHeaderPane.setVisible(true);
 		monthHeaderPane.setDisable(false);
-//		setMonth();
+		setMonth();
 	}
 	
 	
