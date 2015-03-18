@@ -116,12 +116,6 @@ public class LoginController {
 		return newuser;
 		
 		
-//				brukernavn.setOnAction((event) ->{
-//					logButt.fire();
-//				});
-//				passord.setOnAction((event) ->{
-//					logButt.fire();
-//				});
     }
 	
 }

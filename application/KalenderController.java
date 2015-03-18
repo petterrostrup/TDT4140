@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -38,227 +39,64 @@ public class KalenderController {
 	private User sessionUser;
 	
     @FXML
-    private Label week1;
+    private Label week1, week2, week3, week4, week5, week6;
     @FXML
-    private Label week2;
+    private Label lordato, tirdato, onsdato, torsdato, fredato, mandato, sondato;
     @FXML
-    private Label week3;
+    private Label month10, month20, month30, month40, month50, month60, month70, month11, month21, month31, month41;
     @FXML
-    private Label lordato;
-
+    private Label month51, month61, month71, month12, month22, month32, month42, month52, month62, month72, month13;
     @FXML
-    private Label month63;
-
+    private Label month23, month33, month43, month53, month63, month73, month14, month24, month34, month44, month54;
     @FXML
-    private Label month62;
-
-    @FXML
-    private Label month21;
-
-    @FXML
-    private Label month65;
-
-    @FXML
-    private Label month20;
-
-    @FXML
-    private Label month64;
-
-    @FXML
-    private Pane weekHeaderPane;
-
-    @FXML
-    private Pane monthPane;
-
-    @FXML
-    private Label monthLabel;
-
-    @FXML
-    private Label month61;
-
-    @FXML
-    private Label month60;
-
+    private Label month64, month74, month15, month25, month35, month45, month55, month65, month75;
+    
+    Label[] dayList = new Label[]{month10, month20, month30, month40, month50, month60, month70, month11, month21, month31, month41,
+    		month51, month61, month71, month12, month22, month32, month42, month52, month62, month72, month13, month23, month33, month43,
+    		month53, month63, month73, month14, month24, month34, month44, month54, month64, month74, month15, month25, month35, month45,
+    		month55, month65, month75};
+    private ArrayList<Label> monthDays;
     @FXML
     private Label notification;
-
     @FXML
-    private Label month15;
-
+    private Pane weekHeaderPane;
     @FXML
-    private Label month12;
-
+    private Pane monthPane;
     @FXML
-    private Label month11;
-
-    @FXML
-    private Label month55;
-
-    @FXML
-    private Label month14;
-
-    @FXML
-    private Label month13;
-
-    @FXML
-    private Label tirdato;
-
-    @FXML
-    private Label onsdato;
-
+    private Label monthLabel;
     @FXML
     private RadioButton radioWeek;
-
     @FXML
     private Label yearMonth;
-
     @FXML
     private Button nesteUke;
-
-    @FXML
-    private Label month52;
-
-    @FXML
-    private Label month51;
-
     @FXML
     private Label innloggetsom;
-
-    @FXML
-    private Label month10;
-
-    @FXML
-    private Label month54;
-
-    @FXML
-    private Label month53;
-
     @FXML
     private DatePicker datepicker;
-
-    @FXML
-    private Label month50;
-
     @FXML
     private GridPane gridpane;
-
-    @FXML
-    private Label month45;
-
     @FXML
     private ScrollPane scrollpane;
-
-    @FXML
-    private Label month44;
-
-    @FXML
-    private Label month41;
-
-    @FXML
-    private Label month40;
-
-    @FXML
-    private Label month43;
-
-    @FXML
-    private Label month42;
-
     @FXML
     private Button prevWeek;
-
     @FXML
     private Pane monthHeaderPane;
-
     @FXML
     private Button nesteMoned;
-
-    @FXML
-    private Label torsdato;
-
-    @FXML
-    private Label fredato;
-
-    @FXML
-    private Label month34;
-
-    @FXML
-    private Label month33;
-
     @FXML
     private ToggleGroup radioGroup1;
-
-    @FXML
-    private Label month35;
-
-    @FXML
-    private Label mandato;
-
-    @FXML
-    private Label sondato;
-
     @FXML
     private GridPane monthGrid;
-
-    @FXML
-    private Label month30;
-
-    @FXML
-    private Label month74;
-
     @FXML
     private Button sisteMoned;
-
-    @FXML
-    private Label month73;
-
-    @FXML
-    private Label month32;
-
-    @FXML
-    private Label month31;
-
-    @FXML
-    private Label month75;
-
-    @FXML
-    private Label month70;
-
-    @FXML
-    private Label month72;
-
-    @FXML
-    private Label month71;
-
-    @FXML
-    private Label month23;
-
-    @FXML
-    private Label month22;
-
     @FXML
     private Label yearnr;
-
-    @FXML
-    private Label month25;
-
     @FXML
     private Label weeknr;
-
-    @FXML
-    private Label month24;
-
-    @FXML
-    private Label week4;
-
-    @FXML
-    private Label week5;
-
-    @FXML
-    private Label week6;
-
     @FXML
     private Label ukeLabel;
-	
+    
 	private Calendar cal = Calendar.getInstance();
 	private Calendar tempCal;
 	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
@@ -266,6 +104,7 @@ public class KalenderController {
 
 	@FXML
 	private void initialize(){
+//		monthDays.addAll(Arrays.asList(dayList));
 		avtaleCollection.addAll(gridpane.getChildren());
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
@@ -345,17 +184,49 @@ public class KalenderController {
 	
 	public void setMonth(){
 		tempCal = this.cal;
+		int days = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int indentTop;
+		int missingBottom;
+		int max = 42;
 		monthLabel.setText(monthString(tempCal.get(Calendar.MONTH)));
 		yearMonth.setText(Integer.toString(tempCal.get(Calendar.YEAR)));
-		
+//		
+//		if (tempCal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
+//			indentTop = 7;
+//			missingBottom = max -(indentTop + days);
+//			for (int day = 7; day < monthDays.size()-missingBottom; day++){
+//				monthDays.get(day).setText(Integer.toString(Calendar.));
+//				tempCal.set(Calendar.DAY_OF_MONTH, +1);
+//			}
+//		}
+//		else {
+//			
+//		}
+//		
+//		tempCal.set(Calendar.WEEK_OF_MONTH, 1);
+//		if (tempCal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
+//			setDayLabel(month11,2); setDayLabel(month21,3); setDayLabel(month31,4); setDayLabel(month41,5); setDayLabel(month51,6); setDayLabel(month61,7); setDayLabel(month71,1);
+//			tempCal.set(Calendar.WEEK_OF_MONTH, 2);
+//			setDayLabel(month12,2); setDayLabel(month22,3); setDayLabel(month32,4); setDayLabel(month42,5); setDayLabel(month52,6); setDayLabel(month62,7); setDayLabel(month72,1);
+//			tempCal.set(Calendar.WEEK_OF_MONTH, 3);
+//			setDayLabel(month13,2); setDayLabel(month23,3); setDayLabel(month33,4); setDayLabel(month43,5); setDayLabel(month53,6); setDayLabel(month63,7); setDayLabel(month73,1);
+//			tempCal.set(Calendar.WEEK_OF_MONTH, 4);
+//			setDayLabel(month14,2); setDayLabel(month24,3); setDayLabel(month34,4); setDayLabel(month44,5); setDayLabel(month54,6); setDayLabel(month64,7); setDayLabel(month74,1);
+//			tempCal.set(Calendar.WEEK_OF_MONTH, 5);
+//			setDayLabel(month15,2); setDayLabel(month25,3); setDayLabel(month35,4); setDayLabel(month45,5); setDayLabel(month55,6); setDayLabel(month65,7); setDayLabel(month75,1);
+//			tempCal.set(Calendar.WEEK_OF_MONTH, 1);
+//			setDayLabel(month10,2); setDayLabel(month20,3); setDayLabel(month30,4); setDayLabel(month40,5); setDayLabel(month50,6); setDayLabel(month60,7); setDayLabel(month70,1);
+//			
+//		}
 	}
 	
-//	public String monthDayName(){
+//	public void monthDayName(){
 //		String dayName;
+//		int day = 1;
 //		for (int i = 0; i < 6; i++){
 //			for (int j = 1; j<8; j++){
 //				dayName = "month"+j+i;
-//				
+//				dayName.setText(Integer.toString(tempCal.get(Calendar.DAY_OF_WEEK_IN_MONTH)));
 //			}
 //		}
 //	}

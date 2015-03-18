@@ -5,21 +5,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="application.NyGruppeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NyGruppeController">
    <children>
-      <Label fx:id="tittel" layoutX="157.0" layoutY="14.0" text="Ny Gruppe">
+      <Label fx:id="tittel" layoutX="152.0" layoutY="14.0" text="Ny Gruppe">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <ListView fx:id="nyGruppeMedlemmerList" layoutX="18.0" layoutY="163.0" prefHeight="230.0" prefWidth="160.0" />
       <ListView fx:id="allePersonerList" layoutX="220.0" layoutY="163.0" prefHeight="230.0" prefWidth="160.0" />
-      <Button layoutX="334.0" layoutY="411.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+      <Button layoutX="265.0" layoutY="411.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
       <Button layoutX="187.0" layoutY="282.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
       <Button layoutX="187.0" layoutY="249.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
       <Label layoutX="66.0" layoutY="137.0" text="Medlemmer" />
       <Label layoutX="265.0" layoutY="137.0" text="Alle personer" />
       <Label layoutX="54.0" layoutY="77.0" text="Navn på gruppe:" />
       <TextField fx:id="gruppeNavn" layoutX="156.0" layoutY="73.0" />
+      <Button layoutX="329.0" layoutY="411.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
    </children>
 </Pane>

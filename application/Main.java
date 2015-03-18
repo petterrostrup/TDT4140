@@ -22,6 +22,8 @@ public class Main extends Application {
 	
 	private User sessionUser;
 	
+	
+	//Login skjerm
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
@@ -33,6 +35,7 @@ public class Main extends Application {
 	        stage.show();
 	        		        
 	}
+	
 	
 	public void startKalender(Stage primaryStage) {
 		try {
