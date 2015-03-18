@@ -416,7 +416,6 @@ public class LagAvtaleController {
 		feilStartSluttLabel.setVisible(false);
 		feilBeskrivelseLabel.setVisible(false);
 		feilDeltagerLabel.setVisible(false);
-//		boolean checkpointReached = false;
 //tittel
 		if(tittel.getText().isEmpty()){
 			feilTittelLabel.setVisible(true);

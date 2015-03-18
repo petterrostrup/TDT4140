@@ -3,6 +3,7 @@ package application;
 import java.awt.Color;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -329,30 +330,29 @@ public class RedigerAvtaleController {
 		feilStartSluttLabel.setVisible(false);
 		feilBeskrivelseLabel.setVisible(false);
 		feilDeltagerLabel.setVisible(false);
-		boolean checkpointReached = false;
 //tittel
-		if(!tittel.getText().isEmpty()){
-			checkpointReached = true;
-			
-		}
-		else{
+		if(tittel.getText().isEmpty()){
 			feilTittelLabel.setVisible(true);
 		}
 //rom
-		if(!visRomInfo.getText().equals("")){
-			checkpointReached = true;
-		}
-		else{
+		if(visRomInfo.getText().equals("")){
 			feilRomLabel.setVisible(true);
 		}
 //dato
-//		Date now = new Date();
-//		int result = now.compareTo(dato);
-//		if (result < 0){
-//			this.date = date;
-//			
-//		}
-//		else throw new IllegalArgumentException("Date must be after current date");
+		if(dato.getValue() != null){
+			LocalDate datoValgt = dato.getValue();
+			LocalDate datoidag = LocalDate.now();
+			int test = datoValgt.compareTo(datoidag);
+			if(!(test == 0 || test > 0)){
+				System.out.println("NOO");
+				feilDatoLabel.setVisible(true);
+				feilDatoLabel.setText("Må sette en dato fram i tid");
+			}
+		}
+		else{
+			feilDatoLabel.setVisible(true);
+			feilDatoLabel.setText("Må velge dato");
+		}
 
 //start/slutt
 		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
@@ -362,23 +362,19 @@ public class RedigerAvtaleController {
 			int startint = Integer.parseInt(startstring);
 			int sluttint = Integer.parseInt(sluttstring);
 			//System.out.println(startint + " " + sluttint);
-			if(startint < sluttint){
-				checkpointReached = true;
-			}
-			else{
+			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være etter slutttid.");
-				feilStartSluttLabel.setVisible(true);			}
+				feilStartSluttLabel.setVisible(true);
+			}
 		}
 		else{feilStartSluttLabel.setVisible(true);
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
-		if(!beskrivelse.getText().isEmpty()){
-			checkpointReached = true;
-		}
-		else{
+		if(beskrivelse.getText().isEmpty()){
 			feilBeskrivelseLabel.setVisible(true);
 		}
+		
 //deltagere
 		if(!valgte.contains(equals(null))){
 			checkpointReached = true;
@@ -388,24 +384,24 @@ public class RedigerAvtaleController {
 		}
 		
 //if nirvana reached, save the stuff
-		if(checkpointReached){
+		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
-//			try {
-//				Main newMain = new Main();
-//				newMain.setSession(this.sessionUser);
-//				newMain.startKalender(new Stage());
-//			} catch (Exception e) {
-//				
-//				e.printStackTrace();
-//			}
-//			//Henter stage parameter
-//			Node  source = (Node)  event.getSource(); 
-//		    Stage stage  = (Stage) source.getScene().getWindow();
-//		    stage.close();
+			// DO THE SHIT
+			try {
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.startKalender(new Stage());
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//Henter stage parameter
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
 		}
 		else{
 			System.out.println("IKKE GODKJENT");
-//			lagreavtale.disabledProperty();
 		}
 	
 	}

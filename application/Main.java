@@ -29,8 +29,8 @@ public class Main extends Application {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	       
 	        final Scene scene = new Scene(root);
-	        
-	        stage.setTitle("Login");
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        stage.setTitle("CalenderBook");
 	        stage.setScene(scene);
 	        stage.show();
 	        		        
