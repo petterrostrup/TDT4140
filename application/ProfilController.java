@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
 import classes.User;
@@ -30,10 +31,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -62,12 +65,26 @@ public class ProfilController {
 	private ColorPicker colorpick;
 	@FXML
 	private Label innloggetsom;
+	
+	@FXML
+	private Label avtaler;
+	
 	@FXML
 	private ListView dineGrupper;
 	
 	private ArrayList<Group> myGroups = new ArrayList<Group>();
 	
 	private ObservableList<String> grupper = FXCollections.observableArrayList(); // HENT INN GRUPPER
+	
+	@FXML
+	private RadioButton deltar;
+	
+	@FXML
+	private RadioButton deltarIkke;
+	
+	@FXML
+	private AnchorPane avtScrollpane;
+	
 	
 	@FXML
 	public void initialize(){
@@ -204,6 +221,30 @@ public class ProfilController {
 //		mainPane.set(colorpick.getValue());
 	}
 	
+	
+	//Henter instanser av en avtale
+	public void hentAvtale(ActionEvent event) {
+		//Har en klikk event når du klikker på info i panen
+		//System.out.println("asd");
+		Appointment newApp = new Appointment(null, null, null, null, null, null, null, null, sessionUser);
+		//Putte alle appointments til en bruker i en list, kan så velge attend/ikke attending
+		
+	}
+	
+	//Setter bruker som deltar på instans av avtale
+	public void deltar(ActionEvent event) {
+		//System.out.println("hei");
+		
+	}
+	
+	//Setter bruker som ikke deltar på instans av avtale
+	public void deltarIkke(ActionEvent event) {
+		//System.out.println("hade");
+	}
+	
+	
+	
+	//Testknapp, tar deg nå til avtaleOversikt
 	public void test(ActionEvent event){
 		try{
 			Main newMain= new Main();

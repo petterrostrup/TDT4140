@@ -27,14 +27,12 @@
             <Label layoutX="20.0" layoutY="120.0" text="E-post:" />
             <Label layoutX="20.0" layoutY="40.0" text="Navn:" />
             <ImageView fx:id="imageview" fitHeight="231.0" fitWidth="223.0" layoutX="539.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="ugyldigBrukernavn" layoutX="266.0" layoutY="89.0" />
-            <Label fx:id="ugyldigEpost" layoutX="266.0" layoutY="125.0" prefHeight="17.0" prefWidth="0.0" />
-            <Label fx:id="feilNavnText" layoutX="257.0" layoutY="44.0" text="Ingen ugyldige chars karakterer" textFill="RED" />
-            <Label fx:id="feilBrukernavnText" layoutX="257.0" layoutY="84.0" text="Ingen store bokstaver eller mellomrom" textFill="RED" />
-            <Label fx:id="feilEpostText" layoutX="257.0" layoutY="125.0" text="Ugyldig epost, eks: &quot;abc@ntnu.no&quot;" textFill="RED" />
-            <Label fx:id="feilAdresseText" layoutX="257.0" layoutY="164.0" text="Ugyldig adresse, eks: &quot;ntnu 1&quot;" textFill="RED" />
-            <Label fx:id="feilPassordText" layoutX="257.0" layoutY="204.0" text="Ugyldig. 6 karakterer, stor bokstav og tall" textFill="RED" />
-            <Label fx:id="feilGPassordText" layoutX="257.0" layoutY="244.0" text="Passordene er ulike" textFill="RED" />
+            <Label fx:id="feilNavnText" layoutX="265.0" layoutY="44.0" text="Ingen ugyldige chars karakterer" textFill="RED" />
+            <Label fx:id="feilBrukernavnText" layoutX="265.0" layoutY="84.0" text="Ingen store bokstaver eller mellomrom" textFill="RED" />
+            <Label fx:id="feilEpostText" layoutX="265.0" layoutY="124.0" text="Ugyldig epost, eks: &quot;abc@ntnu.no&quot;" textFill="RED" />
+            <Label fx:id="feilAdresseText" layoutX="265.0" layoutY="164.0" text="Ugyldig adresse, eks: &quot;ntnu 1&quot;" textFill="RED" />
+            <Label fx:id="feilPassordText" layoutX="265.0" layoutY="204.0" text="Ugyldig. 6 karakterer, stor bokstav og tall" textFill="RED" />
+            <Label fx:id="feilGPassordText" layoutX="265.0" layoutY="244.0" text="Passordene er ulike" textFill="RED" />
          </children>
       </Pane>
       <Pane prefHeight="128.0" prefWidth="780.0" style="-fx-background-color: #E2E2E2;">

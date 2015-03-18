@@ -25,5 +25,11 @@
       <Label fx:id="tidspunkt" layoutX="130.0" layoutY="204.0" />
       <Label fx:id="beskrivelse" layoutX="128.0" layoutY="249.0" />
       <Button fx:id="reidgeravtale" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" onAction="#redigerAvtale" text="Rediger avtale" />
+      <RadioButton fx:id="deltar" layoutX="236.0" layoutY="384.0" mnemonicParsing="false" onAction="#attendButt" text="Deltar">
+         <toggleGroup>
+            <ToggleGroup fx:id="AttendingToggle" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="deltarIkke" layoutX="236.0" layoutY="356.0" mnemonicParsing="false" onAction="#notAttendButt" selected="true" text="Deltar ikke" toggleGroup="$AttendingToggle" />
    </children>
 </Pane>

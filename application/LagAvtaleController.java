@@ -125,7 +125,8 @@ public class LagAvtaleController {
 	private ArrayList<User> allUsers = new ArrayList<User>();
 	private ArrayList<Room> allRooms = new ArrayList<Room>();
 	private ArrayList<Group> allGroups = new ArrayList<Group>();
-	private ArrayList<User> groupMedlemmer = new ArrayList<User>();
+	private ArrayList<User> selectedUsers = new ArrayList<User>();
+	private ArrayList<Group> selectedGroups = new ArrayList<Group>();
 
 	///////////////////////////////////////////////////////////////////////////////
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
@@ -140,8 +141,9 @@ public class LagAvtaleController {
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
 	//MEDLEMMER SLUTT
 	
-	private ObservableList<Object> valgte = FXCollections.observableArrayList(valgtePersoner, grupper/*(hent gruppemedlemmer fra gruppene i listen "grupper*/); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
-	private ArrayList<String> supervalgte = new ArrayList<String>();
+
+	private ObservableList<Object> valgte = FXCollections.observableArrayList(); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
+
 	//slutt lister
 	@FXML
 	private void initialize(){
@@ -206,6 +208,7 @@ public class LagAvtaleController {
 		
 		
 		System.out.println(valgte);
+		dato.setValue(LocalDate.now());
 		//
 		personListe.setItems(deltagere);
 		gruppeListe.setItems(grupper);
@@ -324,17 +327,30 @@ public class LagAvtaleController {
 		if(listevalg.getText().equals(visPersoner.getText())){
 			Object leggtilPerson = (Object) personListe.getSelectionModel().getSelectedItem();
 			if(leggtilPerson != null){
+				for (int i = 0; i < allUsers.size(); i++) {
+					if (allUsers.get(i).getName().equals(leggtilPerson)){
+						selectedUsers.add(allUsers.get(i));
+						allUsers.remove(i);
+					}
+				}
 				personListe.getSelectionModel().clearSelection();
 				deltagere.remove(leggtilPerson);
-				valgtePersoner.add((String) leggtilPerson);
+				valgtePersoner.add(leggtilPerson.toString());
 			}
 		}
 		else if(listevalg.getText().equals(visGrupper.getText())){
 			Object leggtilGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 			if(leggtilGruppe != null){
+				for (int i = 0; i < allGroups.size(); i++) {
+					if (allGroups.get(i).getGroupName().equals(leggtilGruppe)){
+						selectedGroups.add(allGroups.get(i));
+						allGroups.remove(i);
+					}
+				}
+				
 				gruppeListe.getSelectionModel().clearSelection();
 				grupper.remove(leggtilGruppe);
-				valgteGrupper.add((Object) leggtilGruppe);	
+				valgteGrupper.add(leggtilGruppe.toString());	
 			}
 		}
 		
@@ -367,7 +383,7 @@ public class LagAvtaleController {
 		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
-			gruppeListe.getSelectionModel().clearSelection();
+			//gruppeListe.getSelectionModel().clearSelection();
 			for (Object i : grupper) {
 //				medlemmer.addAll(i, visMedlemmerIGruppe);;
 				medlemmer.setAll(visMedlemmerIGruppe);
@@ -415,33 +431,23 @@ public class LagAvtaleController {
 		feilStartSluttLabel.setVisible(false);
 		feilBeskrivelseLabel.setVisible(false);
 		feilDeltagerLabel.setVisible(false);
-		boolean checkpointReached = false;
 //tittel
-		if(!tittel.getText().isEmpty()){
-			checkpointReached = true;
-			
-		}
-		else{
+		if(tittel.getText().isEmpty()){
 			feilTittelLabel.setVisible(true);
 		}
 //rom
-		if(!visRomInfo.getText().equals("")){
-			checkpointReached = true;
-		}
-		else{
+		if(visRomInfo.getText().equals("")){
 			feilRomLabel.setVisible(true);
 		}
 //dato
 		if(dato.getValue() != null){
-			int dayToday = LocalDate.now().getDayOfYear();
-			int dayChosen = dato.getValue().getDayOfYear();
-			
-			if((dayChosen > dayToday)){
-//						check = true;
-			}
-			else{
+			LocalDate datoValgt = dato.getValue();
+			LocalDate datoidag = LocalDate.now();
+			int test = datoValgt.compareTo(datoidag);
+			if(!(test == 0 || test > 0)){
+				System.out.println("NOO");
 				feilDatoLabel.setVisible(true);
-				feilDatoLabel.setText("Må velge en dato fram i tid");
+				feilDatoLabel.setText("Må sette en dato fram i tid");
 			}
 		}
 		else{
@@ -457,23 +463,19 @@ public class LagAvtaleController {
 			int startint = Integer.parseInt(startstring);
 			int sluttint = Integer.parseInt(sluttstring);
 			//System.out.println(startint + " " + sluttint);
-			if(startint < sluttint){
-				checkpointReached = true;
-			}
-			else{
+			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være etter slutttid.");
-				feilStartSluttLabel.setVisible(true);			}
+				feilStartSluttLabel.setVisible(true);
+			}
 		}
 		else{feilStartSluttLabel.setVisible(true);
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
-		if(!beskrivelse.getText().isEmpty()){
-			checkpointReached = true;
-		}
-		else{
+		if(beskrivelse.getText().isEmpty()){
 			feilBeskrivelseLabel.setVisible(true);
 		}
+		
 //deltagere
 		if(!valgte.contains(equals(null))){
 			checkpointReached = true;
@@ -483,24 +485,24 @@ public class LagAvtaleController {
 		}
 		
 //if nirvana reached, save the stuff
-		if(checkpointReached){
+		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
-//			try {
-//				Main newMain = new Main();
-//				newMain.setSession(this.sessionUser);
-//				newMain.startKalender(new Stage());
-//			} catch (Exception e) {
-//				
-//				e.printStackTrace();
-//			}
-//			//Henter stage parameter
-//			Node  source = (Node)  event.getSource(); 
-//		    Stage stage  = (Stage) source.getScene().getWindow();
-//		    stage.close();
+			// DO THE SHIT
+			try {
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.startKalender(new Stage());
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//Henter stage parameter
+			Node  source = (Node)  event.getSource(); 
+		    Stage stage  = (Stage) source.getScene().getWindow();
+		    stage.close();
 		}
 		else{
 			System.out.println("IKKE GODKJENT");
-//			lagreavtale.disabledProperty();
 		}
 	
 	}

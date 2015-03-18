@@ -22,17 +22,20 @@ public class Main extends Application {
 	
 	private User sessionUser;
 	
+	
+	//Login skjerm
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	       
 	        final Scene scene = new Scene(root);
-	        
-	        stage.setTitle("Login");
+	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        stage.setTitle("CalenderBook");
 	        stage.setScene(scene);
 	        stage.show();
 	        		        
 	}
+	
 	
 	public void startKalender(Stage primaryStage) {
 		try {
