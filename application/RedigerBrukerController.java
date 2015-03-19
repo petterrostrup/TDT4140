@@ -111,7 +111,7 @@ public class RedigerBrukerController {
 			feilNavnText.setVisible(true);
 			feilNavnText.setText("Må fylles ut");
 		}
-		else if(!navn.getText().matches("[a-zA-Z]+")){
+		else if(!navn.getText().matches("([a-zA-Z]*)([\\s\\\'-][a-zA-Z]*)*")){
 			feilNavnText.setVisible(true);
 			feilNavnText.setText("Navn kan bare inneholde bokstaver");
 		}
@@ -143,8 +143,7 @@ public class RedigerBrukerController {
 			feilNyttPassordText.setVisible(true);
 			feilNyttPassordText.setText("Må fylles ut");
 		}
-		else if(!nyttpassord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){ // IKKE LAGET NO-WHITESPACEVALIDATION
-			//^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
+		else if(!nyttpassord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){
 			feilNyttPassordText.setVisible(true);
 			feilNyttPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
 		}
