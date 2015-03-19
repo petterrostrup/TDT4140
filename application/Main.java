@@ -35,8 +35,8 @@ public class Main extends Application {
 	        stage.show();
 			stage.setResizable(false);
 			
-			Image icon = new Image(getClass().getResourceAsStream("myicon.png"));
-			stage.getIcons().add(new Image("youngmaster.jpg"));
+//			Image icon = new Image(getClass().getResourceAsStream("myicon.png"));
+//			stage.getIcons().add(new Image("youngmaster.jpg"));
 //			stage.getIcons().add(new Image("youngmaster.jpg"));
 //			stage.getIcons().add(new Image("/path/to/javaicon.png"));
 	        		        
