@@ -198,6 +198,26 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public void startDagsOversikt(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("dagsoversikt.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
+			newCont.setSession(this.sessionUser);			
+			primaryStage.show();
+			primaryStage.setResizable(false);
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	public void startRedigerAvtale(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigeravtale.fxml"));		    
