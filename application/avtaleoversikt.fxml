@@ -13,9 +13,9 @@
       <Label layoutX="62.0" layoutY="172.0" text="Dato:" />
       <Label layoutX="63.0" layoutY="204.0" text="Tidspunkt:" />
       <Label layoutX="60.0" layoutY="249.0" text="Beskrivelse:" />
-      <Label layoutX="130.0" layoutY="14.0" prefHeight="17.0" prefWidth="149.0" text="Avtaleoversikt">
+      <Label layoutX="118.0" layoutY="14.0" text="Avtaleoversikt" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font size="25.0" />
          </font>
       </Label>
       <Label fx:id="tittel" layoutX="130.0" layoutY="76.0" />
@@ -31,5 +31,6 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="deltarIkke" layoutX="236.0" layoutY="356.0" mnemonicParsing="false" onAction="#notAttendButt" selected="true" text="Deltar ikke" toggleGroup="$AttendingToggle" />
+      <Separator layoutY="63.0" prefWidth="390.0" />
    </children>
 </Pane>
