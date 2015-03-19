@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxWidth="928.0" minWidth="928.0" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KalenderController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KalenderController">
    <children>
-      <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" visible="false">
+      <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" visible="false">
          <children>
             <Label layoutX="405.0" layoutY="8.0" text="Uke">
                <font>
@@ -43,7 +43,7 @@
             <Label fx:id="sondato" layoutX="859.0" layoutY="47.0" text="01" />
          </children>
       </Pane>
-      <ScrollPane fx:id="scrollpane" layoutY="248.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: #FEFEFE;" visible="false">
+      <ScrollPane fx:id="scrollpane" layoutY="248.0" prefHeight="555.0" prefWidth="928.0" visible="false">
          <content>
             <GridPane fx:id="gridpane" alignment="BOTTOM_LEFT" gridLinesVisible="true" prefHeight="700.0" prefWidth="906.0">
                <columnConstraints>
@@ -101,7 +101,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Pane minWidth="128.0" prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+      <Pane minWidth="128.0" prefHeight="128.0" prefWidth="928.0">
          <children>
             <Label alignment="CENTER" layoutX="396.0" layoutY="39.0" text="Kalender">
                <font>
@@ -180,9 +180,9 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="monthPane" layoutY="245.0" maxWidth="928.0" minWidth="928.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: FEFEFE;">
+      <Pane fx:id="monthPane" layoutY="245.0" maxWidth="928.0" minWidth="928.0" prefHeight="555.0" prefWidth="928.0">
          <children>
-            <GridPane fx:id="monthGrid" gridLinesVisible="true" maxWidth="928.0" minWidth="928.0" prefHeight="580.0" prefWidth="928.0">
+            <GridPane fx:id="monthGrid" gridLinesVisible="true" maxWidth="928.0" minWidth="928.0" prefHeight="555.0" prefWidth="928.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="125.0" />

@@ -5,13 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="780.0" style="-fx-background-color: E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerAvtaleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerAvtaleController">
    <children>
       <Label layoutX="304.0" layoutY="14.0" text="Rediger Avtale">
          <font>
-            <Font size="30.0" />
+            <Font size="35.0" />
          </font>
       </Label>
+      <Separator layoutY="70.0" prefWidth="780.0" />
       <Pane layoutY="83.0" prefHeight="631.0" prefWidth="780.0">
          <children>
             <Button fx:id="lagreavtale" layoutX="169.0" layoutY="594.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />

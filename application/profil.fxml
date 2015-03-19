@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
    <children>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
@@ -20,7 +20,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+      <Pane prefHeight="128.0" prefWidth="928.0">
          <children>
             <Label alignment="CENTER" layoutX="424.0" layoutY="39.0" text="Profil">
                <font>
@@ -31,9 +31,9 @@
             <Label fx:id="innloggetsom" layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
          </children>
       </Pane>
-      <Pane layoutY="179.0" prefHeight="646.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+      <Pane layoutY="179.0" prefHeight="621.0" prefWidth="928.0">
          <children>
-            <Button layoutX="825.0" layoutY="607.0" mnemonicParsing="false" onAction="#redigerProfilButt" text="Rediger profil" />
+            <Button layoutX="825.0" layoutY="582.0" mnemonicParsing="false" onAction="#redigerProfilButt" text="Rediger profil" />
             <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="674.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
             <image>
             <Image url="http://i.imgur.com/YOM4zT8.jpg" />
@@ -41,14 +41,14 @@
             </image>
             </ImageView>
             
-            <ColorPicker fx:id="colorpick" layoutX="732.0" layoutY="607.0" onAction="#pickColor" promptText="Theme" />
+            <ColorPicker fx:id="colorpick" layoutX="732.0" layoutY="582.0" onAction="#pickColor" promptText="Theme" />
             <Button fx:id="test" layoutX="445.0" layoutY="173.0" mnemonicParsing="false" onAction="#test" text="Test" />
             <Label fx:id="brukernavn" layoutX="366.0" layoutY="28.0" text="Brukernavn - Navn" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="avtalePane" layoutX="14.0" layoutY="418.0" prefHeight="214.0" prefWidth="342.0">
+            <ScrollPane fx:id="avtalePane" layoutX="14.0" layoutY="393.0" prefHeight="214.0" prefWidth="342.0">
                <content>
                   <Label text="TITTEL avtale1 + *her kan bruker velge status på deltagelse*" />
                </content>
@@ -63,9 +63,9 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="441.0" prefHeight="191.0" prefWidth="173.0" />
-            <Label layoutX="431.0" layoutY="418.0" text="Medlem av gruppe:" />
-            <Button layoutX="594.0" layoutY="607.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
+            <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="416.0" prefHeight="191.0" prefWidth="173.0" />
+            <Label layoutX="431.0" layoutY="393.0" text="Medlem av gruppe:" />
+            <Button layoutX="594.0" layoutY="582.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
             <ScrollPane fx:id="AvtScollpane" layoutX="32.0" layoutY="78.0" prefHeight="191.0" prefWidth="200.0" />
             <RadioButton layoutX="32.0" layoutY="278.0" mnemonicParsing="false" onAction="#deltarIkke" text="Deltar ikke">
                <toggleGroup>

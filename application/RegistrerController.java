@@ -121,9 +121,9 @@ public class RegistrerController {
 			feilNavnText.setVisible(true);
 			feilNavnText.setText("Må fylles ut");
 		}
-		else if(!navn.getText().matches("[a-zA-Z]+")){
+		else if(!navn.getText().matches("([a-zA-Z]*)([\\s\\\'-][a-zA-Z]*)*")){
 			feilNavnText.setVisible(true);
-			feilNavnText.setText("Navn kan bare inneholde bokstaver");
+			feilNavnText.setText("Bokstaver (a-z)");
 		}
 
 //brukernavn
@@ -161,8 +161,7 @@ public class RegistrerController {
 			feilPassordText.setVisible(true);
 			feilPassordText.setText("Må fylles ut");
 		}
-		else if(!passord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){ // IKKE LAGET NO-WHITESPACEVALIDATION
-			//^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
+		else if(!passord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){
 			feilPassordText.setVisible(true);
 			feilPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
 		}

@@ -33,6 +33,7 @@ public class Main extends Application {
 	        stage.setTitle("CalenderBook");
 	        stage.setScene(scene);
 	        stage.show();
+			stage.setResizable(false);
 	        		        
 	}
 	
@@ -45,7 +46,11 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			KalenderController newCont = loader.<KalenderController>getController();
 			newCont.setSession(this.sessionUser);
+			
+			
 			primaryStage.show();
+			primaryStage.setResizable(false);
+			
 		} 
 		
 		catch(Exception e) {
@@ -61,7 +66,9 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			RegistrerController newCont = loader.<RegistrerController>getController();
-			primaryStage.show();
+
+			primaryStage.show();		
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -79,6 +86,7 @@ public class Main extends Application {
 			LagAvtaleController newCont = loader.<LagAvtaleController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -94,8 +102,9 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			ProfilController newCont = loader.<ProfilController>getController();
-			newCont.setSession(this.sessionUser);
+			newCont.setSession(this.sessionUser);			
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -113,6 +122,7 @@ public class Main extends Application {
 			RedigerBrukerController newCont = loader.<RedigerBrukerController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -128,6 +138,7 @@ public class Main extends Application {
 			AdministrerGrupperController newCont = loader.<AdministrerGrupperController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -143,6 +154,7 @@ public class Main extends Application {
 			NyGruppeController newCont = loader.<NyGruppeController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -160,6 +172,7 @@ public class Main extends Application {
 			AvtaleOversiktController newCont = loader.<AvtaleOversiktController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {
@@ -175,6 +188,7 @@ public class Main extends Application {
 			RedigerAvtaleController newCont = loader.<RedigerAvtaleController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} 
 		
 		catch(Exception e) {

@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="780.0" style="-fx-background-color: #E6E6E6;" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerBrukerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="780.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerBrukerController">
    <children>
-      <Pane layoutY="128.0" prefHeight="392.0" prefWidth="780.0">
+      <Pane layoutY="108.0" prefHeight="392.0" prefWidth="780.0">
          <children>
             <TextField fx:id="navn" layoutX="128.0" layoutY="29.0" />
             <TextField fx:id="epost" layoutX="128.0" layoutY="72.0" />
@@ -34,13 +34,14 @@
             <Label fx:id="feilGammeltPassordText" layoutX="285.0" layoutY="196.0" text="Ugyldig. 6 karakterer, stor bokstav og tall" textFill="RED" />
          </children>
       </Pane>
-      <Pane prefHeight="128.0" prefWidth="780.0" style="-fx-background-color: #E2E2E2;">
+      <Pane prefHeight="108.0" prefWidth="780.0">
          <children>
-            <Label alignment="CENTER" layoutX="245.0" layoutY="39.0" text="Rediger profil">
+            <Label alignment="CENTER" layoutX="285.0" layoutY="29.0" text="Rediger profil">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
+            <Separator layoutY="108.0" prefWidth="780.0" />
          </children>
       </Pane>
    </children>

@@ -101,7 +101,7 @@ public class ProfilController {
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
            
-           
+
            
 	}
 
