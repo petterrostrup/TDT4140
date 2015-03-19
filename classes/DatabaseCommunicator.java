@@ -180,6 +180,30 @@ public class DatabaseCommunicator {
 		}
 		}
 	
+	public static int updateId(String statement){
+		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
+		int id = 0;
+		
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+			st.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
+			
+			rs = st.getGeneratedKeys();
+			rs.next();
+			id = rs.getInt(1);
+			
+			
+		} catch (SQLException ex) {
+			Logger lgr = Logger.getLogger(DatabaseCommunicator.class.getName());
+			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+			System.out.println("Something went wrong updating the database");
+		}
+		return id;
+		}
+	
 	public static ResultSet execute(String statement){
 		Connection con = null;
 		Statement st = null;

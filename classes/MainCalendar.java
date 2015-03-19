@@ -106,7 +106,7 @@ public class MainCalendar {
 	
 	public void fillCalendar(){
 		String id = null; //user id here
-		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = '" + id + "'";
+		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Appointment adding = null;
 		try {

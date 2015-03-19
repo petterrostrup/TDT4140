@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LagAvtaleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LagAvtaleController">
    <children>
       <Pane prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
          <children>
@@ -33,9 +33,9 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="179.0" prefHeight="646.0" prefWidth="928.0">
+      <Pane layoutY="179.0" prefHeight="621.0" prefWidth="928.0">
          <children>
-            <Button fx:id="lagreavtale" layoutX="198.0" layoutY="596.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+            <Button fx:id="lagreavtale" layoutX="195.0" layoutY="581.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
             <TextField fx:id="tittel" layoutX="198.0" layoutY="14.0" />
             <ComboBox fx:id="visRom" layoutX="197.0" layoutY="55.0" onAction="#velgRom" prefHeight="25.0" prefWidth="148.0" />
             <DatePicker fx:id="dato" layoutX="198.0" layoutY="98.0" />
@@ -46,33 +46,33 @@
             <Label layoutX="87.0" layoutY="59.0" text="Rom: " />
             <Label layoutX="87.0" layoutY="102.0" text="Dato:" />
             <Label layoutX="87.0" layoutY="196.0" text="Beskrivelse" />
-            <ListView fx:id="valgtePersonerList" layoutX="198.0" layoutY="345.0" prefHeight="97.0" prefWidth="150.0" />
-            <ListView fx:id="valgteGrupperList" layoutX="197.0" layoutY="450.0" prefHeight="97.0" prefWidth="150.0" />
-            <ListView fx:id="personListe" layoutX="382.0" layoutY="345.0" prefHeight="205.0" prefWidth="150.0" />
-            <Button fx:id="toDeltar" layoutX="352.0" layoutY="417.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
-            <Button fx:id="toCandidates" layoutX="352.0" layoutY="450.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
+            <ListView fx:id="valgtePersonerList" layoutX="195.0" layoutY="330.0" prefHeight="97.0" prefWidth="150.0" />
+            <ListView fx:id="valgteGrupperList" layoutX="194.0" layoutY="435.0" prefHeight="97.0" prefWidth="150.0" />
+            <ListView fx:id="personListe" layoutX="379.0" layoutY="330.0" prefHeight="205.0" prefWidth="150.0" />
+            <Button fx:id="toDeltar" layoutX="349.0" layoutY="402.0" mnemonicParsing="false" onAction="#sendLeft" text="&lt;" />
+            <Button fx:id="toCandidates" layoutX="349.0" layoutY="435.0" mnemonicParsing="false" onAction="#sendRight" text="&gt;" />
             <Label layoutX="87.0" layoutY="149.0" text="Start/Slutt" />
             <Label layoutX="300.0" layoutY="149.0" text="/" />
-            <MenuButton fx:id="listevalg" layoutX="75.0" layoutY="333.0" mnemonicParsing="false" text="Deltagere">
+            <MenuButton fx:id="listevalg" layoutX="72.0" layoutY="318.0" mnemonicParsing="false" text="Deltagere">
               <items>
                 <MenuItem fx:id="visPersoner" mnemonicParsing="false" onAction="#visPersonerList" text="Personer" />
                 <MenuItem fx:id="visGrupper" mnemonicParsing="false" onAction="#visGrupperList" text="Grupper" />
               </items>
             </MenuButton>
-            <Label fx:id="text1" layoutX="259.0" layoutY="323.0" />
-            <Label fx:id="text2" layoutX="444.0" layoutY="323.0" />
-            <ListView fx:id="gruppeMedlemmerList" layoutX="585.0" layoutY="345.0" prefHeight="180.0" prefWidth="180.0" />
-            <Label fx:id="medlemmerText" layoutX="643.0" layoutY="323.0" text="Medlemmer" />
-            <Button fx:id="leggtilmedlem" layoutX="663.0" layoutY="535.0" mnemonicParsing="false" onAction="#addGruppeMedlem" text="&lt;" />
-            <Label fx:id="valgteGrupperText" layoutX="145.0" layoutY="490.0" text="Grupper" />
-            <Label fx:id="valgtePersonerText" layoutX="143.0" layoutY="391.0" text="Personer" />
-            <ListView fx:id="gruppeListe" layoutX="382.0" layoutY="345.0" onMouseClicked="#visMedlemmer" prefHeight="205.0" prefWidth="150.0" />
+            <Label fx:id="text1" layoutX="256.0" layoutY="308.0" />
+            <Label fx:id="text2" layoutX="441.0" layoutY="308.0" />
+            <ListView fx:id="gruppeMedlemmerList" layoutX="582.0" layoutY="330.0" prefHeight="180.0" prefWidth="180.0" />
+            <Label fx:id="medlemmerText" layoutX="640.0" layoutY="308.0" text="Medlemmer" />
+            <Button fx:id="leggtilmedlem" layoutX="660.0" layoutY="520.0" mnemonicParsing="false" onAction="#addGruppeMedlem" text="&lt;" />
+            <Label fx:id="valgteGrupperText" layoutX="142.0" layoutY="475.0" text="Grupper" />
+            <Label fx:id="valgtePersonerText" layoutX="140.0" layoutY="376.0" text="Personer" />
+            <ListView fx:id="gruppeListe" layoutX="379.0" layoutY="330.0" onMouseClicked="#visMedlemmer" prefHeight="205.0" prefWidth="150.0" />
             <Label fx:id="feilTittelLabel" layoutX="362.0" layoutY="18.0" text="Feltet må fylles ut" textFill="RED" />
             <Label fx:id="feilRomLabel" layoutX="362.0" layoutY="59.0" text="Du må velge rom" textFill="RED" />
             <Label fx:id="feilDatoLabel" layoutX="382.0" layoutY="102.0" text="Du må velge dato" textFill="RED" />
             <Label fx:id="feilStartSluttLabel" layoutX="429.0" layoutY="149.0" text="Feil input, eks: &quot;10:00&quot; / &quot;11:00&quot;" textFill="RED" />
             <Label fx:id="feilBeskrivelseLabel" layoutX="476.0" layoutY="231.0" text="Feltet må fylles ut" textFill="RED" />
-            <Label fx:id="feilDeltagerLabel" layoutX="211.0" layoutY="560.0" text="Må ha minst 1 deltager" textFill="RED" />
+            <Label fx:id="feilDeltagerLabel" layoutX="208.0" layoutY="545.0" text="Må ha minst 1 deltager" textFill="RED" />
             <Label fx:id="visRomInfo" layoutX="360.0" layoutY="59.0" />
          </children>
       </Pane>

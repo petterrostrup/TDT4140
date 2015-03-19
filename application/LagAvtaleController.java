@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -127,6 +128,8 @@ public class LagAvtaleController {
 	private ArrayList<Group> allGroups = new ArrayList<Group>();
 	private ArrayList<User> selectedUsers = new ArrayList<User>();
 	private ArrayList<Group> selectedGroups = new ArrayList<Group>();
+	private ArrayList<User> groupMembers = new ArrayList<User>();
+	private ArrayList<User> saveUsers = new ArrayList<User>();
 
 	///////////////////////////////////////////////////////////////////////////////
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
@@ -294,33 +297,33 @@ public class LagAvtaleController {
 	public void sendRight(ActionEvent event){
 		Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
 		if(fjernPerson != null){
+			for (int i = 0; i < selectedUsers.size(); i++) {
+				if (selectedUsers.get(i).getName().equals(fjernPerson)){
+					if (!allUsers.contains(selectedUsers.get(i))){
+						allUsers.add(selectedUsers.get(i));						
+					}
+					selectedUsers.remove(i);
+				}
+			}
 			valgtePersonerList.getSelectionModel().clearSelection();
 			valgtePersoner.remove(fjernPerson);
-			deltagere.add((String) fjernPerson);
+			if (!deltagere.contains(fjernPerson.toString())){
+				deltagere.add(fjernPerson.toString());				
+			}
 		}
 		Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
 		if(fjernGruppe != null){
+			for (int i = 0; i < selectedGroups.size(); i++) {
+				if (selectedGroups.get(i).getGroupName().equals(fjernGruppe.toString())){
+					allGroups.add(selectedGroups.get(i));
+					selectedGroups.remove(i);
+				}
+			}
+			
 			valgteGrupperList.getSelectionModel().clearSelection();
 			valgteGrupper.remove(fjernGruppe);
 			grupper.add(fjernGruppe);
 		}
-		
-//		if(listevalg.getText().equals(visPersoner.getText())){
-//			Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
-//			if(fjernPerson != null){
-//				valgtePersonerList.getSelectionModel().clearSelection();
-//				valgtePersoner.remove(fjernPerson);
-//				deltagere.add((String) fjernPerson);
-//			}
-//		}
-//		else if(listevalg.getText().equals(visGrupper.getText())){
-//			Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
-//			if(fjernGruppe != null){
-//				valgteGrupperList.getSelectionModel().clearSelection();
-//				valgteGrupper.remove(fjernGruppe);
-//				grupper.add(fjernGruppe);
-//			}
-//		}
 	}
 		
 	public void sendLeft (ActionEvent event){
@@ -342,7 +345,7 @@ public class LagAvtaleController {
 			Object leggtilGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 			if(leggtilGruppe != null){
 				for (int i = 0; i < allGroups.size(); i++) {
-					if (allGroups.get(i).getGroupName().equals(leggtilGruppe)){
+					if (allGroups.get(i).getGroupName().equals(leggtilGruppe.toString())){
 						selectedGroups.add(allGroups.get(i));
 						allGroups.remove(i);
 					}
@@ -353,44 +356,45 @@ public class LagAvtaleController {
 				valgteGrupper.add(leggtilGruppe.toString());	
 			}
 		}
-		
-//		Object leggtil = (Object) personListe.getSelectionModel().getSelectedItem();
-//		if(leggtil != null){
-//			personListe.getSelectionModel().clearSelection();	
-//			if(listevalg.getText().equals(visPersoner.getText())){
-//				deltagere.remove(leggtil);
-//				valgtePersoner.add((String) leggtil);
-//			}
-//			else if(listevalg.getText().equals(visGrupper.getText())){
-//				grupper.remove(leggtil);
-//				valgteGrupper.add((String) leggtil);
-//			}
-//		}
 	}
 	
 	public void addGruppeMedlem(ActionEvent event){
 		Object leggtilMedlem = (Object) gruppeMedlemmerList.getSelectionModel().getSelectedItem();
 		if(leggtilMedlem != null){
+			for (int i = 0; i < groupMembers.size(); i++) {
+				if (groupMembers.get(i).getName().equals(leggtilMedlem)){
+					selectedUsers.add(groupMembers.get(i));
+					groupMembers.remove(i);
+				}
+			}
 			gruppeMedlemmerList.getSelectionModel().clearSelection();
-			
 			medlemmer.remove(leggtilMedlem);
-			valgtePersoner.add((String) leggtilMedlem);
+			valgtePersoner.add(leggtilMedlem.toString());
 		}
 	}
 	
 	public void visMedlemmer(MouseEvent event){
-		System.out.println("herro");
+		groupMembers.clear();
 		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
 			//gruppeListe.getSelectionModel().clearSelection();
-			for (Object i : grupper) {
-//				medlemmer.addAll(i, visMedlemmerIGruppe);;
-				medlemmer.setAll(visMedlemmerIGruppe);
+			for (int i = 0; i < allGroups.size(); i++) {
+				if (allGroups.get(i).getGroupName().equals(visMedlemmerIGruppe.toString())){
+					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + allGroups.get(i).getGroupID() + "'";
+					ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+					User newUser;
+					try {
+						while (results.next()){
+							newUser = User.readUser(results.getLong(2));
+							groupMembers.add(newUser);
+							medlemmer.add(newUser.getName());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			
-//			gruppeListe.getSelectionModel().clearSelection();
-//			medlemmer.add(visMedlemmerIGruppe);
 		}
 
 	}
@@ -398,25 +402,6 @@ public class LagAvtaleController {
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
-		
-		
-		//LagAvtale test
-		
-//		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//		Date date = df.parse(date);
-		
-		
-		//String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-				//(request.getParameter("date")));
-		
-//		Room VarRoom = new Room("10", "Real 56","Realfagsbygget", 5);
-//		Calendar c1 = Calendar.getInstance();
-//		c1.set(2015, Calendar.MARCH, 18);
-//		Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, c1.getTime(),Timestamp.valueOf("2015-03-15 18:00:00.0"),Timestamp.valueOf("2015-03-15 20:00:00.0"), sessionUser);
-//		//Appointment newAppointment = new Appointment("Møte","Dette er et testmøte", "Testrom 3", VarRoom, new SimpleDateFormat("yyyy-MM-dd").format(new Date(2015, 13, 03)), LocalTime.parse("07:00"),LocalTime.parse("08:00"), sessionUser);
-//		newAppointment.saveAppointment(newAppointment);
-		
-		//Appointment(String name, String desc, String location, Room room, Date date, LocalTime start, LocalTime end, User user)
 		
 	}
 	
@@ -491,14 +476,64 @@ public class LagAvtaleController {
 			User varUser = null;
 			// DO THE STUFF
 			try{
+				saveUsers.addAll(selectedUsers);
+				for (int i = 0; i < selectedGroups.size(); i++) {
+					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + selectedGroups.get(i).getGroupID() + "'";
+					ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+					User newUser;
+					try {
+						while (results.next()){
+							newUser = User.readUser(results.getLong(2));
+							if (!saveUsers.contains(newUser)){
+								saveUsers.add(newUser);
+							}
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				String sqlStatement = "SELECT * FROM ROOM WHERE name = '" + visRomInfo.getText() + "'";
+				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+				Room newRoom = null;
+				try {
+					if (results.next()){
+						String id = (results.getLong(1) + "");
+						String name = (results.getString(results.findColumn("name")));
+						String place = (results.getString(results.findColumn("place")));
+						int capacity = (results.getInt(results.findColumn("capacity")));
+						newRoom = new Room(id, name, place, capacity);
+					}
+					else{
+						System.out.println("Room does not exist. Cannot read");
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went wrong connecting to the database");
+				}
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SS");
 				String name = tittel.getText();
-				String room = visRomInfo.getText();
-//				String location = visRomInfo.getText(); Trenger vi denne?
+				String location = visRomInfo.getText();
 				String description = beskrivelse.getText();
 				LocalDate date = dato.getValue();
-//				String start = start.getText();
-				String end = slutt.getText();
-				String owner = this.sessionUser.getUserName();
+				Date finalDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				
+				String startformat = date.toString() + " " + start.getText() + ":00.00";
+				Date parsedDate = dateFormat.parse(startformat);
+				Timestamp startTime = new Timestamp(parsedDate.getTime());
+				
+				String endformat = date.toString() + " " + slutt.getText() + ":00.00";
+				parsedDate = dateFormat.parse(endformat);
+				Timestamp endTime = new Timestamp(parsedDate.getTime());
+				
+				Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
+				saveAppointment.saveAppointment();
+				saveAppointment.inviteParticipants();
+				
+				
 			
 			}catch(Exception e){
 				e.printStackTrace();
