@@ -30,11 +30,11 @@ public class Main extends Application {
 	
 	private User sessionUser;
 //    String css = LoginController.class.getResource("LaserTheme.css").toExternalForm();
-	Image icon = new Image(getClass().getResourceAsStream("kappa.png"));
+	Image icon = new Image(getClass().getResourceAsStream("../images/kappa.png"));
 	//Login skjerm
 	@Override
 	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
+	       Parent root = FXMLLoader.load(getClass().getResource("../fxml/logginn.fxml"));
 	        final Scene scene = new Scene(root);
 	        
 	        ProfilController profil = new ProfilController(); 
@@ -54,7 +54,7 @@ public class Main extends Application {
 	
 	public void startKalender(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("kalender.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/kalender.fxml"));
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -76,7 +76,7 @@ public class Main extends Application {
 	
 	public void startRegister(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("registrer.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/registrer.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -95,7 +95,7 @@ public class Main extends Application {
 	
 	public void startLagAvtale(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("lagavtale.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/lagavtale.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -115,7 +115,7 @@ public class Main extends Application {
 	
 	public void startProfil(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profil.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -136,7 +136,7 @@ public class Main extends Application {
 	
 	public void startRedigerBruker(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigerbruker.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/redigerbruker.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -154,7 +154,7 @@ public class Main extends Application {
 	}
 	public void startAdministrerGrupper(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("administrergrupper.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/administrergrupper.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -172,7 +172,7 @@ public class Main extends Application {
 	}
 	public void startNyGruppe(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("nygruppe.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/nygruppe.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -194,7 +194,7 @@ public class Main extends Application {
 	public void startAvtaleOversikt(Stage primaryStage, Appointment appointment){
 
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("avtaleoversikt.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/avtaleoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -220,7 +220,7 @@ public class Main extends Application {
 	
 	public void startDagsOversikt(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("dagsoversikt.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/dagsoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
@@ -241,7 +241,7 @@ public class Main extends Application {
 	
 	public void startRedigerAvtale(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigeravtale.fxml"));		    
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/redigeravtale.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());

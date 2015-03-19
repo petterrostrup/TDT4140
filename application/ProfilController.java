@@ -96,7 +96,7 @@ public class ProfilController {
 	private ComboBox visThemes;
 	
 	
-	private String css = getClass().getResource("LaserTheme.css").toExternalForm();
+	private String css = getClass().getResource("../style/LaserTheme.css").toExternalForm();
 	
 	@FXML
 	public void initialize(){
