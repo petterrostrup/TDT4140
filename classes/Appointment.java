@@ -168,6 +168,16 @@ public class Appointment {
 		}
 	}
 	
+	public void updateAppointment(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		String sqlStatement = "UPDATE APPOINTMENT SET name = '" + this.getName() + "', description = '" + this.getDescription() 
+				+ "', location = '" + this.getLocation() + "', room = '" + this.room.getId() + "', date = '" 
+				+ sdf.format(this.getDate()) + "', start = '" + this.getStart() + "', end = '" + this.getEnd() 
+				+ "', owner = '" + this.getOwner().getId() + "' " + "WHERE id = '" + this.getAppointmentID() + "'";
+		DatabaseCommunicator.update(sqlStatement);
+	}
+	
 	public void addParticipant(User user){
 		this.participants.add(user);
 	}
@@ -217,6 +227,20 @@ public class Appointment {
 		}
 		
 	}
+	
+	
+	public void updateParticipants(){
+		for (int i = 0; i < participants.size(); i++) {
+			User currentPerson = participants.get(i);
+			
+			String sqlStatement = "DELETE FROM CONNECTED WHERE person = '" + currentPerson.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
+			DatabaseCommunicator.update(sqlStatement);
+			
+			sqlStatement = "INSERT INTO CONNECTED (person, appointment, status, changed, notification) "
+					+ "VALUES ( '" + currentPerson.getId() + "', '" + this.getAppointmentID() + "', '" + 0 + "', '" + 0 + "', '" + 0 + "')";
+			DatabaseCommunicator.update(sqlStatement);
+				}
+			}
 	
 	public void deleteParticipant(String personId){
 		
