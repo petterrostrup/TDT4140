@@ -233,7 +233,7 @@ public class KalenderController {
 	public void setMonth(){
 			
 		MainCalendar kalender = new MainCalendar();
-		kalender.fillTest();
+		kalender.fillCalendar(this.sessionUser.getId());
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			
@@ -352,7 +352,7 @@ public class KalenderController {
 	
 	public void fillCalendar(){
 		MainCalendar kalender = new MainCalendar();
-		kalender.fillTest();
+		kalender.fillCalendar(this.sessionUser.getId());
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		for (Appointment avtale: avtaler){
