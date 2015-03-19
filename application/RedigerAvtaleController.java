@@ -499,10 +499,7 @@ public class RedigerAvtaleController {
 		}
 		
 //deltagere
-		if(!valgte.contains(equals(null))){
-			checkpointReached = true;
-		}
-		else{
+		if(selectedUsers.isEmpty() && selectedGroups.isEmpty()){ 
 			feilDeltagerLabel.setVisible(true);
 		}
 		

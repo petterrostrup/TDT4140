@@ -80,12 +80,7 @@ public class ProfilController {
 	private ArrayList<Group> myGroups = new ArrayList<Group>();
 	
 	private ObservableList<String> grupper = FXCollections.observableArrayList(); // HENT INN GRUPPER
-	
-	@FXML
-	private RadioButton deltar;
-	
-	@FXML
-	private RadioButton deltarIkke;
+
 	
 	@FXML
 	private ListView avtalerList;
@@ -103,7 +98,7 @@ public class ProfilController {
 	private ObservableList<String> allAppointmentsView = FXCollections.observableArrayList();
 	private ObservableList<String> notificationAppointmentsView = FXCollections.observableArrayList();
 	
-	private String css = getClass().getResource("../style/LaserTheme.css").toExternalForm();
+	private String css = getClass().getResource("../style/LightTheme.css").toExternalForm();
 	
 	@FXML
 	public void initialize(){
@@ -131,28 +126,28 @@ public class ProfilController {
 
 			
 		if(visThemes.getSelectionModel().getSelectedItem().equals("Light Theme")){
-			css = getClass().getResource("LightTheme.css").toExternalForm();
+			css = getClass().getResource("../style/LightTheme.css").toExternalForm();
 		}
 		else if(visThemes.getSelectionModel().getSelectedItem().equals("Dark Theme")){
-			css = getClass().getResource("DarkTheme.css").toExternalForm();
+			css = getClass().getResource("../style/DarkTheme.css").toExternalForm();
 //			String css = LoginController.class.getResource("DarkTheme.css").toExternalForm();
 //			scene.getStylesheets().clear();
 			
 
-			// load default global stylesheet
-			Application.setUserAgentStylesheet(null);
-			// add custom global stylesheet
-			StyleManager.getInstance().addUserAgentStylesheet("DarkTheme.css");
+//			// load default global stylesheet
+//			Application.setUserAgentStylesheet(null);
+//			// add custom global stylesheet
+//			StyleManager.getInstance().addUserAgentStylesheet("../style/DarkTheme.css");
 			   
 		}
 //		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
-//			css = getClass().getResource("GurlyTheme.css").toExternalForm();
+//			css = getClass().getResource("../style/GurlyTheme.css").toExternalForm();
 //		}
 //		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
-//			css = getClass().getResource("LaserTheme.css").toExternalForm();
+//			css = getClass().getResource("../style/LaserTheme.css").toExternalForm();
 //		}
 //		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
-//			css = getClass().getResource("JBTheme.css").toExternalForm();
+//			css = getClass().getResource("../style/JBTheme.css").toExternalForm();
 //		}
 	}
 	public void setCss(String css) {
@@ -315,17 +310,6 @@ public class ProfilController {
 		Appointment newApp = new Appointment(null, null, null, null, null, null, null, null, sessionUser);
 		//Putte alle appointments til en bruker i en list, kan så velge attend/ikke attending
 		
-	}
-	
-	//Setter bruker som deltar på instans av avtale
-	public void deltar(ActionEvent event) {
-		//System.out.println("hei");
-		
-	}
-	
-	//Setter bruker som ikke deltar på instans av avtale
-	public void deltarIkke(ActionEvent event) {
-		//System.out.println("hade");
 	}
 	
 	
