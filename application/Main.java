@@ -175,7 +175,7 @@ public class Main extends Application {
 	}
 	
 	
-	public void startAvtaleOversikt(Stage primaryStage){
+	public void startAvtaleOversikt(Stage primaryStage, Appointment appointment){
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("avtaleoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
