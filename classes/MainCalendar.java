@@ -62,11 +62,9 @@ public class MainCalendar {
 				System.out.println("Adding appointment");
 			
 		} catch (SQLException e) {
-			//SUCK MY DIIIIIICK IM A SHAAAARK
 			e.printStackTrace();
 		}
 		return returning;
-		
 	}
 	
 	public Room getroom(String roomid) {
@@ -104,8 +102,7 @@ public class MainCalendar {
 		appointments.add(appointment4);
 	}
 	
-	public void fillCalendar(){
-		String id = null; //user id here
+	public void fillCalendar(String id){
 		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Appointment adding = null;
