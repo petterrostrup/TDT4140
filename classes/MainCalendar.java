@@ -42,13 +42,13 @@ public class MainCalendar {
 		this.appointments.remove(appointment);
 	}
 	
-	public Appointment getAppointment(int appointmentID){
+	public Appointment getAppointment(long appointmentID){
 		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = '" + appointmentID + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Appointment returning = null;
 		try {
 				results.next();
-				String id = Integer.toString(results.getInt("id"));
+				Long id = (results.getLong(1));
 				String name = results.getString("name");
 				String desc = results.getString("description");
 				String loc = results.getString("location");
@@ -57,7 +57,7 @@ public class MainCalendar {
 				Timestamp start = results.getTimestamp("start");
 				Timestamp end = results.getTimestamp("end");
 				
-				returning = new Appointment(name, desc, loc, room, null, date, start, end, owner);
+				returning = new Appointment(name, desc, loc, room, null, date, start, end, owner, id + "");
 				appointments.add(returning);
 				System.out.println("Adding appointment");
 			
@@ -105,11 +105,11 @@ public class MainCalendar {
 	public void fillCalendar(String id){
 		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		Appointment adding = null;
+		Appointment adding;
 		try {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
-				adding = getAppointment(results.getInt(results.findColumn("appointment")));
+				adding = this.getAppointment(results.getLong(3));
 				System.out.println("Adding appointment");
 				appointments.add(adding);
 			}
