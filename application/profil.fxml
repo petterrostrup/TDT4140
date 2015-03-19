@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
    <children>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
@@ -40,19 +40,12 @@
            
             </image>
             </ImageView>
-            
-            <ColorPicker fx:id="colorpick" layoutX="732.0" layoutY="582.0" onAction="#pickColor" promptText="Theme" />
             <Button fx:id="test" layoutX="445.0" layoutY="173.0" mnemonicParsing="false" onAction="#test" text="Test" />
             <Label fx:id="brukernavn" layoutX="366.0" layoutY="28.0" text="Brukernavn - Navn" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="avtalePane" layoutX="14.0" layoutY="393.0" prefHeight="214.0" prefWidth="342.0">
-               <content>
-                  <Label text="TITTEL avtale1 + *her kan bruker velge status på deltagelse*" />
-               </content>
-            </ScrollPane>
             <Label fx:id="email" layoutX="366.0" layoutY="55.0" text="E-mail" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
@@ -65,8 +58,7 @@
             </Label>
             <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="416.0" prefHeight="191.0" prefWidth="173.0" />
             <Label layoutX="431.0" layoutY="393.0" text="Medlem av gruppe:" />
-            <Button layoutX="594.0" layoutY="582.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
-            <ScrollPane fx:id="AvtScollpane" layoutX="32.0" layoutY="78.0" prefHeight="191.0" prefWidth="200.0" />
+            <Button layoutX="578.0" layoutY="582.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
             <RadioButton layoutX="32.0" layoutY="278.0" mnemonicParsing="false" onAction="#deltarIkke" text="Deltar ikke">
                <toggleGroup>
                   <ToggleGroup fx:id="deltaButt" />
@@ -78,6 +70,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <ListView fx:id="avtalerList" layoutX="45.0" layoutY="78.0" onMouseClicked="#visAvtale" prefHeight="191.0" prefWidth="173.0" />
+            <ListView fx:id="visAvtalerList" layoutX="18.0" layoutY="416.0" prefHeight="191.0" prefWidth="309.0" />
+            <ComboBox fx:id="visThemes" layoutX="739.0" layoutY="449.0" onAction="#velgThemes" prefWidth="150.0" />
          </children>
       </Pane>
    </children>

@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
+import classes.MainCalendar;
 import classes.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -29,6 +30,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -36,6 +38,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -58,11 +61,8 @@ public class ProfilController {
 	
 	@FXML
 	private Label email;
-	@FXML
-	private Pane mainPane;
+
 	
-	@FXML
-	private ColorPicker colorpick;
 	@FXML
 	private Label innloggetsom;
 	
@@ -71,6 +71,8 @@ public class ProfilController {
 	
 	@FXML
 	private ListView dineGrupper;
+	
+	private MainCalendar myCal;
 	
 	private ArrayList<Group> myGroups = new ArrayList<Group>();
 	
@@ -83,8 +85,14 @@ public class ProfilController {
 	private RadioButton deltarIkke;
 	
 	@FXML
-	private AnchorPane avtScrollpane;
+	private ListView avtalerList;
+	@FXML
+	private ListView visAvtalerList;
+
+	@FXML
+	private ComboBox visThemes;
 	
+	private ArrayList<String> allThemes = new ArrayList<>();
 	
 	@FXML
 	public void initialize(){
@@ -100,8 +108,49 @@ public class ProfilController {
            imageview.setClip(null);
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
-
            
+           visThemes.getItems().addAll("Dark Theme", "Light Theme", "Girly Theme", "Laser Theme", "JB Theme");
+
+	}
+	public void velgThemes(ActionEvent event){
+		visThemes.getSelectionModel().getSelectedItem();
+		System.out.println(visThemes.getSelectionModel().getSelectedItem());
+		
+		if(visThemes.getSelectionModel().getSelectedItem().equals("Light Theme")){
+			System.out.println("dust");
+
+		
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("Dark Theme")){
+//			primaryScene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
+			
+//			String style = this.getClass().getResource("DarkTheme.css").toExternalForm();
+
+//			this.scene.setUserAgentStylesheet("DarkTheme.css");
+			  Application.setUserAgentStylesheet(
+				        LagAvtaleController.class.getResource("DarkTheme.css").toExternalForm());
+//			myScene.getScene().getStylesheets().add("path/to/custom.css");
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
+			
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
+			
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
+			
+		}
+		
+	}
+	
+	public void visAvtale(MouseEvent event){
+		// TRYKK HER, så sendes du til avtalen du trykket på
+	
+		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
+		if(avtalerList != null){
+			
+		}
+
 	}
 
 	public void administrerGrupperButt(ActionEvent event){
@@ -126,7 +175,6 @@ public class ProfilController {
 		
 		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		
 		Group newGroup;
 		try {
 			while (results.next()){
@@ -146,6 +194,9 @@ public class ProfilController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		myCal = new MainCalendar();
+		myCal.fillCalendar(this.sessionUser.getId());
 		
 		dineGrupper.setItems(grupper);
 		
@@ -207,18 +258,7 @@ public class ProfilController {
 	    
 	}
 	
-	public void pickColor(ActionEvent event){
-		
-		//getStyleClass().add("bordered-titled-border");
-		//mainPane.getStyleClass().add("boromirBorder");
-		//private color = pickColor.
-		
-//		mainPane.setFill(ColorPicker.getValue());
-		
-		Color c = colorpick.getValue();
-		System.out.println("Hey this is " + c.getRed() + " and " + c.getBlue());
-//		mainPane.set(colorpick.getValue());
-	}
+
 	
 	
 	//Henter instanser av en avtale

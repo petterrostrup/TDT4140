@@ -2,11 +2,16 @@ package application;
 	
 
 import java.awt.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import classes.Appointment;
+import classes.Room;
 import classes.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -31,20 +36,16 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	        final Scene scene = new Scene(root);
-	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        scene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 	        
 	        stage.getIcons().add(new Image(getClass().getResourceAsStream("calicon.png")));
-//	        stage.getIcons().add(new Image("youngmaster.jpg"));
+
 	        
 	        stage.setTitle("CalenderBook");
 	        stage.setScene(scene);
 	        stage.show();
 			stage.setResizable(false);
-			
-//			Image icon = new Image(getClass().getResourceAsStream("myicon.png"));
-//			stage.getIcons().add(new Image("youngmaster.jpg"));
-//			stage.getIcons().add(new Image("youngmaster.jpg"));
-//			stage.getIcons().add(new Image("/path/to/javaicon.png"));
+
 	        		        
 	}
 	
@@ -53,7 +54,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("kalender.fxml"));
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 			primaryStage.setScene(scene);
 			KalenderController newCont = loader.<KalenderController>getController();
 			newCont.setSession(this.sessionUser);
@@ -110,7 +111,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
 			primaryStage.setScene(scene);
 			ProfilController newCont = loader.<ProfilController>getController();
 			newCont.setSession(this.sessionUser);			
@@ -181,7 +182,14 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			AvtaleOversiktController newCont = loader.<AvtaleOversiktController>getController();
-			newCont.setSession(this.sessionUser);
+			
+			Calendar c1 = Calendar.getInstance();
+			Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
+			User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
+			c1.set(2015, Calendar.MARCH, 26);
+			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
+			
+			newCont.setSession(this.sessionUser, appointment4);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -197,7 +205,14 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			RedigerAvtaleController newCont = loader.<RedigerAvtaleController>getController();
-			newCont.setSession(this.sessionUser);
+			
+			Calendar c1 = Calendar.getInstance();
+			Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
+			User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
+			c1.set(2015, Calendar.MARCH, 26);
+			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
+			newCont.setSession(this.sessionUser, appointment4);
+			
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
