@@ -231,6 +231,12 @@ public class KalenderController {
 	
 	
 	public void setMonth(){
+			
+		MainCalendar kalender = new MainCalendar();
+		kalender.fillTest();
+		ArrayList<Appointment> avtaler = kalender.getAppointments();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			
 		Calendar brukKalender = Calendar.getInstance();
 		brukKalender.setTime(this.cal.getTime());
 		monthLabel.setText(monthString(brukKalender));
@@ -248,6 +254,23 @@ public class KalenderController {
 		for (int day = indentTop; day < monthDays.size(); day++){
 			monthDays.get(day).setText(Integer.toString(brukKalender.get(Calendar.DAY_OF_MONTH)));
 			monthDays.get(day).setTextFill(Color.BLACK);
+			if (brukKalender.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
+				monthDays.get(day).setStyle("-fx-background-color:None");
+			}
+			else{
+				monthDays.get(day).setStyle("-fx-background-color:#FFB9B9");
+			}
+			for (Appointment avtale: avtaler){
+				Date date = avtale.getDate();
+				Calendar calDate = Calendar.getInstance();
+				calDate.setTime(date);
+				
+				
+				if (calDate.get(Calendar.DAY_OF_YEAR) == brukKalender.get(Calendar.DAY_OF_YEAR)
+						&& calDate.get(Calendar.YEAR) == brukKalender.get(Calendar.YEAR)){
+					monthDays.get(day).setStyle("-fx-background-color:#33CC33");
+				}
+			}
 			brukKalender.add(Calendar.DAY_OF_YEAR, +1);
 			
 			if (day >= (max-missingBottom)){
@@ -285,6 +308,7 @@ public class KalenderController {
 				brukKalender.add(Calendar.WEEK_OF_YEAR, 1);
 			}
 		}
+
 	}
 	
 
@@ -351,6 +375,7 @@ public class KalenderController {
 			}
 		}
 	}
+
 	
 
 	public void filler(int startTime, String navn, int weekDay, int endTime){
