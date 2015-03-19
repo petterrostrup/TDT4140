@@ -38,6 +38,7 @@ import javafx.stage.Stage;
 public class KalenderController {
 	
 	private User sessionUser;
+	private MainCalendar kalender;
 	
     @FXML
     private Label week1, week2, week3, week4, week5, week6;
@@ -231,9 +232,6 @@ public class KalenderController {
 	
 	
 	public void setMonth(){
-			
-		MainCalendar kalender = new MainCalendar();
-		kalender.fillCalendar(this.sessionUser.getId());
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			
@@ -351,9 +349,7 @@ public class KalenderController {
 	
 	
 	public void fillCalendar(){
-		MainCalendar kalender = new MainCalendar();
-		System.out.println(this.sessionUser.getId());
-		kalender.fillCalendar(this.sessionUser.getId());
+
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		for (Appointment avtale: avtaler){
@@ -401,6 +397,11 @@ public class KalenderController {
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		
+		kalender = new MainCalendar();
+		System.out.println(this.sessionUser.getId());
+		kalender.fillCalendar(this.sessionUser.getId());
+		
 		setWeek();
 	}
 	

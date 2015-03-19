@@ -52,13 +52,16 @@ public class MainCalendar {
 				String name = results.getString("name");
 				String desc = results.getString("description");
 				String loc = results.getString("location");
-				Room room = getroom(Integer.toString(results.getInt("room")));
+				Room room = getroom(results.getLong(5));
 				Date date = results.getDate("date");
 				Timestamp start = results.getTimestamp("start");
 				Timestamp end = results.getTimestamp("end");
 				
-				returning = new Appointment(name, desc, loc, room, null, date, start, end, owner, id + "");
-				appointments.add(returning);
+				System.out.println(id);
+				
+				returning = new Appointment(name, desc, loc, room, new ArrayList<User>(), date, start, end, owner, id + "");
+				System.out.println(returning);
+				this.appointments.add(returning);
 				System.out.println("Adding appointment");
 			
 		} catch (SQLException e) {
@@ -67,13 +70,13 @@ public class MainCalendar {
 		return returning;
 	}
 	
-	public Room getroom(String roomid) {
+	public Room getroom(Long roomid) {
 		String sqlStatement = 	"SELECT * FROM ROOM WHERE id = '" + roomid + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Room room = null;
 		try {
 			results.next();
-			room = new Room(String.valueOf(results.getLong(1)),results.getString("name"), results.getString("place"), results.getInt("capacity"));
+			room = new Room(results.getLong(1) + "",results.getString("name"), results.getString("place"), results.getInt("capacity"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,10 +108,12 @@ public class MainCalendar {
 	public void fillCalendar(String id){
 		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		appointments = new ArrayList<Appointment>();
 		Appointment adding;
 		try {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
+				System.out.println(results.getLong(3));
 				adding = this.getAppointment(results.getLong(3));
 				System.out.println("Adding appointment");
 				appointments.add(adding);
