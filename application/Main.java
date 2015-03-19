@@ -207,7 +207,7 @@ public class Main extends Application {
 			c1.set(2015, Calendar.MARCH, 26);
 			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
 			
-			newCont.setSession(this.sessionUser, appointment4);
+			newCont.setSession(this.sessionUser, appointment);
 			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);

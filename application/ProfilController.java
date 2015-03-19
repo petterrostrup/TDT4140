@@ -220,6 +220,8 @@ public class ProfilController {
 		
 		this.myAppointments = myCal.getAppointments();
 		
+		myAppointmentsNotifications = new ArrayList<Appointment>();
+		
 		Appointment localAppointment;
 		for (int i = 0; i < myAppointments.size(); i++) {
 			localAppointment = myAppointments.get(i);
@@ -230,6 +232,7 @@ public class ProfilController {
 			try {
 				if (results.next()) {
 					if (results.getInt("notification") == 0){
+						System.out.println("hei");
 						myAppointmentsNotifications.add(localAppointment);
 						notificationAppointmentsView.add(localAppointment.getName());
 					}
