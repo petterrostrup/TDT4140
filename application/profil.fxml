@@ -72,7 +72,7 @@
             </Label>
             <ListView fx:id="avtalerList" layoutX="45.0" layoutY="78.0" onMouseClicked="#visAvtale" prefHeight="191.0" prefWidth="173.0" />
             <ListView fx:id="visAvtalerList" layoutX="18.0" layoutY="416.0" prefHeight="191.0" prefWidth="309.0" />
-            <ComboBox fx:id="visThemes" layoutX="739.0" layoutY="449.0" onAction="#velgThemes" prefWidth="150.0" />
+            <ComboBox fx:id="visThemes" layoutX="739.0" layoutY="449.0" onAction="#velgThemes" prefHeight="25.0" prefWidth="110.0" promptText="Light Theme" />
          </children>
       </Pane>
    </children>
