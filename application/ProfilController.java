@@ -36,6 +36,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -83,7 +84,9 @@ public class ProfilController {
 	private RadioButton deltarIkke;
 	
 	@FXML
-	private AnchorPane avtScrollpane;
+	private ListView avtalerList;
+	@FXML
+	private ListView visAvtalerList;
 	
 	
 	@FXML
@@ -102,6 +105,16 @@ public class ProfilController {
            imageview.setImage(image);
 
            
+	}
+	
+	public void visAvtaler(MouseEvent event){
+		// TRYKK HER, så sendes du til avtalen du trykket på
+	
+		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
+		if(avtalerList != null){
+			
+		}
+
 	}
 
 	public void administrerGrupperButt(ActionEvent event){

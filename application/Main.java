@@ -31,7 +31,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	        final Scene scene = new Scene(root);
-	        scene.getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
+	        scene.getStylesheets().add(getClass().getResource("LaserTheme.css").toExternalForm());
 	        
 	        stage.getIcons().add(new Image(getClass().getResourceAsStream("calicon.png")));
 
