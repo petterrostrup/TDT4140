@@ -68,7 +68,11 @@ public class LoginController {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 	}
 	
-	
+	public void cheatButt (ActionEvent event) {				
+		brukernavn.setText("kong1");
+		passord.setText("Qwe123");
+		
+	}
 	
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {				
