@@ -133,10 +133,10 @@ public class RedigerAvtaleController {
 	private ArrayList<User> saveUsers = new ArrayList<User>();
 	
 	///////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
 	private ObservableList<String> deltagere = FXCollections.observableArrayList(); // Her henter vi inn enkelt-PERSONER fra database - PETTER
 	//RANDOM GRUPPER START
-	private ObservableList<String> KristiansGruppe = FXCollections.observableArrayList();
 	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
 	private ObservableList<Object> grupper = FXCollections.observableArrayList(); // Her henter vi inn grupper fra database - PETTER
@@ -146,7 +146,8 @@ public class RedigerAvtaleController {
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
 	//MEDLEMMER SLUTT
 	
-	private ObservableList<ObservableList<? extends Object>> valgte = FXCollections.observableArrayList(); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
+
+	private ObservableList<Object> valgte = FXCollections.observableArrayList();
 	//slutt lister
 	@FXML
 	private void initialize(){
@@ -293,90 +294,104 @@ public class RedigerAvtaleController {
 	public void sendRight(ActionEvent event){
 		Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
 		if(fjernPerson != null){
+			for (int i = 0; i < selectedUsers.size(); i++) {
+				if (selectedUsers.get(i).getName().equals(fjernPerson)){
+					if (!allUsers.contains(selectedUsers.get(i))){
+						allUsers.add(selectedUsers.get(i));						
+					}
+					selectedUsers.remove(i);
+				}
+			}
 			valgtePersonerList.getSelectionModel().clearSelection();
 			valgtePersoner.remove(fjernPerson);
-			deltagere.add((String) fjernPerson);
+			if (!deltagere.contains(fjernPerson.toString())){
+				deltagere.add(fjernPerson.toString());				
+			}
 		}
 		Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
 		if(fjernGruppe != null){
+			for (int i = 0; i < selectedGroups.size(); i++) {
+				if (selectedGroups.get(i).getGroupName().equals(fjernGruppe.toString())){
+					allGroups.add(selectedGroups.get(i));
+					selectedGroups.remove(i);
+				}
+			}
+			
 			valgteGrupperList.getSelectionModel().clearSelection();
 			valgteGrupper.remove(fjernGruppe);
 			grupper.add(fjernGruppe);
 		}
-		
-//		if(listevalg.getText().equals(visPersoner.getText())){
-//			Object fjernPerson = (Object) valgtePersonerList.getSelectionModel().getSelectedItem();
-//			if(fjernPerson != null){
-//				valgtePersonerList.getSelectionModel().clearSelection();
-//				valgtePersoner.remove(fjernPerson);
-//				deltagere.add((String) fjernPerson);
-//			}
-//		}
-//		else if(listevalg.getText().equals(visGrupper.getText())){
-//			Object fjernGruppe = (Object) valgteGrupperList.getSelectionModel().getSelectedItem();
-//			if(fjernGruppe != null){
-//				valgteGrupperList.getSelectionModel().clearSelection();
-//				valgteGrupper.remove(fjernGruppe);
-//				grupper.add(fjernGruppe);
-//			}
-//		}
 	}
 		
 	public void sendLeft (ActionEvent event){
 		if(listevalg.getText().equals(visPersoner.getText())){
 			Object leggtilPerson = (Object) personListe.getSelectionModel().getSelectedItem();
 			if(leggtilPerson != null){
+				for (int i = 0; i < allUsers.size(); i++) {
+					if (allUsers.get(i).getName().equals(leggtilPerson)){
+						selectedUsers.add(allUsers.get(i));
+						allUsers.remove(i);
+					}
+				}
 				personListe.getSelectionModel().clearSelection();
 				deltagere.remove(leggtilPerson);
-				valgtePersoner.add((String) leggtilPerson);
+				valgtePersoner.add(leggtilPerson.toString());
 			}
 		}
 		else if(listevalg.getText().equals(visGrupper.getText())){
 			Object leggtilGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 			if(leggtilGruppe != null){
+				for (int i = 0; i < allGroups.size(); i++) {
+					if (allGroups.get(i).getGroupName().equals(leggtilGruppe.toString())){
+						selectedGroups.add(allGroups.get(i));
+						allGroups.remove(i);
+					}
+				}
+				
 				gruppeListe.getSelectionModel().clearSelection();
 				grupper.remove(leggtilGruppe);
-				valgteGrupper.add((Object) leggtilGruppe);	
+				valgteGrupper.add(leggtilGruppe.toString());	
 			}
 		}
-		
-//		Object leggtil = (Object) personListe.getSelectionModel().getSelectedItem();
-//		if(leggtil != null){
-//			personListe.getSelectionModel().clearSelection();	
-//			if(listevalg.getText().equals(visPersoner.getText())){
-//				deltagere.remove(leggtil);
-//				valgtePersoner.add((String) leggtil);
-//			}
-//			else if(listevalg.getText().equals(visGrupper.getText())){
-//				grupper.remove(leggtil);
-//				valgteGrupper.add((String) leggtil);
-//			}
-//		}
 	}
 	
 	public void addGruppeMedlem(ActionEvent event){
 		Object leggtilMedlem = (Object) gruppeMedlemmerList.getSelectionModel().getSelectedItem();
 		if(leggtilMedlem != null){
+			for (int i = 0; i < groupMembers.size(); i++) {
+				if (groupMembers.get(i).getName().equals(leggtilMedlem)){
+					selectedUsers.add(groupMembers.get(i));
+					groupMembers.remove(i);
+				}
+			}
 			gruppeMedlemmerList.getSelectionModel().clearSelection();
-			
 			medlemmer.remove(leggtilMedlem);
-			valgtePersoner.add((String) leggtilMedlem);
+			valgtePersoner.add(leggtilMedlem.toString());
 		}
 	}
 	
 	public void visMedlemmer(MouseEvent event){
-		System.out.println("herro");
+		groupMembers.clear();
 		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
-			gruppeListe.getSelectionModel().clearSelection();
-			for (Object i : grupper) {
-//				medlemmer.addAll(i, visMedlemmerIGruppe);;
-				medlemmer.setAll(visMedlemmerIGruppe);
+			//gruppeListe.getSelectionModel().clearSelection();
+			for (int i = 0; i < allGroups.size(); i++) {
+				if (allGroups.get(i).getGroupName().equals(visMedlemmerIGruppe.toString())){
+					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + allGroups.get(i).getGroupID() + "'";
+					ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+					User newUser;
+					try {
+						while (results.next()){
+							newUser = User.readUser(results.getLong(2));
+							groupMembers.add(newUser);
+							medlemmer.add(newUser.getName());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			
-//			gruppeListe.getSelectionModel().clearSelection();
-//			medlemmer.add(visMedlemmerIGruppe);
 		}
 
 	}
@@ -384,6 +399,19 @@ public class RedigerAvtaleController {
 	public void setSession(User sessionUser, Appointment sessionAppointment){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		this.currentAppointment = sessionAppointment;
+		currentAppointment.readParticipants();
+
+		ArrayList<User> newUsers = currentAppointment.getParticipants();
+		
+		User addingUser;
+		for (int i = 0; i < newUsers.size(); i++) {
+			addingUser = newUsers.get(i);
+			selectedUsers.add(addingUser);
+			valgtePersoner.add(addingUser.getName());
+		}
+		
+		valgtePersonerList.setItems(valgtePersoner);
+		personListe.setItems(deltagere);
 		
 		tittel.setText(currentAppointment.getName());
 		dato.setValue(currentAppointment.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -433,21 +461,29 @@ public class RedigerAvtaleController {
 			feilDatoLabel.setText("Må velge dato");
 		}
 
-//start/slutt
-		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
-	
-			String startstring = start.getText().replace(":", "");
-			String sluttstring = slutt.getText().replace(":", "");
-			int startint = Integer.parseInt(startstring);
-			int sluttint = Integer.parseInt(sluttstring);
-			//System.out.println(startint + " " + sluttint);
-			if(!(startint < sluttint)){
-				feilStartSluttLabel.setText("Starttid må være etter slutttid.");
-				feilStartSluttLabel.setVisible(true);
-			}
-		}
-		else{feilStartSluttLabel.setVisible(true);
-			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
+		//start/slutt
+				if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
+						((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
+						&& ((slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty()) ||
+						((slutt.getText().matches("[0-1][0-9]:[0-5][0-9]") && !slutt.getText().isEmpty())))){
+					
+					if(start.getText().startsWith("0") || slutt.getText().startsWith("0")){
+						start.getText().replace("0", "");
+						slutt.getText().replace("0", "");
+//						System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
+					}
+					String startstring = start.getText().replace(":", "");
+					String sluttstring = slutt.getText().replace(":", "");
+					int startint = Integer.parseInt(startstring);
+					int sluttint = Integer.parseInt(sluttstring);
+					//System.out.println(startint + " " + sluttint);
+					if(!(startint < sluttint)){
+						feilStartSluttLabel.setText("Starttid må være før slutttid.");
+						feilStartSluttLabel.setVisible(true);
+					}
+				}
+				else{feilStartSluttLabel.setVisible(true);
+					feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
 		if(beskrivelse.getText().isEmpty()){
@@ -466,12 +502,67 @@ public class RedigerAvtaleController {
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
 			// DO THE SHIT
-			try {
-				Main newMain = new Main();
-				newMain.setSession(this.sessionUser);
-				newMain.startKalender(new Stage());
-			} catch (Exception e) {
+			try{
+				saveUsers.addAll(selectedUsers);
+				for (int i = 0; i < selectedGroups.size(); i++) {
+					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + selectedGroups.get(i).getGroupID() + "'";
+					ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+					User newUser;
+					try {
+						while (results.next()){
+							newUser = User.readUser(results.getLong(2));
+							if (!saveUsers.contains(newUser)){
+								saveUsers.add(newUser);
+							}
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				
+				String sqlStatement = "SELECT * FROM ROOM WHERE name = '" + visRomInfo.getText() + "'";
+				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+				Room newRoom = null;
+				try {
+					if (results.next()){
+						String id = (results.getLong(1) + "");
+						String name = (results.getString(results.findColumn("name")));
+						String place = (results.getString(results.findColumn("place")));
+						int capacity = (results.getInt(results.findColumn("capacity")));
+						newRoom = new Room(id, name, place, capacity);
+					}
+					else{
+						System.out.println("Room does not exist. Cannot read");
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went wrong connecting to the database");
+				}
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SS");
+				String name = tittel.getText();
+				String location = visRomInfo.getText();
+				String description = beskrivelse.getText();
+				LocalDate date = dato.getValue();
+				Date finalDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				
+				String startformat = date.toString() + " " + start.getText() + ":00.00";
+				Date parsedDate = dateFormat.parse(startformat);
+				Timestamp startTime = new Timestamp(parsedDate.getTime());
+				
+				String endformat = date.toString() + " " + slutt.getText() + ":00.00";
+				parsedDate = dateFormat.parse(endformat);
+				Timestamp endTime = new Timestamp(parsedDate.getTime());
+				
+				Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
+				saveAppointment.updateParticipants();
+				saveAppointment.updateAppointment();
+				
+				
+			
+			}catch(Exception e){
 				e.printStackTrace();
 			}
 			//Henter stage parameter
