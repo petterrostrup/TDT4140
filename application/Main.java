@@ -31,7 +31,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	        final Scene scene = new Scene(root);
-	        scene.getStylesheets().add(getClass().getResource("LaserTheme.css").toExternalForm());
+	        scene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 	        
 	        stage.getIcons().add(new Image(getClass().getResourceAsStream("calicon.png")));
 
@@ -49,7 +49,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("kalender.fxml"));
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 			primaryStage.setScene(scene);
 			KalenderController newCont = loader.<KalenderController>getController();
 			newCont.setSession(this.sessionUser);
@@ -106,7 +106,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
 			primaryStage.setScene(scene);
 			ProfilController newCont = loader.<ProfilController>getController();
 			newCont.setSession(this.sessionUser);			

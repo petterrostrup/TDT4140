@@ -29,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -59,11 +60,8 @@ public class ProfilController {
 	
 	@FXML
 	private Label email;
-	@FXML
-	private Pane mainPane;
+
 	
-	@FXML
-	private ColorPicker colorpick;
 	@FXML
 	private Label innloggetsom;
 	
@@ -87,7 +85,11 @@ public class ProfilController {
 	private ListView avtalerList;
 	@FXML
 	private ListView visAvtalerList;
+
+	@FXML
+	private ComboBox visThemes;
 	
+	private ArrayList<String> allThemes = new ArrayList<>();
 	
 	@FXML
 	public void initialize(){
@@ -103,11 +105,42 @@ public class ProfilController {
            imageview.setClip(null);
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
-
            
+           visThemes.getItems().addAll("Dark Theme", "Light Theme", "Girly Theme", "Laser Theme", "JB Theme");
+
+	}
+	public void velgThemes(ActionEvent event){
+		visThemes.getSelectionModel().getSelectedItem();
+		System.out.println(visThemes.getSelectionModel().getSelectedItem());
+		
+		if(visThemes.getSelectionModel().getSelectedItem().equals("Light Theme")){
+			System.out.println("dust");
+
+		
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("Dark Theme")){
+//			primaryScene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
+			
+//			String style = this.getClass().getResource("DarkTheme.css").toExternalForm();
+
+//			this.scene.setUserAgentStylesheet("DarkTheme.css");
+			  Application.setUserAgentStylesheet(
+				        LagAvtaleController.class.getResource("DarkTheme.css").toExternalForm());
+//			myScene.getScene().getStylesheets().add("path/to/custom.css");
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
+			
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
+			
+		}
+		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
+			
+		}
+		
 	}
 	
-	public void visAvtaler(MouseEvent event){
+	public void visAvtale(MouseEvent event){
 		// TRYKK HER, så sendes du til avtalen du trykket på
 	
 		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
@@ -220,18 +253,7 @@ public class ProfilController {
 	    
 	}
 	
-	public void pickColor(ActionEvent event){
-		
-		//getStyleClass().add("bordered-titled-border");
-		//mainPane.getStyleClass().add("boromirBorder");
-		//private color = pickColor.
-		
-//		mainPane.setFill(ColorPicker.getValue());
-		
-		Color c = colorpick.getValue();
-		System.out.println("Hey this is " + c.getRed() + " and " + c.getBlue());
-//		mainPane.set(colorpick.getValue());
-	}
+
 	
 	
 	//Henter instanser av en avtale
