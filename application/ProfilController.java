@@ -103,7 +103,7 @@ public class ProfilController {
 	private ObservableList<String> allAppointmentsView = FXCollections.observableArrayList();
 	private ObservableList<String> notificationAppointmentsView = FXCollections.observableArrayList();
 	
-	private String css = getClass().getResource("LaserTheme.css").toExternalForm();
+	private String css = getClass().getResource("../style/LaserTheme.css").toExternalForm();
 	
 	@FXML
 	public void initialize(){

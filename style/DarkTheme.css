@@ -1,5 +1,5 @@
 .root{
-	-fx-background-image: url("backgrounddark.jpg");
+	-fx-background-image: url("../images/backgrounddark.jpg");
 	-fx-background-size: 150%;
 	}
 .label {
