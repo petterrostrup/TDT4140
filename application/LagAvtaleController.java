@@ -448,7 +448,7 @@ public class LagAvtaleController {
 			if(start.getText().startsWith("0") || slutt.getText().startsWith("0")){
 				start.getText().replace("0", "");
 				slutt.getText().replace("0", "");
-				System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
+//				System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
 			}
 			String startstring = start.getText().replace(":", "");
 			String sluttstring = slutt.getText().replace(":", "");
@@ -545,7 +545,7 @@ public class LagAvtaleController {
 				e.printStackTrace();
 			}
 			
-			if(saveAppointment != null){
+			if(SOMETHING != null){
 				try {
 					Main newMain = new Main();
 					newMain.setSession(this.sessionUser);
