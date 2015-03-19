@@ -29,19 +29,21 @@ import application.LoginController;
 public class Main extends Application {
 	
 	private User sessionUser;
-	
+//    String css = LoginController.class.getResource("LaserTheme.css").toExternalForm();
 	
 	//Login skjerm
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	        final Scene scene = new Scene(root);
-	        scene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 	        
-	        stage.getIcons().add(new Image(getClass().getResourceAsStream("calicon.png")));
-
+	        ProfilController profil = new ProfilController(); 
+	        scene.getStylesheets().add(profil.getCss());
+//	        scene.getStylesheets().add(getClass().getResource("LaserTheme.css").toExternalForm());
 	        
-	        stage.setTitle("CalenderBook");
+	        stage.getIcons().add(new Image(getClass().getResourceAsStream("kappa.png")));
+	        
+	        stage.setTitle("uCal");
 	        stage.setScene(scene);
 	        stage.show();
 			stage.setResizable(false);
@@ -111,7 +113,9 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
+		    ProfilController profil = new ProfilController(); 
+	        scene.getStylesheets().add(profil.getCss());
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			ProfilController newCont = loader.<ProfilController>getController();
 			newCont.setSession(this.sessionUser);			
@@ -173,9 +177,11 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	
 	
 	public void startAvtaleOversikt(Stage primaryStage, Appointment appointment){
+
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("avtaleoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
@@ -198,6 +204,26 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public void startDagsOversikt(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("dagsoversikt.fxml"));		    
+		    Scene scene = new Scene((Parent) loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
+			newCont.setSession(this.sessionUser);			
+			primaryStage.show();
+			primaryStage.setResizable(false);
+		} 
+		
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	public void startRedigerAvtale(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigeravtale.fxml"));		    
