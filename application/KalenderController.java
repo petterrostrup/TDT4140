@@ -53,6 +53,8 @@ public class KalenderController {
     private Label month64, month74, month15, month25, month35, month45, month55, month65, month75;
     
     Label[] dayList = new Label[]{};
+    Label[] weekList = new Label[]{};    
+    ObservableList<Label> monthWeeks = FXCollections.observableArrayList();
     ObservableList<Label> monthDays = FXCollections.observableArrayList();
     @FXML
     private Label notification;
@@ -105,6 +107,7 @@ public class KalenderController {
 	@FXML
 	private void initialize(){
 		addToMonthDays();
+		addToMonthWeeks();
 		avtaleCollection.addAll(gridpane.getChildren());
 		avtaleMonthCollection.addAll(monthGrid.getChildren());
 		//Creating appointment panes
@@ -116,6 +119,12 @@ public class KalenderController {
 		setWeek();
 
 		
+	}
+	public void addToMonthWeeks(){
+		this.weekList = new Label[]{week1, week2, week3, week4, week5, week6};
+		for (Label label: weekList){
+			this.monthWeeks.add(label);
+		}
 	}
 	public void addToMonthDays(){
 		this.dayList = new Label[]{month10, month20, month30, month40, month50, month60, month70, month11, month21, month31, month41,
@@ -134,8 +143,6 @@ public class KalenderController {
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
 		monthHeaderPane.setDisable(true);
-		
-		
 		setWeek();
 		
 	}
@@ -228,6 +235,7 @@ public class KalenderController {
 		brukKalender.setTime(this.cal.getTime());
 		monthLabel.setText(monthString(brukKalender));
 		yearMonth.setText(Integer.toString(brukKalender.get(Calendar.YEAR)));
+		
 		int max = 42;
 		int days = brukKalender.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -245,7 +253,6 @@ public class KalenderController {
 			if (day >= (max-missingBottom)){
 				monthDays.get(day).setTextFill(Color.GRAY);
 			}
-			
 		}
 
 		brukKalender.setTime(this.cal.getTime());
@@ -257,6 +264,25 @@ public class KalenderController {
 			monthDays.get(day).setTextFill(Color.GRAY);
 			if (!(day == 0)){
 				brukKalender.add(Calendar.DAY_OF_YEAR, -1);
+			}
+		}
+		
+		brukKalender.setTime(this.cal.getTime());
+		brukKalender.set(Calendar.DAY_OF_MONTH, 1);
+		if (indentTop == 7){
+			for (int week = 1; week < monthWeeks.size(); week++){
+				monthWeeks.get(week).setText(Integer.toString(brukKalender.get(Calendar.WEEK_OF_YEAR)));
+				brukKalender.add(Calendar.WEEK_OF_YEAR, 1);
+			}
+			brukKalender.setTime(this.cal.getTime());
+			brukKalender.set(Calendar.DAY_OF_MONTH, 1);
+			brukKalender.add(Calendar.DAY_OF_YEAR, -1);
+			week1.setText(Integer.toString(brukKalender.get(Calendar.WEEK_OF_YEAR)));
+		}
+		else{
+			for (int week = 0; week < monthWeeks.size(); week++){
+				monthWeeks.get(week).setText(Integer.toString(brukKalender.get(Calendar.WEEK_OF_YEAR)));
+				brukKalender.add(Calendar.WEEK_OF_YEAR, 1);
 			}
 		}
 	}
