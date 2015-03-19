@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.sun.javafx.css.StyleManager;
+
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
@@ -40,6 +42,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -100,6 +103,8 @@ public class ProfilController {
 	private ObservableList<String> allAppointmentsView = FXCollections.observableArrayList();
 	private ObservableList<String> notificationAppointmentsView = FXCollections.observableArrayList();
 	
+	private String css = getClass().getResource("LaserTheme.css").toExternalForm();
+	
 	@FXML
 	public void initialize(){
 		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
@@ -117,36 +122,45 @@ public class ProfilController {
            
            visThemes.getItems().addAll("Dark Theme", "Light Theme", "Girly Theme", "Laser Theme", "JB Theme");
 
+           
 	}
+
 	public void velgThemes(ActionEvent event){
 		visThemes.getSelectionModel().getSelectedItem();
 		System.out.println(visThemes.getSelectionModel().getSelectedItem());
-		
-		if(visThemes.getSelectionModel().getSelectedItem().equals("Light Theme")){
-			System.out.println("dust");
 
-		
+			
+		if(visThemes.getSelectionModel().getSelectedItem().equals("Light Theme")){
+			css = getClass().getResource("LightTheme.css").toExternalForm();
 		}
 		else if(visThemes.getSelectionModel().getSelectedItem().equals("Dark Theme")){
-//			primaryScene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
+			css = getClass().getResource("DarkTheme.css").toExternalForm();
+//			String css = LoginController.class.getResource("DarkTheme.css").toExternalForm();
+//			scene.getStylesheets().clear();
 			
-//			String style = this.getClass().getResource("DarkTheme.css").toExternalForm();
 
-//			this.scene.setUserAgentStylesheet("DarkTheme.css");
-			  Application.setUserAgentStylesheet(
-				        LagAvtaleController.class.getResource("DarkTheme.css").toExternalForm());
-//			myScene.getScene().getStylesheets().add("path/to/custom.css");
+			// load default global stylesheet
+			Application.setUserAgentStylesheet(null);
+			// add custom global stylesheet
+			StyleManager.getInstance().addUserAgentStylesheet("DarkTheme.css");
+			   
 		}
-		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
-			
-		}
-		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
-			
-		}
-		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
-			
-		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
+//			css = getClass().getResource("GurlyTheme.css").toExternalForm();
+//		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
+//			css = getClass().getResource("LaserTheme.css").toExternalForm();
+//		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
+//			css = getClass().getResource("JBTheme.css").toExternalForm();
+//		}
+	}
+	public void setCss(String css) {
+		this.css = css;
+	}
+	public String getCss() {
 		
+		return css;
 	}
 	
 	public void visAvtale(MouseEvent event){
@@ -318,7 +332,7 @@ public class ProfilController {
 		try{
 			Main newMain= new Main();
 			newMain.setSession(this.sessionUser);
-			newMain.startAvtaleOversikt(new Stage());
+			newMain.startDagsOversikt(new Stage());
 			 
 		}catch (Exception e){
 			e.printStackTrace();
