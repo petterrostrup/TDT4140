@@ -93,6 +93,12 @@ public class ProfilController {
 	private ComboBox visThemes;
 	
 	private ArrayList<String> allThemes = new ArrayList<>();
+	ArrayList<Appointment> myAppointments;
+	ArrayList<Appointment> myAppointmentsNotifications;
+	
+	
+	private ObservableList<String> allAppointmentsView = FXCollections.observableArrayList();
+	private ObservableList<String> notificationAppointmentsView = FXCollections.observableArrayList();
 	
 	@FXML
 	public void initialize(){
@@ -197,6 +203,30 @@ public class ProfilController {
 		
 		myCal = new MainCalendar();
 		myCal.fillCalendar(this.sessionUser.getId());
+		
+		this.myAppointments = myCal.getAppointments();
+		
+		Appointment localAppointment;
+		for (int i = 0; i < myAppointments.size(); i++) {
+			localAppointment = myAppointments.get(i);
+			
+			allAppointmentsView.add(localAppointment.getName());
+			sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
+			results = DatabaseCommunicator.execute(sqlStatement);
+			try {
+				if (results.next()) {
+					if (results.getInt("notification") == 0){
+						myAppointmentsNotifications.add(localAppointment);
+						notificationAppointmentsView.add(localAppointment.getName());
+					}
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		avtalerList.setItems(notificationAppointmentsView);
+		visAvtalerList.setItems(allAppointmentsView);
 		
 		dineGrupper.setItems(grupper);
 		
