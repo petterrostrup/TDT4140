@@ -18,6 +18,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -102,7 +104,8 @@ public class KalenderController {
 	private Calendar tempCal = Calendar.getInstance();
 	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
 	ObservableList<Node> avtaleMonthCollection = FXCollections.observableArrayList();
-	
+	@SuppressWarnings("rawtypes")
+	private EventHandler appointmentClick;
 	
 
 	@FXML
@@ -117,10 +120,16 @@ public class KalenderController {
 		weekHeaderPane.setVisible(true);
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
+		appointmentClick = new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent event) {
+				System.out.println("You clickeded meh");
+			}
+		};
 		
 
 		
 	}
+	
 	
 	//Fills the week labels in the month view to an array list
 	public void addToMonthWeeks(){
@@ -180,6 +189,7 @@ public class KalenderController {
 		setWeek();
 	}
 
+	
 	//Sets and fills the week view appointments and labels
 	public void setWeek(){
 		tempCal.setTime(this.cal.getTime());;
@@ -240,6 +250,7 @@ public class KalenderController {
 	}
 	
 	//Fills and sets appointments and label texts to month view
+	@SuppressWarnings("unchecked")
 	public void setMonth(){
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -263,9 +274,11 @@ public class KalenderController {
 			monthDays.get(day).setTextFill(Color.BLACK);
 			if (brukKalender.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
 				monthDays.get(day).setStyle("-fx-background-color:None");
+				monthDays.get(day).setOnMouseClicked(null);
 			}
 			else{
 				monthDays.get(day).setStyle("-fx-background-color:#FFB9B9");
+				monthDays.get(day).setOnMouseClicked(null);
 			}
 			for (Appointment avtale: avtaler){
 				Date date = avtale.getDate();
@@ -276,6 +289,7 @@ public class KalenderController {
 				if (calDate.get(Calendar.DAY_OF_YEAR) == brukKalender.get(Calendar.DAY_OF_YEAR)
 						&& calDate.get(Calendar.YEAR) == brukKalender.get(Calendar.YEAR)){
 					monthDays.get(day).setStyle("-fx-background-color:#33CC33");
+					monthDays.get(day).setOnMouseClicked(appointmentClick);
 				}
 			}
 			brukKalender.add(Calendar.DAY_OF_YEAR, +1);
@@ -384,6 +398,7 @@ public class KalenderController {
 
 	
 	//Adds appointments to the week view grid pane
+	@SuppressWarnings("unchecked")
 	public void filler(int startTime, String navn, int weekDay, int endTime){
 		Pane avtalePane = new Pane();
 		int span = endTime - startTime;
@@ -391,8 +406,10 @@ public class KalenderController {
 		avtalePane.setPrefSize(122, 60);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
+		avtalePane.setOnMouseClicked(appointmentClick);
 		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
+	
 	
 	//Converts the inserted time to grid position
 	public int timeToGrid(LocalTime time){
