@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
+import classes.MainCalendar;
 import classes.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -70,6 +71,8 @@ public class ProfilController {
 	
 	@FXML
 	private ListView dineGrupper;
+	
+	private MainCalendar myCal;
 	
 	private ArrayList<Group> myGroups = new ArrayList<Group>();
 	
@@ -172,7 +175,6 @@ public class ProfilController {
 		
 		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		
 		Group newGroup;
 		try {
 			while (results.next()){
@@ -192,6 +194,9 @@ public class ProfilController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		myCal = new MainCalendar();
+		myCal.fillCalendar(this.sessionUser.getId());
 		
 		dineGrupper.setItems(grupper);
 		

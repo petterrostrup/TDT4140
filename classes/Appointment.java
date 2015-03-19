@@ -26,6 +26,7 @@ public class Appointment {
 	
 	public Appointment(String name, String desc, String location, Room room, Date date, Timestamp start, Timestamp end, User user){
 		setName(name);
+		setDescription(desc);
 		setLocation(location);
 		setRoom(room);
 		setDate(date);
@@ -194,6 +195,26 @@ public class Appointment {
 				System.out.println("Something went wrong connecting to the database");
 				}
 			}
+		
+	}
+	
+	public void readParticipants(){
+		String sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + this.getAppointmentID() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		participants = new ArrayList<User>();
+		User newUser;
+		try {
+			while (results.next()){
+				newUser = User.readUser(results.getLong(2));
+				if (!participants.contains(newUser)){
+					participants.add(newUser);
+				}
+				
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 	

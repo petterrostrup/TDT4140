@@ -1,5 +1,8 @@
 package application;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import classes.Appointment;
@@ -18,6 +21,7 @@ import javafx.stage.Stage;
 public class AvtaleOversiktController {
 	
 	private User sessionUser;
+	private Appointment currentAppointment;
 	
 	@FXML
 	private Label tittel;
@@ -104,8 +108,30 @@ public class AvtaleOversiktController {
 	}
 
 
-	public void setSession(User sessionUser){
+	public void setSession(User sessionUser, Appointment sessionAppointment){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		this.currentAppointment = sessionAppointment;
+		currentAppointment.readParticipants();
+		
+		ArrayList<User> userList = currentAppointment.getParticipants();
+		
+		String deltagereString = "";
+		
+		for (int i = 0; i < userList.size(); i++) {
+			deltagereString += userList.get(i).getName() + "\n";
+		}
+		deltagere.setText(deltagereString);
+		
+		tittel.setText(currentAppointment.getName());
+		dato.setText(currentAppointment.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString());
+		
+		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		
+		String timestring = sdfTime.format(currentAppointment.getStart()) + " - " + sdfTime.format(currentAppointment.getEnd());
+		
+		tidspunkt.setText(timestring);
+		beskrivelse.setText(currentAppointment.getDescription());
+		rom.setText(currentAppointment.getLocation());
 	}
 	
 	

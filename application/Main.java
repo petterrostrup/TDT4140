@@ -2,11 +2,16 @@ package application;
 	
 
 import java.awt.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import classes.Appointment;
+import classes.Room;
 import classes.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -177,7 +182,14 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			AvtaleOversiktController newCont = loader.<AvtaleOversiktController>getController();
-			newCont.setSession(this.sessionUser);
+			
+			Calendar c1 = Calendar.getInstance();
+			Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
+			User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
+			c1.set(2015, Calendar.MARCH, 26);
+			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
+			
+			newCont.setSession(this.sessionUser, appointment4);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -193,7 +205,14 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			RedigerAvtaleController newCont = loader.<RedigerAvtaleController>getController();
-			newCont.setSession(this.sessionUser);
+			
+			Calendar c1 = Calendar.getInstance();
+			Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
+			User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
+			c1.set(2015, Calendar.MARCH, 26);
+			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
+			newCont.setSession(this.sessionUser, appointment4);
+			
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
