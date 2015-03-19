@@ -121,12 +121,16 @@ public class KalenderController {
 
 		
 	}
+	
+	//Fills the week labels in the month view to an array list
 	public void addToMonthWeeks(){
 		this.weekList = new Label[]{week1, week2, week3, week4, week5, week6};
 		for (Label label: weekList){
 			this.monthWeeks.add(label);
 		}
 	}
+
+	//Fills the day labels in the month view to an array list
 	public void addToMonthDays(){
 		this.dayList = new Label[]{month10, month20, month30, month40, month50, month60, month70, month11, month21, month31, month41,
 	    		month51, month61, month71, month12, month22, month32, month42, month52, month62, month72, month13, month23, month33, month43,
@@ -137,6 +141,7 @@ public class KalenderController {
 		}
 	}
 	
+	//Shows the week view when the radio button is set to Uke
 	public void radioUke(ActionEvent event){
 		scrollpane.setVisible(true);
 		weekHeaderPane.setVisible(true);
@@ -148,6 +153,7 @@ public class KalenderController {
 		
 	}
 	
+	//Shows the month view when the radio button is set to Måned
 	public void radioMoned(ActionEvent event){
 		monthPane.setVisible(true);
 		scrollpane.setVisible(false);
@@ -158,7 +164,7 @@ public class KalenderController {
 		setMonth();
 	}
 	
-	
+	//View next week
 	public void nextWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, 1);
 		gridpane.getChildren().clear();
@@ -166,7 +172,7 @@ public class KalenderController {
 		setWeek();
 	}
 	
-	
+	//View previous week
 	public void lastWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
 		gridpane.getChildren().clear();
@@ -174,7 +180,7 @@ public class KalenderController {
 		setWeek();
 	}
 
-	
+	//Sets and fills the week view appointments and labels
 	public void setWeek(){
 		tempCal.setTime(this.cal.getTime());;
 		weeknr.setText(Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR)));
@@ -191,16 +197,19 @@ public class KalenderController {
 		
 	}
 	
+	//View next month
 	public void nextMonth(ActionEvent event){
 		cal.add(Calendar.MONTH, 1);
 		setMonth();
 	}
 	
+	//View previous month
 	public void lastMonth(ActionEvent event){
 		cal.add(Calendar.MONTH, -1);
 		setMonth();
 	}
 	
+	//Calculates when the month starts in the view
 	public int calculateIndentation(Calendar date){
 		int indentation = 0;
 		Calendar monthDate = Calendar.getInstance();
@@ -230,7 +239,7 @@ public class KalenderController {
 		return indentation;
 	}
 	
-	
+	//Fills and sets appointments and label texts to month view
 	public void setMonth(){
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -309,7 +318,7 @@ public class KalenderController {
 
 	}
 	
-
+	//Returns the string corresponding to the month
 	public String monthString(Calendar cal){
 		int month = cal.get(Calendar.MONTH);
 		if (month == Calendar.JANUARY){
@@ -339,15 +348,15 @@ public class KalenderController {
 		else{
 			return "No int given";
 		}
-		
 	}
 	
+	//sets label text to the corresponding day
 	public void setDayLabel(Label label, int weekDay){
 		tempCal.set(Calendar.DAY_OF_WEEK, weekDay);
 		label.setText(Integer.toString(tempCal.get(Calendar.DAY_OF_MONTH)));
 	}
 	
-	
+	//Gets information needed and calls filler
 	public void fillCalendar(){
 
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
@@ -374,7 +383,7 @@ public class KalenderController {
 	}
 
 	
-
+	//Adds appointments to the week view grid pane
 	public void filler(int startTime, String navn, int weekDay, int endTime){
 		Pane avtalePane = new Pane();
 		int span = endTime - startTime;
@@ -385,7 +394,7 @@ public class KalenderController {
 		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
 	
-	
+	//Converts the inserted time to grid position
 	public int timeToGrid(LocalTime time){
 		String timeString = time.toString();
 		String [] timeSplit = timeString.split(":");
@@ -393,7 +402,7 @@ public class KalenderController {
 		return timeInt;
 	}
 
-	
+	//Sets the current session?
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
@@ -403,16 +412,6 @@ public class KalenderController {
 		kalender.fillCalendar(this.sessionUser.getId());
 		
 		setWeek();
-	}
-	
-	
-	public void avtaleTester (int startTime, String navn, String style, int dag){
-		Pane avtalePane = new Pane();
-		avtalePane.setStyle(style);
-		avtalePane.setPrefSize(122, 60);
-		Label avtaleNavn = new Label(navn);
-		avtalePane.getChildren().add(avtaleNavn);
-		gridpane.add(avtalePane, dag, startTime-6, 1, 2);	
 	}
 	
 	
