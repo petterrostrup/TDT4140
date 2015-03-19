@@ -1,4 +1,5 @@
 package application;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import classes.Appointment;
+import classes.DatabaseCommunicator;
 import classes.Login;
 import classes.MainCalendar;
 import classes.Room;
@@ -35,7 +37,9 @@ public class DagsOversiktController {
 	@FXML
 	private Button visAvtButt;
 	
-	private ObservableList<Object> appointz = FXCollections.observableArrayList();
+	private ObservableList<String> appointz = FXCollections.observableArrayList();
+	
+	private ArrayList<Appointment> myApps;
 
 	
 	@FXML
@@ -43,12 +47,10 @@ public class DagsOversiktController {
 		//Klikk på en dag, hent oversikt over avtaler for dagen i listview
 		//Sjekke om dagen er den samme som denne og vise alle avtaler for valgt dag
 		
+		 
 		
-		DagsCal = new MainCalendar();		
 		
-		
-		//adde observable list 
-		visAvtaler.setItems(appointz);
+		//visAvtaler.setItems(appointz);
 		
 	}
 	
@@ -59,10 +61,8 @@ public class DagsOversiktController {
 	//Knapp tar deg til visAvtale vindu
 	public void visAvtale (ActionEvent event) {
 		
-		String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
-		if(){
-			
-		}
+		//String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
+		
 		
 		
 //		try {
@@ -90,14 +90,38 @@ public class DagsOversiktController {
 	public void setSession(User sessionUser) {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		
-		System.out.println(sessionUser.getId());
+		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		DagsCal = new MainCalendar();
+		//System.out.println(sessionUser.getId());
 		DagsCal.fillCalendar(sessionUser.getId());
 		
+		this.myApps = DagsCal.getAppointments();
 		
-		ArrayList<Appointment> appointments = DagsCal.getAppointments();
+		Appointment enApp;
+		for (int i = 0; i < myApps.size(); i++) {
+			enApp = myApps.get(i);
+			
+			appointz.add(enApp.getName());
+			
+					}
+				}
+			
+		{
+		
+		
+		visAvtaler.setItems(appointz);
+		
+		
+	}
+			
+		
+
+		//ArrayList<Appointment> appointments = DagsCal.getAppointments();
 		
 		
 		
 	}
 
-}
+
