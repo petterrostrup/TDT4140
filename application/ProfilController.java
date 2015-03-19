@@ -80,12 +80,7 @@ public class ProfilController {
 	private ArrayList<Group> myGroups = new ArrayList<Group>();
 	
 	private ObservableList<String> grupper = FXCollections.observableArrayList(); // HENT INN GRUPPER
-	
-	@FXML
-	private RadioButton deltar;
-	
-	@FXML
-	private RadioButton deltarIkke;
+
 	
 	@FXML
 	private ListView avtalerList;
@@ -315,17 +310,6 @@ public class ProfilController {
 		Appointment newApp = new Appointment(null, null, null, null, null, null, null, null, sessionUser);
 		//Putte alle appointments til en bruker i en list, kan så velge attend/ikke attending
 		
-	}
-	
-	//Setter bruker som deltar på instans av avtale
-	public void deltar(ActionEvent event) {
-		//System.out.println("hei");
-		
-	}
-	
-	//Setter bruker som ikke deltar på instans av avtale
-	public void deltarIkke(ActionEvent event) {
-		//System.out.println("hade");
 	}
 	
 	

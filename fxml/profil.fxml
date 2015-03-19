@@ -59,12 +59,6 @@
             <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="416.0" prefHeight="191.0" prefWidth="173.0" />
             <Label layoutX="431.0" layoutY="393.0" text="Medlem av gruppe:" />
             <Button layoutX="578.0" layoutY="582.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
-            <RadioButton layoutX="32.0" layoutY="278.0" mnemonicParsing="false" onAction="#deltarIkke" text="Deltar ikke">
-               <toggleGroup>
-                  <ToggleGroup fx:id="deltaButt" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton layoutX="32.0" layoutY="301.0" mnemonicParsing="false" onAction="#deltar" text="Deltar" toggleGroup="$deltaButt" />
             <Label fx:id="avtaler" layoutX="104.0" layoutY="42.0" text="Avtaler">
                <font>
                   <Font size="18.0" />
