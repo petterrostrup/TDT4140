@@ -208,7 +208,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
-			newCont.setSession(this.sessionUser);			
+			newCont.setSession(this.sessionUser);	
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
