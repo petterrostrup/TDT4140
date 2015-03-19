@@ -98,7 +98,7 @@ public class ProfilController {
 	private ObservableList<String> allAppointmentsView = FXCollections.observableArrayList();
 	private ObservableList<String> notificationAppointmentsView = FXCollections.observableArrayList();
 	
-	private String css = getClass().getResource("../style/DarkTheme.css").toExternalForm();
+	private String css = getClass().getResource("../style/LightTheme.css").toExternalForm();
 	
 	@FXML
 	public void initialize(){
