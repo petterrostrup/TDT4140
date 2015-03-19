@@ -1,5 +1,5 @@
 .root{
-	-fx-background-image: url("backgrounddark.jpg");
+	-fx-background-image: url("backgroundblue.jpg");
 	-fx-background-size: 150%;
 	}
 .label {
@@ -11,12 +11,11 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#3F3F3F, #000000);
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 .button:hover {
-    -fx-background-color: linear-gradient(#000000, #3F3F3F);
-    
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
 
 
