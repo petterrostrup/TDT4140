@@ -440,15 +440,23 @@ public class LagAvtaleController {
 		}
 
 //start/slutt
-		if((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) && (slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty())){
-	
+		if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
+				((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
+				&& ((slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty()) ||
+				((slutt.getText().matches("[0-1][0-9]:[0-5][0-9]") && !slutt.getText().isEmpty())))){
+			
+			if(start.getText().startsWith("0") || slutt.getText().startsWith("0")){
+				start.getText().replace("0", "");
+				slutt.getText().replace("0", "");
+				System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
+			}
 			String startstring = start.getText().replace(":", "");
 			String sluttstring = slutt.getText().replace(":", "");
 			int startint = Integer.parseInt(startstring);
 			int sluttint = Integer.parseInt(sluttstring);
 			//System.out.println(startint + " " + sluttint);
 			if(!(startint < sluttint)){
-				feilStartSluttLabel.setText("Starttid må være etter slutttid.");
+				feilStartSluttLabel.setText("Starttid må være før slutttid.");
 				feilStartSluttLabel.setVisible(true);
 			}
 		}
@@ -471,9 +479,7 @@ public class LagAvtaleController {
 //if nirvana reached, save the stuff
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
-			
-//			(name, description, location, room, date, start, end, owner)
-			User varUser = null;
+					
 			// DO THE STUFF
 			try{
 				saveUsers.addAll(selectedUsers);
@@ -539,7 +545,7 @@ public class LagAvtaleController {
 				e.printStackTrace();
 			}
 			
-			if(varUser != null){
+			if(saveAppointment != null){
 				try {
 					Main newMain = new Main();
 					newMain.setSession(this.sessionUser);
