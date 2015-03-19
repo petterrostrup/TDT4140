@@ -36,20 +36,16 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
 	        final Scene scene = new Scene(root);
-	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        scene.getStylesheets().add(getClass().getResource("LaserTheme.css").toExternalForm());
 	        
 	        stage.getIcons().add(new Image(getClass().getResourceAsStream("calicon.png")));
-//	        stage.getIcons().add(new Image("youngmaster.jpg"));
+
 	        
 	        stage.setTitle("CalenderBook");
 	        stage.setScene(scene);
 	        stage.show();
 			stage.setResizable(false);
-			
-//			Image icon = new Image(getClass().getResourceAsStream("myicon.png"));
-//			stage.getIcons().add(new Image("youngmaster.jpg"));
-//			stage.getIcons().add(new Image("youngmaster.jpg"));
-//			stage.getIcons().add(new Image("/path/to/javaicon.png"));
+
 	        		        
 	}
 	
