@@ -3,7 +3,7 @@ package application;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-
+import javafx.scene.image.*;
 import classes.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -34,6 +34,11 @@ public class Main extends Application {
 	        stage.setScene(scene);
 	        stage.show();
 			stage.setResizable(false);
+			
+			Image icon = new Image(getClass().getResourceAsStream("myicon.png"));
+			stage.getIcons().add(new Image("youngmaster.jpg"));
+//			stage.getIcons().add(new Image("youngmaster.jpg"));
+//			stage.getIcons().add(new Image("/path/to/javaicon.png"));
 	        		        
 	}
 	

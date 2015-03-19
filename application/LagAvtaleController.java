@@ -120,6 +120,7 @@ public class LagAvtaleController {
 	
 	private Boolean checkpointReached;
 	
+	private Appointment saveAppointment;
 	
 	// start lister
 	
@@ -545,7 +546,7 @@ public class LagAvtaleController {
 				e.printStackTrace();
 			}
 			
-			if(SOMETHING != null){
+			if(saveAppointment != null){
 				try {
 					Main newMain = new Main();
 					newMain.setSession(this.sessionUser);
