@@ -225,13 +225,9 @@ public class Main extends Application {
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
-			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
-<<<<<<< HEAD
-			newCont.setSession(this.sessionUser);	
-=======
+			DagsOversiktController newCont = loader.<DagsOversiktController>getController();	
 			newCont.setSession(this.sessionUser);		
 			primaryStage.getIcons().add(icon);
->>>>>>> 52d4b34c5b8e6d93291476c1c696ca747bbaa54f
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
