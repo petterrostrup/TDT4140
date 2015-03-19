@@ -10,6 +10,7 @@ import classes.Login;
 import classes.MainCalendar;
 import classes.Room;
 import classes.User;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +25,9 @@ import javafx.stage.Stage;
 public class DagsOversiktController {
 	
 	private User sessionUser;
-	//private Appointment currentAppointment;
+	
+	
+	private MainCalendar DagsCal;
 	
 	@FXML
 	private ListView visAvtaler;
@@ -32,24 +35,20 @@ public class DagsOversiktController {
 	@FXML
 	private Button visAvtButt;
 	
-	
+	private ObservableList<Object> appointz = FXCollections.observableArrayList();
 
 	
 	@FXML
 	private void initialize(){
 		//Klikk på en dag, hent oversikt over avtaler for dagen i listview
 		//Sjekke om dagen er den samme som denne og vise alle avtaler for valgt dag
-		MainCalendar DagsCal = new MainCalendar();
-		//User lolUser = new User(null, null, null, null, null, null);
-		//lolUser.getId();
 		
-		DagsCal.fillCalendar(sessionUser.getId());
-		//arrayAdapter?
 		
-		DagsCal.getAppointments();
+		//MainCalendar DagsCal = new MainCalendar();		
 		
-		visAvtaler.setItems((ObservableList) DagsCal);
 		
+		//adde observable list 
+		visAvtaler.setItems(appointz);
 		
 	}
 	
@@ -62,6 +61,7 @@ public class DagsOversiktController {
 		try {
 			//Gå til avtale du har markert i listview
 			System.out.println("asdtest");
+			
 			
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
@@ -81,7 +81,14 @@ public class DagsOversiktController {
 
 
 	public void setSession(User sessionUser) {
-		// TODO Auto-generated method stub
+		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		
+		DagsCal.fillCalendar(sessionUser.getId());
+		
+		
+		ArrayList appointments = DagsCal.getAppointments();
+		
+		
 		
 	}
 

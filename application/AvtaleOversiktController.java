@@ -123,7 +123,7 @@ public class AvtaleOversiktController {
 		deltagere.setText(deltagereString);
 		
 		tittel.setText(currentAppointment.getName());
-		dato.setText(currentAppointment.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString());
+		dato.setText(currentAppointment.getDate().toString());
 		
 		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
 		

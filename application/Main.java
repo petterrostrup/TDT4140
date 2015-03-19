@@ -207,7 +207,7 @@ public class Main extends Application {
 			c1.set(2015, Calendar.MARCH, 26);
 			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
 			
-			newCont.setSession(this.sessionUser, appointment4);
+			newCont.setSession(this.sessionUser, appointment);
 			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
@@ -226,8 +226,12 @@ public class Main extends Application {
 	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
+<<<<<<< HEAD
+			newCont.setSession(this.sessionUser);	
+=======
 			newCont.setSession(this.sessionUser);		
 			primaryStage.getIcons().add(icon);
+>>>>>>> 52d4b34c5b8e6d93291476c1c696ca747bbaa54f
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
