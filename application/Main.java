@@ -1,9 +1,12 @@
 package application;
 	
-import java.awt.Image;
+
+import java.awt.*;
 
 import javax.swing.ImageIcon;
+
 import javafx.scene.image.*;
+import javafx.scene.image.Image;
 import classes.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -27,9 +30,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 	       Parent root = FXMLLoader.load(getClass().getResource("logginn.fxml"));
-	       
 	        final Scene scene = new Scene(root);
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        
+	        stage.getIcons().add(new Image(getClass().getResourceAsStream("calicon.png")));
+//	        stage.getIcons().add(new Image("youngmaster.jpg"));
+	        
 	        stage.setTitle("CalenderBook");
 	        stage.setScene(scene);
 	        stage.show();
