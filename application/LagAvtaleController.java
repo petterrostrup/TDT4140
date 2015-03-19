@@ -136,16 +136,12 @@ public class LagAvtaleController {
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
 	private ObservableList<String> deltagere = FXCollections.observableArrayList(); // Her henter vi inn enkelt-PERSONER fra database - PETTER
 	//RANDOM GRUPPER START
-	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
 	private ObservableList<Object> grupper = FXCollections.observableArrayList(); // Her henter vi inn grupper fra database - PETTER
 	//rANDOM GRUPPER SLUTT
 	//MEDLEMMER START
-	
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
 	//MEDLEMMER SLUTT
-	
-
 	private ObservableList<Object> valgte = FXCollections.observableArrayList(); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
 
 	//slutt lister
@@ -470,12 +466,10 @@ public class LagAvtaleController {
 		}
 		
 //deltagere
-		if(!valgte.contains(equals(null))){
-			checkpointReached = true;
-		}
-		else{
+		if(selectedUsers.isEmpty() && selectedGroups.isEmpty()){ 
 			feilDeltagerLabel.setVisible(true);
 		}
+	
 		
 //if nirvana reached, save the stuff
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
