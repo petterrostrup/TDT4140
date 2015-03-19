@@ -116,7 +116,7 @@ public class KalenderController {
 		weekHeaderPane.setVisible(true);
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
-		setWeek();
+		
 
 		
 	}
@@ -352,6 +352,7 @@ public class KalenderController {
 	
 	public void fillCalendar(){
 		MainCalendar kalender = new MainCalendar();
+		System.out.println(this.sessionUser.getId());
 		kalender.fillCalendar(this.sessionUser.getId());
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -400,6 +401,7 @@ public class KalenderController {
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		setWeek();
 	}
 	
 	
