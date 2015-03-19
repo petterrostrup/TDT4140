@@ -122,8 +122,6 @@ public class MainCalendar {
 	}
 	
 	public static void main(String[] args) {
-		MainCalendar trialCalendar = new MainCalendar();
-		trialCalendar.fillCalendar();
 	}
 	
 }
