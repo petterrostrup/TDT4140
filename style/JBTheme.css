@@ -1,5 +1,5 @@
 .root{
-	-fx-background-image: url("backgroundorange.jpg");
+	-fx-background-image: url("../images/backgroundJB.jpg");
 	-fx-background-size: 150%;
 	}
 .label {
@@ -11,11 +11,11 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#FF7519, #806600);
+    -fx-background-color: linear-gradient(#FF00FF, #4C004C);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 .button:hover {
-    -fx-background-color: linear-gradient(#806600, #FF7519);
+    -fx-background-color: linear-gradient(#4C004C, #FF00FF);
     
 }
 

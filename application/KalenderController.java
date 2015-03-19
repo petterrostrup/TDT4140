@@ -120,11 +120,7 @@ public class KalenderController {
 		weekHeaderPane.setVisible(true);
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
-		appointmentClick = new EventHandler<MouseEvent>(){
-			public void handle(MouseEvent event) {
-				System.out.println("You clickeded meh");
-			}
-		};
+		
 		
 
 		
@@ -387,10 +383,10 @@ public class KalenderController {
 			if (calDate.get(Calendar.WEEK_OF_YEAR) == tempCal.get(Calendar.WEEK_OF_YEAR)
 					&& calDate.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)){
 				if (calDate.get(Calendar.DAY_OF_WEEK) == 1){
-					filler(timeToGrid(start), avtaleNavn, 7, timeToGrid(end));
+					filler(timeToGrid(start), avtaleNavn, 7, timeToGrid(end), avtale);
 				}
 				else{
-					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1, timeToGrid(end));
+					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1, timeToGrid(end), avtale);
 				}
 			}
 		}
@@ -399,14 +395,20 @@ public class KalenderController {
 	
 	//Adds appointments to the week view grid pane
 	@SuppressWarnings("unchecked")
-	public void filler(int startTime, String navn, int weekDay, int endTime){
+	public void filler(int startTime, String navn, int weekDay, int endTime, Appointment avtale){
 		Pane avtalePane = new Pane();
 		int span = endTime - startTime;
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
 		avtalePane.setPrefSize(122, 60);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
-		avtalePane.setOnMouseClicked(appointmentClick);
+		Appointment appointment = avtale;
+		avtalePane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent event) {
+				System.out.println("You clickeded meh");
+				appointmentView(event, appointment);
+			}
+		});
 		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
 	
@@ -427,8 +429,25 @@ public class KalenderController {
 		kalender = new MainCalendar();
 		System.out.println(this.sessionUser.getId());
 		kalender.fillCalendar(this.sessionUser.getId());
+		appointmentClick = new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent event) {
+				System.out.println("You clickeded meh");
+			}
+		};
 		
 		setWeek();
+	}
+	public void appointmentView(MouseEvent event, Appointment appointment){
+		try{
+			Main newMain= new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startAvtaleOversikt(new Stage(), appointment);
+			 
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
 	}
 	
 	
