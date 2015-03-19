@@ -96,7 +96,7 @@ public class AvtaleOversiktController {
 		try {
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
-			newMain.startRedigerAvtale(new Stage());
+			newMain.startRedigerAvtale(new Stage(), this.currentAppointment);
 		} catch (Exception e) {
 			
 			e.printStackTrace();

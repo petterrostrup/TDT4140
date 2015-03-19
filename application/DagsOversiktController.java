@@ -44,7 +44,7 @@ public class DagsOversiktController {
 		//Sjekke om dagen er den samme som denne og vise alle avtaler for valgt dag
 		
 		
-		//MainCalendar DagsCal = new MainCalendar();		
+		DagsCal = new MainCalendar();		
 		
 		
 		//adde observable list 
@@ -57,23 +57,30 @@ public class DagsOversiktController {
 	
 
 	//Knapp tar deg til visAvtale vindu
-	public void visAvtale (ActionEvent event) {	
-		try {
-			//Gå til avtale du har markert i listview
-			System.out.println("asdtest");
+	public void visAvtale (ActionEvent event) {
+		
+		String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
+		if(){
 			
-			
-			Main newMain = new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startAvtaleOversikt(new Stage());
-		} catch (Exception e) {
-			
-			e.printStackTrace();
 		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
+		
+		
+//		try {
+//			//Gå til avtale du har markert i listview
+//			System.out.println("asdtest");
+//			
+//			
+//			Main newMain = new Main();
+//			newMain.setSession(this.sessionUser);
+//			//newMain.startAvtaleOversikt(new Stage());
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+//		//Henter stage parameter
+//		Node  source = (Node)  event.getSource(); 
+//	    Stage stage  = (Stage) source.getScene().getWindow();
+//	    stage.close();
 	}
 
 
@@ -83,10 +90,11 @@ public class DagsOversiktController {
 	public void setSession(User sessionUser) {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		
+		System.out.println(sessionUser.getId());
 		DagsCal.fillCalendar(sessionUser.getId());
 		
 		
-		ArrayList appointments = DagsCal.getAppointments();
+		ArrayList<Appointment> appointments = DagsCal.getAppointments();
 		
 		
 		

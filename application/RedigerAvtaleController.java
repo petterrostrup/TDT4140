@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -414,15 +416,21 @@ public class RedigerAvtaleController {
 		personListe.setItems(deltagere);
 		
 		tittel.setText(currentAppointment.getName());
-		dato.setValue(currentAppointment.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		
+		Date input = currentAppointment.getDate();
+		Instant instant = Instant.ofEpochMilli(input.getTime());
+		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+		
+		dato.setValue(res);
 		
 		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
 		
 		start.setText(sdfTime.format(currentAppointment.getStart()));
 		slutt.setText(sdfTime.format(currentAppointment.getEnd()));
-		System.out.println(currentAppointment.getDescription());
 		beskrivelse.setText(currentAppointment.getDescription());
 		visRom.setValue(currentAppointment.getLocation());
+		visRomInfo.setText(currentAppointment.getLocation());
+		
 		
 	}
 	
