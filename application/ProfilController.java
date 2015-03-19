@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.sun.javafx.css.StyleManager;
+
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
@@ -94,7 +96,7 @@ public class ProfilController {
 	private ComboBox visThemes;
 	
 	
-	private String css = getClass().getResource("LightTheme.css").toExternalForm();
+	private String css = getClass().getResource("LaserTheme.css").toExternalForm();
 	
 	@FXML
 	public void initialize(){
@@ -119,7 +121,8 @@ public class ProfilController {
 	public void velgThemes(ActionEvent event){
 		visThemes.getSelectionModel().getSelectedItem();
 		System.out.println(visThemes.getSelectionModel().getSelectedItem());
-		
+
+			
 		if(visThemes.getSelectionModel().getSelectedItem().equals("Light Theme")){
 			css = getClass().getResource("LightTheme.css").toExternalForm();
 		}
@@ -127,22 +130,29 @@ public class ProfilController {
 			css = getClass().getResource("DarkTheme.css").toExternalForm();
 //			String css = LoginController.class.getResource("DarkTheme.css").toExternalForm();
 //			scene.getStylesheets().clear();
+			
+
+			// load default global stylesheet
+			Application.setUserAgentStylesheet(null);
+			// add custom global stylesheet
+			StyleManager.getInstance().addUserAgentStylesheet("DarkTheme.css");
+			   
 		}
-		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
-			css = getClass().getResource("GurlyTheme.css").toExternalForm();
-		}
-		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
-			css = getClass().getResource("LaserTheme.css").toExternalForm();
-			System.out.println("laaaaaazooooooooors");
-		}
-		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
-			css = getClass().getResource("JBTheme.css").toExternalForm();
-		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
+//			css = getClass().getResource("GurlyTheme.css").toExternalForm();
+//		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("Laser Theme")){
+//			css = getClass().getResource("LaserTheme.css").toExternalForm();
+//		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
+//			css = getClass().getResource("JBTheme.css").toExternalForm();
+//		}
 	}
 	public void setCss(String css) {
 		this.css = css;
 	}
 	public String getCss() {
+		
 		return css;
 	}
 	

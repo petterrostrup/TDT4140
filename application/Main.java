@@ -30,7 +30,7 @@ public class Main extends Application {
 	
 	private User sessionUser;
 //    String css = LoginController.class.getResource("LaserTheme.css").toExternalForm();
-	
+	Image icon = new Image(getClass().getResourceAsStream("kappa.png"));
 	//Login skjerm
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -41,7 +41,7 @@ public class Main extends Application {
 	        scene.getStylesheets().add(profil.getCss());
 //	        scene.getStylesheets().add(getClass().getResource("LaserTheme.css").toExternalForm());
 	        
-	        stage.getIcons().add(new Image(getClass().getResourceAsStream("kappa.png")));
+	        stage.getIcons().add(icon);
 	        
 	        stage.setTitle("uCal");
 	        stage.setScene(scene);
@@ -56,11 +56,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("kalender.fxml"));
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			KalenderController newCont = loader.<KalenderController>getController();
 			newCont.setSession(this.sessionUser);
-			
+			primaryStage.getIcons().add(icon);
 			
 			primaryStage.show();
 			primaryStage.setResizable(false);
@@ -77,10 +78,11 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("registrer.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			RegistrerController newCont = loader.<RegistrerController>getController();
-
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();		
 			primaryStage.setResizable(false);
 		} 
@@ -95,10 +97,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("lagavtale.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			LagAvtaleController newCont = loader.<LagAvtaleController>getController();
 			newCont.setSession(this.sessionUser);
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -113,12 +117,13 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-		    ProfilController profil = new ProfilController(); 
+		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
 			primaryStage.setScene(scene);
 			ProfilController newCont = loader.<ProfilController>getController();
-			newCont.setSession(this.sessionUser);			
+			newCont.setSession(this.sessionUser);		
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -133,10 +138,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigerbruker.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			RedigerBrukerController newCont = loader.<RedigerBrukerController>getController();
 			newCont.setSession(this.sessionUser);
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -149,10 +156,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("administrergrupper.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			AdministrerGrupperController newCont = loader.<AdministrerGrupperController>getController();
 			newCont.setSession(this.sessionUser);
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -165,10 +174,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("nygruppe.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			NyGruppeController newCont = loader.<NyGruppeController>getController();
 			newCont.setSession(this.sessionUser);
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -181,7 +192,8 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("avtaleoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			AvtaleOversiktController newCont = loader.<AvtaleOversiktController>getController();
 			
@@ -192,6 +204,7 @@ public class Main extends Application {
 			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
 			
 			newCont.setSession(this.sessionUser, appointment4);
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -205,10 +218,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("dagsoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
-			newCont.setSession(this.sessionUser);			
+			newCont.setSession(this.sessionUser);		
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -224,7 +239,8 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("redigeravtale.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		    ProfilController profil = new ProfilController();
+	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			RedigerAvtaleController newCont = loader.<RedigerAvtaleController>getController();
 			
@@ -234,7 +250,7 @@ public class Main extends Application {
 			c1.set(2015, Calendar.MARCH, 26);
 			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
 			newCont.setSession(this.sessionUser, appointment4);
-			
+			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
