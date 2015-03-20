@@ -121,7 +121,8 @@ public class LagAvtaleController {
 	private Boolean checkpointReached;
 	
 	private Appointment saveAppointment;
-	
+	int startint;
+	int sluttint;
 	// start lister
 	
 	private ArrayList<User> allUsers = new ArrayList<User>();
@@ -447,10 +448,9 @@ public class LagAvtaleController {
 				slutt.getText().replace("0", "");
 //				System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
 			}
-			String startstring = start.getText().replace(":", "");
-			String sluttstring = slutt.getText().replace(":", "");
-			int startint = Integer.parseInt(startstring);
-			int sluttint = Integer.parseInt(sluttstring);
+	
+			startint = Integer.parseInt(start.getText().replace(":", ""));
+			sluttint = Integer.parseInt(slutt.getText().replace(":", ""));
 			//System.out.println(startint + " " + sluttint);
 			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være før slutttid.");
@@ -522,11 +522,11 @@ public class LagAvtaleController {
 				LocalDate date = dato.getValue();
 				Date finalDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				
-				String startformat = date.toString() + " " + start.getText() + ":00.00";
+				String startformat = date.toString() + " " + startint + ":00.00";
 				Date parsedDate = dateFormat.parse(startformat);
 				Timestamp startTime = new Timestamp(parsedDate.getTime());
 				
-				String endformat = date.toString() + " " + slutt.getText() + ":00.00";
+				String endformat = date.toString() + " " + sluttint + ":00.00";
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
