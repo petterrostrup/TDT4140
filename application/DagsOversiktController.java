@@ -103,18 +103,11 @@ public class DagsOversiktController {
 		for (int i = 0; i < myApps.size(); i++) {
 			enApp = myApps.get(i);
 			
-			appointz.add(enApp.getName());
+			this.appointz.add(enApp.getName());
 			
 					}
+		visAvtaler.setItems(this.appointz);
 				}
-			
-		{
-		
-		
-		visAvtaler.setItems(appointz);
-		
-		
-	}
 			
 		
 
