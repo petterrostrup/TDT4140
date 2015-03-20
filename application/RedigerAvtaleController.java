@@ -428,7 +428,7 @@ public class RedigerAvtaleController {
 		
 		dato.setValue(res);
 		
-		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		
 		start.setText(sdfTime.format(currentAppointment.getStart()));
 		slutt.setText(sdfTime.format(currentAppointment.getEnd()));
@@ -586,9 +586,9 @@ public class RedigerAvtaleController {
 				
 				if (newRoom.getCapacity() >= saveUsers.size()){
 					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
-						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
+						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
 						saveAppointment.updateAppointment();
-						saveAppointment.inviteParticipants();
+						saveAppointment.updateParticipants();
 						saveAppointment.reserveRoom(newRoom);
 					}
 					else{
