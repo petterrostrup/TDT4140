@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class MainCalendar {
 	private User owner;
-	private ArrayList<Appointment> appointments;
+	private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 
 
 	public User getOwner() {
@@ -57,12 +57,9 @@ public class MainCalendar {
 				Timestamp start = results.getTimestamp("start");
 				Timestamp end = results.getTimestamp("end");
 				
-				System.out.println(id);
-				
 				returning = new Appointment(name, desc, loc, room, new ArrayList<User>(), date, start, end, owner, id + "");
-				System.out.println(returning);
 				this.appointments.add(returning);
-				System.out.println("Adding appointment");
+				System.out.println("Adding appointment " + id);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,16 +103,14 @@ public class MainCalendar {
 	}
 	
 	public void fillCalendar(String id){
+		appointments.clear();
 		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		appointments = new ArrayList<Appointment>();
 		Appointment adding;
 		try {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
-				System.out.println(results.getLong(3));
 				adding = this.getAppointment(results.getLong(3));
-				System.out.println("Adding appointment");
 				appointments.add(adding);
 			}
 		} catch (SQLException e) {
