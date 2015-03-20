@@ -20,3 +20,44 @@
 }
 
 
+
+/*------------------------ */
+.combo-box .list-cell {
+      -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#3F3F3F, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.combo-box:hover {
+    -fx-background-color: linear-gradient(#000000, #3F3F3F);
+}
+    .combo-box-popup .list-view{
+    
+   	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#3F3F3F, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    
+    }
+
+
+/*--------------------------*/
+
+.menu-button .label{
+      -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#000000, #3F3F3F);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.menu-item:focused {
+    -fx-background-color: linear-gradient(#3F3F3F, #000000);
+}
+.context-menu{
+   	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#000000, #3F3F3F);
+}
