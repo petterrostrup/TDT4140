@@ -243,8 +243,8 @@ public class Appointment {
 				+ "VALUES ( '" + room.getId() + "', '" + this.getAppointmentID() + "')";
 		DatabaseCommunicator.update(sqlStatement);
 	}
-	public void removeBooking(Room room){
-		String sqlStatement = "DELETE FROM BOOKING WHERE room = '" + room.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
+	public void removeBooking(){
+		String sqlStatement = "DELETE FROM BOOKING WHERE appointment = '" + this.getAppointmentID() + "'";
 		DatabaseCommunicator.update(sqlStatement);
 	}
 	
