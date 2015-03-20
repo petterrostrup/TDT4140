@@ -49,6 +49,7 @@ public class RedigerAvtaleController {
 	private User sessionUser;
 	private Appointment currentAppointment;
 	
+
 	@FXML
 	private TextField tittel;  
 	

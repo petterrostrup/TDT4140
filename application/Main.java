@@ -62,7 +62,7 @@ public class Main extends Application {
 			KalenderController newCont = loader.<KalenderController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.getIcons().add(icon);
-			
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 			
@@ -83,6 +83,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			RegistrerController newCont = loader.<RegistrerController>getController();
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();		
 			primaryStage.setResizable(false);
 		} 
@@ -103,6 +104,7 @@ public class Main extends Application {
 			LagAvtaleController newCont = loader.<LagAvtaleController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -124,6 +126,7 @@ public class Main extends Application {
 			ProfilController newCont = loader.<ProfilController>getController();
 			newCont.setSession(this.sessionUser);		
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -144,6 +147,7 @@ public class Main extends Application {
 			RedigerBrukerController newCont = loader.<RedigerBrukerController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -162,6 +166,7 @@ public class Main extends Application {
 			AdministrerGrupperController newCont = loader.<AdministrerGrupperController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -180,6 +185,7 @@ public class Main extends Application {
 			NyGruppeController newCont = loader.<NyGruppeController>getController();
 			newCont.setSession(this.sessionUser);
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -203,6 +209,7 @@ public class Main extends Application {
 			
 			newCont.setSession(this.sessionUser, appointment);
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -222,6 +229,7 @@ public class Main extends Application {
 			DagsOversiktController newCont = loader.<DagsOversiktController>getController();	
 			newCont.setSession(this.sessionUser, appointment);	
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 
@@ -244,6 +252,7 @@ public class Main extends Application {
 			
 			newCont.setSession(this.sessionUser, appointment);
 			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("uCal");
 			primaryStage.show();
 			primaryStage.setResizable(false);
 		} 

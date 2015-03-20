@@ -568,7 +568,7 @@ public class LagAvtaleController {
 				e.printStackTrace();
 			}
 			
-			if(saveAppointment != null){
+//			if(saveAppointment != null){
 				try {
 					Main newMain = new Main();
 					newMain.setSession(this.sessionUser);
@@ -582,11 +582,11 @@ public class LagAvtaleController {
 				}
 			}
 		}
-		else{
-			System.out.println("IKKE GODKJENT");
-		}
-	
-	}
+//		else{
+//			System.out.println("IKKE GODKJENT");
+//		}
+//	
+//	}
 	
 	public void kalenderButt (ActionEvent event){
 		try {
