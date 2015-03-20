@@ -5,30 +5,18 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Locale;
-
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.MainCalendar;
-import classes.Room;
 import classes.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -38,7 +26,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -120,16 +107,13 @@ public class KalenderController {
 		addToMonthWeeks();
 		avtaleCollection.addAll(gridpane.getChildren());
 		avtaleMonthCollection.addAll(monthGrid.getChildren());
+		
 		//Creating appointment panes
 		datepicker.setValue(LocalDate.now());
 		scrollpane.setVisible(true);
 		weekHeaderPane.setVisible(true);
 		monthPane.setVisible(false);
 		monthHeaderPane.setVisible(false);
-		
-		
-
-		
 	}
 	
 	
@@ -161,7 +145,6 @@ public class KalenderController {
 		monthHeaderPane.setVisible(false);
 		monthHeaderPane.setDisable(true);
 		setWeek();
-		
 	}
 	
 	//Shows the month view when the radio button is set to Måned
@@ -193,7 +176,6 @@ public class KalenderController {
 		setWeek();
 	}
 
-	
 	//Sets and fills the week view appointments and labels
 	public void setWeek(){
 		tempCal.setTime(this.cal.getTime());;
@@ -449,7 +431,7 @@ public class KalenderController {
 		return timeInt;
 	}
 
-	//Sets the current session?
+	//Setter det som skal vises spesielt for denne kontrolleren. GUI blir fylt ut med variabler etc.
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
@@ -491,7 +473,7 @@ public class KalenderController {
 						
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
+					System.out.println("Error occured: " + e);
 				}				
 			}
 			
@@ -508,7 +490,7 @@ public class KalenderController {
 			newMain.startAvtaleOversikt(new Stage(), appointment);
 			 
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
@@ -521,7 +503,7 @@ public class KalenderController {
 			newMain.startDagsOversikt(new Stage(), appointment);
 			 
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
@@ -536,7 +518,7 @@ public class KalenderController {
 			newMain.startLagAvtale(new Stage());
 		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 			
 		Node  source = (Node)  event.getSource(); 
@@ -551,7 +533,7 @@ public class KalenderController {
 			new Main().start(new Stage());
 		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		//Henter stage parameter
@@ -569,7 +551,7 @@ public class KalenderController {
 			newMain.startProfil(new Stage());
 		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -585,7 +567,7 @@ public class KalenderController {
 			newMain.setSession(this.sessionUser);
 			newMain.startKalender(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 

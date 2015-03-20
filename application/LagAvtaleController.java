@@ -6,28 +6,21 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
 import classes.MainCalendar;
 import classes.Room;
 import classes.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -35,10 +28,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -166,7 +157,7 @@ public class LagAvtaleController {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		// Gets all users and adds them to the list
@@ -189,7 +180,7 @@ public class LagAvtaleController {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		// Gets all groups and adds them to the list
@@ -209,7 +200,7 @@ public class LagAvtaleController {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		
@@ -394,7 +385,7 @@ public class LagAvtaleController {
 							medlemmer.add(newUser.getName());
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("Error occured: " + e);
 					}
 				}
 			}
@@ -556,7 +547,7 @@ public class LagAvtaleController {
 							}
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("Error occured: " + e);
 					}
 				}
 				
@@ -577,7 +568,7 @@ public class LagAvtaleController {
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 					System.out.println("Something went wrong connecting to the database");
 				}
 				
@@ -610,7 +601,7 @@ public class LagAvtaleController {
 				
 				
 			}catch(Exception e){
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
 			
 //			if(saveAppointment != null){
@@ -623,7 +614,7 @@ public class LagAvtaleController {
 				    stage.close();
 				} catch (Exception e) {
 					
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 			}
 		}
@@ -640,7 +631,7 @@ public class LagAvtaleController {
 			newMain.startKalender(new Stage());
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -655,7 +646,7 @@ public class LagAvtaleController {
 			newMain.startProfil(new Stage());
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -669,7 +660,7 @@ public class LagAvtaleController {
 			newMain.startLagAvtale(new Stage());
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -682,7 +673,7 @@ public class LagAvtaleController {
 			new Main().start(new Stage());
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 

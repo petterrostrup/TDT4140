@@ -3,28 +3,21 @@ package application;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 import classes.User;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -187,7 +180,7 @@ public class RedigerBrukerController {
 			
 				varUser.updateUser();
 			}catch (Exception e){
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
 			if(varUser != null){
 				try {
@@ -198,7 +191,7 @@ public class RedigerBrukerController {
 				    Stage stage  = (Stage) source.getScene().getWindow();
 				    stage.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 			}
 		}
@@ -236,7 +229,7 @@ public class RedigerBrukerController {
 			newMain.startProfil(new Stage());
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();

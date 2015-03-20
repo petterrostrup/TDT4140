@@ -2,29 +2,15 @@ package application;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
-
-import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
-import classes.MainCalendar;
-import classes.Room;
 import classes.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -66,8 +52,7 @@ public class NyGruppeController {
 				personer.add(newUser.getName());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		nyGruppeMedlemmerList.setItems(medlemmerNyGruppe);
 		allePersonerList.setItems(personer);
@@ -120,12 +105,12 @@ public class NyGruppeController {
 					try {
 						insertGroup.addMember(member.getId());
 					} catch (Exception e) {
-						// TODO: handle exception
+						System.out.println("Error occured: " + e);
 					}
 				}
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+				System.out.println("Error occured: " + e);
 			}
 			
 			
@@ -136,8 +121,7 @@ public class NyGruppeController {
 					newMain.setSession(this.sessionUser);
 					newMain.startProfil(new Stage());
 				} catch (Exception e) {
-					
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 				//Henter stage parameter
 				Node  source = (Node)  event.getSource(); 
@@ -156,8 +140,7 @@ public class NyGruppeController {
 			newMain.setSession(this.sessionUser);
 			newMain.startProfil(new Stage());
 		} catch (Exception e) {
-			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();

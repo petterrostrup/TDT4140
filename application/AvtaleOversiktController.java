@@ -1,15 +1,9 @@
 package application;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import classes.Appointment;
 import classes.DatabaseCommunicator;
-import classes.Login;
-import classes.Room;
 import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,44 +47,20 @@ public class AvtaleOversiktController {
 	@FXML
 	private RadioButton deltar;
 	
-	//public eller private initialize?
 	@FXML
 	private void initialize(){
-		//Lager instanser for testing
-		Calendar c1 = Calendar.getInstance();
-		Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
-		
-		
-		//Instans av appointment
-		Appointment appz = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom,  c1.getTime() ,Timestamp.valueOf("2015-03-23 18:00:00.0"),Timestamp.valueOf("2015-03-23 20:00:00.0"), sessionUser);
-		//Appointment appz = new Appointment(null, null, null, testRoom, null, null, null, null, sessionUser);
-		
-		
-		//Setter info teksten til avtalen du trykker på
-		tittel.setText(appz.getName());
-		//rom.setText(room.getName);
-		rom.setText(testRoom.getName());
-		//deltagere.setText(appz.getParticipants().toString()); Skal vise en liste over deltagere
-		dato.setText(appz.getDate().toString());
-		tidspunkt.setText(appz.getStart().toString() + (" - ") + appz.getEnd());
-		//tidspunkt.setText(appz.getEnd() + "-" );
-		//beskrivelse.setText(appz.getDescription()); TEXTAREA SUCKS, THIS DOESN'T WORK
-		
 	}
 	
 	
 	//Radiobutton til å velge attending
 	public void attendButt(ActionEvent event) {
-		//Når vi får en attending data verdi i databasen, skal denne endre en avtales data til attending
-		System.out.println("halla");
+		//Når vi får en attending data verdi i databasen, skal denne endre en avtales data til attending;
 		String sqlStatement = "UPDATE CONNECTED SET status = '" + 1 + "' WHERE appointment = '" + this.currentAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
 		DatabaseCommunicator.update(sqlStatement);
 	}
 	
 	//Radiobutton til å velge ikke attending
 	public void notAttendButt(ActionEvent event) {
-		System.out.println("hade");
-		
 		String sqlStatement = "UPDATE CONNECTED SET status = '" + -1 + "' WHERE appointment = '" + this.currentAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
 		DatabaseCommunicator.update(sqlStatement);
 	}
@@ -104,8 +74,7 @@ public class AvtaleOversiktController {
 			newMain.setSession(this.sessionUser);
 			newMain.startRedigerAvtale(new Stage(), this.currentAppointment);
 		} catch (Exception e) {
-			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -113,7 +82,7 @@ public class AvtaleOversiktController {
 	    stage.close();
 	}
 
-
+	//Setter det som skal vises spesielt for denne kontrolleren. GUI blir fylt ut med variabler etc.
 	public void setSession(User sessionUser, Appointment sessionAppointment){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		this.currentAppointment = sessionAppointment;
@@ -133,7 +102,7 @@ public class AvtaleOversiktController {
 				
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Error occured: " + e);
 		}	
 		
 		ArrayList<User> userList = currentAppointment.getParticipants();

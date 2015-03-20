@@ -9,15 +9,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import classes.User;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -196,7 +191,7 @@ public class RegistrerController {
 					
 					varUser.saveUser();
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 				
 				if (varUser != null){
@@ -208,7 +203,7 @@ public class RegistrerController {
 						Stage stage  = (Stage) source.getScene().getWindow();
 						stage.close();
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("Error occured: " + e);
 					}
 				}
 			}
@@ -222,7 +217,7 @@ public class RegistrerController {
 			new Main().start(new Stage());
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 

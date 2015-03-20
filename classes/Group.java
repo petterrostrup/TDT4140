@@ -70,7 +70,7 @@ public class Group {
 				System.out.println("Group exists. Cannot save");
 			}}  catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 					System.out.println("Something went wrong connecting to the database");
 				}
 
@@ -90,7 +90,7 @@ public class Group {
 				System.out.println("User is already in group");
 			}}  catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 					System.out.println("Something went wrong connecting to the database");
 				}
 	}
@@ -110,7 +110,7 @@ public class Group {
 				System.out.println("Added user with ID: " + results.getLong(1));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class Group {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		return returnGroup;
@@ -151,7 +151,7 @@ public class Group {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		return returnGroup;
@@ -171,8 +171,7 @@ public class Group {
 				System.out.println("No group found in database matching that name");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		return returnGroup;

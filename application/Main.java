@@ -1,29 +1,14 @@
 package application;
 	
 
-import java.awt.*;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import javax.swing.ImageIcon;
-
-import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import classes.Appointment;
-import classes.Room;
 import classes.User;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import application.LoginController;
 
 
 public class Main extends Application {
@@ -69,7 +54,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -89,7 +74,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -110,7 +95,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -133,6 +118,7 @@ public class Main extends Application {
 		
 		catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -153,7 +139,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	public void startAdministrerGrupper(Stage primaryStage) {
@@ -172,7 +158,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	public void startNyGruppe(Stage primaryStage) {
@@ -191,7 +177,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 
@@ -215,7 +201,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -235,7 +221,7 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
 	
@@ -258,18 +244,13 @@ public class Main extends Application {
 		} 
 		
 		catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 	}
-	
-	
-	
+
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 	}
-	
-	
-	
 	//(Kan bare launche ett vindu om gangen, resten må kalles fra andre klasser)
 	public static void main(String[] args) {
 		launch(args);

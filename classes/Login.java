@@ -1,10 +1,7 @@
 package classes;
 
 import java.sql.ResultSet;
-import java.sql.RowId;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.Date;
 
 public class Login {
 	
@@ -38,8 +35,7 @@ public class Login {
 				System.out.println("No user found in database matching that username");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		return user;
 	}
