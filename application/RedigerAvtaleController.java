@@ -1,19 +1,18 @@
 package application;
 
-import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
-import classes.MainCalendar;
 import classes.Room;
 import classes.User;
 import javafx.collections.FXCollections;
@@ -34,15 +33,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class LagAvtaleController {
-	
+public class RedigerAvtaleController {
+	private Stage primaryStage;
 	private User sessionUser;
+	private Appointment currentAppointment;
 	
+
 	@FXML
-	private TextField tittel;
-	
-	@FXML
-	private Label notification;
+	private TextField tittel;  
 	
 	@FXML
 	private DatePicker dato;
@@ -112,14 +110,12 @@ public class LagAvtaleController {
 	private Button toCandidates;
 	@FXML
 	private Button leggtilmedlem;
-
 	
 	private Appointment saveAppointment;
 	int startint;
 	int sluttint;
 	String startstring;
 	String sluttstring;
-	// start lister
 	
 	private ArrayList<User> allUsers = new ArrayList<User>();
 	private ArrayList<Room> allRooms = new ArrayList<Room>();
@@ -128,84 +124,75 @@ public class LagAvtaleController {
 	private ArrayList<Group> selectedGroups = new ArrayList<Group>();
 	private ArrayList<User> groupMembers = new ArrayList<User>();
 	private ArrayList<User> saveUsers = new ArrayList<User>();
-
-	///////////////////////////////////////////////////////////////////////////////
-	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
-	private ObservableList<String> deltagere = FXCollections.observableArrayList(); // Her henter vi inn enkelt-PERSONER fra database - PETTER
-	//RANDOM GRUPPER START
-	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
-	private ObservableList<Object> grupper = FXCollections.observableArrayList(); // Her henter vi inn grupper fra database - PETTER
-	//rANDOM GRUPPER SLUTT
-	//MEDLEMMER START
+	
+	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList();
+	private ObservableList<String> deltagere = FXCollections.observableArrayList();
+	
+	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList();
+	private ObservableList<Object> grupper = FXCollections.observableArrayList();
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
-	//MEDLEMMER SLUTT
-	private ObservableList<Object> valgte = FXCollections.observableArrayList(); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
+	
 
+	private ObservableList<Object> valgte = FXCollections.observableArrayList();
 	//slutt lister
 	@FXML
 	private void initialize(){
 		// Gets all rooms and adds them to the list
-		String sqlStatement = "SELECT * FROM ROOM";
-		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		Room newRoom;
-		try {
-			while (results.next()){
-				newRoom = new Room(results.getLong(1) + "", results.getString("name"), results.getString("place"), results.getInt("capacity"));
+				String sqlStatement = "SELECT * FROM ROOM";
+				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+				Room newRoom;
+				try {
+					while (results.next()){
+						newRoom = new Room(results.getLong(1) + "", results.getString("name"), results.getString("place"), results.getInt("capacity"));
+						
+						allRooms.add(newRoom);
+						visRom.getItems().add(newRoom.getName());
+					}
+				} catch (SQLException e) {
+					System.out.println("Error occured: " + e);
+				}
 				
-				allRooms.add(newRoom);
-				visRom.getItems().add(newRoom.getName());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error occured: " + e);
-		}
-		
-		// Gets all users and adds them to the list
-		
-		sqlStatement = "SELECT * FROM USER";
-		results = DatabaseCommunicator.execute(sqlStatement);
-		User newUser;
-		try {
-			while (results.next()){
-				String name = results.getString(results.findColumn("name"));
-				String dbPassword = results.getString(results.findColumn("password"));
-				String dbUsername = results.getString(results.findColumn("username"));
-				String mail = results.getString(results.findColumn("email"));
-				String address = results.getString(results.findColumn("address"));
-				Long id = results.getLong(1);
-				newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+				// Gets all users and adds them to the list
 				
-				allUsers.add(newUser);
-				deltagere.add(newUser.getName());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error occured: " + e);
-		}
-		
-		// Gets all groups and adds them to the list
-		
-		sqlStatement = "SELECT * FROM MEMBERGROUP";
-		results = DatabaseCommunicator.execute(sqlStatement);
-		Group newGroup;
-		try {
-			while (results.next()){
-				String name = results.getString("name");
-				Long id = results.getLong(1);
-				int leader = results.getInt("leader");
-				newGroup = new Group(name,leader + "", id.toString());
+				sqlStatement = "SELECT * FROM USER";
+				results = DatabaseCommunicator.execute(sqlStatement);
+				User newUser;
+				try {
+					while (results.next()){
+						String name = results.getString(results.findColumn("name"));
+						String dbPassword = results.getString(results.findColumn("password"));
+						String dbUsername = results.getString(results.findColumn("username"));
+						String mail = results.getString(results.findColumn("email"));
+						String address = results.getString(results.findColumn("address"));
+						Long id = results.getLong(1);
+						newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+						
+						allUsers.add(newUser);
+						deltagere.add(newUser.getName());
+					}
+				} catch (SQLException e) {
+					System.out.println("Error occured: " + e);
+				}
 				
-				allGroups.add(newGroup);
-				grupper.add(newGroup.getGroupName());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error occured: " + e);
-		}
-		
-		
-		System.out.println(valgte);
-		dato.setValue(LocalDate.now());
+				// Gets all groups and adds them to the list
+				
+				sqlStatement = "SELECT * FROM MEMBERGROUP";
+				results = DatabaseCommunicator.execute(sqlStatement);
+				Group newGroup;
+				try {
+					while (results.next()){
+						String name = results.getString("name");
+						Long id = results.getLong(1);
+						int leader = results.getInt("leader");
+						newGroup = new Group(name,leader + "", id.toString());
+						
+						allGroups.add(newGroup);
+						grupper.add(newGroup.getGroupName());
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Error occured: " + e);
+				}
 		//
 		personListe.setItems(deltagere);
 		gruppeListe.setItems(grupper);
@@ -235,12 +222,6 @@ public class LagAvtaleController {
 		//feil-labels slutt
 		
 
-	}
-	public Color farger(){
-		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
-		return fargekoder;
-		
-		// SE HER ALEKSANDER
 	}
 	
 	public void visPersonerList(ActionEvent event){
@@ -372,7 +353,6 @@ public class LagAvtaleController {
 		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
-			//gruppeListe.getSelectionModel().clearSelection();
 			for (int i = 0; i < allGroups.size(); i++) {
 				if (allGroups.get(i).getGroupName().equals(visMedlemmerIGruppe.toString())){
 					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + allGroups.get(i).getGroupID() + "'";
@@ -393,44 +373,38 @@ public class LagAvtaleController {
 
 	}
 	
-	public void setSession(User sessionUser){
+	public void setSession(User sessionUser, Appointment sessionAppointment){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
-		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
-		selectedUsers.add(sessionUser);
-		valgtePersoner.add(sessionUser.getName());
+		this.currentAppointment = sessionAppointment;
+		currentAppointment.readParticipants();
+
+		ArrayList<User> newUsers = currentAppointment.getParticipants();
 		
-		
-		notification.setVisible(false);
-		
-		MainCalendar myCal = new MainCalendar();
-		myCal.fillCalendar(this.sessionUser.getId());
-		
-		ArrayList<Appointment> comparing = myCal.getAppointments();
-		
-		Appointment localAppointment;
-		
-		Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -1); 
-		for (int i = 0; i < comparing.size(); i++) {
-			localAppointment = comparing.get(i);
-			
-			if(localAppointment.getDate().after(cal.getTime())){
-				String sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
-				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-				try {
-					if (results.next()) {
-						if (results.getInt("status") == 0){
-							notification.setVisible(true);
-							break;
-						}
-						
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-				}				
-			}
-			
+		User addingUser;
+		for (int i = 0; i < newUsers.size(); i++) {
+			addingUser = newUsers.get(i);
+			selectedUsers.add(addingUser);
+			valgtePersoner.add(addingUser.getName());
 		}
+		
+		valgtePersonerList.setItems(valgtePersoner);
+		personListe.setItems(deltagere);
+		
+		tittel.setText(currentAppointment.getName());
+		
+		Date input = currentAppointment.getDate();
+		Instant instant = Instant.ofEpochMilli(input.getTime());
+		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+		
+		dato.setValue(res);
+		
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+		
+		start.setText(sdfTime.format(currentAppointment.getStart()));
+		slutt.setText(sdfTime.format(currentAppointment.getEnd()));
+		beskrivelse.setText(currentAppointment.getDescription());
+		visRom.setValue(currentAppointment.getLocation());
+		visRomInfo.setText(currentAppointment.getLocation());
 		
 		
 	}
@@ -460,6 +434,7 @@ public class LagAvtaleController {
 			LocalDate datoidag = LocalDate.now();
 			int test = datoValgt.compareTo(datoidag);
 			if(!(test == 0 || test > 0)){
+				System.out.println("NOO");
 				feilDatoLabel.setVisible(true);
 				feilDatoLabel.setText("Må sette en dato fram i tid");
 			}
@@ -468,7 +443,6 @@ public class LagAvtaleController {
 			feilDatoLabel.setVisible(true);
 			feilDatoLabel.setText("Må velge dato");
 		}
-
 //tidsvalidering
 		if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
 				((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
@@ -505,7 +479,7 @@ public class LagAvtaleController {
 				feilStartSluttLabel.setText("Starttid må være før slutttid.");
 				feilStartSluttLabel.setVisible(true);
 			}
-			
+		
 			System.out.println(startstring + " " + sluttstring);
 			
 		}
@@ -513,7 +487,7 @@ public class LagAvtaleController {
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
-		if(beskrivelse.getText().isEmpty() ){
+		if(beskrivelse.getText().isEmpty()){
 			feilBeskrivelseLabel.setVisible(true);
 		}
 		else if(beskrivelse.getText().contains("DROP") || beskrivelse.getText().contains("INSERT") || beskrivelse.getText().contains("SELECT") || beskrivelse.getText().contains(";")){
@@ -526,13 +500,11 @@ public class LagAvtaleController {
 		if(selectedUsers.isEmpty() && selectedGroups.isEmpty()){ 
 			feilDeltagerLabel.setVisible(true);
 		}
-	
 		
 //if nirvana reached, save the stuff
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
 			System.out.println("GODKJENT");
-					
-			// DO THE STUFF
+			// DO THE SHIT
 			try{
 				saveUsers.addAll(selectedUsers);
 				for (int i = 0; i < selectedGroups.size(); i++) {
@@ -567,9 +539,7 @@ public class LagAvtaleController {
 					}
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					System.out.println("Error occured: " + e);
-					System.out.println("Something went wrong connecting to the database");
 				}
 				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
@@ -588,98 +558,62 @@ public class LagAvtaleController {
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
 				if (newRoom.getCapacity() >= saveUsers.size()){
+					Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
+					saveAppointment.removeBooking();
 					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
-						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
-						saveAppointment.saveAppointment();
-						saveAppointment.inviteParticipants();
+						saveAppointment.updateAppointment();
+						saveAppointment.updateParticipants();
 						saveAppointment.reserveRoom(newRoom);
 					}
-					else System.out.println("Double booking is not allowed");					
+					else{
+						System.out.println("Double booking is not allowed");
+						saveAppointment = null;
+					}
 				}
 				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());
 				
-				
+
 				
 			}catch(Exception e){
 				System.out.println("Error occured: " + e);
 			}
-			
-//			if(saveAppointment != null){
 				try {
-					Main newMain = new Main();
-					newMain.setSession(this.sessionUser);
-					newMain.startKalender(new Stage());
+
 					Node  source = (Node)  event.getSource(); 
 				    Stage stage  = (Stage) source.getScene().getWindow();
 				    stage.close();
 				} catch (Exception e) {
-					
+					  
 					System.out.println("Error occured: " + e);
 				}
-			}
+				
+//			}
 		}
-//		else{
-//			System.out.println("IKKE GODKJENT");
-//		}
-//	
-//	}
+		else{
+			System.out.println("IKKE GODKJENT");
+		}
 	
-	public void kalenderButt (ActionEvent event){
-		try {
-			Main newMain = new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startKalender(new Stage());
-		} catch (Exception e) {
-			
-			System.out.println("Error occured: " + e);
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
 	}
-	
-	public void profilButt (ActionEvent event){
-		try {
-			Main newMain = new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startProfil(new Stage());
-		} catch (Exception e) {
-			
-			System.out.println("Error occured: " + e);
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
-	}
-	public void avtaleButt(ActionEvent event){
-		try {
-			Main newMain = new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startLagAvtale(new Stage());
-		} catch (Exception e) {
-			
-			System.out.println("Error occured: " + e);
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
-	}
-	
-	public void logoutButt (ActionEvent event){
-		try {
-			new Main().start(new Stage());
-		} catch (Exception e) {
-			
-			System.out.println("Error occured: " + e);
-		}
-		//Henter stage parameter
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
 
+	public void avbrytButt(ActionEvent event){
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 	}
-	
+
+	public void slettAvtale(ActionEvent event){
+		
+		
+		try {
+			this.currentAppointment.deleteAppointment();
+		} catch (Exception e) {
+			System.out.println("Error occured: " + e);
+		}
+
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+
 }

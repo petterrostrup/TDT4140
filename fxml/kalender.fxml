@@ -7,15 +7,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxWidth="928.0" minWidth="928.0" prefHeight="825.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KalenderController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KalenderController">
    <children>
-      <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;" visible="false">
+      <Pane fx:id="weekHeaderPane" layoutY="179.0" prefHeight="71.0" prefWidth="928.0" visible="false">
          <children>
-            <Button fx:id="nesteUke" layoutX="520.0" layoutY="6.0" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
-            <Label fx:id="ukeLabel" layoutX="402.0" layoutY="8.0" prefHeight="27.0" prefWidth="40.0" text="Uke">
+            <Label layoutX="405.0" layoutY="8.0" text="Uke">
                <font>
                   <Font size="18.0" />
-               </font></Label>
+               </font>
+            </Label>
+            <Button fx:id="nesteUke" layoutX="520.0" layoutY="6.0" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
             <Button fx:id="prevWeek" layoutX="372.0" layoutY="6.0" mnemonicParsing="false" onAction="#lastWeek" text="&lt;" />
             <Label alignment="CENTER" layoutX="51.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Mandag" />
             <Label alignment="CENTER" layoutX="173.0" layoutY="44.0" prefHeight="27.0" prefWidth="85.0" text="Tirsdag" />
@@ -40,10 +41,9 @@
             <Label fx:id="fredato" layoutX="615.0" layoutY="47.0" text="01" />
             <Label fx:id="lordato" layoutX="737.0" layoutY="47.0" text="01" />
             <Label fx:id="sondato" layoutX="859.0" layoutY="47.0" text="01" />
-            <Label layoutX="1.0" layoutY="44.0" text="Uke" />
          </children>
       </Pane>
-      <ScrollPane fx:id="scrollpane" layoutY="248.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: #FEFEFE;" visible="false">
+      <ScrollPane fx:id="scrollpane" layoutY="248.0" prefHeight="555.0" prefWidth="928.0" visible="false">
          <content>
             <GridPane fx:id="gridpane" alignment="BOTTOM_LEFT" gridLinesVisible="true" prefHeight="700.0" prefWidth="906.0">
                <columnConstraints>
@@ -101,7 +101,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Pane minWidth="128.0" prefHeight="128.0" prefWidth="928.0" style="-fx-background-color: #E2E2E2;">
+      <Pane minWidth="128.0" prefHeight="128.0" prefWidth="928.0">
          <children>
             <Label alignment="CENTER" layoutX="396.0" layoutY="39.0" text="Kalender">
                <font>
@@ -113,7 +113,7 @@
       </Pane>
       <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
+            <Button mnemonicParsing="false" onAction="#kalenderButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
             <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
             <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
             <Label fx:id="notification" layoutX="635.0" layoutY="6.0" text="!" textFill="RED">
@@ -166,23 +166,23 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="nesteMoned" layoutX="519.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
-            <Button fx:id="sisteMoned" layoutX="373.0" layoutY="5.0" mnemonicParsing="false" onAction="#lastMonth" text="&lt;" />
-            <Label fx:id="monthLabel" alignment="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="27.0" prefWidth="73.0" text="Januar">
+            <Button fx:id="nesteMoned" layoutX="535.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
+            <Button fx:id="sisteMoned" layoutX="363.0" layoutY="5.0" mnemonicParsing="false" onAction="#lastMonth" text="&lt;" />
+            <Label fx:id="monthLabel" alignment="CENTER" layoutX="393.0" layoutY="7.0" prefHeight="27.0" prefWidth="101.0" text="Desember">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="yearMonth" layoutX="480.0" layoutY="10.0" prefHeight="27.0" prefWidth="40.0" text="2015">
+            <Label fx:id="yearMonth" layoutX="495.0" layoutY="7.0" prefHeight="27.0" prefWidth="40.0" text="2015">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="monthPane" layoutY="245.0" maxWidth="928.0" minWidth="928.0" prefHeight="580.0" prefWidth="928.0" style="-fx-background-color: FEFEFE;">
+      <Pane fx:id="monthPane" layoutY="245.0" maxWidth="928.0" minWidth="928.0" prefHeight="555.0" prefWidth="928.0">
          <children>
-            <GridPane fx:id="monthGrid" gridLinesVisible="true" maxWidth="928.0" minWidth="928.0" prefHeight="580.0" prefWidth="928.0">
+            <GridPane fx:id="monthGrid" gridLinesVisible="true" maxWidth="928.0" minWidth="928.0" prefHeight="555.0" prefWidth="928.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="125.0" />

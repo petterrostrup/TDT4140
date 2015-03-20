@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
+   <children>
+      <Pane layoutY="128.0" prefHeight="51.0" prefWidth="928.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#kalenderButt" prefHeight="51.0" prefWidth="309.0" text="Kalender" />
+            <Button layoutX="310.0" mnemonicParsing="false" onAction="#avtaleButt" prefHeight="51.0" prefWidth="309.0" text="Ny Avtale" />
+            <Button layoutX="619.0" mnemonicParsing="false" onAction="#profilButt" prefHeight="51.0" prefWidth="309.0" text="Profil" />
+            <Label fx:id="notification" layoutX="635.0" layoutY="6.0" text="!" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="128.0" prefWidth="928.0">
+         <children>
+            <Label alignment="CENTER" layoutX="424.0" layoutY="39.0" text="Profil">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="857.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutButt" text="Logg ut" />
+            <Label fx:id="innloggetsom" layoutX="651.0" layoutY="14.0" text="*Logget inn som*" />
+         </children>
+      </Pane>
+      <Pane layoutY="179.0" prefHeight="621.0" prefWidth="928.0">
+         <children>
+            <Button layoutX="825.0" layoutY="582.0" mnemonicParsing="false" onAction="#redigerProfilButt" text="Rediger profil" />
+            <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="674.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+            <Image url="http://www.cdpe.com/assets/images/cdpe-profile-placeholder.png" />
+            </image>
+            </ImageView>
+            <Label fx:id="brukernavn" layoutX="402.0" layoutY="14.0" text="Brukernavn" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="email" layoutX="771.0" layoutY="345.0" text="E-mail" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="adresse" layoutX="771.0" layoutY="368.0" text="Adresse" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="416.0" prefHeight="191.0" prefWidth="173.0" />
+            <Label layoutX="397.0" layoutY="378.0" text="Medlem av gruppe:">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Button layoutX="578.0" layoutY="582.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
+            <Label fx:id="avtaler" layoutX="70.0" layoutY="42.0" text="Notifikasjoner">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ListView fx:id="avtalerList" layoutX="45.0" layoutY="78.0" onMouseClicked="#visAvtale" prefHeight="191.0" prefWidth="173.0" />
+            <ListView fx:id="visAvtalerList" layoutX="18.0" layoutY="416.0" prefHeight="191.0" prefWidth="309.0" />
+            <ComboBox fx:id="visThemes" layoutX="708.0" layoutY="582.0" onAction="#velgThemes" prefHeight="25.0" prefWidth="110.0" promptText="Light Theme" />
+            <Label layoutX="86.0" layoutY="378.0" text="Kommende eventer">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="navn" layoutX="771.0" layoutY="324.0" text="navn" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>

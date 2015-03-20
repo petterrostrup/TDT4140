@@ -2,37 +2,17 @@ package application;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
-
-import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
-import classes.Room;
 import classes.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class AdministrerGrupperController {
@@ -64,13 +44,19 @@ public class AdministrerGrupperController {
 		User newUser;
 		try {
 			while (results.next()){
-				newUser = User.readUser(results.getLong(1));
+				String name = results.getString(results.findColumn("name"));
+				String dbPassword = results.getString(results.findColumn("password"));
+				String dbUsername = results.getString(results.findColumn("username"));
+				String mail = results.getString(results.findColumn("email"));
+				String address = results.getString(results.findColumn("address"));
+				Long id = results.getLong(1);
+				newUser = new User(dbUsername, dbPassword, mail, name, address, id.toString());
+				
 				userPersoner.add(newUser);
 				personer.add(newUser.getName());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		medlemmerList.setItems(medlemmer);
@@ -96,6 +82,13 @@ public class AdministrerGrupperController {
 
 		String leggtilPerson = (String) allePersonerList.getSelectionModel().getSelectedItem();
 		if(leggtilPerson != null){
+			for (int i = 0; i < userPersoner.size(); i++) {
+				if (userPersoner.get(i).getName().equals(leggtilPerson)){
+					groupMedlemmer.add(userPersoner.get(i));
+					userPersoner.remove(i);
+				}
+			}
+			
 			allePersonerList.getSelectionModel().clearSelection();
 			personer.remove(leggtilPerson);
 			medlemmer.add(leggtilPerson);
@@ -123,8 +116,7 @@ public class AdministrerGrupperController {
 					currentGroup = newGroup;
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
 			
 			sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + newGroup.getGroupID() + "'";
@@ -142,14 +134,11 @@ public class AdministrerGrupperController {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
 			
 			dineGrupper.getSelectionModel().clearSelection();
 			medlemmerList.setItems(medlemmer);
-			
-//			gruppeListe.getSelectionModel().clearSelection();
-//			medlemmer.add(visMedlemmerIGruppe);
 		}
 
 	}
@@ -164,7 +153,7 @@ public class AdministrerGrupperController {
 			newMain.setSession(this.sessionUser);
 			newMain.startNyGruppe(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		Node source = (Node) event.getSource();
 		Stage stage = (Stage) source.getScene().getWindow();
@@ -188,8 +177,7 @@ public class AdministrerGrupperController {
 				grupper.add(newGroup.getGroupName());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}	
 	}
 	
@@ -207,7 +195,7 @@ public class AdministrerGrupperController {
 					try {
 						currentGroup.addMember(member.getId());
 					} catch (Exception e) {
-						// TODO: handle exception
+						System.out.println("Error occured: " + e);
 					}
 				}
 				
@@ -215,13 +203,24 @@ public class AdministrerGrupperController {
 				newMain.setSession(this.sessionUser);
 				newMain.startProfil(new Stage());
 			} catch (Exception e) {
-				
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
 			//Henter stage parameter
 			Node  source = (Node)  event.getSource(); 
 		    Stage stage  = (Stage) source.getScene().getWindow();
 		    stage.close();
 		    }
+	}
+	public void avbrytButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
+		} catch (Exception e) {
+			System.out.println("Error occured: " + e);
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
 	}
 }

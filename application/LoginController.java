@@ -1,41 +1,15 @@
 package application;
 
-import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import application.RegistrerController;
 import classes.Login;
 import classes.User;
 
-import com.sun.javafx.property.adapter.PropertyDescriptor.Listener;
-
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -57,8 +31,8 @@ public class LoginController {
 	@FXML
 	private Label feilLabel;
 	
-//	@FXML
-//	private Button registrer;
+	@FXML
+	private Button registrer;
 	
 	@FXML
 	private void initialize(){
@@ -68,14 +42,18 @@ public class LoginController {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 	}
 	
-	
+	public void cheatButt (ActionEvent event) {				
+		brukernavn.setText("kong1");
+		passord.setText("Qwe123");
+		
+	}
 	
 	//Bytter vindu til registreringsskjerm
 	public void regButt (ActionEvent event) {				
 		try {
 			new Main().startRegister(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -83,10 +61,6 @@ public class LoginController {
 	    stage.close();
 		
 	}
-	
-	
-	
-	
     public User logButt (ActionEvent event) {
     	
     	User newuser = null;
@@ -116,12 +90,6 @@ public class LoginController {
 		return newuser;
 		
 		
-//				brukernavn.setOnAction((event) ->{
-//					logButt.fire();
-//				});
-//				passord.setOnAction((event) ->{
-//					logButt.fire();
-//				});
     }
 	
 }

@@ -2,18 +2,14 @@ package classes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainCalendar {
 	private User owner;
-	private ArrayList<Appointment> appointments;
+	private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 
 
 	public User getOwner() {
@@ -42,43 +38,40 @@ public class MainCalendar {
 		this.appointments.remove(appointment);
 	}
 	
-	public Appointment getAppointment(int appointmentID){
+	public Appointment getAppointment(long appointmentID){
 		String sqlStatement = 	"SELECT * FROM APPOINTMENT WHERE id = '" + appointmentID + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Appointment returning = null;
 		try {
 				results.next();
-				String id = Integer.toString(results.getInt("id"));
+				Long id = (results.getLong(1));
 				String name = results.getString("name");
 				String desc = results.getString("description");
 				String loc = results.getString("location");
-				Room room = getroom(Integer.toString(results.getInt("room")));
+				Room room = getroom(results.getLong(5));
 				Date date = results.getDate("date");
 				Timestamp start = results.getTimestamp("start");
 				Timestamp end = results.getTimestamp("end");
 				
-				returning = new Appointment(name, desc, loc, room, null, date, start, end, owner);
-				appointments.add(returning);
-				System.out.println("Adding appointment");
+				returning = new Appointment(name, desc, loc, room, new ArrayList<User>(), date, start, end, owner, id + "");
+				this.appointments.add(returning);
 			
 		} catch (SQLException e) {
-			//SUCK MY DIIIIIICK IM A SHAAAARK
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		return returning;
-		
 	}
 	
-	public Room getroom(String roomid) {
+	public Room getroom(Long roomid) {
 		String sqlStatement = 	"SELECT * FROM ROOM WHERE id = '" + roomid + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Room room = null;
 		try {
 			results.next();
-			room = new Room(String.valueOf(results.getLong(1)),results.getString("name"), results.getString("place"), results.getInt("capacity"));
+			room = new Room(results.getLong(1) + "",results.getString("name"), results.getString("place"), results.getInt("capacity"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		return room;
@@ -104,29 +97,29 @@ public class MainCalendar {
 		appointments.add(appointment4);
 	}
 	
-	public void fillCalendar(){
-		String id = null; //user id here
-		String sqlStatement = "SELECT * FROM ATTENDING WHERE person = '" + id + "'";
+	public void fillCalendar(String id){
+		appointments.clear();
+		String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		Appointment adding = null;
+		Appointment adding;
 		try {
-			//System.out.println(results.isClosed());
 			while (results.next()) {
-				adding = getAppointment(results.getInt(results.findColumn("appointment")));
-				System.out.println("Adding appointment");
-				appointments.add(adding);
+				if (results.getInt("status") != -1){
+					adding = this.getAppointment(results.getLong(3));
+					if (!appointments.contains(adding)){
+						appointments.add(adding);					
+					}					
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		
 	}
 	
 	public static void main(String[] args) {
-		MainCalendar trialCalendar = new MainCalendar();
-		trialCalendar.fillCalendar();
 	}
 	
 }

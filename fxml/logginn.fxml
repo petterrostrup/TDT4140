@@ -19,5 +19,6 @@
       </Label>
       <Button fx:id="registrer" layoutX="290.0" layoutY="224.0" mnemonicParsing="false" onAction="#regButt" text="Registrer" />
       <Label fx:id="feilLabel" layoutX="184.0" layoutY="99.0" prefHeight="17.0" prefWidth="168.0" textFill="#ee0202" />
+      <Button layoutX="448.0" layoutY="163.0" mnemonicParsing="false" onAction="#cheatButt" text="cheat" />
    </children>
 </Pane>

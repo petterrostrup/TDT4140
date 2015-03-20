@@ -2,8 +2,6 @@ package classes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.Date;
 
 public class Alarm {	
 	public void setNotification(int appID, int userID, int minutes){
@@ -21,7 +19,7 @@ public class Alarm {
 			i = results.getInt("notification");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		return i;

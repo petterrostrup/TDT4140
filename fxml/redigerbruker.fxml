@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="780.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RedigerBrukerController">
+   <children>
+      <Pane layoutY="108.0" prefHeight="392.0" prefWidth="780.0">
+         <children>
+            <TextField fx:id="navn" layoutX="128.0" layoutY="29.0" />
+            <TextField fx:id="epost" layoutX="128.0" layoutY="72.0" />
+            <TextField fx:id="adresse" layoutX="128.0" layoutY="112.0" />
+            <PasswordField fx:id="gammeltpassord" layoutX="128.0" layoutY="192.0" />
+            <PasswordField fx:id="nyttpassord" layoutX="128.0" layoutY="232.0" />
+            <PasswordField fx:id="gnyttpassord" layoutX="128.0" layoutY="272.0" />
+            <Button fx:id="openfile" layoutX="593.0" layoutY="277.0" mnemonicParsing="false" onAction="#openFile" text="Velg bilde" />
+            <Label layoutX="28.0" layoutY="232.0" text="Nytt passord" />
+            <Label layoutX="28.0" layoutY="29.0" text="Navn:" />
+            <Label layoutX="28.0" layoutY="272.0" text="Gjenta passord" />
+            <Label layoutX="28.0" layoutY="72.0" text="E-post:" />
+            <Label layoutX="28.0" layoutY="192.0" text="Gammelt passord:" />
+            <Label layoutX="28.0" layoutY="112.0" text="Adresse:" />
+            <Button fx:id="lagre" layoutX="124.0" layoutY="355.0" mnemonicParsing="false" onAction="#lagreButt" text="Lagre" />
+            <Button fx:id="Avbryt" layoutX="226.0" layoutY="355.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
+            <ImageView fx:id="imageview" fitHeight="244.0" fitWidth="236.0" layoutX="510.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="feilGPassordText" layoutX="285.0" layoutY="276.0" text="Passordene er ulike" textFill="RED" />
+            <Label fx:id="feilNyttPassordText" layoutX="285.0" layoutY="236.0" text="Ugyldig. 6 karakterer, stor bokstav og tall" textFill="RED" />
+            <Label fx:id="feilAdresseText" layoutX="285.0" layoutY="116.0" text="Ugyldig adresse, eks: &quot;ntnu 1&quot;" textFill="RED" />
+            <Label fx:id="feilEpostText" layoutX="285.0" layoutY="76.0" text="Ugyldig epost, eks: &quot;abc@ntnu.no&quot;" textFill="RED" />
+            <Label fx:id="feilNavnText" layoutX="285.0" layoutY="33.0" text="Ingen ugyldige chars karakterer" textFill="RED" />
+            <Label fx:id="feilGammeltPassordText" layoutX="285.0" layoutY="196.0" text="Ugyldig. 6 karakterer, stor bokstav og tall" textFill="RED" />
+         </children>
+      </Pane>
+      <Pane prefHeight="108.0" prefWidth="780.0">
+         <children>
+            <Label alignment="CENTER" layoutX="285.0" layoutY="29.0" text="Rediger profil">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Separator layoutY="108.0" prefWidth="780.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
