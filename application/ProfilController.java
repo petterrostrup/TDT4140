@@ -106,6 +106,7 @@ public class ProfilController {
 	
 	@FXML
 	public void initialize(){
+//		avtalerList.setItems(notificationAppointmentsView);
 		   Rectangle clip = new Rectangle(imageview.getFitWidth(), imageview.getFitHeight());
 	        clip.setArcWidth(20);
            clip.setArcHeight(20);
@@ -160,16 +161,6 @@ public class ProfilController {
 	public String getCss() {
 		
 		return css;
-	}
-	
-	public void visAvtale(MouseEvent event){
-		// TRYKK HER, så sendes du til avtalen du trykket på
-	
-		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
-		if(avtalerList != null){
-			
-		}
-
 	}
 
 	public void administrerGrupperButt(ActionEvent event){
@@ -251,11 +242,29 @@ public class ProfilController {
 		
 		avtalerList.setItems(notificationAppointmentsView);
 		visAvtalerList.setItems(allAppointmentsView);
-		
 		dineGrupper.setItems(grupper);
 		
 	}
 
+	public void visAvtale(MouseEvent event){
+		// TRYKK HER, så sendes du til avtalen du trykket på
+		
+		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
+		if(visAvtaleValgt != null){
+			try {
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				newMain.startAvtaleOversikt(new Stage(), (Appointment) visAvtaleValgt);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Node source = (Node) event.getSource();
+			Stage stage = (Stage) source.getScene().getWindow();
+//			stage.close();
+		}
+		
+	}
+	
 	public void kalenderButt (ActionEvent event) {
 		try {
 			Main newMain = new Main();
@@ -311,9 +320,6 @@ public class ProfilController {
 	    
 	    
 	}
-	
-
-	
 	
 	//Henter instanser av en avtale
 	public void hentAvtale(ActionEvent event) {

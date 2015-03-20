@@ -592,7 +592,7 @@ public class RedigerAvtaleController {
 				e.printStackTrace();
 			}
 			
-			if(saveAppointment != null){
+//			if(saveAppointment != null){
 				try {
 
 					Node  source = (Node)  event.getSource(); 
@@ -615,7 +615,7 @@ public class RedigerAvtaleController {
 					e.printStackTrace();
 				}
 				
-			}
+//			}
 		}
 		else{
 			System.out.println("IKKE GODKJENT");
