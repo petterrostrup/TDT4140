@@ -66,43 +66,6 @@ public class DagsOversiktController {
 	    stage.close();
 		
 	}
-	
-	
-
-	//Knapp tar deg til visAvtale vindu
-	public void visAvtale (ActionEvent event) {
-		
-		String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
-		
-//		appointmentView(event, appointment);
-//		
-//		
-//		if(){//day = this day, then open appointment
-//			
-//		}
-		
-		
-		
-//		try {
-//			//Gå til avtale du har markert i listview
-//			System.out.println("asdtest");
-//			
-//			
-//			Main newMain = new Main();
-//			newMain.setSession(this.sessionUser);
-//			//newMain.startAvtaleOversikt(new Stage());
-//		} catch (Exception e) {
-//			
-//			e.printStackTrace();
-//		}
-//		//Henter stage parameter
-//		Node  source = (Node)  event.getSource(); 
-//	    Stage stage  = (Stage) source.getScene().getWindow();
-//	    stage.close();
-	}
-
-
-
 
 
 	public void setSession(User sessionUser, Appointment sessionAppointment) {
@@ -135,7 +98,34 @@ public class DagsOversiktController {
 			
 		
 
-		//ArrayList<Appointment> appointments = DagsCal.getAppointments();
+	//Knapp tar deg til visAvtale vindu
+	public void visAvtale (ActionEvent event) {
+		String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
+//	// TRYKK HER, så sendes du til avtalen du trykket på
+		Appointment chosen = null;
+		System.out.println(visAvtaleValgt);
+	
+		if(visAvtaleValgt != null){
+			try {
+				Main newMain = new Main();
+				newMain.setSession(this.sessionUser);
+				for (int i = 0; i < myApps.size(); i++) {
+					if (myApps.get(i).getName().equals(visAvtaleValgt.toString())){
+						chosen = myApps.get(i);
+					}
+				}
+				
+				newMain.startAvtaleOversikt(new Stage(), chosen);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Node source = (Node) event.getSource();
+			Stage stage = (Stage) source.getScene().getWindow();
+			stage.close();
+		}
+		
+
+	}
 		
 		
 		

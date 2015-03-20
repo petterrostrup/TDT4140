@@ -485,9 +485,14 @@ public class LagAvtaleController {
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
-		if(beskrivelse.getText().isEmpty()){
+		if(beskrivelse.getText().isEmpty() ){
 			feilBeskrivelseLabel.setVisible(true);
 		}
+		else if(beskrivelse.getText().contains("DROP") || beskrivelse.getText().contains("INSERT") || beskrivelse.getText().contains("SELECT") || beskrivelse.getText().contains(";")){
+			feilBeskrivelseLabel.setVisible(true);
+			feilBeskrivelseLabel.setText("Dont even try man");
+		}
+			
 		
 //deltagere
 		if(selectedUsers.isEmpty() && selectedGroups.isEmpty()){ 

@@ -68,7 +68,7 @@
             <Label fx:id="valgtePersonerText" layoutX="140.0" layoutY="376.0" text="Personer" />
             <ListView fx:id="gruppeListe" layoutX="379.0" layoutY="330.0" onMouseClicked="#visMedlemmer" prefHeight="205.0" prefWidth="150.0" />
             <Label fx:id="feilTittelLabel" layoutX="362.0" layoutY="18.0" text="Feltet må fylles ut" textFill="RED" />
-            <Label fx:id="feilRomLabel" layoutX="362.0" layoutY="59.0" text="Du må velge rom" textFill="RED" />
+            <Label fx:id="feilRomLabel" layoutX="441.0" layoutY="59.0" text="Du må velge rom" textFill="RED" />
             <Label fx:id="feilDatoLabel" layoutX="382.0" layoutY="102.0" text="Du må velge dato" textFill="RED" />
             <Label fx:id="feilStartSluttLabel" layoutX="429.0" layoutY="149.0" text="Feil input, eks: &quot;10:00&quot; / &quot;11:00&quot;" textFill="RED" />
             <Label fx:id="feilBeskrivelseLabel" layoutX="476.0" layoutY="231.0" text="Feltet må fylles ut" textFill="RED" />
