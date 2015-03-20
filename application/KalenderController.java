@@ -34,6 +34,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -104,6 +105,7 @@ public class KalenderController {
 	private Calendar tempCal = Calendar.getInstance();
 	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
 	ObservableList<Node> avtaleMonthCollection = FXCollections.observableArrayList();
+	ObservableList<String> paneCollection = FXCollections.observableArrayList();
 	@SuppressWarnings("rawtypes")
 	private EventHandler appointmentClick;
 	
@@ -172,6 +174,7 @@ public class KalenderController {
 	//View next week
 	public void nextWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, 1);
+		paneCollection.clear();
 		gridpane.getChildren().clear();
 		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
@@ -180,6 +183,7 @@ public class KalenderController {
 	//View previous week
 	public void lastWeek(ActionEvent event){
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
+		paneCollection.clear();
 		gridpane.getChildren().clear();
 		gridpane.getChildren().addAll(avtaleCollection);
 		setWeek();
@@ -392,14 +396,27 @@ public class KalenderController {
 		}
 	}
 
-	
+
 	//Adds appointments to the week view grid pane
-	@SuppressWarnings("unchecked")
 	public void filler(int startTime, String navn, int weekDay, int endTime, Appointment avtale){
-		Pane avtalePane = new Pane();
+		StackPane avtalePane = new StackPane();
+		String paneString = Integer.toString(startTime) + ":" + Integer.toString(weekDay) + ":" + Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR));
+		System.out.println(paneString + navn);
 		int span = endTime - startTime;
+		int numberOfAppointments = 1;
+		
+		for (String panes : paneCollection){
+			String[] pane = panes.split(":");
+			int startTid = Integer.parseInt(pane[0]);
+			int ukedag = Integer.parseInt(pane[1]);
+			int uke = Integer.parseInt(pane[2]);
+			if (startTid == startTime && ukedag == weekDay && uke == cal.get(Calendar.WEEK_OF_YEAR)){
+				numberOfAppointments++;
+			}
+		}
+		System.out.println("number of apointmasdf: " + numberOfAppointments);
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
-		avtalePane.setPrefSize(122, 60);
+		avtalePane.setPrefWidth(122);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
 		Appointment appointment = avtale;
@@ -409,10 +426,10 @@ public class KalenderController {
 				appointmentView(event, appointment);
 			}
 		});
+		paneCollection.add(paneString);
 		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
-	
-	
+
 	//Converts the inserted time to grid position
 	public int timeToGrid(LocalTime time){
 		String timeString = time.toString();
