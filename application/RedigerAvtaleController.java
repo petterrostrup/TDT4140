@@ -45,11 +45,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class RedigerAvtaleController {
-	
+	private Stage primaryStage;
 	private User sessionUser;
 	private Appointment currentAppointment;
-	private Room newRoom;
 	
+
 	@FXML
 	private TextField tittel;  
 	
@@ -161,6 +161,7 @@ public class RedigerAvtaleController {
 		// Gets all rooms and adds them to the list
 				String sqlStatement = "SELECT * FROM ROOM";
 				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+				Room newRoom;
 				try {
 					while (results.next()){
 						newRoom = new Room(results.getLong(1) + "", results.getString("name"), results.getString("place"), results.getInt("capacity"));
@@ -427,35 +428,13 @@ public class RedigerAvtaleController {
 		
 		dato.setValue(res);
 		
-		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
 		
 		start.setText(sdfTime.format(currentAppointment.getStart()));
 		slutt.setText(sdfTime.format(currentAppointment.getEnd()));
 		beskrivelse.setText(currentAppointment.getDescription());
 		visRom.setValue(currentAppointment.getLocation());
 		visRomInfo.setText(currentAppointment.getLocation());
-		
-		String sqlStatement = "SELECT * FROM ROOM WHERE name = '" + visRomInfo.getText() + "'";
-		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		newRoom = null;
-		try {
-			if (results.next()){
-				String id = (results.getLong(1) + "");
-				String name = (results.getString(results.findColumn("name")));
-				String place = (results.getString(results.findColumn("place")));
-				int capacity = (results.getInt(results.findColumn("capacity")));
-				newRoom = new Room(id, name, place, capacity);
-				currentAppointment.removeBooking(newRoom);
-			}
-			else{
-				System.out.println("Room does not exist. Cannot read");
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Something went wrong connecting to the database");
-		}
 		
 		
 	}
@@ -522,14 +501,15 @@ public class RedigerAvtaleController {
 			sluttint = Integer.parseInt(sluttstring.replace(":", ""));
 			System.out.println(startint + " " + sluttint);
 			
-			if(!(startint < sluttint)){
-				feilStartSluttLabel.setText("Starttid må være før slutttid.");
-				feilStartSluttLabel.setVisible(true);
-			}
 			if(sluttint - startint < 100){
 				feilStartSluttLabel.setText("Avtalen må være minst 1 time lang");
 				feilStartSluttLabel.setVisible(true);
 			}
+			if(!(startint < sluttint)){
+				feilStartSluttLabel.setText("Starttid må være før slutttid.");
+				feilStartSluttLabel.setVisible(true);
+			}
+		
 			System.out.println(startstring + " " + sluttstring);
 			
 		}
@@ -589,7 +569,7 @@ public class RedigerAvtaleController {
 					System.out.println("Something went wrong connecting to the database");
 				}
 				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SS");
 				String name = tittel.getText();
 				String location = visRomInfo.getText();
 				String description = beskrivelse.getText();
@@ -604,29 +584,36 @@ public class RedigerAvtaleController {
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
-				if (newRoom.getCapacity() >= saveUsers.size()){
-					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
-						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
-						saveAppointment.saveAppointment();
-						saveAppointment.inviteParticipants();
-						saveAppointment.reserveRoom(newRoom);
-					}
-					else{
-						System.out.println("Double booking is not allowed");
-						saveAppointment = null;
-					}
-				}
-				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());
-				
+				Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
+				saveAppointment.updateParticipants();
+				saveAppointment.updateAppointment();
 				
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 			
 			if(saveAppointment != null){
-				Node  source = (Node)  event.getSource(); 
-			    Stage stage  = (Stage) source.getScene().getWindow();
-			    stage.close();
+				try {
+
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
+//				    --------
+//					FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/kalender.fxml"));
+//				    Scene scene = new Scene((Parent) loader.load());
+//				    ProfilController profil = new ProfilController();
+//			        scene.getStylesheets().add(profil.getCss());
+//					primaryStage.setScene(scene);
+//					KalenderController newCont = loader.<KalenderController>getController();
+//					newCont.setSession(this.sessionUser);
+////					primaryStage.getIcons().add(icon);
+//					
+//					primaryStage.show();
+//					primaryStage.setResizable(false);
+				} catch (Exception e) {
+					  
+					e.printStackTrace();
+				}
 				
 			}
 		}
@@ -637,18 +624,38 @@ public class RedigerAvtaleController {
 	}
 
 	public void avbrytButt(ActionEvent event){
-		try {
-			currentAppointment.reserveRoom(newRoom);
-			Main newMain = new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startKalender(new Stage());
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
+//		try {
+//			Main newMain = new Main();
+//			newMain.setSession(this.sessionUser);
+//			newMain.startKalender(new Stage());
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
+
+	public void slettAvtale(ActionEvent event){
+		
+//		do your shit here
+		
+//		-----------------
+//			try {
+//			Main newMain = new Main();
+//			newMain.setSession(this.sessionUser);
+//			newMain.startKalender(new Stage());
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+//		det som er over åpner NY kalendercontroller, usikker på om vi skal ha det. ATM closer den bare redigeravtaler
+
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
+
 }

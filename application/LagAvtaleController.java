@@ -466,14 +466,15 @@ public class LagAvtaleController {
 			sluttint = Integer.parseInt(sluttstring.replace(":", ""));
 			System.out.println(startint + " " + sluttint);
 			
-			if(!(startint < sluttint)){
-				feilStartSluttLabel.setText("Starttid må være før slutttid.");
-				feilStartSluttLabel.setVisible(true);
-			}
 			if(sluttint - startint < 100){
 				feilStartSluttLabel.setText("Avtalen må være minst 1 time lang");
 				feilStartSluttLabel.setVisible(true);
 			}
+			if(!(startint < sluttint)){
+				feilStartSluttLabel.setText("Starttid må være før slutttid.");
+				feilStartSluttLabel.setVisible(true);
+			}
+			
 			System.out.println(startstring + " " + sluttstring);
 			
 		}
@@ -567,7 +568,7 @@ public class LagAvtaleController {
 				e.printStackTrace();
 			}
 			
-			if(saveAppointment != null){
+//			if(saveAppointment != null){
 				try {
 					Main newMain = new Main();
 					newMain.setSession(this.sessionUser);
@@ -581,11 +582,11 @@ public class LagAvtaleController {
 				}
 			}
 		}
-		else{
-			System.out.println("IKKE GODKJENT");
-		}
-	
-	}
+//		else{
+//			System.out.println("IKKE GODKJENT");
+//		}
+//	
+//	}
 	
 	public void kalenderButt (ActionEvent event){
 		try {
