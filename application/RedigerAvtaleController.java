@@ -45,7 +45,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class RedigerAvtaleController {
-	
+	private Stage primaryStage;
 	private User sessionUser;
 	private Appointment currentAppointment;
 	
@@ -500,14 +500,15 @@ public class RedigerAvtaleController {
 			sluttint = Integer.parseInt(sluttstring.replace(":", ""));
 			System.out.println(startint + " " + sluttint);
 			
-			if(!(startint < sluttint)){
-				feilStartSluttLabel.setText("Starttid må være før slutttid.");
-				feilStartSluttLabel.setVisible(true);
-			}
 			if(sluttint - startint < 100){
 				feilStartSluttLabel.setText("Avtalen må være minst 1 time lang");
 				feilStartSluttLabel.setVisible(true);
 			}
+			if(!(startint < sluttint)){
+				feilStartSluttLabel.setText("Starttid må være før slutttid.");
+				feilStartSluttLabel.setVisible(true);
+			}
+		
 			System.out.println(startstring + " " + sluttstring);
 			
 		}
@@ -591,9 +592,27 @@ public class RedigerAvtaleController {
 			}
 			
 			if(saveAppointment != null){
-				Node  source = (Node)  event.getSource(); 
-			    Stage stage  = (Stage) source.getScene().getWindow();
-			    stage.close();
+				try {
+
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
+//				    --------
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/kalender.fxml"));
+				    Scene scene = new Scene((Parent) loader.load());
+				    ProfilController profil = new ProfilController();
+			        scene.getStylesheets().add(profil.getCss());
+					primaryStage.setScene(scene);
+					KalenderController newCont = loader.<KalenderController>getController();
+					newCont.setSession(this.sessionUser);
+//					primaryStage.getIcons().add(icon);
+					
+					primaryStage.show();
+					primaryStage.setResizable(false);
+				} catch (Exception e) {
+					  
+					e.printStackTrace();
+				}
 				
 			}
 		}
@@ -604,14 +623,14 @@ public class RedigerAvtaleController {
 	}
 
 	public void avbrytButt(ActionEvent event){
-		try {
-			Main newMain = new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startKalender(new Stage());
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
+//		try {
+//			Main newMain = new Main();
+//			newMain.setSession(this.sessionUser);
+//			newMain.startKalender(new Stage());
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
