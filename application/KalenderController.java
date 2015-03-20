@@ -250,7 +250,6 @@ public class KalenderController {
 	}
 	
 	//Fills and sets appointments and label texts to month view
-	@SuppressWarnings("unchecked")
 	public void setMonth(){
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -289,7 +288,12 @@ public class KalenderController {
 				if (calDate.get(Calendar.DAY_OF_YEAR) == brukKalender.get(Calendar.DAY_OF_YEAR)
 						&& calDate.get(Calendar.YEAR) == brukKalender.get(Calendar.YEAR)){
 					monthDays.get(day).setStyle("-fx-background-color:#33CC33");
-					monthDays.get(day).setOnMouseClicked(appointmentClick);
+					monthDays.get(day).setOnMouseClicked(new EventHandler<MouseEvent>(){
+						public void handle(MouseEvent event) {
+							System.out.println("You clickeded meh");
+							appointmentView(event, avtale);
+						}
+					});
 				}
 			}
 			brukKalender.add(Calendar.DAY_OF_YEAR, +1);
