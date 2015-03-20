@@ -2,6 +2,7 @@ package classes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -116,26 +117,10 @@ public class Room {
 		
 	}
 	
-	public void checkAvailable(Date date, LocalTime start, LocalTime end){
-		String sqlStatement = "SELECT * FROM BOOKING WHERE room = '" + this.getId() + "'";
+	public void bookRoom(String id){
+		String sqlStatement = "SELECT * FROM ROOM WHERE id = '" + id + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-		ResultSet inner;
-		String innersql;
-		MainCalendar methods = new MainCalendar();
-		boolean crossesStart, crossesEnd;
 		try {
-			while (results.next()){
-				crossesStart = false;
-				crossesEnd = false;
-				int appointmentID = (int) results.getLong(3);
-				Appointment comparing = methods.getAppointment(appointmentID);
-				if (date.equals(comparing.getDate())){
-					//add time comparison
-				}
-				else continue;
-				
-			}
-			
 			if (results.next()){
 				this.setId(id);
 				this.setName(results.getString(results.findColumn("name")));
@@ -151,6 +136,51 @@ public class Room {
 			e.printStackTrace();
 			System.out.println("Something went wrong connecting to the database");
 		}
+		
+	}
+	
+	public boolean checkAvailable(Date date, Timestamp start, Timestamp end){
+		boolean isAvailable = true;
+		String sqlStatement = "SELECT * FROM BOOKING WHERE room = '" + this.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		MainCalendar methods = new MainCalendar();
+		boolean crossesStart;
+		boolean middle;
+		boolean crossesEnd;
+		boolean areEquals;
+		try {
+			while (results.next()){
+				crossesStart = false;
+				middle = false;
+				crossesEnd = false;
+				areEquals = false;
+				int appointmentID = (int) results.getLong(3);
+				Appointment comparing = methods.getAppointment(appointmentID);
+				
+				Timestamp appStart = comparing.getStart();
+				Timestamp appEnd = comparing.getEnd();
+				
+				if (date.compareTo(comparing.getDate()) == 0){
+					areEquals = (appStart.equals(start) || appEnd.equals(end));
+					crossesStart = start.before(appStart) && end.after(appStart);
+					middle = (start.after(appStart) && start.before(appEnd));
+					crossesEnd = (start.after(appStart) && start.before(appEnd) && end.after(appEnd));
+					
+					if (crossesStart || middle || crossesEnd || areEquals){
+						isAvailable = false;
+						break;
+					}
+				}
+				else continue;
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+		return isAvailable;
 	}
 	
 

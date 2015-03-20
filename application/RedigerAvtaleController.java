@@ -636,4 +636,9 @@ public class RedigerAvtaleController {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
+
+	public void slettAvtale(ActionEvent event){
+		//SLETT AVTALE PETTER
+	}
+
 }

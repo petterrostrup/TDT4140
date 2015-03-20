@@ -126,7 +126,7 @@ public class AvtaleOversiktController {
 		tittel.setText(currentAppointment.getName());
 		dato.setText(currentAppointment.getDate().toString());
 		
-		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		
 		String timestring = sdfTime.format(currentAppointment.getStart()) + " - " + sdfTime.format(currentAppointment.getEnd());
 		

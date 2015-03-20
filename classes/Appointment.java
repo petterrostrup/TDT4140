@@ -112,13 +112,8 @@ public class Appointment {
 		return date;
 	}
 	public void setDate(Date date) {
-//		Date now = new Date();
-//		int result = now.compareTo(date);
-//		if (result < 0){
 			this.date = date;
-			
-//		}
-//		else throw new IllegalArgumentException("Date must be after current date");
+
 	}
 	
 	public Timestamp getStart() {
@@ -242,13 +237,27 @@ public class Appointment {
 				}
 			}
 	
-	public void deleteParticipant(String personId){
-		
+	public void reserveRoom(Room room){
+		String sqlStatement = "INSERT INTO BOOKING (room, appointment) "
+				+ "VALUES ( '" + room.getId() + "', '" + this.getAppointmentID() + "')";
+		DatabaseCommunicator.update(sqlStatement);
+	}
+	public void removeBooking(Room room){
+		String sqlStatement = "DELETE FROM BOOKING WHERE room = '" + room.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
+		DatabaseCommunicator.update(sqlStatement);
 	}
 	
-	
-	public void reserveRoom(Room room){
-		// Add room to this appointment if available
+	public void deleteAppointment(){
+		String sqlStatement = "DELETE FROM BOOKING WHERE appointment = '" + this.getAppointmentID() + "'";
+		DatabaseCommunicator.update(sqlStatement);
+		
+		sqlStatement = "DELETE FROM CONNECTED WHERE appointment = '" + this.getAppointmentID() + "'";
+		DatabaseCommunicator.update(sqlStatement);
+		
+		sqlStatement = "DELETE FROM APPOINTMENT WHERE id = '" + this.getAppointmentID() + "'";
+		DatabaseCommunicator.update(sqlStatement);
+		
+		
 	}
 	
 
