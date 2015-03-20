@@ -22,6 +22,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -105,7 +107,7 @@ public class KalenderController {
 	private Calendar tempCal = Calendar.getInstance();
 	ObservableList<Node> avtaleCollection = FXCollections.observableArrayList();
 	ObservableList<Node> avtaleMonthCollection = FXCollections.observableArrayList();
-	ObservableList<String> paneCollection = FXCollections.observableArrayList();
+	ObservableList<Node> paneCollection = FXCollections.observableArrayList();
 	@SuppressWarnings("rawtypes")
 	private EventHandler appointmentClick;
 	
@@ -376,10 +378,18 @@ public class KalenderController {
 	
 	//Gets information needed and calls filler
 	public void fillCalendar(){
-
+		int collission = 1;
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		for (Appointment avtale: avtaler){
+			collission = 1;
+			for (Appointment notherAvtale: avtaler){
+				if (notherAvtale.equals(avtale)){
+					collission++;
+				}
+			}
+			System.out.println("dem coslsdilfsdlifd" + collission);
+			
 			LocalTime start = LocalTime.parse(sdf.format(avtale.getStart()));
 			LocalTime end = LocalTime.parse(sdf.format(avtale.getEnd()));
 			String avtaleNavn = avtale.getName();
@@ -391,10 +401,10 @@ public class KalenderController {
 			if (calDate.get(Calendar.WEEK_OF_YEAR) == tempCal.get(Calendar.WEEK_OF_YEAR)
 					&& calDate.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)){
 				if (calDate.get(Calendar.DAY_OF_WEEK) == 1){
-					filler(timeToGrid(start), avtaleNavn, 7, timeToGrid(end), avtale);
+					filler(timeToGrid(start), avtaleNavn, 7, timeToGrid(end), avtale, collission);
 				}
 				else{
-					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1, timeToGrid(end), avtale);
+					filler(timeToGrid(start), avtaleNavn, calDate.get(Calendar.DAY_OF_WEEK)-1, timeToGrid(end), avtale, collission);
 				}
 			}
 		}
@@ -402,28 +412,20 @@ public class KalenderController {
 
 
 	//Adds appointments to the week view grid pane
-	public void filler(int startTime, String navn, int weekDay, int endTime, Appointment avtale){
+	public void filler(int startTime, String navn, int weekDay, int endTime, Appointment avtale, int collission){
 		int span = endTime - startTime;
 		if (span<=0 || startTime <=0){
 			return;
 		}
-		StackPane avtalePane = new StackPane();
+		Pane avtalePane = new Pane();
 		String paneString = Integer.toString(startTime) + ":" + Integer.toString(weekDay) + ":" + Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(paneString + navn);
-		int numberOfAppointments = 1;
-		
-		for (String panes : paneCollection){
-			String[] pane = panes.split(":");
-			int startTid = Integer.parseInt(pane[0]);
-			int ukedag = Integer.parseInt(pane[1]);
-			int uke = Integer.parseInt(pane[2]);
-			if (startTid == startTime && ukedag == weekDay && uke == cal.get(Calendar.WEEK_OF_YEAR)){
-				numberOfAppointments++;
-			}
-		}
-		System.out.println("number of apointmasdf: " + numberOfAppointments);
+
+//		System.out.println("number of apointmasdf: " + numberOfAppointments);
+//		avtalePane.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+		if (collission > 1)avtalePane.setMaxWidth(122/collission);
+		else avtalePane.setMaxWidth(122);
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
-		avtalePane.setMaxWidth(122/numberOfAppointments);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
 		Appointment appointment = avtale;
@@ -433,7 +435,6 @@ public class KalenderController {
 				appointmentView(event, appointment);
 			}
 		});
-		paneCollection.add(paneString);
 		gridpane.add(avtalePane, weekDay, startTime, 1, span);
 	}
 
