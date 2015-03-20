@@ -48,6 +48,7 @@ public class RedigerAvtaleController {
 	
 	private User sessionUser;
 	private Appointment currentAppointment;
+	private Room newRoom;
 	
 	@FXML
 	private TextField tittel;  
@@ -160,7 +161,6 @@ public class RedigerAvtaleController {
 		// Gets all rooms and adds them to the list
 				String sqlStatement = "SELECT * FROM ROOM";
 				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-				Room newRoom;
 				try {
 					while (results.next()){
 						newRoom = new Room(results.getLong(1) + "", results.getString("name"), results.getString("place"), results.getInt("capacity"));
@@ -435,6 +435,28 @@ public class RedigerAvtaleController {
 		visRom.setValue(currentAppointment.getLocation());
 		visRomInfo.setText(currentAppointment.getLocation());
 		
+		String sqlStatement = "SELECT * FROM ROOM WHERE name = '" + visRomInfo.getText() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		newRoom = null;
+		try {
+			if (results.next()){
+				String id = (results.getLong(1) + "");
+				String name = (results.getString(results.findColumn("name")));
+				String place = (results.getString(results.findColumn("place")));
+				int capacity = (results.getInt(results.findColumn("capacity")));
+				newRoom = new Room(id, name, place, capacity);
+				currentAppointment.removeBooking(newRoom);
+			}
+			else{
+				System.out.println("Room does not exist. Cannot read");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
+		
 		
 	}
 	
@@ -570,9 +592,20 @@ public class RedigerAvtaleController {
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
-				Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
-				saveAppointment.updateParticipants();
-				saveAppointment.updateAppointment();
+				if (newRoom.getCapacity() >= saveUsers.size()){
+					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
+						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
+						saveAppointment.saveAppointment();
+						saveAppointment.inviteParticipants();
+						saveAppointment.reserveRoom(newRoom);
+					}
+					else{
+						System.out.println("Double booking is not allowed");
+						saveAppointment = null;
+					}
+				}
+				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());
+				
 				
 			}catch(Exception e){
 				e.printStackTrace();
@@ -593,6 +626,7 @@ public class RedigerAvtaleController {
 
 	public void avbrytButt(ActionEvent event){
 		try {
+			currentAppointment.reserveRoom(newRoom);
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
 			newMain.startKalender(new Stage());
