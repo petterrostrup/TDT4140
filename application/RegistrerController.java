@@ -72,7 +72,7 @@ public class RegistrerController {
 	private Label feilGPassordText;
 
 	private boolean accept;
-	
+	File imgpath;
 	@FXML
 	private void initialize(){
 		feilNavnText.setVisible(false);
@@ -97,7 +97,7 @@ public class RegistrerController {
 		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 				
 				File file = fileChooser.showOpenDialog(null);
-				
+				imgpath = file;
 				try{
 					BufferedImage buffImg = ImageIO.read(file);
 					Image img = SwingFXUtils.toFXImage(buffImg, null);
@@ -105,7 +105,9 @@ public class RegistrerController {
 				}
 				catch(IOException ex){
 					Logger.getLogger(RegistrerController.class.getName()).log(Level.SEVERE, null, ex);
+					
 				}	
+				System.out.println(imgpath);
 	}
 	
 	public void regButt (ActionEvent event){

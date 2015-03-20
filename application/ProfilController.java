@@ -117,10 +117,11 @@ public class ProfilController {
            SnapshotParameters parameters = new SnapshotParameters();
            parameters.setFill(Color.TRANSPARENT);
            WritableImage image = imageview.snapshot(parameters, null);
-
+           Image img = new Image("../images/kappa.png");
            imageview.setClip(null);
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
+           
            
            visThemes.getItems().addAll("Dark Theme", "Light Theme", "Girly Theme", "Laser Theme", "JB Theme", "Mindblown Theme", "Spacedog Theme");
 
@@ -338,7 +339,6 @@ public class ProfilController {
 	    stage.close();
 	}
 		
-	
 	public void redigerProfilButt (ActionEvent event) {
 		try {
 			Main newMain = new Main();
