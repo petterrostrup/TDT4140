@@ -38,7 +38,6 @@
             <ImageView fx:id="imageview" fitHeight="290.0" fitWidth="280.0" layoutX="674.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
             <image>
             <Image url="http://i.imgur.com/YOM4zT8.jpg" />
-           
             </image>
             </ImageView>
             <Label fx:id="brukernavn" layoutX="402.0" layoutY="14.0" text="Brukernavn" textAlignment="CENTER">
