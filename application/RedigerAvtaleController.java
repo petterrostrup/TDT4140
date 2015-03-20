@@ -494,32 +494,44 @@ public class RedigerAvtaleController {
 			feilDatoLabel.setVisible(true);
 			feilDatoLabel.setText("Må velge dato");
 		}
-
+//tidsvalidering
 		if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
 				((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
 				&& ((slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty()) ||
 				((slutt.getText().matches("[0-1][0-9]:[0-5][0-9]") && !slutt.getText().isEmpty())))){
 			
-			if(start.getText().startsWith("0")|| slutt.getText().startsWith("0")){
-
+			startstring = start.getText();
+			sluttstring = slutt.getText();
+			
+			if(startstring.matches("[0][0-5]:[0-5][1-9]") || sluttstring.matches("[0][0-5]:[0-5][1-9]")){
+				feilStartSluttLabel.setText("Kan ikke lage avtaler mellom 00:00 /06:00");
+				feilStartSluttLabel.setVisible(true);
+			}
+			if(startstring.matches("00:00")){
+				feilStartSluttLabel.setText("Kan ikke lage avtaler mellom 00:00 /06:00");
+				feilStartSluttLabel.setVisible(true);
+			}
+			if(sluttstring.equals("00:00")){
+				sluttstring = "23:59";
+			}
+			if(startstring.startsWith("0")|| sluttstring.startsWith("0")){
 				start.getText().replace("0", "");
 				slutt.getText().replace("0", "");
-//						
 			}
-//			else if(slutt.getText().startsWith("0")){
-//				sluttstring = slutt.getText().replace("0", "");
-//			}
-			startint = Integer.parseInt(start.getText().replace(":", ""));
-			sluttint = Integer.parseInt(slutt.getText().replace(":", ""));
+			startint = Integer.parseInt(startstring.replace(":", ""));
+			sluttint = Integer.parseInt(sluttstring.replace(":", ""));
 			System.out.println(startint + " " + sluttint);
-
+			
 			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være før slutttid.");
 				feilStartSluttLabel.setVisible(true);
 			}
-			startstring = start.getText();
-			sluttstring = slutt.getText();
+			if(sluttint - startint < 100){
+				feilStartSluttLabel.setText("Avtalen må være minst 1 time lang");
+				feilStartSluttLabel.setVisible(true);
+			}
 			System.out.println(startstring + " " + sluttstring);
+			
 		}
 		else{feilStartSluttLabel.setVisible(true);
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
