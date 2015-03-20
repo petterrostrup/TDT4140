@@ -625,6 +625,20 @@ public class LagAvtaleController {
 	    Stage stage  = (Stage) source.getScene().getWindow();
 	    stage.close();
 	}
+	public void avtaleButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startLagAvtale(new Stage());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		//Henter stage parameter
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	    stage.close();
+	}
 	
 	public void logoutButt (ActionEvent event){
 		try {

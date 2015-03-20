@@ -341,12 +341,23 @@ public class ProfilController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Henter stage parameter
+
 		((Node)(event.getSource())).getScene().getWindow().hide();
 	    
 	    
 	}
 	
+	public void profilButt(ActionEvent event){
+		try {
+			Main newMain = new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startProfil(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		((Node)(event.getSource())).getScene().getWindow().hide();
+	}
 	//Henter instanser av en avtale
 	public void hentAvtale(ActionEvent event) {		
 	}
