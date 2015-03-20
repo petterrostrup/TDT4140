@@ -574,7 +574,7 @@ public class RedigerAvtaleController {
 					System.out.println("Something went wrong connecting to the database");
 				}
 				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SS");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
 				String name = tittel.getText();
 				String location = visRomInfo.getText();
 				String description = beskrivelse.getText();

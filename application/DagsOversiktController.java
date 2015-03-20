@@ -88,9 +88,11 @@ public class DagsOversiktController {
 		
 		Appointment enApp;
 		for (int i = 0; i < myApps.size(); i++) {
-			enApp = myApps.get(i);
+			if (myApps.get(i).getDate().equals(currentAppointment.getDate())){
+				enApp = myApps.get(i);				
+				this.appointz.add(enApp.getName());
+			}
 			
-			this.appointz.add(enApp.getName());
 			
 					}
 		visAvtaler.setItems(this.appointz);

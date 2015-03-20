@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
@@ -223,10 +224,13 @@ public class ProfilController {
 		
 		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		Appointment localAppointment;
+		
+		Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1); 
 		for (int i = 0; i < comparing.size(); i++) {
 			localAppointment = comparing.get(i);
 			
-			if(localAppointment.getDate().after(new Date())){
+			if(localAppointment.getDate().after(cal.getTime())){
 				sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
 				results = DatabaseCommunicator.execute(sqlStatement);
 				try {
