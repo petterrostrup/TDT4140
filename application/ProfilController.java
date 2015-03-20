@@ -251,6 +251,9 @@ public class ProfilController {
 		Appointment chosen = null;
 		
 		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
+		System.out.println(visAvtaleValgt);
+	
+		
 		if(visAvtaleValgt != null){
 			try {
 				Main newMain = new Main();
@@ -329,12 +332,7 @@ public class ProfilController {
 	}
 	
 	//Henter instanser av en avtale
-	public void hentAvtale(ActionEvent event) {
-		//Har en klikk event når du klikker på info i panen
-		//System.out.println("asd");
-		Appointment newApp = new Appointment(null, null, null, null, null, null, null, null, sessionUser);
-		//Putte alle appointments til en bruker i en list, kan så velge attend/ikke attending
-		
+	public void hentAvtale(ActionEvent event) {		
 	}
 	
 	
