@@ -145,6 +145,7 @@ public class ProfilController {
 //			Application.setUserAgentStylesheet(null);
 //			// add custom global stylesheet
 //			StyleManager.getInstance().addUserAgentStylesheet("../style/DarkTheme.css");
+			
 			   
 		}
 //		else if(visThemes.getSelectionModel().getSelectedItem().equals("Girly Theme")){
