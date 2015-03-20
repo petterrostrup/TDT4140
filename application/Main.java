@@ -30,7 +30,7 @@ public class Main extends Application {
 	
 	private User sessionUser;
 //    String css = LoginController.class.getResource("LaserTheme.css").toExternalForm();
-	Image icon = new Image(getClass().getResourceAsStream("../images/kappa.png"));
+	Image icon = new Image(getClass().getResourceAsStream("../images/calicon.png"));
 	//Login skjerm
 	@Override
 	public void start(Stage stage) throws Exception {
