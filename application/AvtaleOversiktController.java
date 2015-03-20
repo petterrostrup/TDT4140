@@ -1,4 +1,5 @@
 package application;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import classes.Appointment;
+import classes.DatabaseCommunicator;
 import classes.Login;
 import classes.Room;
 import classes.User;
@@ -81,14 +83,16 @@ public class AvtaleOversiktController {
 	public void attendButt(ActionEvent event) {
 		//Når vi får en attending data verdi i databasen, skal denne endre en avtales data til attending
 		System.out.println("halla");
-		
-		
-		
+		String sqlStatement = "UPDATE CONNECTED SET status = '" + 1 + "' WHERE appointment = '" + this.currentAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
+		DatabaseCommunicator.update(sqlStatement);
 	}
 	
 	//Radiobutton til å velge ikke attending
 	public void notAttendButt(ActionEvent event) {
 		System.out.println("hade");
+		
+		String sqlStatement = "UPDATE CONNECTED SET status = '" + -1 + "' WHERE appointment = '" + this.currentAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
+		DatabaseCommunicator.update(sqlStatement);
 	}
 	
 	
@@ -114,6 +118,23 @@ public class AvtaleOversiktController {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		this.currentAppointment = sessionAppointment;
 		currentAppointment.readParticipants();
+		
+		String sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + currentAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		try {
+			if (results.next()) {
+				if (results.getInt("status") == 1){
+					deltar.setSelected(true);;
+				}
+				else if (results.getInt("status") == -1){
+					deltarIkke.setSelected(true);;
+				}
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}	
 		
 		ArrayList<User> userList = currentAppointment.getParticipants();
 		

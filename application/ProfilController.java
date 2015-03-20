@@ -220,18 +220,23 @@ public class ProfilController {
 			localAppointment = comparing.get(i);
 			
 			if(localAppointment.getDate().after(new Date())){
-				myAppointments.add(localAppointment);
-				String timestring = sdfTime.format(localAppointment.getStart()) + " - " + sdfTime.format(localAppointment.getEnd());
-				
-				allAppointmentsView.add(localAppointment.getName() + ": " + localAppointment.getDate().toString() + " " + timestring );
 				sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
 				results = DatabaseCommunicator.execute(sqlStatement);
 				try {
 					if (results.next()) {
-						if (results.getInt("notification") == 0){
+						if (results.getInt("status") == 0){
 							myAppointmentsNotifications.add(localAppointment);
 							notificationAppointmentsView.add(localAppointment.getName());
 						}
+						else if (results.getInt("status") == 1){
+							System.out.println("HERRRRRROOOOOOO");
+							myAppointments.add(localAppointment);
+							String timestring = sdfTime.format(localAppointment.getStart()) + " - " + sdfTime.format(localAppointment.getEnd());
+							
+							allAppointmentsView.add(localAppointment.getName() + ": " + localAppointment.getDate().toString() + " " + timestring );
+							
+						}
+						
 					}
 				} catch (Exception e) {
 					// TODO: handle exception

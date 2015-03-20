@@ -110,9 +110,11 @@ public class MainCalendar {
 		try {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
-				adding = this.getAppointment(results.getLong(3));
-				if (!appointments.contains(adding)){
-					appointments.add(adding);					
+				if (results.getInt("status") != -1){
+					adding = this.getAppointment(results.getLong(3));
+					if (!appointments.contains(adding)){
+						appointments.add(adding);					
+					}					
 				}
 			}
 		} catch (SQLException e) {
