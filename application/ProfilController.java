@@ -248,13 +248,20 @@ public class ProfilController {
 
 	public void visAvtale(MouseEvent event){
 		// TRYKK HER, så sendes du til avtalen du trykket på
+		Appointment chosen = null;
 		
 		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
 		if(visAvtaleValgt != null){
 			try {
 				Main newMain = new Main();
 				newMain.setSession(this.sessionUser);
-				newMain.startAvtaleOversikt(new Stage(), (Appointment) visAvtaleValgt);
+				for (int i = 0; i < myAppointmentsNotifications.size(); i++) {
+					if (myAppointmentsNotifications.get(i).getName().equals(visAvtaleValgt.toString())){
+						chosen = myAppointmentsNotifications.get(i);
+					}
+				}
+				
+				newMain.startAvtaleOversikt(new Stage(), chosen);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
