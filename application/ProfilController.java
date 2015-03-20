@@ -120,7 +120,7 @@ public class ProfilController {
            imageview.setEffect(new DropShadow(20, Color.BLACK));
            imageview.setImage(image);
            
-           visThemes.getItems().addAll("Dark Theme", "Light Theme", "Girly Theme", "Laser Theme", "JB Theme");
+           visThemes.getItems().addAll("Dark Theme", "Light Theme", "Girly Theme", "Laser Theme", "JB Theme", "Mindblown Theme", "Spacedog Theme");
 
            
 	}
@@ -154,6 +154,13 @@ public class ProfilController {
 //		else if(visThemes.getSelectionModel().getSelectedItem().equals("JB Theme")){
 //			css = getClass().getResource("../style/JBTheme.css").toExternalForm();
 //		}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("Mindblown Theme")){
+//		css = getClass().getResource("../style/MindblownTheme.css").toExternalForm();
+//	}
+//		else if(visThemes.getSelectionModel().getSelectedItem().equals("Spacedog Theme")){
+//		css = getClass().getResource("../style/SpacedogTheme.css").toExternalForm();
+//	}
+
 	}
 	public void setCss(String css) {
 		this.css = css;
