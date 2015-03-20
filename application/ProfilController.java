@@ -223,7 +223,7 @@ public class ProfilController {
 		myAppointments = new ArrayList<Appointment>();
 		myAppointmentsNotifications = new ArrayList<Appointment>();
 		
-		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		Appointment localAppointment;
 		for (int i = 0; i < comparing.size(); i++) {
 			localAppointment = comparing.get(i);

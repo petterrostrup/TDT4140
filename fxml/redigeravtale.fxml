@@ -55,6 +55,7 @@
             <Label fx:id="visRomInfo" layoutX="331.0" layoutY="57.0" />
             <ComboBox fx:id="visRom" layoutX="168.0" layoutY="53.0" onAction="#velgRom" prefHeight="25.0" prefWidth="148.0" />
             <Button fx:id="avbryt" layoutX="715.0" layoutY="594.0" mnemonicParsing="false" onAction="#avbrytButt" text="Avbryt" />
+            <Button fx:id="slett" layoutX="230.0" layoutY="594.0" mnemonicParsing="false" onAction="#slettAvtale" text="Slett Avtale" />
          </children>
       </Pane>
    </children>
