@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -40,18 +41,18 @@
            
             </image>
             </ImageView>
-            <Button fx:id="test" layoutX="445.0" layoutY="173.0" mnemonicParsing="false" onAction="#test" text="Test" />
-            <Label fx:id="brukernavn" layoutX="366.0" layoutY="28.0" text="Brukernavn - Navn" textAlignment="CENTER">
+            <Button fx:id="test" layoutX="240.0" layoutY="244.0" mnemonicParsing="false" onAction="#test" text="Test" />
+            <Label fx:id="brukernavn" layoutX="402.0" layoutY="14.0" text="Brukernavn" textAlignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="email" layoutX="366.0" layoutY="55.0" text="E-mail" textAlignment="CENTER">
+            <Label fx:id="email" layoutX="771.0" layoutY="345.0" text="E-mail" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="adresse" layoutX="366.0" layoutY="82.0" text="Adresse" textAlignment="CENTER">
+            <Label fx:id="adresse" layoutX="771.0" layoutY="368.0" text="Adresse" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
@@ -59,20 +60,24 @@
             <ListView fx:id="dineGrupper" layoutX="396.0" layoutY="416.0" prefHeight="191.0" prefWidth="173.0" />
             <Label layoutX="431.0" layoutY="393.0" text="Medlem av gruppe:" />
             <Button layoutX="578.0" layoutY="582.0" mnemonicParsing="false" onAction="#administrerGrupperButt" text="Administrer grupper" />
-            <RadioButton layoutX="32.0" layoutY="278.0" mnemonicParsing="false" onAction="#deltarIkke" text="Deltar ikke">
-               <toggleGroup>
-                  <ToggleGroup fx:id="deltaButt" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton layoutX="32.0" layoutY="301.0" mnemonicParsing="false" onAction="#deltar" text="Deltar" toggleGroup="$deltaButt" />
-            <Label fx:id="avtaler" layoutX="104.0" layoutY="42.0" text="Avtaler">
+            <Label fx:id="avtaler" layoutX="101.0" layoutY="40.0" text="Avtaler">
                <font>
-                  <Font size="18.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
             <ListView fx:id="avtalerList" layoutX="45.0" layoutY="78.0" onMouseClicked="#visAvtale" prefHeight="191.0" prefWidth="173.0" />
             <ListView fx:id="visAvtalerList" layoutX="18.0" layoutY="416.0" prefHeight="191.0" prefWidth="309.0" />
-            <ComboBox fx:id="visThemes" layoutX="739.0" layoutY="449.0" onAction="#velgThemes" prefHeight="25.0" prefWidth="110.0" promptText="Light Theme" />
+            <ComboBox fx:id="visThemes" layoutX="708.0" layoutY="582.0" onAction="#velgThemes" prefHeight="25.0" prefWidth="110.0" promptText="Light Theme" />
+            <Label layoutX="86.0" layoutY="378.0" text="Kommende eventer">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="navn" layoutX="771.0" layoutY="324.0" text="navn" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

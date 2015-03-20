@@ -121,7 +121,8 @@ public class LagAvtaleController {
 	private Boolean checkpointReached;
 	
 	private Appointment saveAppointment;
-	
+	int startint;
+	int sluttint;
 	// start lister
 	
 	private ArrayList<User> allUsers = new ArrayList<User>();
@@ -136,16 +137,12 @@ public class LagAvtaleController {
 	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
 	private ObservableList<String> deltagere = FXCollections.observableArrayList(); // Her henter vi inn enkelt-PERSONER fra database - PETTER
 	//RANDOM GRUPPER START
-	
 	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
 	private ObservableList<Object> grupper = FXCollections.observableArrayList(); // Her henter vi inn grupper fra database - PETTER
 	//rANDOM GRUPPER SLUTT
 	//MEDLEMMER START
-	
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
 	//MEDLEMMER SLUTT
-	
-
 	private ObservableList<Object> valgte = FXCollections.observableArrayList(); // Denne gruppen inneholder(skal sende tilbake) valgte personer/grupper  - PETTER
 
 	//slutt lister
@@ -451,10 +448,9 @@ public class LagAvtaleController {
 				slutt.getText().replace("0", "");
 //				System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
 			}
-			String startstring = start.getText().replace(":", "");
-			String sluttstring = slutt.getText().replace(":", "");
-			int startint = Integer.parseInt(startstring);
-			int sluttint = Integer.parseInt(sluttstring);
+	
+			startint = Integer.parseInt(start.getText().replace(":", ""));
+			sluttint = Integer.parseInt(slutt.getText().replace(":", ""));
 			//System.out.println(startint + " " + sluttint);
 			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være før slutttid.");
@@ -470,12 +466,10 @@ public class LagAvtaleController {
 		}
 		
 //deltagere
-		if(!valgte.contains(equals(null))){
-			checkpointReached = true;
-		}
-		else{
+		if(selectedUsers.isEmpty() && selectedGroups.isEmpty()){ 
 			feilDeltagerLabel.setVisible(true);
 		}
+	
 		
 //if nirvana reached, save the stuff
 		if(!(feilTittelLabel.isVisible()) && !(feilRomLabel.isVisible()) && !(feilDatoLabel.isVisible()) && !(feilStartSluttLabel.isVisible()) && !(feilBeskrivelseLabel.isVisible()) && !(feilDeltagerLabel.isVisible())){
@@ -528,11 +522,11 @@ public class LagAvtaleController {
 				LocalDate date = dato.getValue();
 				Date finalDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				
-				String startformat = date.toString() + " " + start.getText() + ":00.00";
+				String startformat = date.toString() + " " + startint + ":00.00";
 				Date parsedDate = dateFormat.parse(startformat);
 				Timestamp startTime = new Timestamp(parsedDate.getTime());
 				
-				String endformat = date.toString() + " " + slutt.getText() + ":00.00";
+				String endformat = date.toString() + " " + sluttint + ":00.00";
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				

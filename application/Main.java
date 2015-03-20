@@ -201,12 +201,6 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			AvtaleOversiktController newCont = loader.<AvtaleOversiktController>getController();
 			
-			Calendar c1 = Calendar.getInstance();
-			Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
-			User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
-			c1.set(2015, Calendar.MARCH, 26);
-			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
-			
 			newCont.setSession(this.sessionUser, appointment);
 			primaryStage.getIcons().add(icon);
 			primaryStage.show();
@@ -225,7 +219,7 @@ public class Main extends Application {
 		    ProfilController profil = new ProfilController();
 	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
-			DagsOversiktController newCont = loader.<DagsOversiktController>getController();
+			DagsOversiktController newCont = loader.<DagsOversiktController>getController();	
 			newCont.setSession(this.sessionUser);		
 			primaryStage.getIcons().add(icon);
 			primaryStage.show();
@@ -239,7 +233,7 @@ public class Main extends Application {
 	
 	
 	
-	public void startRedigerAvtale(Stage primaryStage) {
+	public void startRedigerAvtale(Stage primaryStage, Appointment appointment) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/redigeravtale.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
@@ -248,12 +242,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			RedigerAvtaleController newCont = loader.<RedigerAvtaleController>getController();
 			
-			Calendar c1 = Calendar.getInstance();
-			Room testRoom = new Room("5", "Realfag 245", "somewhere", 10);
-			User varUser = new User("testuser123", "Testpass12345", "test@gmail.com", "Test Testesen", "Testelia 12");
-			c1.set(2015, Calendar.MARCH, 26);
-			Appointment appointment4 = new Appointment("Gruppemøte", "Vanlig møte", "Bygg-1", testRoom, new ArrayList<User>(), c1.getTime(),Timestamp.valueOf("2015-03-26 21:00:00.0"),Timestamp.valueOf("2015-03-26 23:00:00.0"), varUser, "15");
-			newCont.setSession(this.sessionUser, appointment4);
+			newCont.setSession(this.sessionUser, appointment);
 			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);
