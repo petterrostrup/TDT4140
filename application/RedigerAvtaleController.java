@@ -121,7 +121,10 @@ public class RedigerAvtaleController {
 	@FXML
 	private Button leggtilmedlem;
 	
-	private Boolean checkpointReached;
+	int startint;
+	int sluttint;
+	String startstring;
+	String sluttstring;
 	
 	
 	// start lister
@@ -239,7 +242,7 @@ public class RedigerAvtaleController {
 		feilDeltagerLabel.setVisible(false);
 		//feil-labels slutt
 		
-		checkpointReached = false;
+
 	}
 //	public Color farger(){
 //		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
@@ -469,29 +472,34 @@ public class RedigerAvtaleController {
 			feilDatoLabel.setText("Må velge dato");
 		}
 
-		//start/slutt
-				if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
-						((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
-						&& ((slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty()) ||
-						((slutt.getText().matches("[0-1][0-9]:[0-5][0-9]") && !slutt.getText().isEmpty())))){
-					
-					if(start.getText().startsWith("0") || slutt.getText().startsWith("0")){
-						start.getText().replace("0", "");
-						slutt.getText().replace("0", "");
-//						System.out.println(start.getText().replace("0", "") + " " + slutt.getText().replace("0", ""));
-					}
-					String startstring = start.getText().replace(":", "");
-					String sluttstring = slutt.getText().replace(":", "");
-					int startint = Integer.parseInt(startstring);
-					int sluttint = Integer.parseInt(sluttstring);
-					//System.out.println(startint + " " + sluttint);
-					if(!(startint < sluttint)){
-						feilStartSluttLabel.setText("Starttid må være før slutttid.");
-						feilStartSluttLabel.setVisible(true);
-					}
-				}
-				else{feilStartSluttLabel.setVisible(true);
-					feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
+		if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
+				((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
+				&& ((slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty()) ||
+				((slutt.getText().matches("[0-1][0-9]:[0-5][0-9]") && !slutt.getText().isEmpty())))){
+			
+			if(start.getText().startsWith("0")|| slutt.getText().startsWith("0")){
+
+				start.getText().replace("0", "");
+				slutt.getText().replace("0", "");
+//						
+			}
+//			else if(slutt.getText().startsWith("0")){
+//				sluttstring = slutt.getText().replace("0", "");
+//			}
+			startint = Integer.parseInt(start.getText().replace(":", ""));
+			sluttint = Integer.parseInt(slutt.getText().replace(":", ""));
+			System.out.println(startint + " " + sluttint);
+
+			if(!(startint < sluttint)){
+				feilStartSluttLabel.setText("Starttid må være før slutttid.");
+				feilStartSluttLabel.setVisible(true);
+			}
+			startstring = start.getText();
+			sluttstring = slutt.getText();
+			System.out.println(startstring + " " + sluttstring);
+		}
+		else{feilStartSluttLabel.setVisible(true);
+			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
 		
 //beskrivelse
 		if(beskrivelse.getText().isEmpty()){
@@ -553,11 +561,11 @@ public class RedigerAvtaleController {
 				LocalDate date = dato.getValue();
 				Date finalDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				
-				String startformat = date.toString() + " " + start.getText() + ":00.00";
+				String startformat = date.toString() + " " + startstring + ":00.00";
 				Date parsedDate = dateFormat.parse(startformat);
 				Timestamp startTime = new Timestamp(parsedDate.getTime());
 				
-				String endformat = date.toString() + " " + slutt.getText() + ":00.00";
+				String endformat = date.toString() + " " + sluttstring + ":00.00";
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
