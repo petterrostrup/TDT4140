@@ -403,6 +403,9 @@ public class KalenderController {
 		String paneString = Integer.toString(startTime) + ":" + Integer.toString(weekDay) + ":" + Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(paneString + navn);
 		int span = endTime - startTime;
+		if (span<=0){
+			return;
+		}
 		int numberOfAppointments = 1;
 		
 		for (String panes : paneCollection){

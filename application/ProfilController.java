@@ -327,19 +327,19 @@ public class ProfilController {
 	
 	
 	//Testknapp, tar deg nå til avtaleOversikt
-	public void test(ActionEvent event){
-		try{
-			Main newMain= new Main();
-			newMain.setSession(this.sessionUser);
-			newMain.startDagsOversikt(new Stage());
-			 
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		Node  source = (Node)  event.getSource(); 
-	    Stage stage  = (Stage) source.getScene().getWindow();
-	    stage.close();
-	}
+//	public void test(ActionEvent event){
+//		try{
+//			Main newMain= new Main();
+//			newMain.setSession(this.sessionUser);
+//			newMain.startDagsOversikt(new Stage());
+//			 
+//		}catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		Node  source = (Node)  event.getSource(); 
+//	    Stage stage  = (Stage) source.getScene().getWindow();
+//	    stage.close();
+//	}
 
 	
 	

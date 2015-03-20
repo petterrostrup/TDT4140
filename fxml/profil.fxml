@@ -41,7 +41,6 @@
            
             </image>
             </ImageView>
-            <Button fx:id="test" layoutX="240.0" layoutY="244.0" mnemonicParsing="false" onAction="#test" text="Test" />
             <Label fx:id="brukernavn" layoutX="402.0" layoutY="14.0" text="Brukernavn" textAlignment="CENTER">
                <font>
                   <Font size="25.0" />
