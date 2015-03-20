@@ -607,7 +607,7 @@ public class RedigerAvtaleController {
 				if (newRoom.getCapacity() >= saveUsers.size()){
 					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
 						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
-						saveAppointment.saveAppointment();
+						saveAppointment.updateAppointment();
 						saveAppointment.inviteParticipants();
 						saveAppointment.reserveRoom(newRoom);
 					}
