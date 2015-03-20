@@ -593,7 +593,6 @@ public class RedigerAvtaleController {
 					}
 					else{
 						System.out.println("Double booking is not allowed");
-						saveAppointment = null;
 					}
 				}
 				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());

@@ -401,6 +401,9 @@ public class LagAvtaleController {
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		selectedUsers.add(sessionUser);
+		valgtePersoner.add(sessionUser.getName());
+		
 		
 	}
 	
@@ -498,6 +501,7 @@ public class LagAvtaleController {
 					
 			// DO THE STUFF
 			try{
+				saveUsers.clear();
 				saveUsers.addAll(selectedUsers);
 				for (int i = 0; i < selectedGroups.size(); i++) {
 					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + selectedGroups.get(i).getGroupID() + "'";
