@@ -183,9 +183,12 @@ public class Appointment {
 
 	public void inviteParticipants(){
 		for (int i = 0; i < participants.size(); i++) {
+			String sqlStatement = "DELETE FROM CONNECTED WHERE appointment = '" + this.getAppointmentID() + "'";
+			DatabaseCommunicator.update(sqlStatement);
+			
 			User currentPerson = participants.get(i);
 			
-			String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + currentPerson.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
+			sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + currentPerson.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
 			ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 			try {
 				if (!results.next()){

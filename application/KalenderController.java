@@ -378,11 +378,11 @@ public class KalenderController {
 	
 	//Gets information needed and calls filler
 	public void fillCalendar(){
-		int collission = 1;
+		int collission = 0;
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		for (Appointment avtale: avtaler){
-			collission = 1;
+			collission = 0;
 			for (Appointment notherAvtale: avtaler){
 				if (notherAvtale.equals(avtale)){
 					collission++;
@@ -423,7 +423,7 @@ public class KalenderController {
 
 //		System.out.println("number of apointmasdf: " + numberOfAppointments);
 //		avtalePane.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-		if (collission > 1)avtalePane.setMaxWidth(122/collission);
+		if (collission > 0)avtalePane.setMaxWidth(122/collission);
 		else avtalePane.setMaxWidth(122);
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
 		Label avtaleNavn = new Label(navn);

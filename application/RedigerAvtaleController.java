@@ -584,9 +584,21 @@ public class RedigerAvtaleController {
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
-				Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
-				saveAppointment.updateParticipants();
-				saveAppointment.updateAppointment();
+				if (newRoom.getCapacity() >= saveUsers.size()){
+					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
+						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
+						saveAppointment.updateAppointment();
+						saveAppointment.inviteParticipants();
+						saveAppointment.reserveRoom(newRoom);
+					}
+					else{
+						System.out.println("Double booking is not allowed");
+						saveAppointment = null;
+					}
+				}
+				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());
+				
+
 				
 			}catch(Exception e){
 				e.printStackTrace();
