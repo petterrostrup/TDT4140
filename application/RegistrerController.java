@@ -67,7 +67,7 @@ public class RegistrerController {
 	private Label feilGPassordText;
 
 	private boolean accept;
-	File imgpath;
+	private File imgpath;
 	@FXML
 	private void initialize(){
 		feilNavnText.setVisible(false);
