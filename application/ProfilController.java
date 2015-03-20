@@ -55,7 +55,8 @@ import javafx.stage.Stage;
 public class ProfilController {
 	
 	private User sessionUser;
-	
+	@FXML
+	private Label notification;
 	@FXML
 	private ImageView imageview;
 	
