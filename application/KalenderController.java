@@ -421,11 +421,9 @@ public class KalenderController {
 		String paneString = Integer.toString(startTime) + ":" + Integer.toString(weekDay) + ":" + Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(paneString + navn);
 
-//		System.out.println("number of apointmasdf: " + numberOfAppointments);
-//		avtalePane.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 		if (collission > 0)avtalePane.setMaxWidth(122/collission);
 		else avtalePane.setMaxWidth(122);
-		avtalePane.setStyle("-fx-background-color:#FE2E2E");
+		avtalePane.setStyle("-fx-background-color:#33CC33");
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
 		Appointment appointment = avtale;
@@ -443,6 +441,9 @@ public class KalenderController {
 		String timeString = time.toString();
 		String [] timeSplit = timeString.split(":");
 		int timeInt = Integer.parseInt(timeSplit[0])-6;
+		if (Integer.parseInt(timeSplit[1]) >= 30){
+			timeInt+=1;
+		}
 		return timeInt;
 	}
 
