@@ -15,6 +15,7 @@ import java.util.Date;
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
+import classes.MainCalendar;
 import classes.Room;
 import classes.User;
 import javafx.application.Application;
@@ -47,7 +48,10 @@ public class LagAvtaleController {
 	private User sessionUser;
 	
 	@FXML
-	private TextField tittel;  
+	private TextField tittel;
+	
+	@FXML
+	private Label notification;
 	
 	@FXML
 	private DatePicker dato;
@@ -403,6 +407,39 @@ public class LagAvtaleController {
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
 		selectedUsers.add(sessionUser);
 		valgtePersoner.add(sessionUser.getName());
+		
+		
+		notification.setVisible(false);
+		
+		MainCalendar myCal = new MainCalendar();
+		myCal.fillCalendar(this.sessionUser.getId());
+		
+		ArrayList<Appointment> comparing = myCal.getAppointments();
+		
+		Appointment localAppointment;
+		
+		Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1); 
+		for (int i = 0; i < comparing.size(); i++) {
+			localAppointment = comparing.get(i);
+			
+			if(localAppointment.getDate().after(cal.getTime())){
+				String sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
+				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+				try {
+					if (results.next()) {
+						if (results.getInt("status") == 0){
+							notification.setVisible(true);
+							break;
+						}
+						
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}				
+			}
+			
+		}
 		
 		
 	}
