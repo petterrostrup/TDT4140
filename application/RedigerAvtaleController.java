@@ -121,6 +121,7 @@ public class RedigerAvtaleController {
 	@FXML
 	private Button leggtilmedlem;
 	
+	private Appointment saveAppointment;
 	int startint;
 	int sluttint;
 	String startstring;
@@ -573,15 +574,23 @@ public class RedigerAvtaleController {
 				saveAppointment.updateParticipants();
 				saveAppointment.updateAppointment();
 				
-				
-			
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			//Henter stage parameter
-			Node  source = (Node)  event.getSource(); 
-		    Stage stage  = (Stage) source.getScene().getWindow();
-		    stage.close();
+			
+			if(saveAppointment != null){
+				try {
+					Main newMain = new Main();
+					newMain.setSession(this.sessionUser);
+					newMain.startKalender(new Stage());
+					Node  source = (Node)  event.getSource(); 
+				    Stage stage  = (Stage) source.getScene().getWindow();
+				    stage.close();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+			}
 		}
 		else{
 			System.out.println("IKKE GODKJENT");

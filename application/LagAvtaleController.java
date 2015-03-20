@@ -542,8 +542,6 @@ public class LagAvtaleController {
 				saveAppointment.saveAppointment();
 				saveAppointment.inviteParticipants();
 				
-				
-			
 			}catch(Exception e){
 				e.printStackTrace();
 			}
