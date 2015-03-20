@@ -403,13 +403,13 @@ public class KalenderController {
 
 	//Adds appointments to the week view grid pane
 	public void filler(int startTime, String navn, int weekDay, int endTime, Appointment avtale){
+		int span = endTime - startTime;
+		if (span<=0 || startTime <=0){
+			return;
+		}
 		StackPane avtalePane = new StackPane();
 		String paneString = Integer.toString(startTime) + ":" + Integer.toString(weekDay) + ":" + Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(paneString + navn);
-		int span = endTime - startTime;
-		if (span<=0){
-			return;
-		}
 		int numberOfAppointments = 1;
 		
 		for (String panes : paneCollection){
@@ -423,7 +423,7 @@ public class KalenderController {
 		}
 		System.out.println("number of apointmasdf: " + numberOfAppointments);
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
-		avtalePane.setPrefWidth(122);
+		avtalePane.setMaxWidth(122/numberOfAppointments);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
 		Appointment appointment = avtale;
