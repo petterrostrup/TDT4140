@@ -2,8 +2,6 @@ package classes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.Date;
 
 public class User {
 	private String id;
@@ -125,7 +123,7 @@ public class User {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		return user;
 	}
@@ -147,7 +145,7 @@ public class User {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 		
@@ -168,7 +166,7 @@ public class User {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 	}
@@ -181,7 +179,7 @@ public class User {
 			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 		

@@ -1,6 +1,5 @@
 package application;
 
-import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -8,27 +7,19 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
 import classes.Room;
 import classes.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -36,10 +27,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -128,9 +117,6 @@ public class RedigerAvtaleController {
 	String startstring;
 	String sluttstring;
 	
-	
-	// start lister
-	
 	private ArrayList<User> allUsers = new ArrayList<User>();
 	private ArrayList<Room> allRooms = new ArrayList<Room>();
 	private ArrayList<Group> allGroups = new ArrayList<Group>();
@@ -139,19 +125,12 @@ public class RedigerAvtaleController {
 	private ArrayList<User> groupMembers = new ArrayList<User>();
 	private ArrayList<User> saveUsers = new ArrayList<User>();
 	
-	///////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////
-	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList(); // denne skal være null
-	private ObservableList<String> deltagere = FXCollections.observableArrayList(); // Her henter vi inn enkelt-PERSONER fra database - PETTER
-	//RANDOM GRUPPER START
+	private ObservableList<String> valgtePersoner= FXCollections.observableArrayList();
+	private ObservableList<String> deltagere = FXCollections.observableArrayList();
 	
-	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList(); // denne skal være Null
-	private ObservableList<Object> grupper = FXCollections.observableArrayList(); // Her henter vi inn grupper fra database - PETTER
-	//rANDOM GRUPPER SLUTT
-	//MEDLEMMER START
-	
+	private ObservableList<Object> valgteGrupper = FXCollections.observableArrayList();
+	private ObservableList<Object> grupper = FXCollections.observableArrayList();
 	private ObservableList<Object> medlemmer = FXCollections.observableArrayList();
-	//MEDLEMMER SLUTT
 	
 
 	private ObservableList<Object> valgte = FXCollections.observableArrayList();
@@ -170,8 +149,7 @@ public class RedigerAvtaleController {
 						visRom.getItems().add(newRoom.getName());
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 				
 				// Gets all users and adds them to the list
@@ -193,8 +171,7 @@ public class RedigerAvtaleController {
 						deltagere.add(newUser.getName());
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 				
 				// Gets all groups and adds them to the list
@@ -214,7 +191,7 @@ public class RedigerAvtaleController {
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 		//
 		personListe.setItems(deltagere);
@@ -246,12 +223,6 @@ public class RedigerAvtaleController {
 		
 
 	}
-//	public Color farger(){
-//		Color fargekoder = new Color(Color.HSBtoRGB((float) Math.random(), (float) Math.random(), 0.5F + ((float) Math.random())/2F));
-//		return fargekoder;
-//		
-//		// SE HER ALEKSANDER
-//	}
 	
 	public void visPersonerList(ActionEvent event){
 
@@ -382,7 +353,6 @@ public class RedigerAvtaleController {
 		medlemmer.clear();
 		Object visMedlemmerIGruppe = (Object) gruppeListe.getSelectionModel().getSelectedItem();
 		if(visMedlemmerIGruppe != null){
-			//gruppeListe.getSelectionModel().clearSelection();
 			for (int i = 0; i < allGroups.size(); i++) {
 				if (allGroups.get(i).getGroupName().equals(visMedlemmerIGruppe.toString())){
 					String sqlStatement = "SELECT * FROM MEMBER WHERE membergroup = '" + allGroups.get(i).getGroupID() + "'";
@@ -395,7 +365,7 @@ public class RedigerAvtaleController {
 							medlemmer.add(newUser.getName());
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("Error occured: " + e);
 					}
 				}
 			}
@@ -549,7 +519,7 @@ public class RedigerAvtaleController {
 							}
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("Error occured: " + e);
 					}
 				}
 				
@@ -569,9 +539,7 @@ public class RedigerAvtaleController {
 					}
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Something went wrong connecting to the database");
+					System.out.println("Error occured: " + e);
 				}
 				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
@@ -607,30 +575,16 @@ public class RedigerAvtaleController {
 
 				
 			}catch(Exception e){
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
-			
-//			if(saveAppointment != null){
 				try {
 
 					Node  source = (Node)  event.getSource(); 
 				    Stage stage  = (Stage) source.getScene().getWindow();
 				    stage.close();
-//				    --------
-//					FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/kalender.fxml"));
-//				    Scene scene = new Scene((Parent) loader.load());
-//				    ProfilController profil = new ProfilController();
-//			        scene.getStylesheets().add(profil.getCss());
-//					primaryStage.setScene(scene);
-//					KalenderController newCont = loader.<KalenderController>getController();
-//					newCont.setSession(this.sessionUser);
-////					primaryStage.getIcons().add(icon);
-//					
-//					primaryStage.show();
-//					primaryStage.setResizable(false);
 				} catch (Exception e) {
 					  
-					e.printStackTrace();
+					System.out.println("Error occured: " + e);
 				}
 				
 //			}
@@ -642,14 +596,6 @@ public class RedigerAvtaleController {
 	}
 
 	public void avbrytButt(ActionEvent event){
-//		try {
-//			Main newMain = new Main();
-//			newMain.setSession(this.sessionUser);
-//			newMain.startKalender(new Stage());
-//		} catch (Exception e) {
-//			
-//			e.printStackTrace();
-//		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
@@ -662,7 +608,7 @@ public class RedigerAvtaleController {
 		try {
 			this.currentAppointment.deleteAppointment();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 
 		Node  source = (Node)  event.getSource(); 

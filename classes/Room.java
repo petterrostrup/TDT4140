@@ -90,7 +90,7 @@ public class Room {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 	}
@@ -111,7 +111,7 @@ public class Room {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 		
@@ -133,7 +133,7 @@ public class Room {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 		
@@ -177,7 +177,7 @@ public class Room {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 		return isAvailable;

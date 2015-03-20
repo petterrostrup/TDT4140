@@ -1,55 +1,31 @@
 package application;
 
-import java.awt.TextField;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-
-import javax.imageio.ImageIO;
-
-import com.sun.javafx.css.StyleManager;
-
 import classes.Appointment;
 import classes.DatabaseCommunicator;
 import classes.Group;
 import classes.MainCalendar;
 import classes.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ProfilController {
@@ -85,7 +61,7 @@ public class ProfilController {
 	
 	private ArrayList<Group> myGroups = new ArrayList<Group>();
 	
-	private ObservableList<String> grupper = FXCollections.observableArrayList(); // HENT INN GRUPPER
+	private ObservableList<String> grupper = FXCollections.observableArrayList();
 
 	
 	@FXML
@@ -179,7 +155,7 @@ public class ProfilController {
 			newMain.setSession(this.sessionUser);
 			newMain.startAdministrerGrupper(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		Node source = (Node) event.getSource();
 		Stage stage = (Stage) source.getScene().getWindow();
@@ -212,8 +188,7 @@ public class ProfilController {
 				grupper.add(newGroup.getGroupName());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		notification.setVisible(false);
@@ -253,7 +228,7 @@ public class ProfilController {
 						
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
+					System.out.println("Error occured: " + e);
 				}				
 			}
 			
@@ -289,11 +264,10 @@ public class ProfilController {
 				
 				newMain.startAvtaleOversikt(new Stage(), chosen);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 			}
 			Node source = (Node) event.getSource();
 			Stage stage = (Stage) source.getScene().getWindow();
-//			stage.close();
 		}
 		
 	}
@@ -304,7 +278,7 @@ public class ProfilController {
 			newMain.setSession(this.sessionUser);
 			newMain.startKalender(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -318,7 +292,7 @@ public class ProfilController {
 			newMain.setSession(this.sessionUser);
 			newMain.startLagAvtale(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -331,7 +305,7 @@ public class ProfilController {
 		try {
 			new Main().start(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		//Henter stage parameter
 		Node  source = (Node)  event.getSource(); 
@@ -345,7 +319,7 @@ public class ProfilController {
 			newMain.setSession(this.sessionUser);
 			newMain.startRedigerBruker(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 
 		((Node)(event.getSource())).getScene().getWindow().hide();
@@ -359,32 +333,13 @@ public class ProfilController {
 			newMain.setSession(this.sessionUser);
 			newMain.startProfil(new Stage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 
 		((Node)(event.getSource())).getScene().getWindow().hide();
 	}
 	//Henter instanser av en avtale
 	public void hentAvtale(ActionEvent event) {		
-	}
-	
-	
-	
-	//Testknapp, tar deg nå til avtaleOversikt
-//	public void test(ActionEvent event){
-//		try{
-//			Main newMain= new Main();
-//			newMain.setSession(this.sessionUser);
-//			newMain.startDagsOversikt(new Stage());
-//			 
-//		}catch (Exception e){
-//			e.printStackTrace();
-//		}
-//		Node  source = (Node)  event.getSource(); 
-//	    Stage stage  = (Stage) source.getScene().getWindow();
-//	    stage.close();
-//	}
-
-	
+	}	
 	
 }

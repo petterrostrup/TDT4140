@@ -1,12 +1,9 @@
 package classes;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -158,7 +155,7 @@ public class Appointment {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 			System.out.println("Something went wrong connecting to the database");
 		}
 	}
@@ -197,7 +194,7 @@ public class Appointment {
 					}
 				}  
 			catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("Error occured: " + e);
 				System.out.println("Something went wrong connecting to the database");
 				}
 			}

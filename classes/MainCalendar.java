@@ -2,14 +2,10 @@ package classes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainCalendar {
 	private User owner;
@@ -62,7 +58,7 @@ public class MainCalendar {
 				System.out.println("Adding appointment " + id);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		return returning;
 	}
@@ -76,7 +72,7 @@ public class MainCalendar {
 			room = new Room(results.getLong(1) + "",results.getString("name"), results.getString("place"), results.getInt("capacity"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		return room;
@@ -119,7 +115,7 @@ public class MainCalendar {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured: " + e);
 		}
 		
 		
