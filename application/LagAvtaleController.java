@@ -463,7 +463,10 @@ public class LagAvtaleController {
 			}
 			startstring = start.getText();
 			sluttstring = slutt.getText();
+
 			System.out.println(startstring + " " + sluttstring);
+			
+			
 		}
 		else{feilStartSluttLabel.setVisible(true);
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}

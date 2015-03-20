@@ -579,17 +579,10 @@ public class RedigerAvtaleController {
 			}
 			
 			if(saveAppointment != null){
-				try {
-					Main newMain = new Main();
-					newMain.setSession(this.sessionUser);
-					newMain.startKalender(new Stage());
-					Node  source = (Node)  event.getSource(); 
-				    Stage stage  = (Stage) source.getScene().getWindow();
-				    stage.close();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
+				Node  source = (Node)  event.getSource(); 
+			    Stage stage  = (Stage) source.getScene().getWindow();
+			    stage.close();
+				
 			}
 		}
 		else{
