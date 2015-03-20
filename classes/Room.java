@@ -147,11 +147,13 @@ public class Room {
 		boolean crossesStart;
 		boolean middle;
 		boolean crossesEnd;
+		boolean areEquals;
 		try {
 			while (results.next()){
 				crossesStart = false;
 				middle = false;
 				crossesEnd = false;
+				areEquals = false;
 				int appointmentID = (int) results.getLong(3);
 				Appointment comparing = methods.getAppointment(appointmentID);
 				
@@ -159,11 +161,12 @@ public class Room {
 				Timestamp appEnd = comparing.getEnd();
 				
 				if (date.compareTo(comparing.getDate()) == 0){
+					areEquals = (appStart.equals(start) || appEnd.equals(end));
 					crossesStart = start.before(appStart) && end.after(appStart);
 					middle = (start.after(appStart) && start.before(appEnd));
 					crossesEnd = (start.after(appStart) && start.before(appEnd) && end.after(appEnd));
 					
-					if (crossesStart || middle || crossesEnd){
+					if (crossesStart || middle || crossesEnd || areEquals){
 						isAvailable = false;
 						break;
 					}

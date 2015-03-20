@@ -541,14 +541,17 @@ public class LagAvtaleController {
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
-				if (newRoom.checkAvailable(finalDate, startTime, endTime)){
-					Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
-					saveAppointment.saveAppointment();
-					saveAppointment.inviteParticipants();
-					saveAppointment.reserveRoom(newRoom);
+				if (newRoom.getCapacity() >= saveUsers.size()){
+					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
+						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
+						saveAppointment.saveAppointment();
+						saveAppointment.inviteParticipants();
+						saveAppointment.reserveRoom(newRoom);
+					}
+					else System.out.println("Double booking is not allowed");					
 				}
+				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());
 				
-				else System.out.println("Double booking is not allowed");
 				
 				
 			}catch(Exception e){
