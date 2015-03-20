@@ -215,6 +215,8 @@ public class ProfilController {
 			e.printStackTrace();
 		}
 		
+		notification.setVisible(false);
+		
 		myCal = new MainCalendar();
 		myCal.fillCalendar(this.sessionUser.getId());
 		
@@ -241,7 +243,6 @@ public class ProfilController {
 							notificationAppointmentsView.add(localAppointment.getName());
 						}
 						else if (results.getInt("status") == 1){
-							System.out.println("HERRRRRROOOOOOO");
 							myAppointments.add(localAppointment);
 							String timestring = sdfTime.format(localAppointment.getStart()) + " - " + sdfTime.format(localAppointment.getEnd());
 							
@@ -255,6 +256,10 @@ public class ProfilController {
 				}				
 			}
 			
+		}
+		
+		if (!notificationAppointmentsView.isEmpty()){
+			notification.setVisible(true);
 		}
 		
 		avtalerList.setItems(notificationAppointmentsView);

@@ -658,18 +658,12 @@ public class RedigerAvtaleController {
 
 	public void slettAvtale(ActionEvent event){
 		
-//		do your shit here
 		
-//		-----------------
-//			try {
-//			Main newMain = new Main();
-//			newMain.setSession(this.sessionUser);
-//			newMain.startKalender(new Stage());
-//		} catch (Exception e) {
-//			
-//			e.printStackTrace();
-//		}
-//		det som er over åpner NY kalendercontroller, usikker på om vi skal ha det. ATM closer den bare redigeravtaler
+		try {
+			this.currentAppointment.deleteAppointment();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		Node  source = (Node)  event.getSource(); 
 	    Stage stage  = (Stage) source.getScene().getWindow();
