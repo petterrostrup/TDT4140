@@ -250,11 +250,14 @@ public class ProfilController {
 		// TRYKK HER, så sendes du til avtalen du trykket på
 		
 		Object visAvtaleValgt = (Object) avtalerList.getSelectionModel().getSelectedItem();
+		System.out.println(visAvtaleValgt);
+	
+		
 		if(visAvtaleValgt != null){
 			try {
 				Main newMain = new Main();
 				newMain.setSession(this.sessionUser);
-				newMain.startAvtaleOversikt(new Stage(), (Appointment) visAvtaleValgt);
+				newMain.startAvtaleOversikt(new Stage());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
