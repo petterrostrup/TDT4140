@@ -488,7 +488,7 @@ public class LagAvtaleController {
 		if(beskrivelse.getText().isEmpty() ){
 			feilBeskrivelseLabel.setVisible(true);
 		}
-		else if(beskrivelse.getText().contains("DROP") || beskrivelse.getText().contains("INSERT")){
+		else if(beskrivelse.getText().contains("DROP") || beskrivelse.getText().contains("INSERT") || beskrivelse.getText().contains("SELECT") || beskrivelse.getText().contains(";")){
 			feilBeskrivelseLabel.setVisible(true);
 			feilBeskrivelseLabel.setText("Dont even try man");
 		}
