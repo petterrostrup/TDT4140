@@ -109,6 +109,8 @@ public class DagsOversiktController {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		this.currentAppointment = sessionAppointment;
 		currentAppointment.readParticipants();
+		currentAppointment.getDate();
+		
 		
 		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
