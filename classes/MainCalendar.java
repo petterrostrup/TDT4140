@@ -111,7 +111,9 @@ public class MainCalendar {
 			//System.out.println(results.isClosed());
 			while (results.next()) {
 				adding = this.getAppointment(results.getLong(3));
-				appointments.add(adding);
+				if (!appointments.contains(adding)){
+					appointments.add(adding);					
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
