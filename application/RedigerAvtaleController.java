@@ -520,6 +520,11 @@ public class RedigerAvtaleController {
 		if(beskrivelse.getText().isEmpty()){
 			feilBeskrivelseLabel.setVisible(true);
 		}
+		else if(beskrivelse.getText().contains("DROP") || beskrivelse.getText().contains("INSERT")){
+			feilBeskrivelseLabel.setVisible(true);
+			feilBeskrivelseLabel.setText("Dont even try man");
+		}
+			
 		
 //deltagere
 		if(selectedUsers.isEmpty() && selectedGroups.isEmpty()){ 
