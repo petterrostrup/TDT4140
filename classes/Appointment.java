@@ -248,7 +248,9 @@ public class Appointment {
 	
 	
 	public void reserveRoom(Room room){
-		// Add room to this appointment if available
+		String sqlStatement = "INSERT INTO BOOKING (room, appointment) "
+				+ "VALUES ( '" + room.getId() + "', '" + this.getAppointmentID() + "')";
+		DatabaseCommunicator.update(sqlStatement);
 	}
 	
 

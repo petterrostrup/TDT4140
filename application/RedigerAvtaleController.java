@@ -423,7 +423,7 @@ public class RedigerAvtaleController {
 		
 		dato.setValue(res);
 		
-		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		
 		start.setText(sdfTime.format(currentAppointment.getStart()));
 		slutt.setText(sdfTime.format(currentAppointment.getEnd()));
@@ -546,7 +546,7 @@ public class RedigerAvtaleController {
 					System.out.println("Something went wrong connecting to the database");
 				}
 				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SS");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
 				String name = tittel.getText();
 				String location = visRomInfo.getText();
 				String description = beskrivelse.getText();
