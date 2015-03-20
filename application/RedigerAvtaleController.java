@@ -48,6 +48,7 @@ public class RedigerAvtaleController {
 	
 	private User sessionUser;
 	private Appointment currentAppointment;
+	private Room newRoom;
 	
 	@FXML
 	private TextField tittel;  
@@ -160,7 +161,6 @@ public class RedigerAvtaleController {
 		// Gets all rooms and adds them to the list
 				String sqlStatement = "SELECT * FROM ROOM";
 				ResultSet results = DatabaseCommunicator.execute(sqlStatement);
-				Room newRoom;
 				try {
 					while (results.next()){
 						newRoom = new Room(results.getLong(1) + "", results.getString("name"), results.getString("place"), results.getInt("capacity"));
@@ -427,13 +427,35 @@ public class RedigerAvtaleController {
 		
 		dato.setValue(res);
 		
-		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		
 		start.setText(sdfTime.format(currentAppointment.getStart()));
 		slutt.setText(sdfTime.format(currentAppointment.getEnd()));
 		beskrivelse.setText(currentAppointment.getDescription());
 		visRom.setValue(currentAppointment.getLocation());
 		visRomInfo.setText(currentAppointment.getLocation());
+		
+		String sqlStatement = "SELECT * FROM ROOM WHERE name = '" + visRomInfo.getText() + "'";
+		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		newRoom = null;
+		try {
+			if (results.next()){
+				String id = (results.getLong(1) + "");
+				String name = (results.getString(results.findColumn("name")));
+				String place = (results.getString(results.findColumn("place")));
+				int capacity = (results.getInt(results.findColumn("capacity")));
+				newRoom = new Room(id, name, place, capacity);
+				currentAppointment.removeBooking(newRoom);
+			}
+			else{
+				System.out.println("Room does not exist. Cannot read");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong connecting to the database");
+		}
 		
 		
 	}
@@ -472,32 +494,44 @@ public class RedigerAvtaleController {
 			feilDatoLabel.setVisible(true);
 			feilDatoLabel.setText("Må velge dato");
 		}
-
+//tidsvalidering
 		if(((start.getText().matches("[0-2][0-3]:[0-5][0-9]") && !start.getText().isEmpty()) || 
 				((start.getText().matches("[0-1][0-9]:[0-5][0-9]") && !start.getText().isEmpty())))
 				&& ((slutt.getText().matches("[0-2][0-3]:[0-5][0-9]") && !slutt.getText().isEmpty()) ||
 				((slutt.getText().matches("[0-1][0-9]:[0-5][0-9]") && !slutt.getText().isEmpty())))){
 			
-			if(start.getText().startsWith("0")|| slutt.getText().startsWith("0")){
-
+			startstring = start.getText();
+			sluttstring = slutt.getText();
+			
+			if(startstring.matches("[0][0-5]:[0-5][1-9]") || sluttstring.matches("[0][0-5]:[0-5][1-9]")){
+				feilStartSluttLabel.setText("Kan ikke lage avtaler mellom 00:00 /06:00");
+				feilStartSluttLabel.setVisible(true);
+			}
+			if(startstring.matches("00:00")){
+				feilStartSluttLabel.setText("Kan ikke lage avtaler mellom 00:00 /06:00");
+				feilStartSluttLabel.setVisible(true);
+			}
+			if(sluttstring.equals("00:00")){
+				sluttstring = "23:59";
+			}
+			if(startstring.startsWith("0")|| sluttstring.startsWith("0")){
 				start.getText().replace("0", "");
 				slutt.getText().replace("0", "");
-//						
 			}
-//			else if(slutt.getText().startsWith("0")){
-//				sluttstring = slutt.getText().replace("0", "");
-//			}
-			startint = Integer.parseInt(start.getText().replace(":", ""));
-			sluttint = Integer.parseInt(slutt.getText().replace(":", ""));
+			startint = Integer.parseInt(startstring.replace(":", ""));
+			sluttint = Integer.parseInt(sluttstring.replace(":", ""));
 			System.out.println(startint + " " + sluttint);
-
+			
 			if(!(startint < sluttint)){
 				feilStartSluttLabel.setText("Starttid må være før slutttid.");
 				feilStartSluttLabel.setVisible(true);
 			}
-			startstring = start.getText();
-			sluttstring = slutt.getText();
+			if(sluttint - startint < 100){
+				feilStartSluttLabel.setText("Avtalen må være minst 1 time lang");
+				feilStartSluttLabel.setVisible(true);
+			}
 			System.out.println(startstring + " " + sluttstring);
+			
 		}
 		else{feilStartSluttLabel.setVisible(true);
 			feilStartSluttLabel.setText("Feil input, eks: '10:00' / '11:00'");}
@@ -555,7 +589,7 @@ public class RedigerAvtaleController {
 					System.out.println("Something went wrong connecting to the database");
 				}
 				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SS");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
 				String name = tittel.getText();
 				String location = visRomInfo.getText();
 				String description = beskrivelse.getText();
@@ -570,26 +604,30 @@ public class RedigerAvtaleController {
 				parsedDate = dateFormat.parse(endformat);
 				Timestamp endTime = new Timestamp(parsedDate.getTime());
 				
-				Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser, this.currentAppointment.getAppointmentID());
-				saveAppointment.updateParticipants();
-				saveAppointment.updateAppointment();
+				if (newRoom.getCapacity() >= saveUsers.size()){
+					if (newRoom.checkAvailable(finalDate, startTime, endTime)){
+						Appointment saveAppointment = new Appointment(name, description, location, newRoom, saveUsers, finalDate, startTime, endTime, this.sessionUser);
+						saveAppointment.saveAppointment();
+						saveAppointment.inviteParticipants();
+						saveAppointment.reserveRoom(newRoom);
+					}
+					else{
+						System.out.println("Double booking is not allowed");
+						saveAppointment = null;
+					}
+				}
+				else System.out.println("You are over capacity. You have invited " + saveUsers.size() + " while the max capacity for the room is " + newRoom.getCapacity());
+				
 				
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 			
 			if(saveAppointment != null){
-				try {
-					Main newMain = new Main();
-					newMain.setSession(this.sessionUser);
-					newMain.startKalender(new Stage());
-					Node  source = (Node)  event.getSource(); 
-				    Stage stage  = (Stage) source.getScene().getWindow();
-				    stage.close();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
+				Node  source = (Node)  event.getSource(); 
+			    Stage stage  = (Stage) source.getScene().getWindow();
+			    stage.close();
+				
 			}
 		}
 		else{
@@ -600,6 +638,7 @@ public class RedigerAvtaleController {
 
 	public void avbrytButt(ActionEvent event){
 		try {
+			currentAppointment.reserveRoom(newRoom);
 			Main newMain = new Main();
 			newMain.setSession(this.sessionUser);
 			newMain.startKalender(new Stage());
