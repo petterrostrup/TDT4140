@@ -598,17 +598,17 @@ public class RedigerAvtaleController {
 				    Stage stage  = (Stage) source.getScene().getWindow();
 				    stage.close();
 //				    --------
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/kalender.fxml"));
-				    Scene scene = new Scene((Parent) loader.load());
-				    ProfilController profil = new ProfilController();
-			        scene.getStylesheets().add(profil.getCss());
-					primaryStage.setScene(scene);
-					KalenderController newCont = loader.<KalenderController>getController();
-					newCont.setSession(this.sessionUser);
-//					primaryStage.getIcons().add(icon);
-					
-					primaryStage.show();
-					primaryStage.setResizable(false);
+//					FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/kalender.fxml"));
+//				    Scene scene = new Scene((Parent) loader.load());
+//				    ProfilController profil = new ProfilController();
+//			        scene.getStylesheets().add(profil.getCss());
+//					primaryStage.setScene(scene);
+//					KalenderController newCont = loader.<KalenderController>getController();
+//					newCont.setSession(this.sessionUser);
+////					primaryStage.getIcons().add(icon);
+//					
+//					primaryStage.show();
+//					primaryStage.setResizable(false);
 				} catch (Exception e) {
 					  
 					e.printStackTrace();
