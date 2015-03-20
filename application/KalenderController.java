@@ -291,7 +291,7 @@ public class KalenderController {
 					monthDays.get(day).setOnMouseClicked(new EventHandler<MouseEvent>(){
 						public void handle(MouseEvent event) {
 							System.out.println("You clickeded meh");
-							appointmentView(event, avtale);
+							dagsOversikt(event, avtale);
 						}
 					});
 				}
@@ -466,6 +466,19 @@ public class KalenderController {
 			Main newMain= new Main();
 			newMain.setSession(this.sessionUser);
 			newMain.startAvtaleOversikt(new Stage(), appointment);
+			 
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	}
+	
+	public void dagsOversikt(MouseEvent event, Appointment appointment){
+		try{
+			Main newMain= new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startDagsOversikt(new Stage(), appointment);
 			 
 		}catch (Exception e){
 			e.printStackTrace();
