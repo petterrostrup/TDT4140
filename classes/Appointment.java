@@ -183,12 +183,10 @@ public class Appointment {
 
 	public void inviteParticipants(){
 		for (int i = 0; i < participants.size(); i++) {
-			String sqlStatement = "DELETE FROM CONNECTED WHERE appointment = '" + this.getAppointmentID() + "'";
-			DatabaseCommunicator.update(sqlStatement);
 			
 			User currentPerson = participants.get(i);
 			
-			sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + currentPerson.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
+			String sqlStatement = "SELECT * FROM CONNECTED WHERE person = '" + currentPerson.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
 			ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 			try {
 				if (!results.next()){
@@ -228,12 +226,12 @@ public class Appointment {
 	
 	
 	public void updateParticipants(){
+		String sqlStatement = "DELETE FROM CONNECTED WHERE appointment = '" + this.getAppointmentID() + "'";
+		DatabaseCommunicator.update(sqlStatement);
+		
 		for (int i = 0; i < participants.size(); i++) {
 			User currentPerson = participants.get(i);
-			
-			String sqlStatement = "DELETE FROM CONNECTED WHERE person = '" + currentPerson.getId() + "' AND appointment = '" + this.getAppointmentID() + "'";
-			DatabaseCommunicator.update(sqlStatement);
-			
+					
 			sqlStatement = "INSERT INTO CONNECTED (person, appointment, status, changed, notification) "
 					+ "VALUES ( '" + currentPerson.getId() + "', '" + this.getAppointmentID() + "', '" + 0 + "', '" + 0 + "', '" + 0 + "')";
 			DatabaseCommunicator.update(sqlStatement);

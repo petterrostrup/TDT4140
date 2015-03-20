@@ -401,6 +401,9 @@ public class LagAvtaleController {
 	public void setSession(User sessionUser){
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
 		innloggetsom.setText("Innlogget som: " + this.sessionUser.getName());
+		selectedUsers.add(sessionUser);
+		valgtePersoner.add(sessionUser.getName());
+		
 		
 	}
 	
