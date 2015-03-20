@@ -10,9 +10,9 @@
       <Label layoutX="62.0" layoutY="76.0" text="Tittel:" />
       <Label layoutX="63.0" layoutY="108.0" text="Rom:" />
       <Label layoutX="63.0" layoutY="139.0" text="Deltagere:" />
-      <Label layoutX="62.0" layoutY="172.0" text="Dato:" />
-      <Label layoutX="63.0" layoutY="204.0" text="Tidspunkt:" />
-      <Label layoutX="60.0" layoutY="249.0" text="Beskrivelse:" />
+      <Label layoutX="62.0" layoutY="279.0" text="Dato:" />
+      <Label layoutX="63.0" layoutY="305.0" text="Tidspunkt:" />
+      <Label layoutX="60.0" layoutY="333.0" text="Beskrivelse:" />
       <Label layoutX="118.0" layoutY="14.0" text="Avtaleoversikt" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
@@ -20,10 +20,9 @@
       </Label>
       <Label fx:id="tittel" layoutX="130.0" layoutY="76.0" />
       <Label fx:id="rom" layoutX="130.0" layoutY="108.0" />
-      <Label fx:id="deltagere" layoutX="130.0" layoutY="139.0" />
-      <Label fx:id="dato" layoutX="130.0" layoutY="172.0" />
-      <Label fx:id="tidspunkt" layoutX="130.0" layoutY="204.0" />
-      <Label fx:id="beskrivelse" layoutX="128.0" layoutY="249.0" />
+      <Label fx:id="dato" layoutX="125.0" layoutY="279.0" />
+      <Label fx:id="tidspunkt" layoutX="128.0" layoutY="305.0" />
+      <Label fx:id="beskrivelse" layoutX="125.0" layoutY="333.0" />
       <Button fx:id="reidgeravtale" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" onAction="#redigerAvtale" text="Rediger avtale" />
       <RadioButton fx:id="deltar" layoutX="236.0" layoutY="384.0" mnemonicParsing="false" onAction="#attendButt" text="Deltar">
          <toggleGroup>
@@ -32,5 +31,14 @@
       </RadioButton>
       <RadioButton fx:id="deltarIkke" layoutX="236.0" layoutY="356.0" mnemonicParsing="false" onAction="#notAttendButt" selected="true" text="Deltar ikke" toggleGroup="$AttendingToggle" />
       <Separator layoutY="63.0" prefWidth="390.0" />
+      <ScrollPane layoutX="60.0" layoutY="156.0" prefHeight="120.0" prefWidth="148.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="deltagere" editable="false" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </Pane>
