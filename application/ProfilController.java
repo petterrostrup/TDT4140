@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 
@@ -216,28 +218,35 @@ public class ProfilController {
 		myCal = new MainCalendar();
 		myCal.fillCalendar(this.sessionUser.getId());
 		
-		this.myAppointments = myCal.getAppointments();
+		ArrayList<Appointment> comparing = myCal.getAppointments();
 		
+		myAppointments = new ArrayList<Appointment>();
 		myAppointmentsNotifications = new ArrayList<Appointment>();
 		
+		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
 		Appointment localAppointment;
-		for (int i = 0; i < myAppointments.size(); i++) {
-			localAppointment = myAppointments.get(i);
+		for (int i = 0; i < comparing.size(); i++) {
+			localAppointment = comparing.get(i);
 			
-			allAppointmentsView.add(localAppointment.getName());
-			sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
-			results = DatabaseCommunicator.execute(sqlStatement);
-			try {
-				if (results.next()) {
-					if (results.getInt("notification") == 0){
-						System.out.println("hei");
-						myAppointmentsNotifications.add(localAppointment);
-						notificationAppointmentsView.add(localAppointment.getName());
+			if(localAppointment.getDate().after(new Date())){
+				myAppointments.add(localAppointment);
+				String timestring = sdfTime.format(localAppointment.getStart()) + " - " + sdfTime.format(localAppointment.getEnd());
+				
+				allAppointmentsView.add(localAppointment.getName() + ": " + localAppointment.getDate().toString() + " " + timestring );
+				sqlStatement = "SELECT * FROM CONNECTED WHERE appointment = '" + localAppointment.getAppointmentID() + "' AND person = '" + this.sessionUser.getId() + "'";
+				results = DatabaseCommunicator.execute(sqlStatement);
+				try {
+					if (results.next()) {
+						if (results.getInt("notification") == 0){
+							myAppointmentsNotifications.add(localAppointment);
+							notificationAppointmentsView.add(localAppointment.getName());
+						}
 					}
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
+				} catch (Exception e) {
+					// TODO: handle exception
+				}				
 			}
+			
 		}
 		
 		avtalerList.setItems(notificationAppointmentsView);

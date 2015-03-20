@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 
@@ -30,7 +31,7 @@ public class AvtaleOversiktController {
 	private Label rom;
 	
 	@FXML
-	private Label deltagere;
+	private TextArea deltagere;
 	
 	@FXML
 	private Label dato;

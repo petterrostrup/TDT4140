@@ -20,5 +20,6 @@
          </font>
       </Label>
       <Button fx:id="visAvtButt" layoutX="95.0" layoutY="350.0" mnemonicParsing="false" onAction="#visAvtale" text="Vis avtale" />
+      <Button fx:id="tilbakeButton" layoutX="195.0" layoutY="350.0" mnemonicParsing="false" onAction="#tilbakeButt" text="Tilbake" />
    </children>
 </Pane>
