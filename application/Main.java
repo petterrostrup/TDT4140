@@ -212,7 +212,7 @@ public class Main extends Application {
 		}
 	}
 	
-	public void startDagsOversikt(Stage primaryStage) {
+	public void startDagsOversikt(Stage primaryStage, Appointment appointment) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/dagsoversikt.fxml"));		    
 		    Scene scene = new Scene((Parent) loader.load());
@@ -220,7 +220,7 @@ public class Main extends Application {
 	        scene.getStylesheets().add(profil.getCss());
 			primaryStage.setScene(scene);
 			DagsOversiktController newCont = loader.<DagsOversiktController>getController();	
-			newCont.setSession(this.sessionUser);		
+			newCont.setSession(this.sessionUser, appointment);	
 			primaryStage.getIcons().add(icon);
 			primaryStage.show();
 			primaryStage.setResizable(false);

@@ -250,7 +250,6 @@ public class KalenderController {
 	}
 	
 	//Fills and sets appointments and label texts to month view
-	@SuppressWarnings("unchecked")
 	public void setMonth(){
 		ArrayList<Appointment> avtaler = kalender.getAppointments();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -289,7 +288,12 @@ public class KalenderController {
 				if (calDate.get(Calendar.DAY_OF_YEAR) == brukKalender.get(Calendar.DAY_OF_YEAR)
 						&& calDate.get(Calendar.YEAR) == brukKalender.get(Calendar.YEAR)){
 					monthDays.get(day).setStyle("-fx-background-color:#33CC33");
-					monthDays.get(day).setOnMouseClicked(appointmentClick);
+					monthDays.get(day).setOnMouseClicked(new EventHandler<MouseEvent>(){
+						public void handle(MouseEvent event) {
+							System.out.println("You clickeded meh");
+							dagsOversikt(event, avtale);
+						}
+					});
 				}
 			}
 			brukKalender.add(Calendar.DAY_OF_YEAR, +1);
@@ -399,13 +403,13 @@ public class KalenderController {
 
 	//Adds appointments to the week view grid pane
 	public void filler(int startTime, String navn, int weekDay, int endTime, Appointment avtale){
+		int span = endTime - startTime;
+		if (span<=0 || startTime <=0){
+			return;
+		}
 		StackPane avtalePane = new StackPane();
 		String paneString = Integer.toString(startTime) + ":" + Integer.toString(weekDay) + ":" + Integer.toString(tempCal.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(paneString + navn);
-		int span = endTime - startTime;
-		if (span<=0){
-			return;
-		}
 		int numberOfAppointments = 1;
 		
 		for (String panes : paneCollection){
@@ -419,7 +423,7 @@ public class KalenderController {
 		}
 		System.out.println("number of apointmasdf: " + numberOfAppointments);
 		avtalePane.setStyle("-fx-background-color:#FE2E2E");
-		avtalePane.setPrefWidth(122);
+		avtalePane.setMaxWidth(122/numberOfAppointments);
 		Label avtaleNavn = new Label(navn);
 		avtalePane.getChildren().add(avtaleNavn);
 		Appointment appointment = avtale;
@@ -462,6 +466,19 @@ public class KalenderController {
 			Main newMain= new Main();
 			newMain.setSession(this.sessionUser);
 			newMain.startAvtaleOversikt(new Stage(), appointment);
+			 
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		Node  source = (Node)  event.getSource(); 
+	    Stage stage  = (Stage) source.getScene().getWindow();
+	}
+	
+	public void dagsOversikt(MouseEvent event, Appointment appointment){
+		try{
+			Main newMain= new Main();
+			newMain.setSession(this.sessionUser);
+			newMain.startDagsOversikt(new Stage(), appointment);
 			 
 		}catch (Exception e){
 			e.printStackTrace();

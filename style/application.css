@@ -1,12 +1,8 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-
 .root{
 	-fx-background-image: url("../images/backgroundblue.jpg");
 	-fx-background-size: 150%;
 	}
 .label {
-    
-    
     /*-fx-text-fill: #333333;*/
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
@@ -23,33 +19,43 @@
 }
 
 
-
-.color-picker {
-    -fx-background-color: #669999; 
-    -fx-background-radius: 0 15 15 0; 
+/*------------------------ */
+.combo-box .list-cell {
+      -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
-.color-picker .color-picker-label .text {
-    -fx-fill: #ccffcc;
+.combo-box:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
+    .combo-box-popup .list-view{
+    
+   	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    
+    }
 
-/*PULSATING SHIT */
 
-/*Reset*/
-* {
-	margin: 0;
-	padding: 0;
+/*--------------------------*/
+
+.menu-button .label{
+      -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
-
-/* @-webkit-keyframes pulse {
-      0% {background-color: #45CEEF;}
-     25% {background-color: #F747D9;}
-     50% {background-color: #47F1F7;}
-     75% {background-color: #6C9596;}
-     100% {background-color: #00DE21;}
-}*/
-
-
-.puls {
-    /*-webkit-animation: pulse 10s infinite alternate;*/
-    -fx-background-color: #45CEEF;
+.menu-item:focused {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+.context-menu{
+   	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
 }

@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 public class DagsOversiktController {
 	
 	private User sessionUser;
-	
+	private Appointment currentAppointment;
 	
 	private MainCalendar DagsCal;
 	
@@ -49,8 +49,6 @@ public class DagsOversiktController {
 		
 		 
 		
-		
-		//visAvtaler.setItems(appointz);
 		
 	}
 	
@@ -74,7 +72,14 @@ public class DagsOversiktController {
 	//Knapp tar deg til visAvtale vindu
 	public void visAvtale (ActionEvent event) {
 		
-		//String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
+		String visAvtaleValgt = (String) visAvtaler.getSelectionModel().getSelectedItem();
+		
+//		appointmentView(event, appointment);
+//		
+//		
+//		if(){//day = this day, then open appointment
+//			
+//		}
 		
 		
 		
@@ -100,11 +105,17 @@ public class DagsOversiktController {
 
 
 
-	public void setSession(User sessionUser) {
+	public void setSession(User sessionUser, Appointment sessionAppointment) {
 		this.sessionUser = new User(sessionUser.getUserName(), sessionUser.getPassword(), sessionUser.geteMail(), sessionUser.getName(), sessionUser.getAddress(), sessionUser.getId());
+		this.currentAppointment = sessionAppointment;
+		currentAppointment.readParticipants();
+		currentAppointment.getDate();
+		
 		
 		String sqlStatement = "SELECT * FROM MEMBER WHERE person = '" + this.sessionUser.getId() + "'";
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
+		
+		
 		
 		DagsCal = new MainCalendar();
 		//System.out.println(sessionUser.getId());
