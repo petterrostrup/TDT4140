@@ -24,9 +24,7 @@ public class Login {
 					String mail = results.getString(results.findColumn("email"));
 					String address = results.getString(results.findColumn("address"));
 					Long id = results.getLong(1);
-					
-					System.out.println(id.toString());
-					
+
 					user = new User(dbUsername, dbPassword, mail, name, address, id.toString());
 				}				
 			}

@@ -91,6 +91,12 @@ public class RedigerBrukerController {
 
 	//Lagre data fra skjema i database
 	public void lagreButt (ActionEvent event) {
+		
+		String userName;
+		String password;
+		String name;
+		String eMail;
+		String address;
 
 		feilNavnText.setVisible(false);
 		feilEpostText.setVisible(false);
@@ -128,40 +134,51 @@ public class RedigerBrukerController {
 			feilAdresseText.setVisible(true);
 			feilAdresseText.setText("Ugyldig adresse, eks: 'ntnu 1'");
 		}
+		
+		boolean isOkay = false;
+		
+		if (gammeltpassord.getText().isEmpty() && nyttpassord.getText().isEmpty() && gnyttpassord.getText().isEmpty()){
+			isOkay = true;
+		}
 
 
 		
 //nyttpassord
-		if(nyttpassord.getText().isEmpty()){
-			feilNyttPassordText.setVisible(true);
-			feilNyttPassordText.setText("Må fylles ut");
-		}
-		else if(!nyttpassord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){
-			feilNyttPassordText.setVisible(true);
-			feilNyttPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
-		}
-
+		if (!isOkay){
+			if(nyttpassord.getText().isEmpty()){
+				feilNyttPassordText.setVisible(true);
+				feilNyttPassordText.setText("Må fylles ut");
+			}
+			else if(!nyttpassord.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$")){
+				feilNyttPassordText.setVisible(true);
+				feilNyttPassordText.setText("Ugyldig. 6 karakterer, stor bokstav og tall");
+			}			
 //gjentapassord
-		if(gnyttpassord.getText().isEmpty()){
-			feilGPassordText.setVisible(true);
-			feilGPassordText.setText("Må fylles ut");
-		}
-		else if(!gnyttpassord.getText().equals(nyttpassord.getText())){
-			feilGPassordText.setVisible(true);
-			feilGPassordText.setText("Passordene er ulike");
+			if(gnyttpassord.getText().isEmpty()){
+				feilGPassordText.setVisible(true);
+				feilGPassordText.setText("Må fylles ut");
+			}
+			else if(!gnyttpassord.getText().equals(nyttpassord.getText())){
+				feilGPassordText.setVisible(true);
+				feilGPassordText.setText("Passordene er ulike");
+			}
+//gammeltpassord
+			if(gammeltpassord.getText().isEmpty()){
+				feilGammeltPassordText.setVisible(true);
+				feilGammeltPassordText.setText("Må fylles ut");
+			}
+			else if(!(gammeltpassord.getText().equals(this.sessionUser.getPassword()))){
+//			gammeltpassord.setText(this.sessionUser.getPassword());
+				feilGammeltPassordText.setVisible(true);
+				feilGammeltPassordText.setText("Passordet er feil");
+			}
 		}
 		
-//gammeltpassord
-		if(gammeltpassord.getText().isEmpty()){
-			feilGammeltPassordText.setVisible(true);
-			feilGammeltPassordText.setText("Må fylles ut");
-			System.out.println(this.sessionUser.getPassword());
+		else{
+			System.out.println("Is okay");
 		}
-		else if(!(gammeltpassord.getText().equals(this.sessionUser.getPassword()))){
-//			gammeltpassord.setText(this.sessionUser.getPassword());
-			feilGammeltPassordText.setVisible(true);
-			feilGammeltPassordText.setText("Passordet er feil");
-		}
+
+		
 
 //validering slutt		--------------------------------
 	
@@ -170,13 +187,14 @@ public class RedigerBrukerController {
 			System.out.println("godkjent");
 			User varUser = null;
 			try{
-				String userName = this.sessionUser.getUserName();
-				String password = nyttpassord.getText();
-				String name = navn.getText();
-				String eMail = epost.getText();
-				String address = adresse.getText();
+				userName = this.sessionUser.getUserName();
+				if (isOkay) password = sessionUser.getPassword();
+				else password = nyttpassord.getText();
+				name = navn.getText();
+				eMail = epost.getText();
+				address = adresse.getText();
 				
-				varUser = new User(userName, password, eMail, name, address);
+				varUser = new User(userName, password, eMail, name, address, sessionUser.getId());
 			
 				varUser.updateUser();
 			}catch (Exception e){

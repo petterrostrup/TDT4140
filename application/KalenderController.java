@@ -372,7 +372,6 @@ public class KalenderController {
 					collission++;
 				}
 			}
-			System.out.println("dem coslsdilfsdlifd" + collission);
 			
 			LocalTime start = LocalTime.parse(sdf.format(avtale.getStart()));
 			LocalTime end = LocalTime.parse(sdf.format(avtale.getEnd()));

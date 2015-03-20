@@ -144,7 +144,6 @@ public class Appointment {
 			if (!results.next()){
 				sqlStatement = "INSERT INTO APPOINTMENT (name, description, location, room, date, start, end, owner) "
 						+ "VALUES ('" + this.getName() + "', '" + this.getDescription() + "', '" + this.getLocation() + "', '" + this.room.getId() +"', '" + sdf.format(this.getDate()) +"', '" + this.getStart() +"', '" + this.getEnd() +"', '" + this.getOwner().getId() + "')";
-				System.out.println("Saving appointment");
 				int id = DatabaseCommunicator.updateId(sqlStatement);
 				this.setAppointmentID(id + "");
 				

@@ -55,7 +55,6 @@ public class MainCalendar {
 				
 				returning = new Appointment(name, desc, loc, room, new ArrayList<User>(), date, start, end, owner, id + "");
 				this.appointments.add(returning);
-				System.out.println("Adding appointment " + id);
 			
 		} catch (SQLException e) {
 			System.out.println("Error occured: " + e);
@@ -104,7 +103,6 @@ public class MainCalendar {
 		ResultSet results = DatabaseCommunicator.execute(sqlStatement);
 		Appointment adding;
 		try {
-			//System.out.println(results.isClosed());
 			while (results.next()) {
 				if (results.getInt("status") != -1){
 					adding = this.getAppointment(results.getLong(3));
